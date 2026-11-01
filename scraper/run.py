@@ -8,7 +8,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 import employers as E
 import fetchers as F
 from classify import classify, title_prefilter, CATEGORIES
-from salary import extract, estimate
+from salary import extract, estimate, calibrate, fmt
 from geo import Geocoder, region_of
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -37,6 +37,15 @@ def sources():
         s.append((f"Recruitee · {args[0]}", F.recruitee, args))
     for args in E.SMARTRECRUITERS:
         s.append((f"SmartRecruiters · {args[0]}", F.smartrecruiters, args))
+    for args in E.PERSONIO:
+        s.append((f"Personio · {args[0]}", F.personio, args))
+    for args in E.BAMBOOHR:
+        s.append((f"BambooHR · {args[0]}", F.bamboohr, args))
+    for args in E.ASHBY:
+        s.append((f"Ashby · {args[0]}", F.ashby, args))
+    for args in E.EIGHTFOLD:
+        s.append((f"Eightfold · {args[0]}", F.eightfold, args))
+    s.append(("Site carrière · Crédit Agricole CIB", F.cacib, E.CACIB))
     if os.environ.get("ADZUNA_APP_ID"):
         s.append(("Adzuna", F.adzuna, ()))
     return s
@@ -128,9 +137,7 @@ def main():
         sal = extract(desc)
         if not sal and j.get("salary_raw"):
             lo, hi = j["salary_raw"]
-            sal = {"text": f"{lo/1000:.0f}k – {(hi or lo)/1000:.0f}k / an (devise locale)", "estimated": False}
-        if not sal:
-            sal = estimate(j["seniority"], j["contract"], (g or {}).get("cc"), j["category"])
+            sal = {"lo": lo, "hi": hi or lo, "cur": "", "unit": "an", "estimated": False, "basis": "annonce"}
 
         emails = sorted({e.rstrip(".") for e in EMAIL_RX.findall(desc) if EMAIL_OK.search(e)})[:3]
         recruiters = sorted(set(RECRUITER_RX.findall(desc)))[:3]
@@ -146,10 +153,16 @@ def main():
             "lat": (g or {}).get("lat"), "lon": (g or {}).get("lon"),
             "posted": j.get("posted") or old.get("posted"),
             "first_seen": old.get("first_seen", TODAY),
-            "salary": sal, "emails": emails, "recruiters": recruiters,
+            "_sal": sal, "emails": emails, "recruiters": recruiters, "domain": E.DOMAINS.get(j["employer"], ""),
             "desc": desc[:3500],
         })
     geo.save()
+
+    # Salaires : annoncé > calibré sur les offres comparables > grille de marché
+    calib = calibrate(jobs)
+    for x in jobs:
+        s_ = x.pop("_sal", None) or estimate(x["employer"], x["contract"], x["cc"], calib)
+        x["salary"] = {"text": fmt(s_), "estimated": s_["estimated"], "basis": s_["basis"]} if s_ else None
 
     # Si une source a planté, on garde ses anciennes offres plutôt que de les perdre
     failed = {lbl for lbl, r in report.items() if r["error"]}
@@ -158,7 +171,10 @@ def main():
         failed_employers = {lbl.split(" · ")[1] if " · " in lbl else lbl for lbl in failed}
         for p in prev.values():
             if p["id"] not in kept_ids and p["employer"] in failed_employers:
-                jobs.append(p)
+                c = classify(p["title"], p.get("desc", ""), p.get("employer_type", "bank"))
+                if c:
+                    p.update(c)
+                    jobs.append(p)
 
     jobs.sort(key=lambda x: (x.get("posted") or x["first_seen"]), reverse=True)
     os.makedirs(OUT, exist_ok=True)

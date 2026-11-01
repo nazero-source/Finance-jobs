@@ -4,161 +4,170 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Finance Jobs Radar</title>
-<meta name="description" content="Offres de stage, VIE, graduate et CDI en M&A, investment banking, private equity, infrastructure et project finance, partout dans le monde. Mise à jour quotidienne.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%231d4ed8'/><circle cx='16' cy='16' r='8' fill='none' stroke='white' stroke-width='2.5'/><circle cx='16' cy='16' r='2.5' fill='white'/></svg>">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
-<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
+<meta name="description" content="Stages, VIE, graduate et analyst 1 en M&A, investment banking, private equity, infrastructure et project finance, partout dans le monde. Mise à jour chaque jour.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230f172a'/><circle cx='16' cy='16' r='8' fill='none' stroke='white' stroke-width='2.5'/><circle cx='16' cy='16' r='2.5' fill='%237c9cff'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <link rel="stylesheet" href="style.css">
+<script>try{const t=localStorage.getItem("fjr_theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
 </head>
 <body>
-<header class="top">
-  <div class="brand">
-    <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="var(--accent)"/><circle cx="16" cy="16" r="8" fill="none" stroke="#fff" stroke-width="2.5"/><circle cx="16" cy="16" r="2.5" fill="#fff"/></svg>
-    <div>
-      <h1>Finance Jobs Radar</h1>
-      <p class="sub" id="meta">Chargement…</p>
-    </div>
-  </div>
-  <nav class="tabs" role="tablist">
-    <button role="tab" data-tab="list" class="active">Offres</button>
-    <button role="tab" data-tab="map">Carte</button>
-    <button role="tab" data-tab="apply">Ma candidature</button>
-    <button role="tab" data-tab="track">Suivi <span id="trackCount" class="pill"></span></button>
-    <button role="tab" data-tab="about">Sources</button>
+<header class="topbar">
+  <a class="brand" href="#" data-tab="list">
+    <span class="logo-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="8" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="16" cy="16" r="2.5" fill="currentColor"/></svg></span>
+    <span><b>Finance Jobs Radar</b><small id="meta">Chargement…</small></span>
+  </a>
+  <nav class="tabs" role="tablist" aria-label="Sections">
+    <button role="tab" data-tab="list" class="active"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>Offres</span></button>
+    <button role="tab" data-tab="map"><svg viewBox="0 0 24 24"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/></svg><span>Carte</span></button>
+    <button role="tab" data-tab="apply"><svg viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9zM14 3v6h6M8 13h8M8 17h5"/></svg><span>Candidature</span></button>
+    <button role="tab" data-tab="track"><svg viewBox="0 0 24 24"><path d="M4 4h4v16H4zM10 4h4v10h-4zM16 4h4v6h-4z"/></svg><span>Suivi</span><span id="trackCount" class="badge"></span></button>
+    <button role="tab" data-tab="about"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg><span>Sources</span></button>
   </nav>
+  <button class="icon-btn" id="themeBtn" title="Thème clair / sombre" aria-label="Changer de thème"><svg viewBox="0 0 24 24"><path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z"/></svg></button>
 </header>
 
-<button id="filtersToggle" class="filterstoggle" aria-controls="filters">Filtres</button>
-<section id="filters" class="filters">
-  <input id="q" type="search" placeholder="Rechercher : poste, banque, ville…" aria-label="Recherche">
-  <div class="row">
-    <div class="chips" id="catChips" aria-label="Métier"></div>
+<!-- Barre de filtres partagée (Offres + Carte) -->
+<section id="filterbar" class="filterbar">
+  <div class="fb-row">
+    <label class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Poste, banque, fonds, ville…" aria-label="Rechercher" autocomplete="off"></label>
+    <div class="seg" id="levelSeg" aria-label="Type de poste"></div>
+    <button class="btn ghost" id="moreFilters" aria-expanded="false"><svg viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4"/></svg>Filtres<span class="badge" id="activeCount"></span></button>
   </div>
-  <div class="row">
-    <div class="chips" id="contractChips" aria-label="Contrat"></div>
-  </div>
-  <div class="row selects">
-    <select id="region"><option value="">Toutes régions</option></select>
-    <select id="country"><option value="">Tous pays</option></select>
-    <select id="employer"><option value="">Tous employeurs</option></select>
-    <select id="seniority"><option value="">Tous niveaux</option></select>
-    <select id="since">
-      <option value="">Toutes dates</option>
-      <option value="1">Nouvelles (24 h)</option>
-      <option value="7">7 derniers jours</option>
-      <option value="30">30 derniers jours</option>
-    </select>
-    <select id="sort">
-      <option value="date">Plus récentes</option>
-      <option value="employer">Employeur A→Z</option>
-      <option value="country">Pays A→Z</option>
-    </select>
-  </div>
-  <div class="row toggles">
-    <label><input type="checkbox" id="profileOnly"> Mon profil <span class="hint">(stage, VIE, graduate, analyst — hors offres 2026)</span></label>
-    <label><input type="checkbox" id="hideReported" checked> Masquer les offres signalées</label>
-    <span class="count" id="count"></span>
-    <button class="link" id="reset">Réinitialiser</button>
+  <div class="fb-row chips-row" id="catChips" aria-label="Métier"></div>
+  <div class="fb-more" id="fbMore" hidden>
+    <label>Région<select id="region"><option value="">Toutes</option></select></label>
+    <label>Pays<select id="country"><option value="">Tous</option></select></label>
+    <label>Type d'employeur<select id="etype"><option value="">Tous</option></select></label>
+    <label>Employeur<select id="employer"><option value="">Tous</option></select></label>
+    <label>Publiée<select id="since"><option value="">Toutes dates</option><option value="1">Nouvelles (24 h)</option><option value="7">7 derniers jours</option><option value="30">30 derniers jours</option></select></label>
+    <label>Trier par<select id="sort"><option value="date">Plus récentes</option><option value="salary">Salaire</option><option value="employer">Employeur</option><option value="country">Pays</option></select></label>
+    <label class="check"><input type="checkbox" id="hideReported" checked> Masquer les offres signalées</label>
+    <button class="btn ghost small" id="reset">Tout effacer</button>
   </div>
 </section>
 
 <main>
+  <!-- OFFRES -->
   <section id="tab-list" class="tab active">
-    <div id="byRegion" class="regionbar"></div>
+    <div class="kpis" id="kpis"></div>
+    <div class="list-head"><h2 id="listTitle">Offres</h2><span class="muted" id="count"></span></div>
     <div id="list" class="list"></div>
     <button id="more" class="btn ghost wide" hidden>Afficher plus</button>
   </section>
 
+  <!-- CARTE -->
   <section id="tab-map" class="tab">
-    <div class="maplayout">
-      <div id="map" aria-label="Carte des offres"></div>
-      <aside class="mapside">
-        <h3>Offres par pays</h3>
-        <ol id="countryList"></ol>
-      </aside>
+    <div class="mapwrap">
+      <div id="map" aria-label="Carte du monde des offres"></div>
+      <div class="map-legend" id="mapLegend"></div>
+      <div id="mapTip" class="tooltip" hidden></div>
+      <aside class="mappanel" id="mapPanel" aria-live="polite"></aside>
     </div>
   </section>
 
+  <!-- CANDIDATURE -->
   <section id="tab-apply" class="tab">
-    <div class="applygrid">
-      <div class="card">
-        <h2>1 · Mon profil <span class="private">🔒 stocké uniquement dans ce navigateur</span></h2>
-        <div class="actions">
-          <label class="btn">Importer mon fichier profil (.json)<input type="file" id="importProfile" accept=".json" hidden></label>
-          <button class="btn ghost" id="exportProfile">Exporter / sauvegarder</button>
-          <button class="btn ghost danger" id="clearProfile">Tout effacer</button>
+    <div class="studio">
+      <aside class="studio-side">
+        <div class="card">
+          <div class="side-head"><h2>Offre ciblée</h2><button class="btn ghost small" id="openProfile">Mon profil</button></div>
+          <div class="picker">
+            <input id="jobPicker" type="search" placeholder="Rechercher une offre…" autocomplete="off" aria-label="Choisir une offre">
+            <div class="picker-list" id="pickerList" hidden></div>
+          </div>
+          <div id="targetJob" class="target empty-target">Choisis une offre ci-dessus, ou clique sur <b>Préparer</b> depuis la liste.</div>
         </div>
-        <div class="formgrid">
-          <label>Nom <input id="p_name"></label>
-          <label>E-mail <input id="p_email"></label>
-          <label>Téléphone <input id="p_phone"></label>
-          <label>Ville <input id="p_city"></label>
-          <label>École (pour trouver les anciens) <input id="p_school"></label>
-        </div>
-        <label class="block">Texte du CV
-          <textarea id="p_cv" rows="8" placeholder="Colle ici le texte de ton CV, ou importe le PDF ci-dessous."></textarea>
-        </label>
-        <label class="btn ghost small">Importer le CV en PDF<input type="file" id="importCvPdf" accept="application/pdf" hidden></label>
-        <details class="blocks">
-          <summary>Blocs de lettre de motivation (modèles)</summary>
-          <p class="hint">Variables utilisables : {company} {role} {city} {team} {hook} {date} {name}. Un paragraphe par métier : l'outil choisit le bon selon l'offre.</p>
-          <div id="letterBlocks"></div>
-        </details>
-      </div>
-
-      <div class="card">
-        <h2>2 · Offre ciblée</h2>
-        <div id="targetJob" class="target muted">Choisis une offre dans l'onglet « Offres » avec le bouton <b>Adapter ma candidature</b>.</div>
-        <div id="applyTools" hidden>
-          <h3>Mots-clés de l'offre</h3>
-          <p class="hint">Les recruteurs et leurs logiciels de tri (ATS) cherchent ces mots. En vert : déjà dans ton CV. En orange : présents dans l'offre mais absents de ton CV — à ajouter s'ils correspondent vraiment à ton expérience.</p>
+        <div class="card" id="matchCard" hidden>
+          <div class="match">
+            <svg viewBox="0 0 36 36" class="ring"><circle cx="18" cy="18" r="15.5" class="ring-bg"/><circle cx="18" cy="18" r="15.5" class="ring-fg" id="ringFg"/></svg>
+            <div><b id="matchPct">0 %</b><span class="muted" id="matchTxt">des mots-clés de l'offre sont dans ton CV</span></div>
+          </div>
           <div id="kw" class="kw"></div>
+        </div>
+        <div class="card" id="cvControls" hidden>
+          <h3>CV</h3>
+          <label class="check"><input type="checkbox" id="cvReorder" checked> Mettre en avant les puces liées à l'offre</label>
+          <label class="check"><input type="checkbox" id="cvHighlight" checked> Surligner les mots-clés (écran seulement)</label>
+          <p class="hint">Clique sur une puce de l'aperçu pour la masquer ou l'afficher. Le point vert signale les puces liées à l'offre. Pour modifier le texte : <b>Mon profil</b>.</p>
+          <div class="actions"><button class="btn" id="printCv">Exporter en PDF</button><button class="btn ghost" id="docCv">Word (.doc)</button></div>
+        </div>
+        <div class="card" id="letterControls" hidden>
           <h3>Lettre de motivation</h3>
-          <div class="formgrid">
-            <label>Entreprise <input id="l_company"></label>
-            <label>Poste <input id="l_role"></label>
-            <label>Ville <input id="l_city"></label>
-            <label>Équipe / métier
-              <select id="l_cat"></select>
-            </label>
-          </div>
-          <label class="block">Accroche : une actualité récente de l'entreprise <a id="newsLink" target="_blank" rel="noopener">(chercher les actualités)</a>
-            <textarea id="l_hook" rows="3" placeholder="Ex. : In March 2026, X raised its capital by €200m to…"></textarea>
-          </label>
-          <button class="btn" id="genLetter">Générer la lettre</button>
-          <textarea id="letterOut" rows="18" class="letter"></textarea>
-          <div class="actions">
-            <button class="btn ghost" id="copyLetter">Copier</button>
-            <button class="btn ghost" id="docLetter">Télécharger (.doc)</button>
-            <button class="btn ghost" id="printLetter">Imprimer / PDF</button>
-          </div>
+          <label>Paragraphe métier<select id="l_cat"></select></label>
+          <label>Poste<input id="l_role"></label>
+          <label>Ville<input id="l_city"></label>
+          <label>Accroche — une actualité récente de l'entreprise <a id="newsLink" target="_blank" rel="noopener">chercher ↗</a>
+            <textarea id="l_hook" rows="3" placeholder="In March 2026, the bank increased the capital of its Brazilian subsidiary by €200m…"></textarea></label>
+          <div class="actions"><button class="btn" id="genLetter">Régénérer</button><button class="btn ghost" id="printLetter">PDF</button><button class="btn ghost" id="docLetter">Word</button><button class="btn ghost" id="copyLetter">Copier</button></div>
+        </div>
+        <div class="card" id="claudeCard" hidden>
           <h3>Réécriture fine avec Claude</h3>
-          <p class="hint">Copie une consigne complète (offre + CV + lettre) puis ouvre claude.ai : il te suffit de coller. Ton CV ne part que si tu colles le texte toi-même.</p>
-          <button class="btn" id="claudePrompt">Copier la consigne et ouvrir Claude</button>
+          <p class="hint">Copie une consigne complète (offre, CV, lettre) et ouvre claude.ai : il suffit de coller.</p>
+          <button class="btn ghost wide" id="claudePrompt">Copier la consigne et ouvrir Claude ↗</button>
+        </div>
+      </aside>
+      <div class="studio-main">
+        <div class="paper-tabs" role="tablist">
+          <button class="active" data-paper="cv">CV</button>
+          <button data-paper="letter">Lettre de motivation</button>
+          <span class="muted small" id="paperNote">Aperçu A4 · en anglais</span>
+        </div>
+        <div class="paper-stage" id="paperStage">
+          <article class="paper" id="paperCv" spellcheck="false"></article>
+          <article class="paper letter" id="paperLetter" contenteditable="true" spellcheck="true" hidden></article>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- SUIVI -->
   <section id="tab-track" class="tab">
-    <div class="card">
-      <h2>Suivi de mes candidatures <span class="private">🔒 stocké dans ce navigateur</span></h2>
-      <div id="trackTable"></div>
-    </div>
+    <div class="list-head"><h2>Mes candidatures</h2><span class="muted">Glisse les cartes d'une colonne à l'autre · stocké dans ce navigateur</span><button class="btn ghost small" id="exportTrack">Exporter (CSV)</button></div>
+    <div class="board" id="board"></div>
   </section>
 
-  <section id="tab-about" class="tab">
-    <div class="card prose" id="about"></div>
-  </section>
+  <!-- SOURCES -->
+  <section id="tab-about" class="tab"><div class="card prose" id="about"></div></section>
 </main>
+
+<!-- Tiroir de détail d'une offre -->
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" aria-hidden="true" tabindex="-1"></aside>
+
+<!-- Tiroir profil -->
+<aside class="drawer wide" id="profileDrawer" aria-hidden="true" tabindex="-1">
+  <div class="drawer-head"><h2>Mon profil <span class="private">🔒 stocké uniquement dans ce navigateur</span></h2><button class="icon-btn" data-close aria-label="Fermer">✕</button></div>
+  <div class="drawer-body">
+    <div class="actions">
+      <label class="btn">Importer mon fichier profil (.json)<input type="file" id="importProfile" accept=".json" hidden></label>
+      <button class="btn ghost" id="exportProfile">Sauvegarder (.json)</button>
+      <button class="btn ghost danger" id="clearProfile">Tout effacer</button>
+    </div>
+    <div class="formgrid">
+      <label>Nom<input id="p_name"></label><label>E-mail<input id="p_email"></label>
+      <label>Téléphone<input id="p_phone"></label><label>Ville<input id="p_city"></label>
+      <label>École (pour trouver les anciens)<input id="p_school"></label>
+    </div>
+    <h3>CV (en anglais)</h3>
+    <p class="hint">Une puce par ligne. Ces données servent à générer le CV adapté à chaque offre.</p>
+    <div id="cvEditor"></div>
+    <h3>Paragraphes de lettre (en anglais)</h3>
+    <p class="hint">Variables : {company} {role} {city} {team} {hook} {name}. L'outil choisit le paragraphe du métier de l'offre.</p>
+    <div id="letterBlocks"></div>
+  </div>
+</aside>
 
 <div id="toast" role="status" aria-live="polite"></div>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
 <script src="keywords.js"></script>
 <script src="app.js"></script>
+<script src="map.js"></script>
+<script src="studio.js"></script>
 </body>
 </html>

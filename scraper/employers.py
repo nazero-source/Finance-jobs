@@ -40,6 +40,14 @@ WORKDAY = [
     ("Apollo", "pe", "athene.wd5.myworkdayjobs.com", "athene", "Apollo_Careers", "all"),
     ("Bain Capital", "pe", "baincapital.wd1.myworkdayjobs.com", "baincapital", "External_Public", "all"),
     ("Ardian", "pe", "ardian.wd103.myworkdayjobs.com", "ardian", "ArdianCareers", "all"),
+    ("Moelis & Company", "boutique", "moelis.wd1.myworkdayjobs.com", "moelis", "Experienced-Hires", "all"),
+    ("ICG", "pe", "icg.wd3.myworkdayjobs.com", "icg", "external_careers", "all"),
+    ("BBVA", "bank", "bbva.wd3.myworkdayjobs.com", "bbva", "BBVA", "search"),
+    ("DBS", "bank", "dbs.wd3.myworkdayjobs.com", "dbs", "DBS_Careers", "search"),
+    ("CDPQ", "am", "cdpq.wd10.myworkdayjobs.com", "cdpq", "CDPQ", "all"),
+    ("CDPQ", "infra", "cdpq.wd10.myworkdayjobs.com", "cdpq", "CDPQ-recrutement-universitaire", "all"),
+    ("Ontario Teachers'", "am", "otppb.wd3.myworkdayjobs.com", "otppb", "OntarioTeachers_Careers", "all"),
+    ("Hamilton Lane", "pe", "hamiltonlane.wd108.myworkdayjobs.com", "hamiltonlane", "search", "all"),
 ]
 
 ORACLE = [
@@ -49,6 +57,7 @@ ORACLE = [
     ("Lazard", "boutique", "icbpjb.fa.ocs.oraclecloud.com", "CX_1", "all"),
     ("Lazard", "boutique", "icbpjb.fa.ocs.oraclecloud.com", "CX_2", "all"),
     ("IFM Investors", "infra", "enlc.fa.ap1.oraclecloud.com", "CX", "all"),
+    ("Jefferies", "bank", "hdid.fa.us2.oraclecloud.com", "CX_1", "all"),
 ]
 
 GREENHOUSE = [
@@ -58,30 +67,100 @@ GREENHOUSE = [
     ("William Blair", "boutique", "williamblair"),
     ("Lincoln International", "boutique", "lincolninternational"),
     ("Solomon Partners", "boutique", "solomonpartnersstudentsgraduates"),
+    ("LionTree", "boutique", "liontree"),
+    ("Ducera Partners", "boutique", "ducerapartners"),
+    ("Ducera Partners", "boutique", "ducerapartnerscampus"),
+    ("EQT", "pe", "eqtpartners"),
+    ("Audax Group", "pe", "audaxgroup"),
+    ("Adams Street Partners", "pe", "adamsstreetpartners"),
+    ("Lexington Partners", "pe", "lexingtonpartners"),
+    ("Platinum Equity", "pe", "platinumequitycareers"),
+    ("Forvis Mazars", "bank", "forvismazars"),
 ]
 
 LEVER = [
     ("Seaport Global", "boutique", "seaportglobal"),
+    ("The Raine Group", "boutique", "raine"),
 ]
 
 WORKABLE = [
     ("DC Advisory", "boutique", "dcadvisory"),
+    ("Clipperton", "boutique", "clipperton"),
 ]
 
 RECRUITEE = [
     ("Meridiam", "infra", "meridiam"),
+    ("Green Giraffe", "boutique", "greengiraffe"),
+    ("Apax Partners", "pe", "apax"),
+    ("IK Partners", "pe", "ikpartners"),
+    ("Egeria", "pe", "egeria"),
+    ("PAI Partners", "pe", "paipartners"),
+    ("BC Partners", "pe", "bcpartners"),
 ]
 
 SMARTRECRUITERS = [
     ("Tikehau Capital", "pe", "tikehaucapital"),
+    ("Capza", "pe", "capza"),
+    ("TA Associates", "pe", "taassociates"),
+    ("StepStone Group", "pe", "stepstonegroup"),
 ]
+
+PERSONIO = [
+    ("Clearwater International", "boutique", "clearwater", "de"),
+    ("Oaklins", "boutique", "oaklins", "de"),
+]
+
+BAMBOOHR = [
+    ("Summa Equity", "pe", "summaequity"),
+    ("Stone Point Capital", "pe", "stonepoint"),
+    ("Solomon Partners", "boutique", "solomonpartners"),
+]
+
+ASHBY = [
+    ("Pemberton", "pe", "pemberton"),
+]
+
+EIGHTFOLD = [
+    # name, type, host, domain
+    ("HSBC", "bank", "portal.careers.hsbc.com", "hsbc.com"),
+]
+
+CACIB = ("Crédit Agricole CIB", "bank")
 
 GOLDMAN = ("Goldman Sachs", "bank")
 
 # Mots-clés envoyés aux plateformes en mode "search"
 SEARCH_TERMS = [
-    "mergers acquisitions", "M&A", "investment banking", "private equity",
-    "infrastructure", "project finance", "leveraged finance", "acquisition finance",
-    "corporate finance", "summer analyst", "banking intern", "banking graduate",
-    "capital markets origination", "energy finance", "advisory analyst",
+    "mergers acquisitions", "M&A", "investment banking", "investment banking analyst",
+    "investment banking intern", "summer analyst", "off-cycle", "off cycle internship",
+    "graduate programme", "graduate program", "analyst program", "full time analyst",
+    "private equity", "private equity intern", "infrastructure", "infrastructure analyst",
+    "project finance", "project finance analyst", "leveraged finance", "acquisition finance",
+    "corporate finance", "capital markets origination", "energy finance", "advisory analyst",
+    "stage", "stagiaire", "VIE", "working student", "placement", "internship banking",
 ]
+
+# Domaines pour afficher le logo de chaque employeur
+DOMAINS = {
+    "Morgan Stanley": "morganstanley.com", "Bank of America": "bankofamerica.com", "Citi": "citigroup.com",
+    "Barclays": "barclays.com", "Deutsche Bank": "db.com", "Wells Fargo": "wellsfargo.com",
+    "RBC Capital Markets": "rbccm.com", "TD Securities": "tdsecurities.com", "BMO Capital Markets": "bmo.com",
+    "CIBC Capital Markets": "cibc.com", "Mizuho": "mizuhogroup.com", "MUFG": "mufg.jp", "Santander": "santander.com",
+    "ING": "ing.com", "Lloyds Banking Group": "lloydsbankinggroup.com", "Raymond James": "raymondjames.com",
+    "BlackRock": "blackrock.com", "Houlihan Lokey": "hl.com", "PJT Partners": "pjtpartners.com",
+    "Perella Weinberg": "pwpartners.com", "Harris Williams": "harriswilliams.com", "Guggenheim Partners": "guggenheimpartners.com",
+    "Blackstone": "blackstone.com", "Carlyle": "carlyle.com", "Brookfield": "brookfield.com", "Apollo": "apollo.com",
+    "Bain Capital": "baincapital.com", "Ardian": "ardian.com", "Moelis & Company": "moelis.com", "ICG": "icgam.com",
+    "BBVA": "bbva.com", "DBS": "dbs.com", "CDPQ": "cdpq.com", "Ontario Teachers'": "otpp.com", "Hamilton Lane": "hamiltonlane.com",
+    "J.P. Morgan": "jpmorgan.com", "Lazard": "lazard.com", "IFM Investors": "ifminvestors.com", "Jefferies": "jefferies.com",
+    "Goldman Sachs": "goldmansachs.com", "TPG": "tpg.com", "General Atlantic": "generalatlantic.com", "StepStone Group": "stepstonegroup.com",
+    "William Blair": "williamblair.com", "Lincoln International": "lincolninternational.com", "Solomon Partners": "solomonpartners.com",
+    "LionTree": "liontree.com", "Ducera Partners": "ducerapartners.com", "EQT": "eqtgroup.com", "Audax Group": "audaxgroup.com",
+    "Adams Street Partners": "adamsstreetpartners.com", "Lexington Partners": "lexingtonpartners.com", "Platinum Equity": "platinumequity.com",
+    "Forvis Mazars": "forvismazars.com", "Seaport Global": "seaportglobal.com", "The Raine Group": "raine.com",
+    "DC Advisory": "dcadvisory.com", "Clipperton": "clipperton.com", "Meridiam": "meridiam.com", "Green Giraffe": "green-giraffe.com",
+    "Apax Partners": "apax.fr", "IK Partners": "ikpartners.com", "Egeria": "egeria.nl", "PAI Partners": "paipartners.com",
+    "BC Partners": "bcpartners.com", "Tikehau Capital": "tikehaucapital.com", "Capza": "capza.co", "TA Associates": "ta.com",
+    "Clearwater International": "cwicf.com", "Oaklins": "oaklins.com", "Summa Equity": "summaequity.com",
+    "Stone Point Capital": "stonepoint.com", "Pemberton": "pembertonam.com", "HSBC": "hsbc.com", "Crédit Agricole CIB": "ca-cib.com",
+}

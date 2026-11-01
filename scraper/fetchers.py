@@ -270,3 +270,118 @@ def adzuna():
                                desc=strip_html(j.get("description", "")), salary_raw=sal,
                                latlon=(j.get("latitude"), j.get("longitude")) if j.get("latitude") else None))
     return out
+
+
+# ---------------- Personio / BambooHR / Ashby ----------------
+def http_text(url, timeout=30):
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (finance-jobs-radar)"})
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                return r.read().decode("utf-8", "ignore")
+        except Exception:
+            if attempt == 2:
+                raise
+            time.sleep(3 * (attempt + 1))
+
+
+def personio(name, etype, slug, dom="de"):
+    import xml.etree.ElementTree as ET
+    root = ET.fromstring(http_text(f"https://{slug}.jobs.personio.{dom}/xml"))
+    out = []
+    for p in root.findall("position"):
+        pid = p.findtext("id")
+        desc = " \n".join(strip_html(d.findtext("value")) for d in p.findall("jobDescriptions/jobDescription"))
+        out.append(job(source="Personio", employer=name, etype=etype, native_id=f"ps:{slug}:{pid}",
+                       title=p.findtext("name") or "", url=f"https://{slug}.jobs.personio.{dom}/job/{pid}",
+                       location=p.findtext("office") or "", posted=(p.findtext("createdAt") or "")[:10] or None,
+                       desc=desc, experience="EARLY_CAREER" if (p.findtext("seniority") or "") in ("entry-level", "student") else ""))
+    return out
+
+
+def bamboohr(name, etype, slug):
+    d = http(f"https://{slug}.bamboohr.com/careers/list")
+    out = []
+    for j in d.get("result", []):
+        jid = j.get("id")
+        loc = j.get("location") or {}
+        def desc_fn(jid=jid):
+            det = (http(f"https://{slug}.bamboohr.com/careers/{jid}/detail").get("result") or {}).get("jobOpening") or {}
+            return {"desc": strip_html(det.get("description")), "posted": (det.get("datePosted") or "")[:10] or None}
+        out.append(job(source="BambooHR", employer=name, etype=etype, native_id=f"bh:{slug}:{jid}",
+                       title=j.get("jobOpeningName", ""), url=f"https://{slug}.bamboohr.com/careers/{jid}",
+                       location=", ".join(x for x in (loc.get("city"), loc.get("state")) if x), desc_fn=desc_fn))
+    return out
+
+
+def ashby(name, etype, slug):
+    d = http(f"https://api.ashbyhq.com/posting-api/job-board/{slug}?includeCompensation=true")
+    out = []
+    for j in d.get("jobs", []):
+        comp = (j.get("compensation") or {}).get("compensationTierSummary") or ""
+        out.append(job(source="Ashby", employer=name, etype=etype, native_id=f"ab:{j['id']}", title=j.get("title", ""),
+                       url=j.get("jobUrl", ""), location=j.get("location", ""), posted=(j.get("publishedAt") or "")[:10] or None,
+                       desc=(f"Salary: {comp}\n" if comp else "") + (j.get("descriptionPlain") or "")))
+    return out
+
+
+# ---------------- Eightfold (HSBC) ----------------
+def eightfold(name, etype, host, domain):
+    seen, out = set(), []
+    for term in SEARCH_TERMS:
+        for start in range(0, 100, 10):
+            d = http(f"https://{host}/api/apply/v2/jobs?" + urllib.parse.urlencode(
+                {"domain": domain, "query": term, "start": start, "num": 10, "sort_by": "relevance"}))
+            ps = d.get("positions") or []
+            for p in ps:
+                pid = p["id"]
+                if pid in seen:
+                    continue
+                seen.add(pid)
+                def desc_fn(pid=pid):
+                    det = http(f"https://{host}/api/apply/v2/jobs/{pid}?domain={domain}")
+                    return {"desc": strip_html(det.get("job_description"))}
+                ts = p.get("t_create")
+                out.append(job(source="Eightfold", employer=name, etype=etype, native_id=f"ef:{pid}",
+                               title=p.get("name", ""), url=p.get("canonicalPositionUrl", ""),
+                               location=p.get("location", ""),
+                               posted=dt.datetime.fromtimestamp(ts, dt.timezone.utc).date().isoformat() if ts else None,
+                               latlon=tuple(map(float, p["latlongs"].split(",")[:2])) if p.get("latlongs") else None,
+                               desc_fn=desc_fn))
+            if len(ps) < 10:
+                break
+    return out
+
+
+# ---------------- Crédit Agricole CIB (site carrière HTML) ----------------
+def cacib(name, etype):
+    base = "https://jobs.ca-cib.com"
+    out, seen = [], set()
+    for page in range(1, 15):
+        s = http_text(f"{base}/job/list-of-jobs.aspx?page={page}&LCID=2057")
+        cards = re.findall(r'<div class="ts-offer-card Layer".*?(?=<div class="ts-offer-card Layer"|<div class="ts-pagination|$)', s, re.S)
+        new = 0
+        for c in cards:
+            m = re.search(r'href="(/job/[^"]+_(\d+)\.aspx)"[^>]*>\s*([^<]+?)\s*</a>', c)
+            if not m or m.group(2) in seen:
+                continue
+            seen.add(m.group(2)); new += 1
+            bits = [b.strip() for b in re.sub(r"<[^>]+>", "|", re.sub(r"<script.*?</script>", "", c, flags=re.S)).split("|")
+                    if b.strip() and not b.strip().startswith("Add this")]
+            title = html.unescape(m.group(3))
+            rest = [html.unescape(b) for b in bits if html.unescape(b) != title]
+            contract = next((b for b in rest if re.search(r"contract|internship|apprentice|graduate|V\.?I\.?E|temporary", b, re.I)), "")
+            geo = [b for b in rest if b != contract][-2:]
+            url = base + m.group(1)
+            def desc_fn(url=url):
+                t = http_text(url)
+                i, k = t.find('class="JobDescription"'), t.find("Ces offres pourraient")
+                k = k if k > i else t.find("These offers might")
+                txt = strip_html(t[i:k] if i > 0 and k > i else "")
+                return {"desc": re.sub(r"^.*?Description du poste|^.*?Job description", "", txt, flags=re.S).strip()[:6000]}
+            out.append(job(source="CA-CIB", employer=name, etype=etype, native_id=f"cacib:{m.group(2)}",
+                           title=f"{title} ({contract})" if re.search(r"internship|V\.?I\.?E|graduate|apprentice", contract, re.I) else title,
+                           url=url, location=", ".join(reversed(geo)) if geo else "", desc_fn=desc_fn))
+        if not new:
+            break
+    return out

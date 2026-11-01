@@ -37,6 +37,13 @@
 "lat": 24.4538,
 "lon": 54.3774
 },
+"Al Riyadh, Saudi Arabia": {
+"cc": "SA",
+"city": "Riyadh",
+"country": "Saudi Arabia",
+"lat": 24.6389,
+"lon": 46.716
+},
 "Amsterdam Netherlands": {
 "cc": "NL",
 "city": "Amsterdam",
@@ -367,6 +374,7 @@
 "lat": 41.4997,
 "lon": -81.6937
 },
+"Conshohocken, PA, USA, United States": null,
 "Copenhagen Denmark": {
 "cc": "DK",
 "city": "Copenhagen",
@@ -375,12 +383,26 @@
 "lon": 12.5701
 },
 "Dallas, TX, USA, United States": null,
+"Dallas, TX, United States": {
+"cc": "US",
+"city": "Dallas",
+"country": "United States",
+"lat": 32.7763,
+"lon": -96.7969
+},
 "Dallas, United States": {
 "cc": "US",
 "city": "Dallas",
 "country": "United States",
 "lat": 32.7763,
 "lon": -96.7969
+},
+"Dollard-des-Ormeaux, Québec, Canada": {
+"cc": "CA",
+"city": "Dollard-des-Ormeaux",
+"country": "Canada",
+"lat": 45.4842,
+"lon": -73.8065
 },
 "Dubai United Arab Emirates": {
 "cc": "AE",
@@ -404,6 +426,13 @@
 "lon": 55.1886
 },
 "Dublin Ireland": {
+"cc": "IE",
+"city": "Dublin",
+"country": "Ireland",
+"lat": 53.3494,
+"lon": -6.2606
+},
+"Dublin, Ireland": {
 "cc": "IE",
 "city": "Dublin",
 "country": "Ireland",
@@ -466,6 +495,13 @@
 "lat": 27.7568,
 "lon": -81.464
 },
+"FRANKFURT, Germany": {
+"cc": "DE",
+"city": "Frankfurt",
+"country": "Germany",
+"lat": 50.1106,
+"lon": 8.6821
+},
 "FREEDOM DR RESTON, United States": {
 "cc": "US",
 "city": "Reston",
@@ -496,7 +532,21 @@
 "lat": 50.1106,
 "lon": 8.6821
 },
+"Frankfurt am Main": {
+"cc": "DE",
+"city": "Frankfurt",
+"country": "Germany",
+"lat": 50.1106,
+"lon": 8.6821
+},
 "Frankfurt am Main, Germany": {
+"cc": "DE",
+"city": "Frankfurt",
+"country": "Germany",
+"lat": 50.1106,
+"lon": 8.6821
+},
+"Frankfurt am Main, Hesse, Germany": {
 "cc": "DE",
 "city": "Frankfurt",
 "country": "Germany",
@@ -511,6 +561,13 @@
 "lon": 8.6821
 },
 "Frankfurt, Taunus Turm, Germany": null,
+"GREENWICH, Connecticut": {
+"cc": "US",
+"city": "Greenwich",
+"country": "United States",
+"lat": 41.0265,
+"lon": -73.6285
+},
 "Georgetown, Ontario, Canada": {
 "cc": "CA",
 "city": "Halton Hills",
@@ -526,6 +583,13 @@
 "lon": 10.4478
 },
 "Global Service Private Ltd.": null,
+"HONG KONG, Hong Kong": {
+"cc": "CN",
+"city": "Hong Kong",
+"country": "China",
+"lat": 22.2818,
+"lon": 114.1583
+},
 "HOUSTON, TX, United States": {
 "cc": "US",
 "city": "Houston",
@@ -783,6 +847,13 @@
 "lat": 34.0537,
 "lon": -118.2428
 },
+"Los Angeles, California, United States": {
+"cc": "US",
+"city": "Los Angeles",
+"country": "United States",
+"lat": 34.0537,
+"lon": -118.2428
+},
 "Los Angeles, United States": {
 "cc": "US",
 "city": "Los Angeles",
@@ -828,6 +899,13 @@
 },
 "MUFG Global Service Private Ltd.": null,
 "MUFGM, Kuala Lumpur Branch, Malaysia": null,
+"MUMBAI, India": {
+"cc": "IN",
+"city": "Mumbai",
+"country": "India",
+"lat": 19.055,
+"lon": 72.8692
+},
 "Madison Ave Corp, United States": null,
 "Madrid Paseo Castellana 18, Spain": null,
 "Madrid Spain": {
@@ -941,6 +1019,20 @@
 "lat": 45.5032,
 "lon": -73.5698
 },
+"Montrouge, France": {
+"cc": "FR",
+"city": "Montrouge",
+"country": "France",
+"lat": 48.8189,
+"lon": 2.3194
+},
+"Montréal, Québec, Canada": {
+"cc": "CA",
+"city": "Montreal",
+"country": "Canada",
+"lat": 45.5032,
+"lon": -73.5698
+},
 "Mumbai (NESCO), India": null,
 "Mumbai Maharashtra India": {
 "cc": "IN",
@@ -986,6 +1078,13 @@
 "lat": 19.055,
 "lon": 72.8692
 },
+"Munchen, DE": {
+"cc": "DE",
+"city": "Munich",
+"country": "Germany",
+"lat": 48.1371,
+"lon": 11.5754
+},
 "Munich": {
 "cc": "DE",
 "city": "Munich",
@@ -993,7 +1092,21 @@
 "lat": 48.1371,
 "lon": 11.5754
 },
+"Munich, Germany": {
+"cc": "DE",
+"city": "Munich",
+"country": "Germany",
+"lat": 48.1371,
+"lon": 11.5754
+},
 "NEW YORK, NY, United States": {
+"cc": "US",
+"city": "New York",
+"country": "United States",
+"lat": 40.7127,
+"lon": -74.006
+},
+"NEW YORK, United States Of America": {
 "cc": "US",
 "city": "New York",
 "country": "United States",
@@ -1042,27 +1155,6 @@
 "lat": 40.7127,
 "lon": -74.006
 },
-"New York , United States, NY": {
-"cc": "US",
-"city": "City of Kingston",
-"country": "United States",
-"lat": 41.9411,
-"lon": -74.0478
-},
-"New York New York United States, United States": {
-"cc": "US",
-"city": "City of Kingston",
-"country": "United States",
-"lat": 41.9411,
-"lon": -74.0478
-},
-"New York United States, United States": {
-"cc": "US",
-"city": "City of Kingston",
-"country": "United States",
-"lat": 41.9411,
-"lon": -74.0478
-},
 "New York, 1 Columbus Circle, United States": null,
 "New York, 745 7th Avenue, United States": {
 "cc": "US",
@@ -1071,6 +1163,7 @@
 "lat": 40.6742,
 "lon": -73.9754
 },
+"New York, 875 Third Avenue, United States": null,
 "New York, NY": {
 "cc": "US",
 "city": "New York",
@@ -1125,6 +1218,13 @@
 "lat": 44.5678,
 "lon": -80.943
 },
+"PARIS, Paris, France": {
+"cc": "FR",
+"city": "Paris",
+"country": "France",
+"lat": 48.8589,
+"lon": 2.32
+},
 "Paris France": {
 "cc": "FR",
 "city": "Paris",
@@ -1153,7 +1253,21 @@
 "lat": 48.8589,
 "lon": 2.32
 },
+"Paris, fr": {
+"cc": "FR",
+"city": "Paris",
+"country": "France",
+"lat": 48.8535,
+"lon": 2.3484
+},
 "Quebec VIRTUAL, Canada": null,
+"Québec, Québec, Canada": {
+"cc": "CA",
+"city": "Quebec",
+"country": "Canada",
+"lat": 46.8137,
+"lon": -71.2084
+},
 "Red Deer, Alberta, Canada": {
 "cc": "CA",
 "city": "Red Deer",
@@ -1167,6 +1281,13 @@
 "country": "Chile",
 "lat": -33.5739,
 "lon": -70.6206
+},
+"Repentigny, Québec, Canada": {
+"cc": "CA",
+"city": "Repentigny",
+"country": "Canada",
+"lat": 45.7326,
+"lon": -73.4528
 },
 "Richmond , United States": {
 "cc": "US",
@@ -1217,6 +1338,20 @@
 "lat": 37.7879,
 "lon": -122.4075
 },
+"SAO PAULO, Brazil": {
+"cc": "BR",
+"city": "São Paulo",
+"country": "Brazil",
+"lat": -23.5507,
+"lon": -46.6334
+},
+"SEOUL, Korea": {
+"cc": "KR",
+"city": "Seoul",
+"country": "South Korea",
+"lat": 37.5667,
+"lon": 126.9783
+},
 "STOCKHOLM, STOCKHOLM, Sweden": {
 "cc": "SE",
 "city": "Stockholm",
@@ -1238,6 +1373,13 @@
 "lat": 27.7712,
 "lon": -82.634
 },
+"Saint-Romuald, Québec, Canada": {
+"cc": "CA",
+"city": "Lévis",
+"country": "Canada",
+"lat": 46.7566,
+"lon": -71.2379
+},
 "Salt Lake City, United States": {
 "cc": "US",
 "city": "Salt Lake City",
@@ -1253,6 +1395,13 @@
 "lon": -105.9368
 },
 "San Francisco California United States, United States": null,
+"San Francisco, CA": {
+"cc": "US",
+"city": "San Francisco",
+"country": "United States",
+"lat": 37.7879,
+"lon": -122.4075
+},
 "San Francisco, CA, United States": {
 "cc": "US",
 "city": "San Francisco",
@@ -1422,6 +1571,13 @@
 "lat": 59.3251,
 "lon": 18.0711
 },
+"Stockholm, Stockholm, Sweden": {
+"cc": "SE",
+"city": "Stockholm",
+"country": "Sweden",
+"lat": 59.3251,
+"lon": 18.0711
+},
 "Stockholm, Sweden": {
 "cc": "SE",
 "city": "Stockholm",
@@ -1556,6 +1712,13 @@
 "lat": 35.6769,
 "lon": 139.7639
 },
+"Tokyo, Tokyo, Japan": {
+"cc": "JP",
+"city": "Chiyoda",
+"country": "Japan",
+"lat": 35.6813,
+"lon": 139.7667
+},
 "Tokyo-To, Japan": {
 "cc": "JP",
 "city": "Tokyo-To",
@@ -1564,6 +1727,13 @@
 "lon": 139.7639
 },
 "Toronto": {
+"cc": "CA",
+"city": "Toronto",
+"country": "Canada",
+"lat": 43.6535,
+"lon": -79.3839
+},
+"Toronto, Canada": {
 "cc": "CA",
 "city": "Toronto",
 "country": "Canada",
@@ -1626,6 +1796,13 @@
 "country": "Canada",
 "lat": 49.2609,
 "lon": -123.114
+},
+"Vaudreuil-Dorion, Québec, Canada": {
+"cc": "CA",
+"city": "Vaudreuil-Dorion",
+"country": "Canada",
+"lat": 45.3972,
+"lon": -74.0255
 },
 "Vaughan, Ontario, Canada": {
 "cc": "CA",

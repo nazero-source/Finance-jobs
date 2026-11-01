@@ -48,7 +48,12 @@ def clean(loc):
     loc = re.sub(r"^[A-Z]{2}\s*-\s*", "", loc)                       # "CA - San Francisco"
     loc = loc.replace("Korea, Republic of", "South Korea").replace("United States of America", "United States")
     loc = re.sub(r"^(.+?) \1\b", r"\1", loc)                       # "New York New York" -> "New York"
-    loc = re.sub(r"(?<=[a-z]) (United States|United Kingdom|Canada|India)$", r", \1", loc)
+    loc = re.sub(r"(?<=[a-z]) (United States|United Kingdom|Canada|India)\b", r", \1", loc)
+    parts = []
+    for part in (x.strip() for x in loc.split(",")):
+        if part and part.lower() not in (y.lower() for y in parts):
+            parts.append(part)
+    loc = ", ".join(parts)
     return re.sub(r"\s{2,}", " ", loc).strip(" ,-|")
 
 
