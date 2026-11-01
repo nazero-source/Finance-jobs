@@ -32,6 +32,16 @@ jobs:
           ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
           ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
           JOOBLE_API_KEY: ${{ secrets.JOOBLE_API_KEY }}
+          JOOBLE_API_KEY_FR: ${{ secrets.JOOBLE_API_KEY_FR }}
+          JOOBLE_API_KEY_UK: ${{ secrets.JOOBLE_API_KEY_UK }}
+          JOOBLE_API_KEY_DE: ${{ secrets.JOOBLE_API_KEY_DE }}
+          JOOBLE_API_KEY_CH: ${{ secrets.JOOBLE_API_KEY_CH }}
+          JOOBLE_API_KEY_NL: ${{ secrets.JOOBLE_API_KEY_NL }}
+          JOOBLE_API_KEY_ES: ${{ secrets.JOOBLE_API_KEY_ES }}
+          JOOBLE_API_KEY_IT: ${{ secrets.JOOBLE_API_KEY_IT }}
+          JOOBLE_API_KEY_AE: ${{ secrets.JOOBLE_API_KEY_AE }}
+          JOOBLE_API_KEY_SG: ${{ secrets.JOOBLE_API_KEY_SG }}
+          JOOBLE_API_KEY_BR: ${{ secrets.JOOBLE_API_KEY_BR }}
         run: python scraper/run.py
       - name: Enregistrement des données
         if: github.event_name != 'push'

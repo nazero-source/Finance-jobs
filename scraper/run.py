@@ -50,7 +50,7 @@ def sources():
     s.append(("Site carrière · Crédit Agricole CIB", F.cacib, E.CACIB))
     if os.environ.get("ADZUNA_APP_ID"):
         s.append(("Agrégateur · Adzuna", F.adzuna, ()))
-    if os.environ.get("JOOBLE_API_KEY"):
+    if any(k.startswith("JOOBLE_API_KEY") for k in os.environ):
         s.append(("Agrégateur · Jooble", F.jooble, ()))
     return s
 

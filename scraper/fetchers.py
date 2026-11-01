@@ -428,22 +428,42 @@ JOOBLE_QUERIES = [
 ]
 
 
-def jooble():
-    key = os.environ.get("JOOBLE_API_KEY")
-    if not key:
-        return []
+# Une clé Jooble par pays : JOOBLE_API_KEY (États-Unis), JOOBLE_API_KEY_FR, _UK, _DE, _CH, _NL, _ES, _IT, _AE, _SG, _BR…
+JOOBLE_LOCAL = {
+    "FR": [("analyste M&A", ""), ("stage fusions acquisitions", ""), ("stage M&A", "Paris"), ("stage private equity", ""),
+           ("analyste private equity", ""), ("stage financement de projets", ""), ("VIE M&A", ""), ("stage corporate finance", "Paris"),
+           ("stage leveraged finance", ""), ("stage infrastructure investissement", "")],
+    "DEFAULT": [("M&A analyst", ""), ("M&A intern", ""), ("investment banking analyst", ""), ("investment banking intern", ""),
+                ("private equity analyst", ""), ("private equity intern", ""), ("project finance analyst", ""),
+                ("infrastructure investment analyst", ""), ("corporate finance intern", ""), ("leveraged finance analyst", "")],
+}
+
+
+def _jooble_run(host, key, queries, cc):
     out = []
-    for term, loc in JOOBLE_QUERIES:
-            try:
-                d = http(f"https://jooble.org/api/{key}", {"keywords": term, "location": loc, "page": 1}, tries=1)
-            except Exception:
-                continue
-            for j in d.get("jobs", []):
-                sal = None
-                out.append(job(source=f"Jooble · {j.get('source') or 'web'}", employer=(j.get("company") or "?").strip(),
-                               etype="bank", native_id=f"jb:{j.get('id')}", title=strip_html(j.get("title", "")),
-                               url=j.get("link", ""), location=j.get("location") or loc,
-                               posted=(j.get("updated") or "")[:10] or None,
-                               desc=strip_html(j.get("snippet", "")) + ("\nSalary: " + j["salary"] if j.get("salary") else "")))
-            time.sleep(0.3)
+    for term, loc in queries:
+        try:
+            d = http(f"https://{host}/api/{key}", {"keywords": term, "location": loc, "page": 1}, tries=1)
+        except Exception:
+            continue
+        for j in d.get("jobs", []):
+            out.append(job(source=f"Jooble · {j.get('source') or 'web'}", employer=(j.get("company") or "?").strip(),
+                           etype="bank", native_id=f"jb:{j.get('id')}", title=strip_html(j.get("title", "")),
+                           url=j.get("link", ""), location=j.get("location") or loc, country_hint=cc if cc != "US" else "",
+                           posted=(j.get("updated") or "")[:10] or None,
+                           desc=strip_html(j.get("snippet", "")) + ("\nSalary: " + j["salary"] if j.get("salary") else "")))
+        time.sleep(0.3)
+    return out
+
+
+def jooble():
+    out = []
+    if os.environ.get("JOOBLE_API_KEY"):
+        out += _jooble_run("jooble.org", os.environ["JOOBLE_API_KEY"], JOOBLE_QUERIES, "US")
+    for var, key in os.environ.items():
+        m = re.match(r"JOOBLE_API_KEY_([A-Z]{2})$", var)
+        if m and key:
+            cc = m.group(1)
+            host = f"{cc.lower()}.jooble.org"
+            out += _jooble_run(host, key, JOOBLE_LOCAL.get(cc, JOOBLE_LOCAL["DEFAULT"]), {"UK": "GB"}.get(cc, cc))
     return out
