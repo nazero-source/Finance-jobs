@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Finance Jobs Radar</title>
+<meta name="description" content="Offres de stage, VIE, graduate et CDI en M&A, investment banking, private equity, infrastructure et project finance, partout dans le monde. Mise à jour quotidienne.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%231d4ed8'/><circle cx='16' cy='16' r='8' fill='none' stroke='white' stroke-width='2.5'/><circle cx='16' cy='16' r='2.5' fill='white'/></svg>">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="var(--accent)"/><circle cx="16" cy="16" r="8" fill="none" stroke="#fff" stroke-width="2.5"/><circle cx="16" cy="16" r="2.5" fill="#fff"/></svg>
+    <div>
+      <h1>Finance Jobs Radar</h1>
+      <p class="sub" id="meta">Chargement…</p>
+    </div>
+  </div>
+  <nav class="tabs" role="tablist">
+    <button role="tab" data-tab="list" class="active">Offres</button>
+    <button role="tab" data-tab="map">Carte</button>
+    <button role="tab" data-tab="apply">Ma candidature</button>
+    <button role="tab" data-tab="track">Suivi <span id="trackCount" class="pill"></span></button>
+    <button role="tab" data-tab="about">Sources</button>
+  </nav>
+</header>
+
+<button id="filtersToggle" class="filterstoggle" aria-controls="filters">Filtres</button>
+<section id="filters" class="filters">
+  <input id="q" type="search" placeholder="Rechercher : poste, banque, ville…" aria-label="Recherche">
+  <div class="row">
+    <div class="chips" id="catChips" aria-label="Métier"></div>
+  </div>
+  <div class="row">
+    <div class="chips" id="contractChips" aria-label="Contrat"></div>
+  </div>
+  <div class="row selects">
+    <select id="region"><option value="">Toutes régions</option></select>
+    <select id="country"><option value="">Tous pays</option></select>
+    <select id="employer"><option value="">Tous employeurs</option></select>
+    <select id="seniority"><option value="">Tous niveaux</option></select>
+    <select id="since">
+      <option value="">Toutes dates</option>
+      <option value="1">Nouvelles (24 h)</option>
+      <option value="7">7 derniers jours</option>
+      <option value="30">30 derniers jours</option>
+    </select>
+    <select id="sort">
+      <option value="date">Plus récentes</option>
+      <option value="employer">Employeur A→Z</option>
+      <option value="country">Pays A→Z</option>
+    </select>
+  </div>
+  <div class="row toggles">
+    <label><input type="checkbox" id="profileOnly"> Mon profil <span class="hint">(stage, VIE, graduate, analyst — hors offres 2026)</span></label>
+    <label><input type="checkbox" id="hideReported" checked> Masquer les offres signalées</label>
+    <span class="count" id="count"></span>
+    <button class="link" id="reset">Réinitialiser</button>
+  </div>
+</section>
+
+<main>
+  <section id="tab-list" class="tab active">
+    <div id="byRegion" class="regionbar"></div>
+    <div id="list" class="list"></div>
+    <button id="more" class="btn ghost wide" hidden>Afficher plus</button>
+  </section>
+
+  <section id="tab-map" class="tab">
+    <div class="maplayout">
+      <div id="map" aria-label="Carte des offres"></div>
+      <aside class="mapside">
+        <h3>Offres par pays</h3>
+        <ol id="countryList"></ol>
+      </aside>
+    </div>
+  </section>
+
+  <section id="tab-apply" class="tab">
+    <div class="applygrid">
+      <div class="card">
+        <h2>1 · Mon profil <span class="private">🔒 stocké uniquement dans ce navigateur</span></h2>
+        <div class="actions">
+          <label class="btn">Importer mon fichier profil (.json)<input type="file" id="importProfile" accept=".json" hidden></label>
+          <button class="btn ghost" id="exportProfile">Exporter / sauvegarder</button>
+          <button class="btn ghost danger" id="clearProfile">Tout effacer</button>
+        </div>
+        <div class="formgrid">
+          <label>Nom <input id="p_name"></label>
+          <label>E-mail <input id="p_email"></label>
+          <label>Téléphone <input id="p_phone"></label>
+          <label>Ville <input id="p_city"></label>
+          <label>École (pour trouver les anciens) <input id="p_school"></label>
+        </div>
+        <label class="block">Texte du CV
+          <textarea id="p_cv" rows="8" placeholder="Colle ici le texte de ton CV, ou importe le PDF ci-dessous."></textarea>
+        </label>
+        <label class="btn ghost small">Importer le CV en PDF<input type="file" id="importCvPdf" accept="application/pdf" hidden></label>
+        <details class="blocks">
+          <summary>Blocs de lettre de motivation (modèles)</summary>
+          <p class="hint">Variables utilisables : {company} {role} {city} {team} {hook} {date} {name}. Un paragraphe par métier : l'outil choisit le bon selon l'offre.</p>
+          <div id="letterBlocks"></div>
+        </details>
+      </div>
+
+      <div class="card">
+        <h2>2 · Offre ciblée</h2>
+        <div id="targetJob" class="target muted">Choisis une offre dans l'onglet « Offres » avec le bouton <b>Adapter ma candidature</b>.</div>
+        <div id="applyTools" hidden>
+          <h3>Mots-clés de l'offre</h3>
+          <p class="hint">Les recruteurs et leurs logiciels de tri (ATS) cherchent ces mots. En vert : déjà dans ton CV. En orange : présents dans l'offre mais absents de ton CV — à ajouter s'ils correspondent vraiment à ton expérience.</p>
+          <div id="kw" class="kw"></div>
+          <h3>Lettre de motivation</h3>
+          <div class="formgrid">
+            <label>Entreprise <input id="l_company"></label>
+            <label>Poste <input id="l_role"></label>
+            <label>Ville <input id="l_city"></label>
+            <label>Équipe / métier
+              <select id="l_cat"></select>
+            </label>
+          </div>
+          <label class="block">Accroche : une actualité récente de l'entreprise <a id="newsLink" target="_blank" rel="noopener">(chercher les actualités)</a>
+            <textarea id="l_hook" rows="3" placeholder="Ex. : In March 2026, X raised its capital by €200m to…"></textarea>
+          </label>
+          <button class="btn" id="genLetter">Générer la lettre</button>
+          <textarea id="letterOut" rows="18" class="letter"></textarea>
+          <div class="actions">
+            <button class="btn ghost" id="copyLetter">Copier</button>
+            <button class="btn ghost" id="docLetter">Télécharger (.doc)</button>
+            <button class="btn ghost" id="printLetter">Imprimer / PDF</button>
+          </div>
+          <h3>Réécriture fine avec Claude</h3>
+          <p class="hint">Copie une consigne complète (offre + CV + lettre) puis ouvre claude.ai : il te suffit de coller. Ton CV ne part que si tu colles le texte toi-même.</p>
+          <button class="btn" id="claudePrompt">Copier la consigne et ouvrir Claude</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tab-track" class="tab">
+    <div class="card">
+      <h2>Suivi de mes candidatures <span class="private">🔒 stocké dans ce navigateur</span></h2>
+      <div id="trackTable"></div>
+    </div>
+  </section>
+
+  <section id="tab-about" class="tab">
+    <div class="card prose" id="about"></div>
+  </section>
+</main>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="keywords.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

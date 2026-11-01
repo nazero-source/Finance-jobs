@@ -1,0 +1,177 @@
+"""Lance la collecte complète et écrit docs/data/jobs.json + meta.json.
+
+Usage : python scraper/run.py
+"""
+import concurrent.futures as cf, datetime as dt, hashlib, json, os, re, sys, time, traceback
+
+sys.path.insert(0, os.path.dirname(__file__))
+import employers as E
+import fetchers as F
+from classify import classify, title_prefilter, CATEGORIES
+from salary import extract, estimate
+from geo import Geocoder, region_of
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OUT = os.path.join(ROOT, "docs", "data")
+TODAY = dt.date.today().isoformat()
+
+EMAIL_RX = re.compile(r"[\w.+-]+@[\w-]+\.[\w.-]+")
+EMAIL_OK = re.compile(r"recruit|campus|career|talent|graduate|intern|jobs|hr|rh|stage|emploi|hiring", re.I)
+RECRUITER_RX = re.compile(r"(?:recruiter|recruiting contact|talent partner|contact)\s*[:\-]\s*([A-Z][a-z]+(?: [A-Z][a-zA-Z'\-]+){1,2})")
+
+
+def sources():
+    s = []
+    for args in E.WORKDAY:
+        s.append((f"Workday · {args[0]} · {args[4]}", F.workday, args))
+    for args in E.ORACLE:
+        s.append((f"Oracle · {args[0]} · {args[3]}", F.oracle, args))
+    s.append(("Goldman Sachs", F.goldman, E.GOLDMAN))
+    for args in E.GREENHOUSE:
+        s.append((f"Greenhouse · {args[0]}", F.greenhouse, args))
+    for args in E.LEVER:
+        s.append((f"Lever · {args[0]}", F.lever, args))
+    for args in E.WORKABLE:
+        s.append((f"Workable · {args[0]}", F.workable, args))
+    for args in E.RECRUITEE:
+        s.append((f"Recruitee · {args[0]}", F.recruitee, args))
+    for args in E.SMARTRECRUITERS:
+        s.append((f"SmartRecruiters · {args[0]}", F.smartrecruiters, args))
+    if os.environ.get("ADZUNA_APP_ID"):
+        s.append(("Adzuna", F.adzuna, ()))
+    return s
+
+
+def fetch_all():
+    raw, report = [], {}
+    def run(src):
+        label, fn, args = src
+        t = time.time()
+        try:
+            res = fn(*args)
+            return label, res, None, time.time() - t
+        except Exception as e:
+            return label, [], f"{type(e).__name__}: {e}", time.time() - t
+    with cf.ThreadPoolExecutor(8) as ex:
+        for label, res, err, secs in ex.map(run, sources()):
+            report[label] = {"fetched": len(res), "error": err, "seconds": round(secs, 1)}
+            print(f"{label:55s} {len(res):5d} {'ERREUR ' + err if err else ''}", flush=True)
+            for j in res:
+                j["_src"] = label
+            raw.extend(res)
+    return raw, report
+
+
+def enrich(j):
+    """Description + classement final (appelé seulement pour les offres qui passent le 1er filtre)."""
+    if j.get("desc_fn"):
+        try:
+            extra = j["desc_fn"]() or {}
+            for k, v in extra.items():
+                if v:
+                    j[k] = v
+        except Exception:
+            pass
+    j.pop("desc_fn", None)
+    c = classify(j["title"], j.get("desc", ""), j["etype"], j.get("experience", ""))
+    if not c:
+        return None
+    j.update(c)
+    return j
+
+
+def main():
+    t0 = time.time()
+    prev = {}
+    try:
+        with open(os.path.join(OUT, "jobs.json")) as f:
+            for p in json.load(f)["jobs"]:
+                prev[p["id"]] = p
+    except Exception:
+        pass
+
+    raw, report = fetch_all()
+    cand = [j for j in raw if title_prefilter(j["title"], j["etype"])]
+    # dédoublonnage avant enrichissement
+    uniq = {}
+    for j in cand:
+        uniq.setdefault((j["employer"], j["native_id"]), j)
+    cand = list(uniq.values())
+    print(f"\n{len(raw)} offres brutes, {len(cand)} après filtre titre", flush=True)
+
+    with cf.ThreadPoolExecutor(12) as ex:
+        kept = [j for j in ex.map(enrich, cand) if j]
+    print(f"{len(kept)} offres retenues après classement", flush=True)
+
+    geo = Geocoder()
+    jobs, seen_ids = [], set()
+    for j in kept:
+        jid = hashlib.sha1(f"{j['employer']}|{j['native_id']}".encode()).hexdigest()[:12]
+        if jid in seen_ids:
+            continue
+        # doublons de la même offre publiée sous deux identifiants (même employeur, titre, lieu)
+        key2 = (j["employer"], j["title"].strip().lower(), F.re.sub(r"\W", "", j["location"].lower()))
+        if key2 in seen_ids:
+            continue
+        seen_ids.update([jid, key2])
+
+        loc_q = j["location"].replace(j["employer"], "").strip(" -")
+        if j.get("country_hint") and j["country_hint"].lower() not in loc_q.lower() and len(j["country_hint"]) > 2:
+            loc_q = f"{loc_q}, {j['country_hint']}"
+        g = geo.lookup(loc_q)
+        if not g and j.get("country_hint"):
+            g = geo.lookup(j["country_hint"])
+        if j.get("latlon") and g:
+            g = dict(g, lat=j["latlon"][0], lon=j["latlon"][1])
+
+        desc = j.get("desc") or ""
+        sal = extract(desc)
+        if not sal and j.get("salary_raw"):
+            lo, hi = j["salary_raw"]
+            sal = {"text": f"{lo/1000:.0f}k – {(hi or lo)/1000:.0f}k / an (devise locale)", "estimated": False}
+        if not sal:
+            sal = estimate(j["seniority"], j["contract"], (g or {}).get("cc"), j["category"])
+
+        emails = sorted({e.rstrip(".") for e in EMAIL_RX.findall(desc) if EMAIL_OK.search(e)})[:3]
+        recruiters = sorted(set(RECRUITER_RX.findall(desc)))[:3]
+
+        old = prev.get(jid, {})
+        jobs.append({
+            "id": jid, "title": j["title"].strip(), "employer": j["employer"], "employer_type": j["etype"],
+            "category": j["category"], "contract": j["contract"], "seniority": j["seniority"],
+            "url": j["url"], "source": j["source"],
+            "location": F.re.sub(r"\s+", " ", j["location"]).strip(),
+            "city": (g or {}).get("city", ""), "country": (g or {}).get("country", j.get("country_hint", "")),
+            "cc": (g or {}).get("cc", ""), "region": region_of((g or {}).get("cc")),
+            "lat": (g or {}).get("lat"), "lon": (g or {}).get("lon"),
+            "posted": j.get("posted") or old.get("posted"),
+            "first_seen": old.get("first_seen", TODAY),
+            "salary": sal, "emails": emails, "recruiters": recruiters,
+            "desc": desc[:3500],
+        })
+    geo.save()
+
+    # Si une source a planté, on garde ses anciennes offres plutôt que de les perdre
+    failed = {lbl for lbl, r in report.items() if r["error"]}
+    if failed:
+        kept_ids = {x["id"] for x in jobs}
+        failed_employers = {lbl.split(" · ")[1] if " · " in lbl else lbl for lbl in failed}
+        for p in prev.values():
+            if p["id"] not in kept_ids and p["employer"] in failed_employers:
+                jobs.append(p)
+
+    jobs.sort(key=lambda x: (x.get("posted") or x["first_seen"]), reverse=True)
+    os.makedirs(OUT, exist_ok=True)
+    with open(os.path.join(OUT, "jobs.json"), "w") as f:
+        json.dump({"generated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%MZ"), "categories": CATEGORIES,
+                   "jobs": jobs}, f, ensure_ascii=False, separators=(",", ":"))
+    with open(os.path.join(OUT, "meta.json"), "w") as f:
+        json.dump({"generated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%MZ"), "count": len(jobs),
+                   "new_today": sum(1 for x in jobs if x["first_seen"] == TODAY and prev),
+                   "sources": report, "geocoding_calls": geo.calls,
+                   "duration_s": round(time.time() - t0)}, f, ensure_ascii=False, indent=1)
+    print(f"\nTerminé : {len(jobs)} offres, {geo.calls} géolocalisations, {time.time()-t0:.0f}s")
+
+
+if __name__ == "__main__":
+    main()

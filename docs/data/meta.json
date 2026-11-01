@@ -1,0 +1,239 @@
+{
+ "generated": "2026-11-01T16:34Z",
+ "count": 757,
+ "new_today": 774,
+ "sources": {
+  "Workday · Morgan Stanley · External": {
+   "fetched": 431,
+   "error": null,
+   "seconds": 44.6
+  },
+  "Workday · Bank of America · Lateral-US": {
+   "fetched": 406,
+   "error": null,
+   "seconds": 19.5
+  },
+  "Workday · Citi · 2": {
+   "fetched": 873,
+   "error": null,
+   "seconds": 88.7
+  },
+  "Workday · Barclays · External_Career_Site_Barclays": {
+   "fetched": 295,
+   "error": null,
+   "seconds": 25.7
+  },
+  "Workday · Deutsche Bank · DBWebsite": {
+   "fetched": 579,
+   "error": null,
+   "seconds": 63.5
+  },
+  "Workday · Wells Fargo · WellsFargoJobs": {
+   "fetched": 436,
+   "error": null,
+   "seconds": 46.5
+  },
+  "Workday · RBC Capital Markets · RBCGLOBAL1": {
+   "fetched": 461,
+   "error": null,
+   "seconds": 212.6
+  },
+  "Workday · TD Securities · TD_Bank_Careers": {
+   "fetched": 669,
+   "error": null,
+   "seconds": 75.2
+  },
+  "Workday · BMO Capital Markets · External": {
+   "fetched": 380,
+   "error": null,
+   "seconds": 44.8
+  },
+  "Workday · CIBC Capital Markets · search": {
+   "fetched": 368,
+   "error": null,
+   "seconds": 39.7
+  },
+  "Workday · Mizuho · MizuhoAmericas": {
+   "fetched": 116,
+   "error": null,
+   "seconds": 30.4
+  },
+  "Workday · MUFG · MUFG-Careers": {
+   "fetched": 439,
+   "error": null,
+   "seconds": 66.9
+  },
+  "Workday · Santander · SantanderCareers": {
+   "fetched": 314,
+   "error": null,
+   "seconds": 53.7
+  },
+  "Workday · ING · ICSGBLCOR": {
+   "fetched": 298,
+   "error": null,
+   "seconds": 22.2
+  },
+  "Workday · Lloyds Banking Group · LBG_Careers": {
+   "fetched": 56,
+   "error": null,
+   "seconds": 21.3
+  },
+  "Workday · Raymond James · RaymondJamesCareers": {
+   "fetched": 219,
+   "error": null,
+   "seconds": 22.4
+  },
+  "Workday · BlackRock · BlackRock_Professional": {
+   "fetched": 154,
+   "error": null,
+   "seconds": 14.6
+  },
+  "Workday · Houlihan Lokey · Campus": {
+   "fetched": 38,
+   "error": null,
+   "seconds": 1.4
+  },
+  "Workday · Houlihan Lokey · External": {
+   "fetched": 1,
+   "error": null,
+   "seconds": 0.6
+  },
+  "Workday · PJT Partners · Careers": {
+   "fetched": 55,
+   "error": null,
+   "seconds": 1.7
+  },
+  "Workday · Perella Weinberg · PWP_Experienced_Opportunities": {
+   "fetched": 8,
+   "error": null,
+   "seconds": 0.7
+  },
+  "Workday · Harris Williams · HarrisWilliams": {
+   "fetched": 14,
+   "error": null,
+   "seconds": 1.4
+  },
+  "Workday · Guggenheim Partners · Guggenheim_Partners": {
+   "fetched": 6,
+   "error": null,
+   "seconds": 0.6
+  },
+  "Workday · Blackstone · Blackstone_Careers": {
+   "fetched": 133,
+   "error": null,
+   "seconds": 4.2
+  },
+  "Workday · Blackstone · Blackstone_Campus_Careers": {
+   "fetched": 19,
+   "error": null,
+   "seconds": 0.6
+  },
+  "Workday · Carlyle · Carlyle": {
+   "fetched": 69,
+   "error": null,
+   "seconds": 2.3
+  },
+  "Workday · Brookfield · brookfield": {
+   "fetched": 140,
+   "error": null,
+   "seconds": 5.8
+  },
+  "Workday · Apollo · Apollo_Careers": {
+   "fetched": 53,
+   "error": null,
+   "seconds": 2.6
+  },
+  "Workday · Bain Capital · External_Public": {
+   "fetched": 32,
+   "error": null,
+   "seconds": 1.3
+  },
+  "Workday · Ardian · ArdianCareers": {
+   "fetched": 64,
+   "error": null,
+   "seconds": 3.0
+  },
+  "Oracle · J.P. Morgan · CX_1001": {
+   "fetched": 917,
+   "error": null,
+   "seconds": 59.7
+  },
+  "Oracle · Lazard · CX_1001": {
+   "fetched": 127,
+   "error": null,
+   "seconds": 4.5
+  },
+  "Oracle · Lazard · CX_1": {
+   "fetched": 49,
+   "error": null,
+   "seconds": 1.8
+  },
+  "Oracle · Lazard · CX_2": {
+   "fetched": 78,
+   "error": null,
+   "seconds": 2.8
+  },
+  "Oracle · IFM Investors · CX": {
+   "fetched": 23,
+   "error": null,
+   "seconds": 1.7
+  },
+  "Goldman Sachs": {
+   "fetched": 524,
+   "error": null,
+   "seconds": 10.4
+  },
+  "Greenhouse · TPG": {
+   "fetched": 19,
+   "error": null,
+   "seconds": 0.2
+  },
+  "Greenhouse · General Atlantic": {
+   "fetched": 14,
+   "error": null,
+   "seconds": 0.2
+  },
+  "Greenhouse · StepStone Group": {
+   "fetched": 56,
+   "error": null,
+   "seconds": 0.3
+  },
+  "Greenhouse · William Blair": {
+   "fetched": 50,
+   "error": null,
+   "seconds": 0.2
+  },
+  "Greenhouse · Lincoln International": {
+   "fetched": 40,
+   "error": null,
+   "seconds": 0.2
+  },
+  "Greenhouse · Solomon Partners": {
+   "fetched": 1,
+   "error": null,
+   "seconds": 0.1
+  },
+  "Lever · Seaport Global": {
+   "fetched": 8,
+   "error": null,
+   "seconds": 0.4
+  },
+  "Workable · DC Advisory": {
+   "fetched": 9,
+   "error": null,
+   "seconds": 0.1
+  },
+  "Recruitee · Meridiam": {
+   "fetched": 6,
+   "error": null,
+   "seconds": 0.4
+  },
+  "SmartRecruiters · Tikehau Capital": {
+   "fetched": 1,
+   "error": null,
+   "seconds": 0.5
+  }
+ },
+ "geocoding_calls": 54,
+ "duration_s": 304
+}

@@ -1,0 +1,272 @@
+"""Connecteurs vers les plateformes de recrutement (API publiques, gratuites)."""
+import datetime as dt, html, json, os, re, time, urllib.error, urllib.parse, urllib.request
+from employers import SEARCH_TERMS
+
+UA = {"User-Agent": "Mozilla/5.0 (finance-jobs-radar)", "Accept": "application/json"}
+TODAY = dt.date.today()
+
+
+def http(url, data=None, timeout=30, tries=4):
+    headers = dict(UA)
+    if data is not None:
+        headers["Content-Type"] = "application/json"
+        data = json.dumps(data).encode()
+    for attempt in range(tries):
+        try:
+            req = urllib.request.Request(url, data=data, headers=headers)
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                return json.load(r)
+        except urllib.error.HTTPError as e:
+            if e.code not in (429, 500, 502, 503, 504) or attempt == tries - 1:
+                raise
+        except (urllib.error.URLError, ConnectionError, TimeoutError, OSError):
+            if attempt == tries - 1:
+                raise
+        time.sleep(3 * (attempt + 1) ** 2)
+
+
+def strip_html(s):
+    if not s:
+        return ""
+    s = html.unescape(html.unescape(s))
+    s = re.sub(r"<(?:br|/p|/li|/div|/h\d)[^>]*>", "\n", s, flags=re.I)
+    s = re.sub(r"<li[^>]*>", "\n• ", s, flags=re.I)
+    s = re.sub(r"<[^>]+>", " ", s)
+    s = re.sub(r"[ \t\xa0]+", " ", s)
+    return re.sub(r"\n\s*\n+", "\n", s).strip()
+
+
+def job(**kw):
+    """Format commun à toutes les sources. desc_fn = fonction appelée seulement si l'offre passe le 1er filtre."""
+    base = dict(source="", employer="", etype="bank", native_id="", title="", url="", location="",
+                country_hint="", posted=None, desc="", desc_fn=None, experience="", salary_raw=None, latlon=None)
+    base.update(kw)
+    return base
+
+
+# ---------------- Workday ----------------
+def _wd_posted(s):
+    if not s:
+        return None
+    s = s.lower()
+    if "today" in s:
+        return TODAY.isoformat()
+    if "yesterday" in s:
+        return (TODAY - dt.timedelta(days=1)).isoformat()
+    m = re.search(r"(\d+)\+? days", s)
+    if m and "+" not in s:
+        return (TODAY - dt.timedelta(days=int(m.group(1)))).isoformat()
+    return None
+
+
+def workday(name, etype, host, tenant, site, mode):
+    api = f"https://{host}/wday/cxs/{tenant}/{site}"
+    seen, out = set(), []
+    terms = [""] if mode == "all" else SEARCH_TERMS
+    for term in terms:
+        offset, maxn, total = 0, (400 if mode == "all" else 100), None
+        while offset < maxn:
+            d = http(f"{api}/jobs", {"appliedFacets": {}, "limit": 20, "offset": offset, "searchText": term})
+            posts = d.get("jobPostings") or []
+            for p in posts:
+                path = p.get("externalPath")
+                if not path or path in seen:
+                    continue
+                seen.add(path)
+                def desc_fn(path=path):
+                    info = http(f"{api}{path}").get("jobPostingInfo", {})
+                    loc = info.get("location") or ""
+                    country = ((info.get("jobRequisitionLocation") or {}).get("country") or {})
+                    return {"desc": strip_html(info.get("jobDescription")),
+                            "posted": info.get("startDate"),
+                            "url": info.get("externalUrl"),
+                            "location": loc,
+                            "country_hint": (info.get("country") or {}).get("descriptor") or country.get("descriptor", "")}
+                pub = f"https://{host}/{site}{path}" if "myworkdayjobs" in host else \
+                    f"https://{host}/recruiting/{tenant}/{site}{path}"
+                out.append(job(source="Workday", employer=name, etype=etype, native_id=f"{tenant}:{path}",
+                               title=p.get("title", ""), url=pub, location=p.get("locationsText", ""),
+                               posted=_wd_posted(p.get("postedOn")), desc_fn=desc_fn))
+            if total is None:          # Workday ne renvoie le total que sur la 1re page
+                total = d.get("total") or 0
+            offset += 20
+            if not posts or offset >= total:
+                break
+    return out
+
+
+# ---------------- Oracle Recruiting Cloud ----------------
+def oracle(name, etype, host, site, mode):
+    base = f"https://{host}/hcmRestApi/resources/latest"
+    seen, out = set(), []
+    terms = [""] if mode == "all" else SEARCH_TERMS
+    for term in terms:
+        offset, maxn = 0, (500 if mode == "all" else 100)
+        while offset < maxn:
+            kw = f',keyword="{term}"' if term else ""
+            url = (f"{base}/recruitingCEJobRequisitions?onlyData=true&expand=requisitionList"
+                   f"&finder=findReqs;siteNumber={site}{urllib.parse.quote(kw)},limit=25,offset={offset},sortBy=POSTING_DATES_DESC")
+            d = http(url)["items"][0]
+            reqs = d.get("requisitionList") or []
+            for r in reqs:
+                rid = r["Id"]
+                if rid in seen:
+                    continue
+                seen.add(rid)
+                def desc_fn(rid=rid):
+                    u = (f"{base}/recruitingCEJobRequisitionDetails?expand=all&onlyData=true"
+                         f"&finder=ById;Id=%22{rid}%22,siteNumber={site}")
+                    it = (http(u).get("items") or [{}])[0]
+                    txt = " \n".join(strip_html(it.get(k)) for k in
+                                     ("ExternalDescriptionStr", "ExternalResponsibilitiesStr", "ExternalQualificationsStr")
+                                     if it.get(k))
+                    return {"desc": txt}
+                out.append(job(source="Oracle", employer=name, etype=etype, native_id=f"{host}:{rid}",
+                               title=r.get("Title", ""),
+                               url=f"https://{host}/hcmUI/CandidateExperience/en/sites/{site}/job/{rid}",
+                               location=r.get("PrimaryLocation", ""), country_hint=r.get("PrimaryLocationCountry", ""),
+                               posted=r.get("PostedDate"), desc=r.get("ShortDescriptionStr") or "", desc_fn=desc_fn))
+            offset += 25
+            if not reqs or offset >= (d.get("TotalJobsCount") or 0):
+                break
+    return out
+
+
+# ---------------- Goldman Sachs (site « Higher ») ----------------
+GS_QUERY = """query GetRoles($searchQueryInput: RoleSearchQueryInput!) { roleSearch(searchQueryInput: $searchQueryInput) {
+ totalCount items { roleId corporateTitle jobTitle jobFunction locations { primary state country city } division
+ createdDate descriptionHtml externalSource { sourceId } } } }"""
+
+
+def goldman(name, etype):
+    seen, out = set(), []
+    for term in SEARCH_TERMS:
+        for page in range(3):
+            d = http("https://api-higher.gs.com/gateway/api/v1/graphql", {
+                "operationName": "GetRoles", "query": GS_QUERY,
+                "variables": {"searchQueryInput": {
+                    "page": {"pageSize": 40, "pageNumber": page},
+                    "sort": {"sortStrategy": "RELEVANCE", "sortOrder": "DESC"}, "filters": [],
+                    "experiences": ["EARLY_CAREER", "PROFESSIONAL"], "searchTerm": term}}})
+            items = d["data"]["roleSearch"]["items"]
+            for it in items:
+                rid = it["roleId"]
+                if rid in seen:
+                    continue
+                seen.add(rid)
+                loc = next((l for l in it.get("locations") or [] if l.get("primary")), (it.get("locations") or [{}])[0])
+                sid = (it.get("externalSource") or {}).get("sourceId") or rid.split("_")[0]
+                title = it.get("jobTitle", "")
+                out.append(job(source="Goldman Sachs", employer=name, etype=etype, native_id=rid, title=title,
+                               url=f"https://higher.gs.com/roles/{sid}",
+                               location=", ".join(x for x in (loc.get("city"), loc.get("country")) if x),
+                               country_hint=loc.get("country", ""),
+                               posted=(it.get("createdDate") or "")[:10] or None,
+                               desc=strip_html(it.get("descriptionHtml")) or " ".join(
+                                   x for x in (it.get("division"), it.get("jobFunction"), it.get("corporateTitle")) if x),
+                               experience="EARLY_CAREER" if "EARLY" in rid.upper() or "CAMPUS" in rid.upper() else ""))
+            if len(items) < 40:
+                break
+    return out
+
+
+# ---------------- Greenhouse / Lever / Workable / Recruitee / SmartRecruiters ----------------
+def greenhouse(name, etype, board):
+    d = http(f"https://boards-api.greenhouse.io/v1/boards/{board}/jobs?content=true")
+    return [job(source="Greenhouse", employer=name, etype=etype, native_id=f"gh:{j['id']}", title=j.get("title", ""),
+                url=j.get("absolute_url", ""), location=(j.get("location") or {}).get("name", ""),
+                posted=(j.get("first_published") or j.get("updated_at") or "")[:10] or None,
+                desc=strip_html(j.get("content")))
+            for j in d.get("jobs", [])]
+
+
+def lever(name, etype, company):
+    d = http(f"https://api.lever.co/v0/postings/{company}?mode=json")
+    out = []
+    for j in d:
+        txt = j.get("descriptionPlain", "") + "\n" + "\n".join(
+            strip_html(l.get("content", "")) for l in j.get("lists", []))
+        ts = j.get("createdAt")
+        out.append(job(source="Lever", employer=name, etype=etype, native_id=f"lever:{j['id']}", title=j.get("text", ""),
+                       url=j.get("hostedUrl", ""), location=(j.get("categories") or {}).get("location", ""),
+                       posted=dt.datetime.utcfromtimestamp(ts / 1000).date().isoformat() if ts else None, desc=txt))
+    return out
+
+
+def workable(name, etype, account):
+    d = http(f"https://apply.workable.com/api/v1/widget/accounts/{account}")
+    out = []
+    for j in d.get("jobs", []):
+        loc = ", ".join(x for x in (j.get("city"), j.get("country")) if x)
+        out.append(job(source="Workable", employer=name, etype=etype, native_id=f"wk:{j.get('shortcode')}",
+                       title=j.get("title", ""), url=j.get("url") or j.get("shortlink", ""), location=loc,
+                       posted=(j.get("published_on") or j.get("created_at") or "")[:10] or None,
+                       desc=strip_html(j.get("description", ""))))
+    return out
+
+
+def recruitee(name, etype, company):
+    d = http(f"https://{company}.recruitee.com/api/offers/")
+    out = []
+    for j in d.get("offers", []):
+        loc = ", ".join(x for x in (j.get("city"), j.get("country")) if x)
+        out.append(job(source="Recruitee", employer=name, etype=etype, native_id=f"rc:{j['id']}", title=j.get("title", ""),
+                       url=j.get("careers_url", ""), location=loc, country_hint=j.get("country", ""),
+                       posted=(j.get("published_at") or "")[:10] or None,
+                       desc=strip_html((j.get("description") or "") + " " + (j.get("requirements") or ""))))
+    return out
+
+
+def smartrecruiters(name, etype, company):
+    out, offset = [], 0
+    while True:
+        d = http(f"https://api.smartrecruiters.com/v1/companies/{company}/postings?limit=100&offset={offset}")
+        for j in d.get("content", []):
+            loc = j.get("location") or {}
+            def desc_fn(ref=j.get("ref")):
+                det = http(ref)
+                secs = (det.get("jobAd") or {}).get("sections") or {}
+                return {"desc": " \n".join(strip_html((v or {}).get("text")) for v in secs.values())}
+            out.append(job(source="SmartRecruiters", employer=name, etype=etype, native_id=f"sr:{j['id']}",
+                           title=j.get("name", ""), url=f"https://jobs.smartrecruiters.com/{company}/{j['id']}",
+                           location=", ".join(x for x in (loc.get("city"), loc.get("country")) if x),
+                           posted=(j.get("releasedDate") or "")[:10] or None, desc_fn=desc_fn))
+        offset += 100
+        if offset >= d.get("totalFound", 0):
+            break
+    return out
+
+
+# ---------------- Adzuna (optionnel, clé gratuite) ----------------
+ADZUNA_COUNTRIES = ["gb", "fr", "de", "nl", "it", "es", "ch", "at", "be", "pl", "us", "ca", "br", "mx",
+                    "sg", "au", "nz", "in", "za"]
+ADZUNA_TERMS = ["mergers acquisitions analyst", "investment banking analyst", "private equity analyst",
+                "infrastructure investment", "project finance", "leveraged finance", "M&A intern",
+                "investment banking intern", "private equity intern"]
+
+
+def adzuna():
+    app_id, key = os.environ.get("ADZUNA_APP_ID"), os.environ.get("ADZUNA_APP_KEY")
+    if not app_id or not key:
+        return []
+    out = []
+    for cc in ADZUNA_COUNTRIES:
+        for term in ADZUNA_TERMS:
+            url = (f"https://api.adzuna.com/v1/api/jobs/{cc}/search/1?" + urllib.parse.urlencode(
+                {"app_id": app_id, "app_key": key, "results_per_page": 50, "what": term, "max_days_old": 45,
+                 "content-type": "application/json"}))
+            try:
+                d = http(url)
+            except Exception:
+                continue
+            for j in d.get("results", []):
+                sal = None
+                if j.get("salary_min") and not str(j.get("salary_is_predicted")) == "1":
+                    sal = (j.get("salary_min"), j.get("salary_max"))
+                out.append(job(source="Adzuna", employer=(j.get("company") or {}).get("display_name", "?"),
+                               etype="bank", native_id=f"az:{j['id']}", title=j.get("title", ""),
+                               url=j.get("redirect_url", ""), location=(j.get("location") or {}).get("display_name", ""),
+                               country_hint=cc.upper(), posted=(j.get("created") or "")[:10] or None,
+                               desc=strip_html(j.get("description", "")), salary_raw=sal,
+                               latlon=(j.get("latitude"), j.get("longitude")) if j.get("latitude") else None))
+    return out

@@ -1,0 +1,13 @@
+# Sécurité : aucune donnée personnelle dans ce dépôt public
+*.pdf
+*.doc
+*.docx
+profil*.json
+*profile*.json
+mon-profil*
+CV*
+cv*
+cover*letter*
+__pycache__/
+*.pyc
+.DS_Store
