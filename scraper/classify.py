@@ -81,7 +81,7 @@ EXCLUDE_TITLE = rx(
     r"leadership program\w*", r"personal banking", r"complex care", r"ia manager", r"ai manager", r"artificial intelligence",
     r"intelligence artificielle", r"mba", r"summer associate", r"senior associate", r"chef de projet", r"project manager",
     r"pilotage", r"surveillance", r"credit research", r"research", r"structured products?", r"structuring - dynamic",
-    r"roadshow", r"corporate access", r"rfp", r"networking", r"implementation", r"interest form", r"information session", r"financial engineer\w*", r"kyc", r"juriste", r"legal", r"assistant\(e\)", r"business manager", r"portfolio management", r"asset management", r"investment management",
+    r"roadshow", r"corporate access", r"rfp", r"remote", r"freelance", r"ai trainer", r"annotat\w*", r"subject matter expert", r"networking", r"implementation", r"interest form", r"information session", r"financial engineer\w*", r"kyc", r"juriste", r"legal", r"assistant\(e\)", r"business manager", r"portfolio management", r"asset management", r"investment management",
 )
 # Dans les fonds, on accepte un titre générique (Analyst, Associate…) sauf ces mots
 EXCLUDE_DEFAULT = rx(r"credit", r"lending", r"real estate", r"hedge", r"liquid", r"multi-asset", r"bxma",
