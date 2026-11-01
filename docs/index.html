@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="style.css?v=6">
+<link rel="stylesheet" href="style.css?v=7">
 <script>try{const t=localStorage.getItem("fjr_theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
 </head>
 <body>
@@ -23,6 +23,7 @@
     <button role="tab" data-tab="list" class="active"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>Offres</span></button>
     <button role="tab" data-tab="map"><svg viewBox="0 0 24 24"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/></svg><span>Carte</span></button>
     <button role="tab" data-tab="apply"><svg viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9zM14 3v6h6M8 13h8M8 17h5"/></svg><span>Candidature</span></button>
+    <button role="tab" data-tab="targets"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg><span>Infra & énergie</span></button>
     <button role="tab" data-tab="track"><svg viewBox="0 0 24 24"><path d="M4 4h4v16H4zM10 4h4v10h-4zM16 4h4v6h-4z"/></svg><span>Suivi</span><span id="trackCount" class="badge"></span></button>
     <button role="tab" data-tab="about"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg><span>Sources</span></button>
   </nav>
@@ -130,6 +131,14 @@
     </div>
   </section>
 
+  <!-- CIBLES INFRA & ÉNERGIE -->
+  <section id="tab-targets" class="tab">
+    <div class="list-head"><h2>Boutiques & fonds infra / énergie</h2><span class="muted" id="targetsCount"></span></div>
+    <p class="hint" style="margin-top:-.3rem">Les employeurs à suivre de près en infra, énergie et transition énergétique. « Suivi automatique » : leurs offres arrivent chaque jour sur le site. « À surveiller » : ils publient sur LinkedIn ou sur un site illisible par le robot, donc passe par leur page carrière ou écris à leur e-mail de recrutement.</p>
+    <div class="fb-row" style="margin:.6rem 0 1rem"><div class="seg" id="targetZone"></div></div>
+    <div class="tgrid" id="targets"></div>
+  </section>
+
   <!-- SUIVI -->
   <section id="tab-track" class="tab">
     <div class="list-head"><h2>Mes candidatures</h2><span class="muted">Glisse les cartes d'une colonne à l'autre · stocké dans ce navigateur</span><button class="btn ghost small" id="exportTrack">Exporter (CSV)</button></div>
@@ -174,9 +183,9 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="keywords.js?v=6"></script>
-<script src="app.js?v=6"></script>
-<script src="map.js?v=6"></script>
-<script src="studio.js?v=6"></script>
+<script src="keywords.js?v=7"></script>
+<script src="app.js?v=7"></script>
+<script src="map.js?v=7"></script>
+<script src="studio.js?v=7"></script>
 </body>
 </html>

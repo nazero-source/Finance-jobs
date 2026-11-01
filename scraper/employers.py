@@ -53,6 +53,10 @@ WORKDAY = [
     ("LGT Capital Partners", "pe", "lgtcp.wd502.myworkdayjobs.com", "lgtcp", "lgtcpcurrentvacancies", "all"),
     ("Howden Capital Markets & Advisory", "bank", "hyperiongrp.wd3.myworkdayjobs.com", "hyperiongrp", "Hyperion_External", "search"),
     ("Texas Capital", "bank", "texascapitalbank.wd12.myworkdayjobs.com", "texascapitalbank", "Careers", "search"),
+    ("3i Group", "infra", "3i.wd103.myworkdayjobs.com", "3i", "Intern_Career", "all"),
+    ("Copenhagen Infrastructure Partners", "infra", "cip.wd103.myworkdayjobs.com", "cip", "CIP_Careers", "all"),
+    ("Knight Frank Capital Advisory", "bank", "knightfrank.wd103.myworkdayjobs.com", "knightfrank", "KF", "all"),
+    ("M&G Infracapital", "bank", "mgpru.wd3.myworkdayjobs.com", "mgpru", "mandgprudential", "all"),
 ]
 
 ORACLE = [
@@ -63,6 +67,7 @@ ORACLE = [
     ("Lazard", "boutique", "icbpjb.fa.ocs.oraclecloud.com", "CX_2", "all"),
     ("IFM Investors", "infra", "enlc.fa.ap1.oraclecloud.com", "CX", "all"),
     ("Jefferies", "bank", "hdid.fa.us2.oraclecloud.com", "CX_1", "all"),
+    ("Edmond de Rothschild", "bank", "evht.fa.ocs.oraclecloud.eu", "CX_7001", "all"),
 ]
 
 GREENHOUSE = [
@@ -93,6 +98,7 @@ GREENHOUSE = [
 LEVER = [
     ("Seaport Global", "boutique", "seaportglobal"),
     ("The Raine Group", "boutique", "raine"),
+    ("Octopus Energy Generation", "bank", "octoenergy"),
     ("Aeris Partners", "boutique", "aerispartners.com"),
     ("D.A. Davidson", "boutique", "dadavidson"),
     ("HCVT", "boutique", "hcvt"),
@@ -125,6 +131,7 @@ SMARTRECRUITERS = [
     ("TA Associates", "pe", "taassociates"),
     ("StepStone Group", "pe", "stepstonegroup"),
     ("Accurent", "boutique", "Accurent"),
+    ("Sienna Investment Managers", "infra", "SiennaInvestmentManagers"),
 ]
 
 PERSONIO = [
@@ -140,12 +147,38 @@ PERSONIO = [
 
 TEAMTAILOR = [
     ("Kepler Cheuvreux", "boutique", "keplercheuvreux.teamtailor.com"),
+    ("Antin Infrastructure Partners", "infra", "antininfrastructurepartners-1655458195.teamtailor.com"),
+]
+
+PINPOINT = [
+    ("Marathon Capital", "boutique", "marathoncapital.pinpointhq.com"),
+]
+
+JAZZHR = [
+    ("CrossBoundary", "boutique", "crossboundary"),
+]
+
+SUCCESSFACTORS = [
+    ("AIIB", "infra", "career5.successfactors.eu", "AIIB"),
+    ("Africa Finance Corporation", "infra", "career2.successfactors.eu", "africafina"),
+]
+
+AVATURE = [
+    ("Macquarie", "bank", "https://recruitment.macquarie.com/en_US/careers/SearchJobs/feed/?7959=%5B421070%2C421069%5D&7959_format=14495&listFilterMode=1"),
+]
+
+HTML_PAGES = [
+    # name, type, page, motif des liens d'offres, lieu par défaut
+    ("Africa50", "infra", "https://www.africa50.com/working-with-us/", r"/working-with-us/career/", "Casablanca, Morocco"),
 ]
 
 BAMBOOHR = [
     ("Summa Equity", "pe", "summaequity"),
     ("Stone Point Capital", "pe", "stonepoint"),
     ("Solomon Partners", "boutique", "solomonpartners"),
+    ("Climate Fund Managers", "infra", "climatefundmanagers"),
+    ("InfraRed Capital Partners", "infra", "ircp"),
+    ("Bluefield", "infra", "bluefield"),
 ]
 
 ASHBY = [
@@ -206,5 +239,89 @@ DOMAINS = {
     "Eight Advisory": "8advisory.com", "Accurent": "accurent.com", "Pava Partners": "pava-partners.com", "DUBAG": "dubag.de",
     "Rautenberg & Company": "rautenberg.co", "Capital Corporate Finance": "ccf.de", "Prime Capital": "primecapital-ag.com",
     "HQ Capital": "hqcapital.com", "Kepler Cheuvreux": "keplercheuvreux.com", "Agentis Capital": "agentiscapital.com",
-    "Ridgepeak Partners": "ridgepeak.com", "MACA": "maca.la", "Pemberton": "pembertonam.com", "HSBC": "hsbc.com", "Crédit Agricole CIB": "ca-cib.com",
+    "Ridgepeak Partners": "ridgepeak.com", "MACA": "maca.la",
+    "3i Group": "3i.com", "Copenhagen Infrastructure Partners": "cip.com", "Knight Frank Capital Advisory": "knightfrank.co.uk",
+    "M&G Infracapital": "infracapital.co.uk", "Edmond de Rothschild": "edmond-de-rothschild.com", "Octopus Energy Generation": "octopusenergygeneration.com",
+    "Sienna Investment Managers": "sienna-im.com", "Climate Fund Managers": "climatefundmanagers.com", "InfraRed Capital Partners": "ircp.com",
+    "Bluefield": "thebluefieldgroup.com", "Antin Infrastructure Partners": "antin-ip.com", "Marathon Capital": "marathoncapital.com",
+    "CrossBoundary": "crossboundary.com", "AIIB": "aiib.org", "Africa Finance Corporation": "africafc.org", "Macquarie": "macquarie.com",
+    "Africa50": "africa50.com", "Pemberton": "pembertonam.com", "HSBC": "hsbc.com", "Crédit Agricole CIB": "ca-cib.com",
 }
+
+# Boutiques et fonds infra / énergie suivis de près (France, Royaume-Uni, Dubaï, Afrique).
+# Ceux dont les offres ne sont pas lisibles automatiquement (LinkedIn seulement, site protégé)
+# apparaissent quand même sur le site, avec leur page carrière et leur e-mail de recrutement.
+# nom, type, zone, page carrière, e-mail, note
+TARGETS = [
+    ("Finergreen", "Boutique M&A énergie", "France · UK · Dubaï · Afrique", "https://finergreen.com/join-the-team/", "careers@finergreen.com", "Offres publiées uniquement sur LinkedIn"),
+    ("Green Giraffe", "Boutique M&A / PF énergie", "France · UK · Europe", "https://green-giraffe.com/careers", "", ""),
+    ("Augusta & Co", "Boutique M&A énergie", "UK", "https://augustaco.com/careers/", "careers@augustaco.com", ""),
+    ("Apricum", "Conseil transactions énergie", "Allemagne · Dubaï", "https://apricum-group.com/careers/", "", ""),
+    ("Gneiss Energy", "Boutique M&A énergie", "UK", "https://gneiss.energy/careers/", "", ""),
+    ("Blunomy", "Conseil financier transition énergétique", "France · UK", "https://www.blunomy.com/careers", "", "Offres sur Welcome to the Jungle"),
+    ("Capitalmind", "Boutique M&A (équipe énergie)", "France · Europe", "https://www.capitalmind.com/careers", "", ""),
+    ("Cambon Partners", "Boutique M&A (énergie, infra)", "France", "https://www.cambonpartners.com/fr/carrieres", "recrutement@cambonpartners.com", "Stages publiés sur Welcome to the Jungle"),
+    ("Messier & Associés", "Boutique M&A", "France", "https://www.messierassocies.com/careers", "", ""),
+    ("Everoze", "Conseil technique & financier énergie", "UK", "https://everoze.com/jobs/", "recruitment@everoze.com", ""),
+    ("Fieldstone", "Conseil financier infra / énergie", "UK · Afrique", "https://www.fieldstone-group.com/careers", "", ""),
+    ("CohnReznick Capital", "Banque d'affaires énergie", "États-Unis", "https://crc-ib.com/careers/students-graduates/", "", ""),
+    ("Marathon Capital", "Banque d'affaires énergie", "États-Unis", "https://marathoncapital.pinpointhq.com/", "", ""),
+    ("CrossBoundary", "Conseil & investissement marchés émergents", "Afrique · Moyen-Orient", "https://crossboundary.applytojob.com/apply", "", ""),
+    ("Knight Frank Capital Advisory", "Conseil infra (lead advisory)", "UK", "https://www.knightfrank.co.uk/careers", "", ""),
+    ("Africa50", "Fonds infra", "Afrique (Casablanca)", "https://www.africa50.com/working-with-us/", "", ""),
+    ("AIIM (African Infrastructure Investment Managers)", "Fonds infra", "Afrique", "https://www.aiimafrica.com/", "", ""),
+    ("Actis", "Fonds infra / énergie", "UK · Afrique · Moyen-Orient", "https://www.act.is/people/careers/", "", ""),
+    ("Africa Finance Corporation", "Institution de financement infra", "Afrique (Lagos)", "https://www.africafc.org/careers", "", ""),
+    ("Climate Fund Managers", "Fonds infra climat", "Afrique du Sud · Pays-Bas", "https://climatefundmanagers.com/careers-and-internships/", "", ""),
+    ("PIDG / InfraCo Africa", "Développeur & fonds infra", "UK · Afrique", "https://pidg.org/about-us/careers/", "", ""),
+    ("Harith", "Fonds infra", "Afrique du Sud", "https://harith.africa/careers/", "", ""),
+    ("Inspired Evolution", "Fonds énergie", "Afrique du Sud", "https://inspiredevolution.co.za/careers/", "", ""),
+    ("Proparco / AFD", "Institution de financement du développement", "France · Afrique", "https://www.afd.fr/fr/lafd-recrute", "", "Stages et VIE fréquents"),
+    ("Meridiam", "Fonds infra", "France · monde", "https://meridiam.recruitee.com/", "", ""),
+    ("Mirova", "Fonds transition énergétique", "France", "https://www.mirova.com/en/join-us", "", ""),
+    ("InfraVia Capital Partners", "Fonds infra", "France", "https://www.infraviacapital.com/", "", ""),
+    ("Antin Infrastructure Partners", "Fonds infra", "France · UK", "https://www.antin-ip.com/careers", "", ""),
+    ("Vauban Infrastructure Partners", "Fonds infra", "France", "https://vauban-ip.com/en/careers", "", ""),
+    ("RGreen Invest", "Fonds énergie renouvelable", "France", "https://www.rgreeninvest.com/", "", ""),
+    ("Eiffel Investment Group", "Fonds transition énergétique", "France", "https://www.eiffel-ig.com/", "", ""),
+    ("Omnes Capital", "Fonds infra / énergie", "France", "https://www.omnescapital.com/culture-and-careers", "", "Offres publiées sur LinkedIn"),
+    ("Infranity", "Fonds infra", "France", "https://www.infranity.com/careers", "", ""),
+    ("Sienna Investment Managers", "Fonds infra / dette", "France", "https://www.sienna-im.com/join-us/", "", ""),
+    ("Swen Capital Partners", "Fonds infra / énergie", "France", "https://www.swen-cp.fr/carrieres/", "", ""),
+    ("Eurazeo Infrastructure", "Fonds infra", "France", "https://www.eurazeo.com/en/talents", "", ""),
+    ("Edmond de Rothschild (infra)", "Fonds infra / dette infra", "France · Suisse", "https://www.edmond-de-rothschild.com/en/careers", "", "Stages aussi sur JobTeaser"),
+    ("Ardian Infrastructure", "Fonds infra", "France · UK · monde", "https://www.ardian.com/talent", "", ""),
+    ("Marguerite", "Fonds infra", "Luxembourg · France", "https://www.marguerite.com/", "", ""),
+    ("Asterion Industrial Partners", "Fonds infra", "Espagne · UK", "https://asterionindustrial.com/", "", ""),
+    ("DIF Capital Partners (CVC DIF)", "Fonds infra", "Pays-Bas · UK · France", "https://www.cvcdif.com/careers", "", ""),
+    ("Cube Infrastructure", "Fonds infra", "France · Luxembourg", "https://www.cube-ip.com/", "", ""),
+    ("InfraRed Capital Partners", "Fonds infra", "UK", "https://www.ircp.com/talent/early-careers/", "", ""),
+    ("Equitix", "Fonds infra", "UK", "https://equitix.com/about/careers/", "recruitment@equitix.com", ""),
+    ("Amber Infrastructure", "Fonds infra", "UK", "https://www.amberinfrastructure.com/careers/", "", ""),
+    ("Ancala Partners", "Fonds infra", "UK", "https://ancala.com/about/careers/", "careers@ancala.com", ""),
+    ("Foresight Group", "Fonds infra / énergie", "UK", "https://foresight.group/other-information/careers/", "careers@foresightgroup.eu", ""),
+    ("Gresham House", "Fonds infra / énergie", "UK", "https://greshamhouse.com/careers/", "", ""),
+    ("NextEnergy Capital", "Fonds énergie solaire", "UK", "https://www.nextenergycapital.com/careers/", "", ""),
+    ("Octopus Energy Generation", "Fonds énergie renouvelable", "UK", "https://www.octopusenergygeneration.com/careers/", "", ""),
+    ("Quinbrook", "Fonds infra énergie", "UK · États-Unis · Australie", "https://quinbrook.careers.hibob.com/", "", ""),
+    ("John Laing", "Fonds infra", "UK", "https://www.johnlaing.com/careers/", "", ""),
+    ("3i Infrastructure", "Fonds infra", "UK", "https://www.3i.com/about-us/careers/", "", ""),
+    ("Gravis Capital", "Fonds infra / énergie", "UK", "https://www.graviscapital.com/careers", "careers@graviscapital.com", ""),
+    ("Bluefield", "Fonds énergie solaire", "UK", "https://thebluefieldgroup.com/careers/", "", ""),
+    ("Triple Point", "Fonds infra / énergie", "UK", "https://www.triplepoint.co.uk/careers/", "", ""),
+    ("Schroders Greencoat", "Fonds énergie renouvelable", "UK", "https://www.greencoat-capital.com/", "", ""),
+    ("Infracapital (M&G)", "Fonds infra", "UK", "https://www.infracapital.co.uk/careers", "", ""),
+    ("Dalmore Capital", "Fonds infra", "UK", "https://www.dalmorecapital.com/", "", ""),
+    ("Copenhagen Infrastructure Partners", "Fonds infra énergie", "Danemark · UK", "https://www.cip.com/careers/vacancies/", "", ""),
+    ("Igneo Infrastructure Partners", "Fonds infra", "UK · monde", "https://www.igneoip.com/", "", ""),
+    ("Masdar", "Investisseur énergie renouvelable", "Abu Dhabi", "https://masdar.ae/en/careers", "", ""),
+    ("AMEA Power", "Développeur & investisseur énergie", "Dubaï", "https://www.ameapower.com/careers/", "talent@ameapower.com", ""),
+    ("Alcazar Energy Partners", "Fonds énergie renouvelable", "Dubaï", "https://www.alcazarenergy.com/", "", ""),
+    ("Investcorp (infrastructure)", "Fonds infra", "Bahreïn · Dubaï · Londres", "https://www.investcorp.com/careers/", "", ""),
+    ("Lunate", "Gestionnaire d'actifs (infra)", "Abu Dhabi", "https://www.lunate.com/en/careers/", "", ""),
+    ("Mubadala", "Fonds souverain (infra, énergie)", "Abu Dhabi", "https://www.mubadala.com/en/careers", "", ""),
+    ("ADQ", "Fonds souverain (infra, énergie)", "Abu Dhabi", "https://www.adq.ae/careers/", "", ""),
+    ("AIIB", "Banque multilatérale infra", "Pékin", "https://www.aiib.org/en/work-with-us/join-the-team/young-talent-programs/index.html", "talentacquisition@aiib.org", "Programmes jeunes talents"),
+    ("EBRD", "Banque multilatérale", "Londres", "https://www.ebrd.com/home/work-with-us.html", "", "Graduate programme annuel"),
+    ("Macquarie Asset Management (infra)", "Fonds infra", "UK · France · monde", "https://recruitment.macquarie.com/en_US/careers/SearchJobs/?7959=%5B421070%2C421069%5D&7959_format=14495&listFilterMode=1", "", ""),
+]

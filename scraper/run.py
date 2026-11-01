@@ -41,6 +41,16 @@ def sources():
         s.append((f"Personio · {args[0]}", F.personio, args))
     for args in E.TEAMTAILOR:
         s.append((f"Teamtailor · {args[0]}", F.teamtailor, args))
+    for args in E.PINPOINT:
+        s.append((f"Pinpoint · {args[0]}", F.pinpoint, args))
+    for args in E.JAZZHR:
+        s.append((f"JazzHR · {args[0]}", F.jazzhr, args))
+    for args in E.SUCCESSFACTORS:
+        s.append((f"SuccessFactors · {args[0]}", F.successfactors, args))
+    for args in E.AVATURE:
+        s.append((f"Avature · {args[0]}", F.avature, args))
+    for args in E.HTML_PAGES:
+        s.append((f"Site carrière · {args[0]}", F.html_links, args))
     for args in E.BAMBOOHR:
         s.append((f"BambooHR · {args[0]}", F.bamboohr, args))
     for args in E.ASHBY:
@@ -206,6 +216,19 @@ def main():
                    "new_today": sum(1 for x in jobs if x["first_seen"] == TODAY and prev),
                    "sources": report, "geocoding_calls": geo.calls,
                    "duration_s": round(time.time() - t0)}, f, ensure_ascii=False, indent=1)
+    # Annuaire des boutiques et fonds infra / énergie, avec le nombre d'offres trouvées
+    cnt = {}
+    for x in jobs:
+        cnt[x["employer"]] = cnt.get(x["employer"], 0) + 1
+    def n_for(name):
+        base = name.split(" (")[0].lower()
+        return sum(v for k, v in cnt.items() if k.lower().startswith(base[:12]) or base.startswith(k.lower()[:12]))
+    followed = {l.split(" · ")[1] if " · " in l else l for l in report}
+    targets = [{"name": n, "type": t, "zone": z, "url": u, "email": e, "note": note, "jobs": n_for(n),
+                "auto": any(n.split(" (")[0].lower().startswith(f.lower()[:10]) for f in followed)}
+               for n, t, z, u, e, note in E.TARGETS]
+    with open(os.path.join(OUT, "targets.json"), "w") as f:
+        json.dump(targets, f, ensure_ascii=False, indent=0)
     print(f"\nTerminé : {len(jobs)} offres, {geo.calls} géolocalisations, {time.time()-t0:.0f}s")
 
 

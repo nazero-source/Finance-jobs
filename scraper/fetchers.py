@@ -467,3 +467,103 @@ def jooble():
             host = f"{cc.lower()}.jooble.org"
             out += _jooble_run(host, key, JOOBLE_LOCAL.get(cc, JOOBLE_LOCAL["DEFAULT"]), {"UK": "GB"}.get(cc, cc))
     return out
+
+
+# ---------------- Pinpoint (JSON public) ----------------
+def pinpoint(name, etype, host):
+    d = http(f"https://{host}/postings.json")
+    out = []
+    for j in d.get("data", []):
+        loc = j.get("location") or {}
+        desc = " \n".join(strip_html(j.get(k)) for k in ("description", "key_responsibilities", "skills_knowledge_expertise", "benefits") if j.get(k))
+        comp = ""
+        if j.get("compensation_minimum") and j.get("compensation_maximum"):
+            comp = f"\nSalary: {j.get('compensation_currency') or '$'}{j['compensation_minimum']} - {j['compensation_maximum']}"
+        out.append(job(source="Pinpoint", employer=name, etype=etype, native_id=f"pp:{j['id']}", title=j.get("title", ""),
+                       url=j.get("url") or f"https://{host}/postings/{j['id']}",
+                       location=", ".join(x for x in (loc.get("city"), loc.get("province"), loc.get("country")) if x) if isinstance(loc, dict) else str(loc),
+                       posted=(j.get("published_at") or j.get("created_at") or "")[:10] or None, desc=desc + comp))
+    return out
+
+
+# ---------------- JazzHR (applytojob.com, page publique) ----------------
+def jazzhr(name, etype, sub):
+    s = http_text(f"https://{sub}.applytojob.com/apply")
+    out, seen = [], set()
+    for m in re.finditer(r'<a[^>]+href="(https://' + re.escape(sub) + r'\.applytojob\.com/apply/([A-Za-z0-9]{8,})/[^"]+)"[^>]*>\s*([^<]+?)\s*</a>', s):
+        url, jid, title = m.group(1), m.group(2), html.unescape(m.group(3)).strip()
+        if jid in seen or len(title) < 4:
+            continue
+        seen.add(jid)
+        seg = s[m.end(): m.end() + 600]
+        loc = re.search(r'fa-map-marker[^>]*></i>\s*([^<]+)', seg) or re.search(r'class="[^"]*location[^"]*"[^>]*>\s*(?:<[^>]+>\s*)*([^<]+)', seg)
+        def desc_fn(url=url):
+            return {"desc": strip_html(http_text(url))[:6000]}
+        out.append(job(source="JazzHR", employer=name, etype=etype, native_id=f"jz:{jid}", title=title, url=url,
+                       location=(loc.group(1).strip() if loc else "") or re.sub(r"^.*?[-–]\s*", "", title) if " - " in title else (loc.group(1).strip() if loc else ""),
+                       desc_fn=desc_fn))
+    return out
+
+
+# ---------------- SAP SuccessFactors (flux XML public) ----------------
+def successfactors(name, etype, host, company):
+    raw = http_text(f"https://{host}/career?company={company}&career_ns=job_listing_summary&resultType=XML")
+    def tag(block, t):
+        m = re.search(rf"<{t}>\s*(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?\s*</{t}>", block, re.S)
+        return html.unescape(m.group(1)).strip() if m else ""
+    out = []
+    for block in re.findall(r"<Job>(.*?)</Job>", raw, re.S):
+        rid = tag(block, "ReqId") or tag(block, "Job-ID")
+        title = tag(block, "JobTitle")
+        loc = ", ".join(x for x in (tag(block, "Location"), tag(block, "Country")) if x)
+        posted = tag(block, "Posted-Date")
+        try:
+            posted = dt.datetime.strptime(posted, "%m/%d/%Y").date().isoformat()
+        except ValueError:
+            posted = None
+        out.append(job(source="SuccessFactors", employer=name, etype=etype, native_id=f"sf:{company}:{rid or title}", title=title,
+                       url=f"https://{host}/career?company={company}&career_job_req_id={rid}&career_ns=job_listing",
+                       location=loc, posted=posted, desc=strip_html(tag(block, "Job-Description"))))
+    return out
+
+
+# ---------------- Avature (flux RSS, ex. Macquarie stages & graduates) ----------------
+def avature(name, etype, feed_url):
+    import xml.etree.ElementTree as ET
+    root = ET.fromstring(http_text(feed_url))
+    out = []
+    for it in root.iter("item"):
+        link = it.findtext("link") or ""
+        title = (it.findtext("title") or "").strip()
+        def desc_fn(link=link):
+            t = http_text(link)
+            return {"desc": strip_html(t)[:6000]}
+        pub = it.findtext("pubDate") or ""
+        try:
+            posted = dt.datetime.strptime(pub[:16].strip(), "%a, %d %b %Y").date().isoformat()
+        except ValueError:
+            posted = None
+        out.append(job(source="Avature", employer=name, etype=etype, native_id=f"av:{link.rsplit('/', 1)[-1]}", title=title, url=link,
+                       location=title.rsplit(",", 1)[-1].strip() if "," in title else "", posted=posted, desc=strip_html(it.findtext("description")), desc_fn=desc_fn))
+    return out
+
+
+# ---------------- Page carrière simple (liens vers les offres, ex. Africa50) ----------------
+def html_links(name, etype, page_url, link_pattern, location=""):
+    s = http_text(page_url)
+    out, seen = [], set()
+    for m in re.finditer(r'<a\b[^>]*href="([^"]*' + link_pattern + r'[^"]*)"[^>]*>(.*?)</a>', s, re.S | re.I):
+        url = urllib.parse.urljoin(page_url, html.unescape(m.group(1)))
+        title = re.sub(r"\s+", " ", strip_html(m.group(2))).strip()
+        if url in seen or len(title) < 5 or len(title) > 160:
+            continue
+        seen.add(url)
+        def desc_fn(url=url):
+            t = http_text(url)
+            body = re.search(r"<(main|article)\b.*?</\1>", t, re.S | re.I)
+            txt = strip_html(body.group(0) if body else t)
+            dm = re.search(r"(?:deadline|closing date|date limite)[^0-9]{0,30}(\d{1,2}[ /.-]\w+[ /.-]20\d\d)", txt, re.I)
+            return {"desc": txt[:6000]}
+        out.append(job(source="Site carrière", employer=name, etype=etype, native_id=f"web:{url}", title=title, url=url,
+                       location=location, desc_fn=desc_fn))
+    return out

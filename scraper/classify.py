@@ -79,9 +79,9 @@ EXCLUDE_TITLE = rx(
     r"fp&a", r"finance manager", r"finance & strategy", r"finance (?:and|&) strategy", r"middle market banking",
     r"loan", r"loans", r"syndicate", r"public affairs", r"governance", r"camberview", r"securities services",
     r"leadership program\w*", r"personal banking", r"complex care", r"ia manager", r"ai manager", r"artificial intelligence",
-    r"intelligence artificielle", r"mba", r"summer associate", r"senior associate", r"chef de projet", r"project manager",
+    r"intelligence artificielle", r"mba", r"summer associate", r"summer (?:\w+ ){1,3}associate", r"senior associate", r"chef de projet", r"project manager",
     r"pilotage", r"surveillance", r"credit research", r"research", r"structured products?", r"structuring - dynamic",
-    r"roadshow", r"corporate access", r"rfp", r"remote", r"freelance", r"ai trainer", r"annotat\w*", r"subject matter expert", r"networking", r"implementation", r"interest form", r"information session", r"financial engineer\w*", r"kyc", r"juriste", r"legal", r"assistant\(e\)", r"business manager", r"portfolio management", r"asset management", r"investment management",
+    r"roadshow", r"corporate access", r"rfp", r"remote", r"avocat\w*", r"lawyer", r"droit", r"merchant acquisition", r"strategy consult\w*", r"notaire", r"freelance", r"ai trainer", r"annotat\w*", r"subject matter expert", r"networking", r"implementation", r"interest form", r"information session", r"financial engineer\w*", r"kyc", r"juriste", r"legal", r"assistant\(e\)", r"business manager", r"portfolio management", r"asset management", r"investment management",
 )
 # Dans les fonds, on accepte un titre générique (Analyst, Associate…) sauf ces mots
 EXCLUDE_DEFAULT = rx(r"credit", r"lending", r"real estate", r"hedge", r"liquid", r"multi-asset", r"bxma",

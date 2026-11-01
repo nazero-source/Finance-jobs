@@ -350,3 +350,15 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
 }
 
 .studio-side .card[hidden], [hidden] { display: none !important; }
+
+/* ============ Cibles infra & énergie ============ */
+.tgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: .7rem; }
+.tcard2 { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: .85rem .95rem; box-shadow: var(--shadow); display: grid; gap: .45rem; align-content: start; }
+.tcard2 .th { display: flex; gap: .65rem; align-items: center; }
+.tcard2 .th b { display: block; font-size: .95rem; line-height: 1.25; }
+.tcard2 .th small { color: var(--muted); font-size: .76rem; }
+.tcard2 .tags { grid-column: auto; margin: 0; }
+.tag.auto { background: var(--good-soft); color: var(--good); font-weight: 600; }
+.tag.watch { background: var(--warn-soft); color: var(--warn); font-weight: 600; }
+.tcard2 .note { font-size: .78rem; color: var(--text-2); }
+.tcard2 .acts { display: flex; flex-wrap: wrap; gap: .35rem; }

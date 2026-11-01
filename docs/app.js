@@ -58,9 +58,9 @@ fetch("data/jobs.json", { cache: "no-cache" }).then(r => r.json()).then(d => {
   S.firstDay = S.today === S.firstRun;
   const gen = new Date(d.generated.replace("Z", ":00Z"));
   $("#meta").textContent = `${d.jobs.length} offres juniors · mis à jour le ${gen.toLocaleDateString("fr-FR")} à ${gen.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })}`;
-  buildFilters(); restoreFilters(); apply(); renderBoard(); renderAbout();
+  buildFilters(); restoreFilters(); apply(); renderBoard(); renderAbout(); loadTargets();
   document.dispatchEvent(new CustomEvent("fjr:data"));
-  const hash = location.hash.slice(1); if (["list", "map", "apply", "track", "about"].includes(hash)) switchTab(hash);
+  const hash = location.hash.slice(1); if (["list", "map", "apply", "targets", "track", "about"].includes(hash)) switchTab(hash);
 }).catch(e => { $("#list").innerHTML = `<p class="empty">Impossible de charger les offres (${esc(e.message)}).</p>`; });
 
 // ---------------------------------------------------------------- filtres
@@ -285,11 +285,51 @@ function switchTab(name) {
   $$(".tabs button").forEach(b => b.classList.toggle("active", b.dataset.tab === name));
   $$(".tab").forEach(t => t.classList.toggle("active", t.id === "tab-" + name));
   $("#filterbar").classList.toggle("hidden", !["list", "map"].includes(name));
+  if (name === "targets" && !TARGETS.length) loadTargets();
   history.replaceState(null, "", "#" + name);
   document.dispatchEvent(new CustomEvent("fjr:tab", { detail: name }));
   window.scrollTo({ top: 0 });
 }
 document.addEventListener("click", e => { const b = e.target.closest("[data-tab]"); if (b && (b.closest(".tabs") || b.classList.contains("brand"))) { e.preventDefault(); switchTab(b.dataset.tab); } });
+
+// ---------------------------------------------------------------- cibles infra & énergie
+let TARGETS = [], tZone = "";
+function loadTargets() {
+  fetch("data/targets.json", { cache: "no-cache" }).then(r => r.ok ? r.json() : []).then(t => { TARGETS = t; renderTargets(); }).catch(() => {});
+}
+function renderTargets() {
+  const zones = ["France", "UK", "Dubaï", "Afrique"];
+  const zc = z => TARGETS.filter(t => !z || (z === "Dubaï" ? /Dubaï|Abu Dhabi|Bahreïn/.test(t.zone) : t.zone.includes(z))).length;
+  $("#targetZone").innerHTML = `<button class="${tZone ? "" : "on"}" data-z="">Toutes<span class="n">${TARGETS.length}</span></button>` +
+    zones.map(z => `<button class="${tZone === z ? "on" : ""}" data-z="${z}">${z}<span class="n">${zc(z)}</span></button>`).join("");
+  const list = TARGETS.filter(t => !tZone || (tZone === "Dubaï" ? /Dubaï|Abu Dhabi|Bahreïn/.test(t.zone) : t.zone.includes(tZone)))
+    .sort((a, b) => b.jobs - a.jobs || (b.auto - a.auto) || a.name.localeCompare(b.name));
+  $("#targetsCount").textContent = `${list.length} employeurs · ${list.filter(t => t.jobs).length} avec des offres juniors en ce moment`;
+  $("#targets").innerHTML = list.map(t => {
+    const dom = (t.url.match(/https?:\/\/(?:www\.)?([^/]+)/) || [])[1] || "";
+    return `<div class="tcard2">
+      <div class="th">${logoHtml({ employer: t.name, domain: dom })}<div><b>${esc(t.name)}</b><small>${esc(t.type)} · ${esc(t.zone)}</small></div></div>
+      <div class="tags">${t.jobs ? `<button class="tag new" data-emp="${esc(t.name)}" style="border:0;cursor:pointer">${t.jobs} offre${t.jobs > 1 ? "s" : ""} junior${t.jobs > 1 ? "s" : ""} →</button>` : ""}
+        <span class="tag ${t.auto ? "auto" : "watch"}">${t.auto ? "Suivi automatique" : "À surveiller"}</span></div>
+      ${t.note ? `<div class="note">${esc(t.note)}</div>` : ""}
+      <div class="acts">
+        <a class="btn small" href="${esc(t.url)}" target="_blank" rel="noopener">Page carrière ↗</a>
+        <a class="btn ghost small" href="https://www.linkedin.com/jobs/search/?keywords=${encodeURIComponent(t.name.split(" (")[0])}" target="_blank" rel="noopener">Offres LinkedIn ↗</a>
+        ${t.email ? `<button class="btn ghost small" data-copy="${esc(t.email)}" title="Copier l'adresse">✉ ${esc(t.email)}</button>` : ""}
+      </div></div>`;
+  }).join("");
+}
+$("#targetZone").onclick = e => { const b = e.target.closest("[data-z]"); if (b) { tZone = b.dataset.z; renderTargets(); } };
+$("#targets").addEventListener("click", e => {
+  const c = e.target.closest("[data-copy]");
+  if (c) { navigator.clipboard?.writeText(c.dataset.copy).then(() => toast("Adresse copiée : " + c.dataset.copy), () => toast(c.dataset.copy)); return; }
+  const em = e.target.closest("[data-emp]");
+  if (em) {
+    const name = em.dataset.emp.split(" (")[0].toLowerCase();
+    const match = [...new Set(S.data.jobs.map(j => j.employer))].find(x => x.toLowerCase().startsWith(name.slice(0, 12)) || name.startsWith(x.toLowerCase().slice(0, 12)));
+    if (match) { setFilter("employer", match); switchTab("list"); }
+  }
+});
 
 // ---------------------------------------------------------------- suivi (kanban)
 function renderBoard() {
