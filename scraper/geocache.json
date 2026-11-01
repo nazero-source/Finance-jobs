@@ -30,6 +30,13 @@
 "lat": 40.6259,
 "lon": -74.0784
 },
+"Abu Dhabi": {
+"cc": "AE",
+"city": "Abu Dhabi",
+"country": "United Arab Emirates",
+"lat": 24.4538,
+"lon": 54.3774
+},
 "Abu Dhabi, United Arab Emirates": {
 "cc": "AE",
 "city": "Abu Dhabi",
@@ -210,6 +217,13 @@
 "lat": 4.6534,
 "lon": -74.0836
 },
+"Bordeaux": {
+"cc": "FR",
+"city": "Bordeaux",
+"country": "France",
+"lat": 44.8412,
+"lon": -0.58
+},
 "Boston , United States, MA": {
 "cc": "US",
 "city": "Howell Township",
@@ -237,6 +251,13 @@
 "country": "United States",
 "lat": 42.3588,
 "lon": -71.0578
+},
+"Bouc-Bel-Air, Bouches-du-Rhône": {
+"cc": "FR",
+"city": "Bouc-Bel-Air",
+"country": "France",
+"lat": 43.4512,
+"lon": 5.4128
 },
 "Brampton, Ontario, Canada": {
 "cc": "CA",
@@ -267,6 +288,13 @@
 "country": "Belgium",
 "lat": 50.8551,
 "lon": 4.3511
+},
+"Brésil": {
+"cc": "BR",
+"city": "Brésil",
+"country": "Brazil",
+"lat": -10.3333,
+"lon": -53.2
 },
 "CA": {
 "cc": "CA",
@@ -319,6 +347,20 @@
 "country": "China",
 "lat": 22.2847,
 "lon": 114.158
+},
+"Central, Singapore Country": {
+"cc": "SG",
+"city": "Singapore",
+"country": "Singapore",
+"lat": 1.3647,
+"lon": 103.8235
+},
+"Cergy, Val-d'Oise": {
+"cc": "FR",
+"city": "Cergy",
+"country": "France",
+"lat": 49.0528,
+"lon": 2.0389
 },
 "Charlotte, NC, United States": {
 "cc": "US",
@@ -466,6 +508,13 @@
 "lat": 55.6867,
 "lon": 12.5701
 },
+"Courbevoie": {
+"cc": "FR",
+"city": "Courbevoie",
+"country": "France",
+"lat": 48.8953,
+"lon": 2.2562
+},
 "Dallas, TX": {
 "cc": "US",
 "city": "Dallas",
@@ -501,6 +550,13 @@
 "country": "Canada",
 "lat": 45.4842,
 "lon": -73.8065
+},
+"Dubai": {
+"cc": "AE",
+"city": "Dubai Emirate",
+"country": "United Arab Emirates",
+"lat": 25.0743,
+"lon": 55.1886
 },
 "Dubai United Arab Emirates": {
 "cc": "AE",
@@ -769,6 +825,13 @@
 },
 "Harris Williams London": null,
 "Harris Williams-Cambpell Mithu (MN013), United States": null,
+"Hauts-de-Seine (92)": {
+"cc": "FR",
+"city": "Garches",
+"country": "France",
+"lat": 48.8383,
+"lon": 2.1755
+},
 "High Prairie, Alberta, Canada": {
 "cc": "CA",
 "city": "High Prairie",
@@ -948,6 +1011,13 @@
 "lat": 32.8459,
 "lon": -117.2576
 },
+"La Madeleine, Nord": {
+"cc": "FR",
+"city": "La Madeleine",
+"country": "France",
+"lat": 50.6544,
+"lon": 3.0733
+},
 "Lake Saint Louis, MO": {
 "cc": "US",
 "city": "Lake Saint Louis",
@@ -975,6 +1045,13 @@
 "country": "Germany",
 "lat": 51.3406,
 "lon": 12.3747
+},
+"Levallois-Perret, Hauts-de-Seine": {
+"cc": "FR",
+"city": "Levallois-Perret",
+"country": "France",
+"lat": 48.893,
+"lon": 2.2882
 },
 "Lexington, NY": {
 "cc": "US",
@@ -1133,12 +1210,26 @@
 "lat": 40.4168,
 "lon": -3.7035
 },
+"Maisons-Alfort, Val-de-Marne": {
+"cc": "FR",
+"city": "Maisons-Alfort",
+"country": "France",
+"lat": 48.8012,
+"lon": 2.431
+},
 "Malaysia": {
 "cc": "MY",
 "city": "Malaysia",
 "country": "Malaysia",
 "lat": 4.5694,
 "lon": 102.2657
+},
+"Marcq-en-Barœul, Nord": {
+"cc": "FR",
+"city": "Marcq-en-Barœul",
+"country": "France",
+"lat": 50.6767,
+"lon": 3.1043
 },
 "Marseille, France": {
 "cc": "FR",
@@ -1272,6 +1363,13 @@
 "lat": 48.8189,
 "lon": 2.3194
 },
+"Montrouge, Hauts-de-Seine": {
+"cc": "FR",
+"city": "Montrouge",
+"country": "France",
+"lat": 48.8189,
+"lon": 2.3194
+},
 "Montréal, Québec, Canada": {
 "cc": "CA",
 "city": "Montreal",
@@ -1394,6 +1492,13 @@
 "lat": 40.7127,
 "lon": -74.006
 },
+"Nantes": {
+"cc": "FR",
+"city": "Nantes",
+"country": "France",
+"lat": 47.2186,
+"lon": -1.5541
+},
 "Nantes, France": {
 "cc": "FR",
 "city": "Nantes",
@@ -1414,6 +1519,13 @@
 "country": "Bahamas",
 "lat": 25.0764,
 "lon": -77.3434
+},
+"Neuilly-sur-Seine, Hauts-de-Seine": {
+"cc": "FR",
+"city": "Neuilly-sur-Seine",
+"country": "France",
+"lat": 48.8847,
+"lon": 2.2696
 },
 "New York": {
 "cc": "US",
@@ -1520,6 +1632,20 @@
 "lat": 48.8589,
 "lon": 2.32
 },
+"Paris": {
+"cc": "FR",
+"city": "Paris",
+"country": "France",
+"lat": 48.8535,
+"lon": 2.3484
+},
+"Paris 17e": {
+"cc": "FR",
+"city": "Paris",
+"country": "France",
+"lat": 48.8844,
+"lon": 2.322
+},
 "Paris France": {
 "cc": "FR",
 "city": "Paris",
@@ -1583,6 +1709,13 @@
 "lat": 39.6622,
 "lon": -8.1354
 },
+"Puteaux, Hauts-de-Seine": {
+"cc": "FR",
+"city": "Puteaux",
+"country": "France",
+"lat": 48.8842,
+"lon": 2.2369
+},
 "Quebec VIRTUAL, Canada": null,
 "Québec, Québec, Canada": {
 "cc": "CA",
@@ -1590,6 +1723,13 @@
 "country": "Canada",
 "lat": 46.8137,
 "lon": -71.2084
+},
+"Raleigh, NC": {
+"cc": "US",
+"city": "Raleigh",
+"country": "United States",
+"lat": 35.7804,
+"lon": -78.6391
 },
 "Red Deer, Alberta, Canada": {
 "cc": "CA",
@@ -1668,6 +1808,13 @@
 "lat": 24.6389,
 "lon": 46.716
 },
+"Royaume-Uni": {
+"cc": "GB",
+"city": "Royaume-Uni",
+"country": "United Kingdom",
+"lat": 54.7024,
+"lon": -3.2766
+},
 "SAN DIEGO, CA, United States": {
 "cc": "US",
 "city": "San Diego",
@@ -1730,6 +1877,13 @@
 "country": "United States",
 "lat": 27.7712,
 "lon": -82.634
+},
+"Saint-Ouen, Seine-Saint-Denis": {
+"cc": "FR",
+"city": "Saint-Ouen-sur-Seine",
+"country": "France",
+"lat": 48.9117,
+"lon": 2.3343
 },
 "Saint-Romuald, Québec, Canada": {
 "cc": "CA",
@@ -2204,6 +2358,13 @@
 "country": "United States",
 "lat": 38.8951,
 "lon": -77.0364
+},
+"Watertown, SD": {
+"cc": "US",
+"city": "Watertown",
+"country": "United States",
+"lat": 44.8992,
+"lon": -97.1153
 },
 "Westlake, TX": {
 "cc": "US",
