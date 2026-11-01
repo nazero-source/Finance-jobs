@@ -95,7 +95,7 @@ function score(b) {
 function renderCv() {
   const P = profile, c = P.cvData, el = $("#paperCv");
   const has = c.sections.some(s => (s.items || []).length || (s.lines || []).some(l => l.text));
-  if (!has) { el.innerHTML = `<div style="font-family:var(--font);color:#555;padding:20mm 0;text-align:center"><b style="font-size:13pt">Ton CV apparaîtra ici</b><p>Ouvre <b>Mon profil</b> et importe ton fichier <code>profil-prive-….json</code>,<br>ou remplis les sections à la main.</p></div>`; return; }
+  if (!has) { el.innerHTML = `<div style="font-family:var(--font);color:#555;padding:20mm 0;text-align:center"><b style="font-size:13pt">Ton CV apparaîtra ici</b><p>Clique sur <b>📄 Importer mon CV (PDF)</b> à gauche,<br>ou remplis les sections dans « Modifier mon profil ».</p></div>`; return; }
   const reorder = $("#cvReorder").checked && target;
   const contact = [P.phone, P.email, P.linkedin].filter(Boolean).join(" | ");
   let html = `<h1 class="cv-name">${esc(P.name || "")}</h1><div class="cv-contact">${esc(contact)}</div>`;
@@ -316,10 +316,18 @@ function parseCv(lines) {
   return out;
 }
 
-$("#importCvPdf").onchange = async e => {
+function loadPdfJs() {
+  if (window.pdfjsLib) return Promise.resolve();
+  return new Promise((res, rej) => { const sc = document.createElement("script");
+    sc.src = "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"; sc.onload = res; sc.onerror = rej; document.head.appendChild(sc); });
+}
+const setPdfStatus = t => { ["#pdfStatus", "#pdfStatusSide"].forEach(s => { if ($(s)) $(s).textContent = t; }); };
+document.addEventListener("change", async e => {
+  if (!e.target.classList?.contains("pdf-input")) return;
   const f = e.target.files[0]; if (!f) return;
-  if (!window.pdfjsLib) { toast("Lecteur PDF indisponible : remplis les sections à la main"); return; }
-  $("#pdfStatus").textContent = "Lecture du PDF dans ton navigateur…";
+  e.target.value = "";
+  setPdfStatus("Lecture du PDF dans ton navigateur…");
+  try { await loadPdfJs(); } catch { setPdfStatus("Le lecteur PDF n'a pas pu se charger (connexion ou bloqueur de contenu). Réessaie ou remplis les sections dans « Modifier mon profil »."); toast("Lecteur PDF indisponible"); return; }
   try {
     const lines = await pdfLines(f), cv = parseCv(lines);
     if (!cv.sections.some(s => (s.items || []).length || (s.lines || []).length)) throw new Error("vide");
@@ -331,13 +339,14 @@ $("#importCvPdf").onchange = async e => {
     profile.cv = lines.map(l => l.text).join("\n");
     save(); renderProfileEditor(); renderAll();
     const n = cv.sections.reduce((a, s) => a + (s.items || []).length, 0);
-    $("#pdfStatus").textContent = `✔ CV importé : ${cv.sections.length} sections, ${n} expériences / formations. Vérifie ci-dessous et corrige si besoin (le PDF n'a été envoyé nulle part).`;
+    setPdfStatus(`✔ CV importé : ${n} expériences / formations dans ${cv.sections.length} sections. Vérifie-les dans « Modifier mon profil ». Le PDF n'a été envoyé nulle part.`);
     toast("CV importé depuis le PDF ✔");
   } catch (err) {
-    $("#pdfStatus").textContent = "Impossible de lire ce PDF automatiquement (PDF scanné ou mise en page inhabituelle). Remplis les sections à la main ou importe un fichier profil .json.";
+    console.error(err);
+    setPdfStatus(`Impossible de lire ce PDF automatiquement (${err && err.message ? err.message : "format inhabituel"}). S'il s'agit d'un scan, remplis les sections dans « Modifier mon profil ».`);
+    toast("Lecture du PDF impossible");
   }
-  e.target.value = "";
-};
+});
 
 $("#importProfile").onchange = async e => {
   const f = e.target.files[0]; if (!f) return;

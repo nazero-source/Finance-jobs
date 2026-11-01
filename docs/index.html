@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=4">
 <script>try{const t=localStorage.getItem("fjr_theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
 </head>
 <body>
@@ -74,7 +74,12 @@
     <div class="studio">
       <aside class="studio-side">
         <div class="card">
-          <div class="side-head"><h2>Offre ciblée</h2><button class="btn ghost small" id="openProfile">Mon profil</button></div>
+          <div class="side-head"><h2>Mon CV</h2><button class="btn ghost small" id="openProfile">Modifier mon profil</button></div>
+          <label class="btn accent wide" id="pdfBtn">📄 Importer mon CV (PDF)<input type="file" class="pdf-input" accept="application/pdf,.pdf" hidden></label>
+          <p class="hint" id="pdfStatusSide" style="margin:0">Lu directement par ton navigateur : rien n'est envoyé.</p>
+        </div>
+        <div class="card">
+          <div class="side-head"><h2>Offre ciblée</h2></div>
           <div class="picker">
             <input id="jobPicker" type="search" placeholder="Rechercher une offre…" autocomplete="off" aria-label="Choisir une offre">
             <div class="picker-list" id="pickerList" hidden></div>
@@ -143,7 +148,7 @@
   <div class="drawer-head"><h2>Mon profil <span class="private">🔒 stocké uniquement dans ce navigateur</span></h2><button class="icon-btn" data-close aria-label="Fermer">✕</button></div>
   <div class="drawer-body">
     <div class="actions">
-      <label class="btn accent">Importer mon CV (PDF)<input type="file" id="importCvPdf" accept="application/pdf,.pdf" hidden></label>
+      <label class="btn accent">Importer mon CV (PDF)<input type="file" id="importCvPdf" class="pdf-input" accept="application/pdf,.pdf" hidden></label>
       <label class="btn ghost">Importer un profil (.json)<input type="file" id="importProfile" accept=".json" hidden></label>
       <button class="btn ghost" id="exportProfile">Sauvegarder (.json)</button>
       <button class="btn ghost danger" id="clearProfile">Tout effacer</button>
@@ -168,9 +173,9 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="keywords.js"></script>
-<script src="app.js"></script>
-<script src="map.js"></script>
-<script src="studio.js"></script>
+<script src="keywords.js?v=4"></script>
+<script src="app.js?v=4"></script>
+<script src="map.js?v=4"></script>
+<script src="studio.js?v=4"></script>
 </body>
 </html>

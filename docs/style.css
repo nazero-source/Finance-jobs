@@ -346,3 +346,5 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
   .cv-bul li.off { display: none; }
   .cv-bul li.rel::after { display: none; }
 }
+
+.studio-side .card[hidden], [hidden] { display: none !important; }
