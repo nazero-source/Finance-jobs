@@ -143,7 +143,8 @@
   <div class="drawer-head"><h2>Mon profil <span class="private">🔒 stocké uniquement dans ce navigateur</span></h2><button class="icon-btn" data-close aria-label="Fermer">✕</button></div>
   <div class="drawer-body">
     <div class="actions">
-      <label class="btn">Importer mon fichier profil (.json)<input type="file" id="importProfile" accept=".json" hidden></label>
+      <label class="btn accent">Importer mon CV (PDF)<input type="file" id="importCvPdf" accept="application/pdf,.pdf" hidden></label>
+      <label class="btn ghost">Importer un profil (.json)<input type="file" id="importProfile" accept=".json" hidden></label>
       <button class="btn ghost" id="exportProfile">Sauvegarder (.json)</button>
       <button class="btn ghost danger" id="clearProfile">Tout effacer</button>
     </div>
@@ -152,6 +153,7 @@
       <label>Téléphone<input id="p_phone"></label><label>Ville<input id="p_city"></label>
       <label>École (pour trouver les anciens)<input id="p_school"></label>
     </div>
+    <p class="hint" id="pdfStatus">Le PDF est lu directement par ton navigateur : il n'est envoyé nulle part. Après l'import, vérifie les sections ci-dessous et corrige si besoin.</p>
     <h3>CV (en anglais)</h3>
     <p class="hint">Une puce par ligne. Ces données servent à générer le CV adapté à chaque offre.</p>
     <div id="cvEditor"></div>
@@ -165,6 +167,7 @@
 
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="keywords.js"></script>
 <script src="app.js"></script>
 <script src="map.js"></script>

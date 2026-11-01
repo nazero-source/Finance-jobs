@@ -232,6 +232,113 @@ $("#profileDrawer").addEventListener("click", e => {
   if (add) { profile.cvData.sections[add.dataset.add].items.unshift({ dates: "", org: "", role: "", location: "", bullets: [] }); save(); renderProfileEditor(); }
   if (del) { const w = del.closest("[data-ii]"); profile.cvData.sections[w.dataset.si].items.splice(w.dataset.ii, 1); save(); renderProfileEditor(); renderAll(); }
 });
+// ---------------------------------------------------------------- import du CV en PDF (lu localement)
+const MON = "jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec|janv|févr|fev|avr|mai|juin|juil|août|aout|déc";
+const DATE_START = new RegExp(`^(?:(?:${MON})[a-zé]*\\.?\\s*'?\\d{2,4}|\\d{1,2}/\\d{2,4}|(?:19|20)\\d{2}|since|depuis|present|today)\\b`, "i");
+const BULLET = /^[▪•●◦‣∙·\-–—*■□➢➤✓]\s*/;
+const HEADING_WORDS = /experience|expérience|education|formation|skills|compétences|activities|activités|languages|langues|interests|intérêts|projects|projets|leadership|certifications|awards|extracurricular|associati|profile|profil|summary|langues/i;
+
+async function pdfLines(file) {
+  pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+  const pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise;
+  const lines = [];
+  for (let n = 1; n <= pdf.numPages; n++) {
+    const page = await pdf.getPage(n), tc = await page.getTextContent();
+    const items = tc.items.filter(i => i.str.trim()).map(i => ({ s: i.str, x: i.transform[4], y: i.transform[5], w: i.width, h: Math.abs(i.transform[3]) || 10, bold: /bold|black|semibold/i.test(i.fontName + (tc.styles[i.fontName]?.fontFamily || "")) }));
+    items.sort((a, b) => b.y - a.y || a.x - b.x);
+    let cur = null;
+    for (const it of items) {
+      if (!cur || Math.abs(cur.y - it.y) > Math.max(2.5, it.h * 0.45)) { cur = { y: it.y, items: [] }; lines.push(cur); }
+      cur.items.push(it);
+    }
+  }
+  return lines.map(l => {
+    l.items.sort((a, b) => a.x - b.x);
+    const cells = []; let last = null;
+    for (const it of l.items) {
+      if (last && it.x - (last.x + last.w) < Math.max(6, it.h * 0.9)) { cells[cells.length - 1].s += (it.x - (last.x + last.w) > 1 ? " " : "") + it.s; }
+      else cells.push({ s: it.s, x: it.x });
+      last = it;
+    }
+    cells.forEach(c => c.s = c.s.replace(/\s+/g, " ").trim());
+    return { cells: cells.filter(c => c.s), x: l.items[0].x, h: Math.max(...l.items.map(i => i.h)), text: cells.map(c => c.s).join(" ").trim() };
+  }).filter(l => l.text);
+}
+
+function parseCv(lines) {
+  const out = { name: "", contact: "", sections: [] };
+  const sizes = lines.map(l => l.h).sort((a, b) => a - b), body = sizes[Math.floor(sizes.length / 2)];
+  let i = 0;
+  if (lines[0] && !DATE_START.test(lines[0].text)) { out.name = lines[0].text; i = 1; }
+  while (i < lines.length && i < 4 && /@|\+?\d[\d ().-]{6,}|linkedin/i.test(lines[i].text)) { out.contact += (out.contact ? " | " : "") + lines[i].text; i++; }
+  const minX = Math.min(...lines.map(l => l.x));
+  let sec = null, item = null, lastBullet = null;
+  const isHeading = l => {
+    const t = l.text; if (t.length > 45 || /\d/.test(t) || BULLET.test(t)) return false;
+    const upper = t === t.toUpperCase() && /[A-Z]/.test(t);
+    return (upper && t.split(" ").length <= 5) || (HEADING_WORDS.test(t) && t.split(" ").length <= 4 && l.h >= body);
+  };
+  for (; i < lines.length; i++) {
+    const l = lines[i], t = l.text;
+    if (isHeading(l)) { sec = { title: t.replace(/\b\w+/g, w => w[0].toUpperCase() + w.slice(1).toLowerCase()).replace(/ & /g, " & "), items: [], lines: [] }; out.sections.push(sec); item = null; lastBullet = null; continue; }
+    if (!sec) { sec = { title: "Experience", items: [], lines: [] }; out.sections.push(sec); }
+    const c = l.cells;
+    if (DATE_START.test(c[0]?.s || "")) {
+      // nouvelle ligne d'expérience : [dates] [organisation - description] [lieu]
+      const dates = c[0].s; let rest = c.slice(1).map(x => x.s);
+      let loc = "";
+      if (rest.length > 1 && /,|^[A-Z][a-zé]+$/.test(rest[rest.length - 1])) loc = rest.pop();
+      const orgFull = rest.join(" ");
+      const [org, ...desc] = orgFull.split(/\s+[-–—]\s+/);
+      item = { dates, duration: "", org: org || "", orgDesc: desc.join(" - "), location: loc, role: "", bullets: [] };
+      sec.items.push(item); lastBullet = null; continue;
+    }
+    if (item && !item.role && !BULLET.test(t)) {
+      // ligne sous l'organisation : [(6 months)] [poste]
+      let cells = c.map(x => x.s);
+      if (/^\(.*\)$/.test(cells[0])) item.duration = cells.shift();
+      item.role = cells.join(" "); continue;
+    }
+    if (BULLET.test(t)) {
+      const txt = t.replace(BULLET, "");
+      if (item) { item.bullets.push(txt); lastBullet = item.bullets.length - 1; }
+      else sec.lines.push({ label: "", text: txt });
+      continue;
+    }
+    const kv = t.match(/^([A-Za-zÀ-ÿ &/]{3,30})\s*:\s*(.+)$/);
+    if (kv && (!item || /skill|language|langue|interest|intérêt|technical|outils|tools/i.test(sec.title))) { sec.lines.push({ label: kv[1].trim(), text: kv[2].trim() }); item = null; continue; }
+    if (item && lastBullet != null) { item.bullets[lastBullet] += " " + t; continue; }       // suite d'une puce
+    if (item && /^\(.*\)$/.test(c[0]?.s || "") && !item.duration) { item.duration = c[0].s; continue; }
+    if (item) { item.role = item.role ? item.role + " " + t : t; continue; }
+    if (sec.lines.length) sec.lines[sec.lines.length - 1].text += " " + t; else sec.lines.push({ label: "", text: t });
+  }
+  out.sections.forEach(s => { if (!s.items.length) delete s.items; if (!s.lines.length) delete s.lines; if (!s.items && !s.lines) s.items = []; });
+  return out;
+}
+
+$("#importCvPdf").onchange = async e => {
+  const f = e.target.files[0]; if (!f) return;
+  if (!window.pdfjsLib) { toast("Lecteur PDF indisponible : remplis les sections à la main"); return; }
+  $("#pdfStatus").textContent = "Lecture du PDF dans ton navigateur…";
+  try {
+    const lines = await pdfLines(f), cv = parseCv(lines);
+    if (!cv.sections.some(s => (s.items || []).length || (s.lines || []).length)) throw new Error("vide");
+    const contact = cv.contact || "";
+    profile.name = profile.name || cv.name;
+    profile.email = profile.email || (contact.match(/[\w.+-]+@[\w-]+\.[\w.-]+/) || [""])[0];
+    profile.phone = profile.phone || (contact.match(/\+?\d[\d ().-]{7,}\d/) || [""])[0].trim();
+    profile.cvData = { sections: cv.sections };
+    profile.cv = lines.map(l => l.text).join("\n");
+    save(); renderProfileEditor(); renderAll();
+    const n = cv.sections.reduce((a, s) => a + (s.items || []).length, 0);
+    $("#pdfStatus").textContent = `✔ CV importé : ${cv.sections.length} sections, ${n} expériences / formations. Vérifie ci-dessous et corrige si besoin (le PDF n'a été envoyé nulle part).`;
+    toast("CV importé depuis le PDF ✔");
+  } catch (err) {
+    $("#pdfStatus").textContent = "Impossible de lire ce PDF automatiquement (PDF scanné ou mise en page inhabituelle). Remplis les sections à la main ou importe un fichier profil .json.";
+  }
+  e.target.value = "";
+};
+
 $("#importProfile").onchange = async e => {
   const f = e.target.files[0]; if (!f) return;
   try { const p = JSON.parse(await f.text()); profile = migrate({ ...profile, ...p, blocks: { ...(p.blocks || {}) } }); save(); renderProfileEditor(); renderAll(); toast("Profil importé ✔"); }
