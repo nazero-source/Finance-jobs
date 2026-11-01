@@ -58,6 +58,13 @@
 "lat": 36.7729,
 "lon": 3.0588
 },
+"Amsterdam": {
+"cc": "NL",
+"city": "Amsterdam",
+"country": "Netherlands",
+"lat": 52.3731,
+"lon": 4.8925
+},
 "Amsterdam Netherlands": {
 "cc": "NL",
 "city": "Amsterdam",
@@ -211,6 +218,13 @@
 "lon": -1.8518
 },
 "Bogota Colombia": {
+"cc": "CO",
+"city": "Bogota",
+"country": "Colombia",
+"lat": 4.6534,
+"lon": -74.0836
+},
+"Bogota, Colombia": {
 "cc": "CO",
 "city": "Bogota",
 "country": "Colombia",
@@ -989,6 +1003,13 @@
 "lat": 3.2303,
 "lon": 101.6284
 },
+"Kuala Lumpur, Malaysia": {
+"cc": "MY",
+"city": "Kuala Lumpur",
+"country": "Malaysia",
+"lat": 3.1517,
+"lon": 101.6942
+},
 "Kyiv, 20 Lavrska Street, Ukraine": null,
 "LONDON, LONDON, United Kingdom": {
 "cc": "GB",
@@ -1580,6 +1601,13 @@
 "country": "United States",
 "lat": 40.7127,
 "lon": -74.006
+},
+"New York, USA, United States": {
+"cc": "US",
+"city": "Carlsbad",
+"country": "United States",
+"lat": 33.1279,
+"lon": -117.3116
 },
 "New York, United States": {
 "cc": "US",
