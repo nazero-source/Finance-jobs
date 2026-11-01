@@ -15,6 +15,7 @@
 "lat": 51.5029,
 "lon": -0.0221
 },
+"2121 N. Pearl Street, United States, TX": null,
 "745 THURLOW ST:VANCOUVER, Canada": {
 "cc": "CA",
 "city": "Vancouver",
@@ -166,6 +167,13 @@
 "country": "Colombia",
 "lat": 4.6534,
 "lon": -74.0836
+},
+"Boston , United States, MA": {
+"cc": "US",
+"city": "Howell Township",
+"country": "United States",
+"lat": 40.1532,
+"lon": -74.228
 },
 "Boston, MA, United States": {
 "cc": "US",
@@ -910,6 +918,7 @@
 },
 "Milano Via Turati 25-27, Italy": null,
 "Milwaukee, 411 E Wisconsin Ave Ste 1850, United States": null,
+"Milwaukee, 411 E Wisconsin Ave Ste 1850, United States, WI": null,
 "Minato-Ku, Japan": {
 "cc": "JP",
 "city": "Minato",
@@ -1032,6 +1041,13 @@
 "country": "United States",
 "lat": 40.7127,
 "lon": -74.006
+},
+"New York , United States, NY": {
+"cc": "US",
+"city": "City of Kingston",
+"country": "United States",
+"lat": 41.9411,
+"lon": -74.0478
 },
 "New York New York United States, United States": {
 "cc": "US",
@@ -1159,6 +1175,13 @@
 "lat": 37.5385,
 "lon": -77.4343
 },
+"Richmond , United States, VA": {
+"cc": "US",
+"city": "Christiansted",
+"country": "United States",
+"lat": 17.744,
+"lon": -64.7119
+},
 "Richmond , VA": {
 "cc": "US",
 "city": "Richmond",
@@ -1201,6 +1224,13 @@
 "lat": 59.3251,
 "lon": 18.0711
 },
+"Saint Petersburg": {
+"cc": "RU",
+"city": "Saint Petersburg",
+"country": "Russia",
+"lat": 59.9607,
+"lon": 30.1587
+},
 "Saint Petersburg, Florida": {
 "cc": "US",
 "city": "Saint Petersburg",
@@ -1214,6 +1244,13 @@
 "country": "United States",
 "lat": 40.7596,
 "lon": -111.8868
+},
+"San Francisco , United States, CA": {
+"cc": "US",
+"city": "Santa Fe",
+"country": "United States",
+"lat": 35.6892,
+"lon": -105.9368
 },
 "San Francisco California United States, United States": null,
 "San Francisco, CA, United States": {
