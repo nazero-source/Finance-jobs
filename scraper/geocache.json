@@ -86,6 +86,13 @@
 "lat": 37.9756,
 "lon": 23.7348
 },
+"Atlanta, GA": {
+"cc": "US",
+"city": "Atlanta",
+"country": "United States",
+"lat": 33.7545,
+"lon": -84.3898
+},
 "Atlanta, GA, USA, United States": null,
 "Atlanta, GA, United States": {
 "cc": "US",
@@ -239,6 +246,13 @@
 "lon": -79.7599
 },
 "Bratislava (Plynárenská 7C), Slovakia": null,
+"Brooklyn, NY": {
+"cc": "US",
+"city": "New York",
+"country": "United States",
+"lat": 40.6526,
+"lon": -73.9497
+},
 "Brussels Avenue Marnix 13-15, Belgium": null,
 "Brussels, Belgium": {
 "cc": "BE",
@@ -292,6 +306,13 @@
 "lon": -107.9917
 },
 "Canary Wharf, 1 Churchill Place, United Kingdom": null,
+"Central London": {
+"cc": "GB",
+"city": "Greater London",
+"country": "United Kingdom",
+"lat": 51.5235,
+"lon": -0.2593
+},
 "Central and Western, Hong Kong Island, Hong Kong": {
 "cc": "CN",
 "city": "Hong Kong",
@@ -381,6 +402,13 @@
 "lat": 35.6941,
 "lon": 139.7535
 },
+"Cincinnati, OH": {
+"cc": "US",
+"city": "Cincinnati",
+"country": "United States",
+"lat": 39.1013,
+"lon": -84.5127
+},
 "Ciudad Autónoma de Buenos Aires, Argentina": {
 "cc": "AR",
 "city": "Autonomous City of Buenos Aires",
@@ -402,6 +430,13 @@
 "lat": 19.4326,
 "lon": -99.1332
 },
+"Clayton, MO": {
+"cc": "US",
+"city": "Clayton",
+"country": "United States",
+"lat": 38.6504,
+"lon": -90.3362
+},
 "Cleveland, Ohio, United States": {
 "cc": "US",
 "city": "Cleveland",
@@ -416,6 +451,13 @@
 "lat": 50.9384,
 "lon": 6.96
 },
+"Columbus, OH": {
+"cc": "US",
+"city": "Columbus",
+"country": "United States",
+"lat": 39.9623,
+"lon": -83.0007
+},
 "Conshohocken, PA, USA, United States": null,
 "Copenhagen Denmark": {
 "cc": "DK",
@@ -423,6 +465,13 @@
 "country": "Denmark",
 "lat": 55.6867,
 "lon": 12.5701
+},
+"Dallas, TX": {
+"cc": "US",
+"city": "Dallas",
+"country": "United States",
+"lat": 32.7763,
+"lon": -96.7969
 },
 "Dallas, TX, USA, United States": null,
 "Dallas, TX, United States": {
@@ -438,6 +487,13 @@
 "country": "United States",
 "lat": 32.7763,
 "lon": -96.7969
+},
+"Denver, CO": {
+"cc": "US",
+"city": "Denver",
+"country": "United States",
+"lat": 39.7392,
+"lon": -104.9849
 },
 "Dollard-des-Ormeaux, Québec, Canada": {
 "cc": "CA",
@@ -503,6 +559,13 @@
 "lat": 33.917,
 "lon": -118.4156
 },
+"Elizabethton, TN": {
+"cc": "US",
+"city": "Elizabethton",
+"country": "United States",
+"lat": 36.3488,
+"lon": -82.2108
+},
 "Elysee, France": {
 "cc": "FR",
 "city": "Paris",
@@ -558,6 +621,13 @@
 "country": "Finland",
 "lat": 63.2468,
 "lon": 25.9209
+},
+"Fort Lauderdale, FL": {
+"cc": "US",
+"city": "Fort Lauderdale",
+"country": "United States",
+"lat": 26.1223,
+"lon": -80.1434
 },
 "France": {
 "cc": "FR",
@@ -618,6 +688,13 @@
 "lon": 8.6821
 },
 "Frankfurt, Taunus Turm, Germany": null,
+"GB": {
+"cc": "GB",
+"city": "GB",
+"country": "United Kingdom",
+"lat": 54.7024,
+"lon": -3.2766
+},
 "GREENWICH, Connecticut": {
 "cc": "US",
 "city": "Greenwich",
@@ -638,6 +715,13 @@
 "country": "Germany",
 "lat": 51.1638,
 "lon": 10.4478
+},
+"Glastonbury, CT": {
+"cc": "US",
+"city": "Glastonbury",
+"country": "United States",
+"lat": 41.7123,
+"lon": -72.6081
 },
 "Global Service Private Ltd.": null,
 "Greece": {
@@ -728,6 +812,13 @@
 "lat": 29.7278,
 "lon": -95.3899
 },
+"Houston, TX": {
+"cc": "US",
+"city": "Houston",
+"country": "United States",
+"lat": 29.7589,
+"lon": -95.3677
+},
 "Houston, TX, United States": {
 "cc": "US",
 "city": "Houston",
@@ -814,6 +905,13 @@
 "lat": -26.205,
 "lon": 28.0497
 },
+"Kansas City, MO": {
+"cc": "US",
+"city": "Kansas City",
+"country": "United States",
+"lat": 39.1001,
+"lon": -94.5781
+},
 "Kelowna, British Columbia, Canada": {
 "cc": "CA",
 "city": "Kelowna",
@@ -850,6 +948,20 @@
 "lat": 32.8459,
 "lon": -117.2576
 },
+"Lake Saint Louis, MO": {
+"cc": "US",
+"city": "Lake Saint Louis",
+"country": "United States",
+"lat": 38.785,
+"lon": -90.7935
+},
+"Leatherhead, Surrey": {
+"cc": "GB",
+"city": "Mole Valley",
+"country": "United Kingdom",
+"lat": 51.2955,
+"lon": -0.3293
+},
 "Leeds, Park Row, United Kingdom": {
 "cc": "GB",
 "city": "Leeds",
@@ -863,6 +975,13 @@
 "country": "Germany",
 "lat": 51.3406,
 "lon": 12.3747
+},
+"Lexington, NY": {
+"cc": "US",
+"city": "Town of Lexington",
+"country": "United States",
+"lat": 42.2405,
+"lon": -74.3654
 },
 "London": {
 "cc": "GB",
@@ -1028,6 +1147,13 @@
 "lat": 43.2964,
 "lon": 5.3778
 },
+"Mc Lean, VA": {
+"cc": "US",
+"city": "Henrico County",
+"country": "United States",
+"lat": 37.4922,
+"lon": -77.3976
+},
 "Mc Lean, Virginia": {
 "cc": "US",
 "city": "Henrico County",
@@ -1076,6 +1202,13 @@
 "country": "Mexico",
 "lat": 19.4244,
 "lon": -99.1753
+},
+"Miami Beach, FL": {
+"cc": "US",
+"city": "Miami Beach",
+"country": "United States",
+"lat": 25.7929,
+"lon": -80.1353
 },
 "Miami Beach, FL, USA, United States": null,
 "Miami, FL": {
@@ -1145,6 +1278,13 @@
 "country": "Canada",
 "lat": 45.5032,
 "lon": -73.5698
+},
+"Mountain View, CA": {
+"cc": "US",
+"city": "Mountain View",
+"country": "United States",
+"lat": 37.3894,
+"lon": -122.0832
 },
 "Mumbai (NESCO), India": null,
 "Mumbai Maharashtra India": {
@@ -1350,6 +1490,13 @@
 "lat": 42.703,
 "lon": -71.1309
 },
+"Oak Brook, IL": {
+"cc": "US",
+"city": "Oak Brook",
+"country": "United States",
+"lat": 41.8327,
+"lon": -87.9484
+},
 "Oshawa, ON, CAN, Canada": null,
 "Ottawa, ON, CAN, Canada": null,
 "Owen Sound, Ontario, Canada": {
@@ -1421,6 +1568,13 @@
 "country": "United States",
 "lat": 39.9527,
 "lon": -75.1635
+},
+"Plano, TX": {
+"cc": "US",
+"city": "Plano",
+"country": "United States",
+"lat": 33.0137,
+"lon": -96.6925
 },
 "Portugal": {
 "cc": "PT",
@@ -1555,6 +1709,13 @@
 "country": "Sweden",
 "lat": 59.3251,
 "lon": 18.0711
+},
+"Saint Paul, MN": {
+"cc": "US",
+"city": "Saint Paul",
+"country": "United States",
+"lat": 44.9497,
+"lon": -93.0931
 },
 "Saint Petersburg": {
 "cc": "RU",
@@ -2030,12 +2191,33 @@
 "lat": 52.2334,
 "lon": 21.0711
 },
+"Washington DC": {
+"cc": "US",
+"city": "Washington",
+"country": "United States",
+"lat": 38.8951,
+"lon": -77.0364
+},
 "Washington, DC, United States": {
 "cc": "US",
 "city": "Washington",
 "country": "United States",
 "lat": 38.8951,
 "lon": -77.0364
+},
+"Westlake, TX": {
+"cc": "US",
+"city": "Westlake",
+"country": "United States",
+"lat": 32.9912,
+"lon": -97.1944
+},
+"White Plains, NY": {
+"cc": "US",
+"city": "City of White Plains",
+"country": "United States",
+"lat": 41.034,
+"lon": -73.7629
 },
 "Wilmington, DE, United States": {
 "cc": "US",
@@ -2057,6 +2239,13 @@
 "country": "Canada",
 "lat": 49.7854,
 "lon": -97.3264
+},
+"Woking, Surrey": {
+"cc": "GB",
+"city": "Woking",
+"country": "United Kingdom",
+"lat": 51.3202,
+"lon": -0.5565
 },
 "Woodland Hills, California, United States": {
 "cc": "US",
