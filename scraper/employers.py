@@ -48,6 +48,11 @@ WORKDAY = [
     ("CDPQ", "infra", "cdpq.wd10.myworkdayjobs.com", "cdpq", "CDPQ-recrutement-universitaire", "all"),
     ("Ontario Teachers'", "am", "otppb.wd3.myworkdayjobs.com", "otppb", "OntarioTeachers_Careers", "all"),
     ("Hamilton Lane", "pe", "hamiltonlane.wd108.myworkdayjobs.com", "hamiltonlane", "search", "all"),
+    ("Alantra", "boutique", "alantra.wd3.myworkdayjobs.com", "alantra", "Alantra", "all"),
+    ("Guggenheim Partners", "boutique", "guggenheim.wd1.myworkdayjobs.com", "guggenheim", "Guggenheim_Careers_Campus", "all"),
+    ("LGT Capital Partners", "pe", "lgtcp.wd502.myworkdayjobs.com", "lgtcp", "lgtcpcurrentvacancies", "all"),
+    ("Howden Capital Markets & Advisory", "bank", "hyperiongrp.wd3.myworkdayjobs.com", "hyperiongrp", "Hyperion_External", "search"),
+    ("Texas Capital", "bank", "texascapitalbank.wd12.myworkdayjobs.com", "texascapitalbank", "Careers", "search"),
 ]
 
 ORACLE = [
@@ -76,16 +81,31 @@ GREENHOUSE = [
     ("Lexington Partners", "pe", "lexingtonpartners"),
     ("Platinum Equity", "pe", "platinumequitycareers"),
     ("Forvis Mazars", "bank", "forvismazars"),
+    ("FT Partners", "boutique", "financialtechnologypartners"),
+    ("AQ Technology Partners", "boutique", "aqtechnologypartners"),
+    ("GTCR", "pe", "gtcr"),
+    ("Pantheon", "pe", "pantheonpublic"),
+    ("LLR Partners", "pe", "llrpartnersjobs"),
+    ("Emigrant Capital", "pe", "emigrantcapital"),
+    ("GCM Grosvenor", "pe", "gcmgrosvenor"),
 ]
 
 LEVER = [
     ("Seaport Global", "boutique", "seaportglobal"),
     ("The Raine Group", "boutique", "raine"),
+    ("Aeris Partners", "boutique", "aerispartners.com"),
+    ("D.A. Davidson", "boutique", "dadavidson"),
+    ("HCVT", "boutique", "hcvt"),
+    ("Harrison Street", "infra", "harrisonst"),
+    ("CIM Group", "infra", "cimgroup"),
 ]
 
 WORKABLE = [
     ("DC Advisory", "boutique", "dcadvisory"),
     ("Clipperton", "boutique", "clipperton"),
+    ("The McLean Group", "boutique", "the-mclean-group"),
+    ("Interpath Advisory", "boutique", "interpath-advisory"),
+    ("Improved Corporate Finance", "boutique", "improvedcf"),
 ]
 
 RECRUITEE = [
@@ -96,6 +116,7 @@ RECRUITEE = [
     ("Egeria", "pe", "egeria"),
     ("PAI Partners", "pe", "paipartners"),
     ("BC Partners", "pe", "bcpartners"),
+    ("Eight Advisory", "boutique", "8advisory"),
 ]
 
 SMARTRECRUITERS = [
@@ -103,11 +124,22 @@ SMARTRECRUITERS = [
     ("Capza", "pe", "capza"),
     ("TA Associates", "pe", "taassociates"),
     ("StepStone Group", "pe", "stepstonegroup"),
+    ("Accurent", "boutique", "Accurent"),
 ]
 
 PERSONIO = [
     ("Clearwater International", "boutique", "clearwater", "de"),
     ("Oaklins", "boutique", "oaklins", "de"),
+    ("Pava Partners", "boutique", "pava-partners", "de"),
+    ("DUBAG", "pe", "dubag", "de"),
+    ("Rautenberg & Company", "boutique", "rautenbergco", "de"),
+    ("Capital Corporate Finance", "boutique", "ccf", "de"),
+    ("Prime Capital", "infra", "primecapital-ag", "de"),
+    ("HQ Capital", "pe", "hq-capital-deutschland-gmbh", "de"),
+]
+
+TEAMTAILOR = [
+    ("Kepler Cheuvreux", "boutique", "keplercheuvreux.teamtailor.com"),
 ]
 
 BAMBOOHR = [
@@ -118,6 +150,9 @@ BAMBOOHR = [
 
 ASHBY = [
     ("Pemberton", "pe", "pemberton"),
+    ("Agentis Capital", "boutique", "Agentis-Capital-Advisors"),
+    ("Ridgepeak Partners", "pe", "ridgepeak-partners"),
+    ("MACA", "boutique", "maca"),
 ]
 
 EIGHTFOLD = [
@@ -162,5 +197,14 @@ DOMAINS = {
     "Apax Partners": "apax.fr", "IK Partners": "ikpartners.com", "Egeria": "egeria.nl", "PAI Partners": "paipartners.com",
     "BC Partners": "bcpartners.com", "Tikehau Capital": "tikehaucapital.com", "Capza": "capza.co", "TA Associates": "ta.com",
     "Clearwater International": "cwicf.com", "Oaklins": "oaklins.com", "Summa Equity": "summaequity.com",
-    "Stone Point Capital": "stonepoint.com", "Pemberton": "pembertonam.com", "HSBC": "hsbc.com", "Crédit Agricole CIB": "ca-cib.com",
+    "Stone Point Capital": "stonepoint.com", "Alantra": "alantra.com", "LGT Capital Partners": "lgtcp.com",
+    "Howden Capital Markets & Advisory": "howdengroup.com", "Texas Capital": "texascapitalbank.com", "FT Partners": "ftpartners.com",
+    "AQ Technology Partners": "aqtechpartners.com", "GTCR": "gtcr.com", "Pantheon": "pantheon.com", "LLR Partners": "llrpartners.com",
+    "Emigrant Capital": "emigrantcapital.com", "GCM Grosvenor": "gcmgrosvenor.com", "Aeris Partners": "aerispartners.com",
+    "D.A. Davidson": "dadavidson.com", "HCVT": "hcvt.com", "Harrison Street": "harrisonst.com", "CIM Group": "cimgroup.com",
+    "The McLean Group": "mcleanllc.com", "Interpath Advisory": "interpath.com", "Improved Corporate Finance": "improvedcf.com",
+    "Eight Advisory": "8advisory.com", "Accurent": "accurent.com", "Pava Partners": "pava-partners.com", "DUBAG": "dubag.de",
+    "Rautenberg & Company": "rautenberg.co", "Capital Corporate Finance": "ccf.de", "Prime Capital": "primecapital-ag.com",
+    "HQ Capital": "hqcapital.com", "Kepler Cheuvreux": "keplercheuvreux.com", "Agentis Capital": "agentiscapital.com",
+    "Ridgepeak Partners": "ridgepeak.com", "MACA": "maca.la", "Pemberton": "pembertonam.com", "HSBC": "hsbc.com", "Crédit Agricole CIB": "ca-cib.com",
 }

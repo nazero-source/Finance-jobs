@@ -253,7 +253,7 @@ main { max-width: 1240px; margin: 0 auto; padding: 1.1rem 1.25rem 4rem; }
 .cv-dates { font-size: 9.6pt; color: #222; }
 .cv-dates small { display: block; color: #555; font-size: 8.8pt; }
 .cv-head { display: flex; justify-content: space-between; gap: 3mm; }
-.cv-head b { font-weight: 600; text-transform: uppercase; letter-spacing: .02em; }
+.cv-head b { font-weight: 600; letter-spacing: .01em; }
 .cv-head .org-d { font-weight: 400; text-transform: none; letter-spacing: 0; }
 .cv-loc { white-space: nowrap; font-size: 9.6pt; }
 .cv-role { font-style: italic; }
@@ -334,12 +334,14 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
 /* ============ Impression : uniquement la feuille ============ */
 @media print {
   @page { size: A4; margin: 0; }
-  body { background: #fff; }
+  html, body { background: #fff; margin: 0; padding: 0; }
+  main, #tab-apply, .studio, .studio-main, .paper-stage { margin: 0 !important; padding: 0 !important; max-width: none !important; border: 0 !important; }
   body > *:not(main), main > *:not(#tab-apply), .studio-side, .paper-tabs { display: none !important; }
   #tab-apply { display: block !important; }
   .studio { display: block; }
   .paper-stage { padding: 0; background: none; display: block; }
-  .paper { box-shadow: none; width: 210mm; min-height: 297mm; zoom: 1 !important; }
+  .paper { box-shadow: none; width: 210mm; min-height: 0; height: 296mm; overflow: hidden; zoom: 1 !important; page-break-after: avoid; break-after: avoid; }
+  .paper.letter { height: auto; overflow: visible; }
   body.print-cv #paperLetter, body.print-letter #paperCv { display: none !important; }
   body.print-cv #paperCv, body.print-letter #paperLetter { display: block !important; }
   .paper .hit { background: none !important; }

@@ -39,6 +39,8 @@ def sources():
         s.append((f"SmartRecruiters · {args[0]}", F.smartrecruiters, args))
     for args in E.PERSONIO:
         s.append((f"Personio · {args[0]}", F.personio, args))
+    for args in E.TEAMTAILOR:
+        s.append((f"Teamtailor · {args[0]}", F.teamtailor, args))
     for args in E.BAMBOOHR:
         s.append((f"BambooHR · {args[0]}", F.bamboohr, args))
     for args in E.ASHBY:
@@ -47,7 +49,9 @@ def sources():
         s.append((f"Eightfold · {args[0]}", F.eightfold, args))
     s.append(("Site carrière · Crédit Agricole CIB", F.cacib, E.CACIB))
     if os.environ.get("ADZUNA_APP_ID"):
-        s.append(("Adzuna", F.adzuna, ()))
+        s.append(("Agrégateur · Adzuna", F.adzuna, ()))
+    if os.environ.get("JOOBLE_API_KEY"):
+        s.append(("Agrégateur · Jooble", F.jooble, ()))
     return s
 
 
@@ -106,6 +110,22 @@ def main():
     for j in cand:
         uniq.setdefault((j["employer"], j["native_id"]), j)
     cand = list(uniq.values())
+    # Les agrégateurs reprennent souvent des offres déjà lues à la source : on garde la version directe
+    norm = lambda x: F.re.sub(r"[^a-z0-9]", "", (x or "").lower())
+    direct = {(norm(j["title"]), norm(j["location"])[:12]) for j in cand if not j["source"].startswith(("Jooble", "Adzuna"))}
+    direct_emp = {norm(j["employer"])[:8] for j in cand if not j["source"].startswith(("Jooble", "Adzuna"))}
+    seen_agg = set()
+    def keep_agg(j):
+        if not j["source"].startswith(("Jooble", "Adzuna")):
+            return True
+        k = (norm(j["title"]), norm(j["employer"])[:8])
+        if (norm(j["title"]), norm(j["location"])[:12]) in direct or k in seen_agg:
+            return False
+        if norm(j["employer"])[:8] in direct_emp and any(norm(j["title"]) == t for t, _ in direct):
+            return False
+        seen_agg.add(k)
+        return True
+    cand = [j for j in cand if keep_agg(j)]
     print(f"\n{len(raw)} offres brutes, {len(cand)} après filtre titre", flush=True)
 
     with cf.ThreadPoolExecutor(12) as ex:

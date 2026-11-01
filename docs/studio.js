@@ -121,6 +121,7 @@ function renderCv() {
   });
   el.innerHTML = html;
   el.classList.toggle("nohl", !$("#cvHighlight").checked);
+  fitCv();
 }
 $("#paperCv").addEventListener("click", e => { const li = e.target.closest("li[data-k]"); if (!li) return; const k = li.dataset.k; cvOff.has(k) ? cvOff.delete(k) : cvOff.add(k); li.classList.toggle("off"); });
 ["#cvReorder", "#cvHighlight"].forEach(s => $(s).addEventListener("change", renderCv));
@@ -159,6 +160,19 @@ function fitPaper() {
 }
 addEventListener("resize", fitPaper);
 document.addEventListener("fjr:tab", e => { if (e.detail === "apply") setTimeout(fitPaper, 30); });
+// Le CV doit tenir sur UNE page A4 : on réduit légèrement la police si besoin (comme on le ferait dans Word)
+function fitCv() {
+  const el = $("#paperCv"); if (!el.offsetParent && el.hidden) { el.style.fontSize = ""; }
+  const z = el.style.zoom; el.style.zoom = 1;
+  const PAGE = 297 * 96 / 25.4 - 2;                 // hauteur A4 en px CSS
+  let size = 10.6; el.style.fontSize = size + "pt"; el.style.lineHeight = "";
+  let guard = 0;
+  while (el.scrollHeight > PAGE && size > 8.6 && guard++ < 20) { size -= 0.2; el.style.fontSize = size.toFixed(1) + "pt"; }
+  if (el.scrollHeight > PAGE) el.style.lineHeight = "1.22";
+  el.style.zoom = z;
+  const note = $("#paperNote"); if (note) note.textContent = size < 10.5 ? `Aperçu A4 · police ajustée à ${size.toFixed(1)} pt pour tenir sur une page` : "Aperçu A4 · en anglais";
+}
+
 function printPaper(kind) {
   document.body.classList.add(kind === "cv" ? "print-cv" : "print-letter");
   const z = $$(".paper").map(p => p.style.zoom); $$(".paper").forEach(p => p.style.zoom = 1);
@@ -167,13 +181,90 @@ function printPaper(kind) {
 $("#printCv").onclick = () => printPaper("cv");
 $("#printLetter").onclick = () => printPaper("letter");
 function docDownload(name, inner) {
-  const html = `<html><head><meta charset="utf-8"><style>body{font-family:Garamond,'Times New Roman',serif;font-size:11pt} h1{text-align:center;font-size:16pt;margin:0} h4{text-transform:uppercase;border-bottom:1px solid #000;font-size:10.5pt;margin:8pt 0 3pt} ul{margin:2pt 0 2pt 14pt;padding:0} .cv-contact{text-align:center} .cv-head{font-weight:bold} .cv-loc{float:right;font-weight:normal} .cv-role{font-style:italic} .cv-dates{font-size:9.5pt;color:#333} li.off{display:none} mark{background:none}</style></head><body>${inner}</body></html>`;
+  const html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8"><style>@page WordSection1{size:595.3pt 841.9pt;margin:36pt 40pt} div.WordSection1{page:WordSection1} p,li,td{margin:0;mso-margin-top-alt:0;mso-margin-bottom-alt:0;line-height:112%} ul{margin-top:0;margin-bottom:0} body{font-family:Garamond,'Times New Roman',serif;font-size:11pt} h1{text-align:center;font-size:16pt;margin:0} h4{text-transform:uppercase;border-bottom:1px solid #000;font-size:10.5pt;margin:8pt 0 3pt} ul{margin:2pt 0 2pt 14pt;padding:0} .cv-contact{text-align:center} .cv-head{font-weight:bold} .cv-loc{float:right;font-weight:normal} .cv-role{font-style:italic} .cv-dates{font-size:9.5pt;color:#333} li.off{display:none} mark{background:none}</style></head><body><div class="WordSection1">${inner}</div></body></html>`;
   const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([html], { type: "application/msword" })); a.download = name; a.click();
 }
 const fileBase = () => `${(profile.name || "CV").replace(/\W+/g, "_")}_${(target?.employer || "").replace(/\W+/g, "_")}`;
-$("#docCv").onclick = () => docDownload(`CV_${fileBase()}.doc`, $("#paperCv").innerHTML);
+function cvDocHtml() {
+  // Reconstruit le CV depuis l'aperçu (ordre et puces masquées respectés) en tableaux compatibles Word
+  const P = profile, paper = $("#paperCv");
+  const T = "font-family:Garamond,'EB Garamond','Times New Roman',serif;";
+  let h = `<p style="${T}text-align:center;font-size:16pt;font-weight:bold;margin:0">${esc(P.name || "")}</p>
+    <p style="${T}text-align:center;font-size:9.5pt;margin:0 0 6pt">${esc([P.phone, P.email].filter(Boolean).join(" | "))}</p>`;
+  paper.querySelectorAll(".cv-sec").forEach(sec => {
+    h += `<p style="${T}font-size:10.5pt;font-weight:bold;text-transform:uppercase;letter-spacing:.5pt;border-bottom:1px solid #000;margin:8pt 0 3pt;padding-bottom:1pt">${esc(sec.querySelector("h4").textContent)}</p>`;
+    h += `<table style="width:100%;border-collapse:collapse;${T}font-size:10pt" cellpadding="0" cellspacing="0">`;
+    sec.querySelectorAll(".cv-item").forEach(it => {
+      const dates = it.querySelector(".cv-dates");
+      const dTxt = esc(dates.childNodes[0]?.textContent || ""), dur = esc(dates.querySelector("small")?.textContent || "");
+      const org = esc(it.querySelector(".cv-head b")?.textContent || ""), od = esc(it.querySelector(".org-d")?.textContent || "");
+      const loc = esc(it.querySelector(".cv-loc")?.textContent || ""), role = esc(it.querySelector(".cv-role")?.textContent || "");
+      const buls = [...it.querySelectorAll(".cv-bul li")].filter(li => !li.classList.contains("off")).map(li => `<li style="margin:0">${esc(li.textContent)}</li>`).join("");
+      const W = "vertical-align:top;padding:0;";
+      h += `<tr><td style="${W}width:78pt;font-size:9.5pt;white-space:nowrap">${dTxt}</td><td style="${W}"><b>${org}</b>${od}</td><td style="${W}width:110pt;text-align:right">${loc}</td></tr>`;
+      if (role || dur) h += `<tr><td style="${W}font-size:9pt;color:#555">${dur}</td><td colspan="2" style="${W}"><i>${role}</i></td></tr>`;
+      if (buls) h += `<tr><td style="${W}"></td><td colspan="2" style="${W}"><ul style="margin:0 0 0 14pt;padding:0">${buls}</ul></td></tr>`;
+      h += `<tr><td colspan="3" style="height:4pt;font-size:2pt;line-height:2pt">&nbsp;</td></tr>`;
+    });
+    sec.querySelectorAll(".cv-skill").forEach(sk => {
+      h += `<tr><td style="vertical-align:top;width:78pt;padding:0"><b>${esc(sk.querySelector("b").textContent)}</b></td><td colspan="2" style="vertical-align:top;padding:0 0 2pt">${esc(sk.querySelector("span").textContent)}</td></tr>`;
+    });
+    h += `</table>`;
+  });
+  return h;
+}
+// Vrai fichier Word (.docx) : même mise en page que l'aperçu, avec des tabulations (robuste dans Word)
+function loadDocx() {
+  if (window.docx) return Promise.resolve();
+  return new Promise((res, rej) => { const sc = document.createElement("script");
+    sc.src = "https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js"; sc.onload = res; sc.onerror = rej; document.head.appendChild(sc); });
+}
+async function cvDocx() {
+  await loadDocx();
+  const D = window.docx, P = profile, paper = $("#paperCv");
+  const FONT = "Garamond", CM = 567, LEFT = Math.round(3.1 * CM), WIDTH = Math.round(17.8 * CM);
+  const t = (text, o = {}) => new D.TextRun({ text, font: FONT, size: o.size || 20, bold: o.bold, italics: o.italics, color: o.color });
+  const para = (children, o = {}) => new D.Paragraph({ children, spacing: { before: o.before || 0, after: o.after || 0, line: 252 },
+    alignment: o.align, tabStops: o.tabs, indent: o.indent, border: o.border, keepNext: o.keepNext });
+  const tabs = [{ type: D.TabStopType.LEFT, position: LEFT }, { type: D.TabStopType.RIGHT, position: WIDTH }];
+  const kids = [
+    para([t(P.name || "", { size: 32, bold: true })], { align: D.AlignmentType.CENTER }),
+    para([t([P.phone, P.email].filter(Boolean).join(" | "), { size: 19 })], { align: D.AlignmentType.CENTER, after: 80 }),
+  ];
+  paper.querySelectorAll(".cv-sec").forEach(sec => {
+    kids.push(para([t(sec.querySelector("h4").textContent.toUpperCase(), { bold: true, size: 21 })],
+      { before: 140, after: 60, keepNext: true, border: { bottom: { style: D.BorderStyle.SINGLE, size: 6, color: "000000", space: 1 } } }));
+    sec.querySelectorAll(".cv-item").forEach(it => {
+      const dates = it.querySelector(".cv-dates"), dTxt = dates.childNodes[0]?.textContent || "", dur = dates.querySelector("small")?.textContent || "";
+      const org = it.querySelector(".cv-head b")?.textContent || "", od = it.querySelector(".org-d")?.textContent || "";
+      const loc = it.querySelector(".cv-loc")?.textContent || "", role = it.querySelector(".cv-role")?.textContent || "";
+      kids.push(para([t(dTxt, { size: 19 }), new D.TextRun({ text: "\t", font: FONT }), t(org, { bold: true }), t(od), new D.TextRun({ text: "\t", font: FONT }), t(loc, { size: 19 })], { tabs, before: 60, keepNext: true }));
+      if (role || dur) kids.push(para([t(dur, { size: 17, color: "555555" }), new D.TextRun({ text: "\t", font: FONT }), t(role, { italics: true })], { tabs, keepNext: true, indent: { left: LEFT, hanging: LEFT } }));
+      it.querySelectorAll(".cv-bul li").forEach(li => {
+        if (li.classList.contains("off")) return;
+        kids.push(para([t("▪", { size: 14 }), new D.TextRun({ text: "\t", font: FONT }), t(li.textContent)],
+          { tabs: [{ type: D.TabStopType.LEFT, position: LEFT + 260 }], indent: { left: LEFT + 260, hanging: 260 } }));
+      });
+    });
+    sec.querySelectorAll(".cv-skill").forEach(sk => {
+      kids.push(para([t(sk.querySelector("b").textContent, { bold: true }), new D.TextRun({ text: "\t", font: FONT }), t(sk.querySelector("span").textContent)],
+        { tabs: [{ type: D.TabStopType.LEFT, position: LEFT }], indent: { left: LEFT, hanging: LEFT }, before: 20 }));
+    });
+  });
+  const doc = new D.Document({ sections: [{ properties: { page: { size: { width: 11906, height: 16838 },
+    margin: { top: Math.round(1.3 * CM), bottom: Math.round(1.2 * CM), left: Math.round(1.6 * CM), right: Math.round(1.6 * CM) } } }, children: kids }] });
+  const blob = await D.Packer.toBlob(doc);
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = `CV_${fileBase()}.docx`; a.click();
+}
+$("#docCv").onclick = async () => {
+  const b = $("#docCv"), lbl = b.textContent; b.disabled = true; b.textContent = "Création…";
+  try { await cvDocx(); toast("CV Word (.docx) téléchargé"); }
+  catch (e) { console.error(e); docDownload(`CV_${fileBase()}.doc`, cvDocHtml()); toast("Export Word simplifié (.doc)"); }
+  finally { b.disabled = false; b.textContent = lbl; }
+};
 $("#docLetter").onclick = () => docDownload(`Cover_Letter_${fileBase()}.doc`, esc($("#paperLetter").innerText).split("\n\n").map(p => `<p>${p.replace(/\n/g, "<br>")}</p>`).join(""));
 
+$("#askAssistant").onclick = () => { if (target) F.askClaude(target); };
 $("#claudePrompt").onclick = () => {
   if (!target) return;
   const p = `You are an experienced ${CAT[target.category]} recruiter and application coach.

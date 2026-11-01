@@ -12,6 +12,7 @@ const LEVELS = ["Stage", "VIE", "Graduate", "Analyst 1", "Alternance"];
 const ETYPE = { bank: "Banque", boutique: "Boutique / conseil", pe: "Private equity", infra: "Infrastructure", am: "Gestion d'actifs" };
 const STATUSES = ["À postuler", "Envoyée", "Entretien", "Offre", "Refusée"];
 const REPO = "nazero-source/Finance-jobs";
+const ASSISTANT = "https://claude.ai/artifact/6uMV13yHifjonSU1jhK8o3";
 const PAGE = 50;
 
 const $ = (s, el = document) => el.querySelector(s);
@@ -202,16 +203,30 @@ function toggleTrack(j, status) {
 
 // ---------------------------------------------------------------- fiche offre (tiroir)
 const li = kw => `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(kw)}`;
+const gx = q => `https://www.google.com/search?q=${encodeURIComponent(q)}`;
+const shortEmp = e => e.replace(/\b(Group|Capital Markets|Partners|Company|& Co\.?|LLC|Inc\.?|SAS|AG|GmbH)\b/gi, "").replace(/\s+/g, " ").trim() || e;
+function jobContext(j) {
+  return `Poste : ${j.title}\nEmployeur : ${j.employer}\nLieu : ${[j.city, j.country].filter(Boolean).join(", ") || j.location}\nType : ${j.seniority} · ${CAT[j.category]}\nLien : ${j.url}\n\nDescription :\n${(j.desc || "").slice(0, 3000)}`;
+}
+async function askClaude(j) {
+  try { await navigator.clipboard.writeText(jobContext(j)); toast("Offre copiée : colle-la dans l'assistant Claude (Ctrl/Cmd + V)"); }
+  catch { toast("Ouvre l'assistant puis colle l'offre"); }
+  window.open(ASSISTANT, "_blank", "noopener");
+}
+window.FJR.askClaude = askClaude;
 function openJob(j) {
   if (!j) return;
   const p = store.get("fjr_profile", {});
-  const team = TEAM[j.category], city = j.city || "";
+  const team = TEAM[j.category], city = j.city || "", emp = shortEmp(j.employer);
+  const junior = j.seniority === "Stage" || j.seniority === "VIE" ? "intern OR analyst" : "analyst OR associate";
   const contacts = [];
   (j.recruiters || []).forEach(r => contacts.push(["👤", r, "cité dans l'annonce", null]));
   (j.emails || []).forEach(e => contacts.push(["✉️", e, "cité dans l'annonce", "mailto:" + e]));
-  contacts.push(["🔎", `Recruteurs / campus de ${j.employer}${city ? " à " + city : ""}`, "recherche LinkedIn", li(`${j.employer} recruiter ${city}`)]);
-  contacts.push(["🔎", `Équipe ${team} · ${j.employer}${city ? " · " + city : ""}`, "les analysts et associates répondent le plus", li(`${j.employer} ${team} ${city}`)]);
-  if (p.school) contacts.push(["🎓", `Anciens de ${p.school} chez ${j.employer}`, "recherche LinkedIn", li(`${j.employer} ${p.school}`)]);
+  contacts.push(["🔎", `Recruteurs / campus recruiting · ${emp}`, "Google · profils LinkedIn publics", gx(`site:linkedin.com/in "${emp}" (recruiter OR "talent acquisition" OR "campus recruiting")${city ? ` "${city}"` : ""}`)]);
+  contacts.push(["🔎", `Équipe ${team} · ${emp}${city ? " · " + city : ""}`, "Google · analysts / associates, les plus réceptifs", gx(`site:linkedin.com/in "${emp}" "${team}" (${junior})${city ? ` "${city}"` : ""}`)]);
+  if (p.school) contacts.push(["🎓", `Anciens de ${p.school} chez ${emp}`, "Google · profils LinkedIn publics", gx(`site:linkedin.com/in "${emp}" "${p.school}"`)]);
+  contacts.push(["🏢", `Page « équipe » du site de ${emp}`, "les boutiques et les fonds y listent souvent tout le monde", gx(`"${emp}" ${team} team ${city}`.trim())]);
+  contacts.push(["in", `Recherche LinkedIn · ${emp} ${team}`, "nécessite d'être connecté à LinkedIn", li(`${emp} ${team}`)]);
   const st = S.track[j.id]?.status || "";
   $("#drawer").innerHTML = `
     <div class="drawer-head"><div style="display:flex;gap:.8rem;align-items:flex-start">${logoHtml(j)}<div><h2>${esc(j.title)}</h2><div class="muted">${esc(j.employer)} · ${flag(j.cc)} ${esc(j.city || j.location)}${j.country ? ", " + esc(j.country) : ""}</div></div></div>
@@ -220,6 +235,7 @@ function openJob(j) {
       <div class="actions" style="margin:0">
         <a class="btn accent" href="${esc(j.url)}" target="_blank" rel="noopener">Voir et postuler ↗</a>
         <button class="btn ghost" data-act="prep">Préparer CV & lettre</button>
+        <button class="btn ghost" data-act="claude">✦ Demander à Claude</button>
         <select data-act="status" aria-label="Statut de suivi"><option value="">Suivi : aucun</option>${STATUSES.map(s => `<option ${s === st ? "selected" : ""}>${s}</option>`).join("")}</select>
       </div>
       <div class="facts">
@@ -229,7 +245,9 @@ function openJob(j) {
         <div class="fact"><span>Employeur</span><b>${esc(ETYPE[j.employer_type] || "")}</b></div>
         <div class="fact" style="grid-column:1/-1"><span>Salaire ${j.salary?.estimated ? "estimé" : "annoncé"}</span><b>${esc(j.salary?.text || "Non communiqué")}</b>${j.salary?.estimated ? `<span style="margin-top:.2rem">Base : ${esc(j.salary.basis || "")} · fixe, hors bonus</span>` : ""}</div>
       </div>
-      <div><h3>Personnes à contacter</h3><div class="contacts">${contacts.map(([i, t, s, h]) =>
+      <div><h3>Personnes à contacter</h3>
+        <button class="contact" data-act="claude" style="width:100%;text-align:left;cursor:pointer;background:var(--accent-soft);border-color:transparent;font:inherit"><span class="ico">✦</span><span><b>Demander à Claude qui contacter et comment</b><small>profils clés, recherches prêtes à ouvrir, message LinkedIn — avec ton compte Claude</small></span></button>
+        <div class="contacts" style="margin-top:.4rem">${contacts.map(([i, t, s, h]) =>
         `${h ? `<a class="contact" href="${esc(h)}" target="_blank" rel="noopener">` : `<div class="contact">`}<span class="ico">${i}</span><span>${esc(t)}<small>${esc(s)}</small></span>${h ? "</a>" : "</div>"}`).join("")}</div></div>
       <div><h3>Description <span class="muted small">(extrait · ${esc(j.source)})</span></h3><div class="desc">${esc(j.desc || "Description non disponible : voir l'offre.")}</div></div>
       <button class="btn ghost small" data-act="report" style="justify-self:start">${S.reported.has(j.id) ? "Annuler le signalement" : "Signaler : hors sujet / pas junior"}</button>
@@ -240,6 +258,7 @@ function openJob(j) {
     if (e.target.closest("[data-close]")) closeDrawers();
     if (a === "prep") { closeDrawers(); window.FJR.prepare?.(j); }
     if (a === "report") report(j);
+    if (a === "claude") askClaude(j);
   };
   $("[data-act=status]", d).onchange = e => { if (!e.target.value) { delete S.track[j.id]; store.set("fjr_track", S.track); renderBoard(); renderList(); toast("Retirée du suivi"); } else toggleTrack(j, e.target.value); };
   openDrawer(d);

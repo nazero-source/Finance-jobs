@@ -44,6 +44,13 @@
 "lat": 24.6389,
 "lon": 46.716
 },
+"Algiers, Algeria": {
+"cc": "DZ",
+"city": "Algiers",
+"country": "Algeria",
+"lat": 36.7729,
+"lon": 3.0588
+},
 "Amsterdam Netherlands": {
 "cc": "NL",
 "city": "Amsterdam",
@@ -59,6 +66,13 @@
 "lon": 4.8925
 },
 "Amsterdam, Noord-Holland, Netherlands": {
+"cc": "NL",
+"city": "Amsterdam",
+"country": "Netherlands",
+"lat": 52.3731,
+"lon": 4.8925
+},
+"Amsterdam, Pays-Bas": {
 "cc": "NL",
 "city": "Amsterdam",
 "country": "Netherlands",
@@ -89,6 +103,13 @@
 },
 "Atlanta, Georgia; Boston, Massachusetts; Charlotte, North Carolina; Chicago, Illinois, United States; Los Angeles, California; San Francisco, California": null,
 "Atlanta, Georgia; Chicago, Illinois, United States": null,
+"Austin HQ": {
+"cc": "US",
+"city": "Austin",
+"country": "United States",
+"lat": 30.2675,
+"lon": -97.735
+},
 "Austin, Texas, United States": {
 "cc": "US",
 "city": "Austin",
@@ -168,6 +189,13 @@
 "lon": 77.5901
 },
 "Birmingham, One Snow Hill, United Kingdom": null,
+"Birmingham, United Kingdom": {
+"cc": "GB",
+"city": "Birmingham",
+"country": "United Kingdom",
+"lat": 52.4949,
+"lon": -1.8518
+},
 "Bogota Colombia": {
 "cc": "CO",
 "city": "Bogota",
@@ -181,6 +209,13 @@
 "country": "United States",
 "lat": 40.1532,
 "lon": -74.228
+},
+"Boston, MA": {
+"cc": "US",
+"city": "Boston",
+"country": "United States",
+"lat": 42.3588,
+"lon": -71.0578
 },
 "Boston, MA, United States": {
 "cc": "US",
@@ -374,6 +409,13 @@
 "lat": 41.4997,
 "lon": -81.6937
 },
+"Cologne, Allemagne": {
+"cc": "DE",
+"city": "Cologne",
+"country": "Germany",
+"lat": 50.9384,
+"lon": 6.96
+},
 "Conshohocken, PA, USA, United States": null,
 "Copenhagen Denmark": {
 "cc": "DK",
@@ -439,6 +481,7 @@
 "lat": 53.3494,
 "lon": -6.2606
 },
+"Düsseldorf oder Frankfurt am Main": null,
 "Edinburgh, United Kingdom": {
 "cc": "GB",
 "city": "City of Edinburgh",
@@ -523,6 +566,13 @@
 "lat": 46.6034,
 "lon": 1.8883
 },
+"Frankfurt": {
+"cc": "DE",
+"city": "Frankfurt",
+"country": "Germany",
+"lat": 50.1106,
+"lon": 8.6821
+},
 "Frankfurt Omniturm, Germany": null,
 "Frankfurt Weserst 54/Mainz Landst 11-17, Germany": null,
 "Frankfurt a. Main, Germany": {
@@ -533,6 +583,13 @@
 "lon": 8.6821
 },
 "Frankfurt am Main": {
+"cc": "DE",
+"city": "Frankfurt",
+"country": "Germany",
+"lat": 50.1106,
+"lon": 8.6821
+},
+"Frankfurt am Main, Allemagne": {
 "cc": "DE",
 "city": "Frankfurt",
 "country": "Germany",
@@ -583,6 +640,20 @@
 "lon": 10.4478
 },
 "Global Service Private Ltd.": null,
+"Greece": {
+"cc": "GR",
+"city": "Greece",
+"country": "Greece",
+"lat": 38.9954,
+"lon": 21.9877
+},
+"HONG KONG": {
+"cc": "CN",
+"city": "HONG KONG",
+"country": "China",
+"lat": 22.3492,
+"lon": 114.1858
+},
 "HONG KONG, Hong Kong": {
 "cc": "CN",
 "city": "Hong Kong",
@@ -598,6 +669,13 @@
 "lon": -95.3677
 },
 "Halifax, NS, CAN, Canada": null,
+"Hamburg, Allemagne": {
+"cc": "DE",
+"city": "Hamburg",
+"country": "Germany",
+"lat": 53.5502,
+"lon": 10.0013
+},
 "Harris Williams": {
 "cc": "AU",
 "city": "Williams",
@@ -779,6 +857,13 @@
 "lat": 53.7973,
 "lon": -1.5371
 },
+"Leipzig": {
+"cc": "DE",
+"city": "Leipzig",
+"country": "Germany",
+"lat": 51.3406,
+"lon": 12.3747
+},
 "London": {
 "cc": "GB",
 "city": "Greater London",
@@ -936,12 +1021,26 @@
 "lat": 4.5694,
 "lon": 102.2657
 },
+"Marseille, France": {
+"cc": "FR",
+"city": "Marseille",
+"country": "France",
+"lat": 43.2964,
+"lon": 5.3778
+},
 "Mc Lean, Virginia": {
 "cc": "US",
 "city": "Henrico County",
 "country": "United States",
 "lat": 37.4922,
 "lon": -77.3976
+},
+"McLean, United States": {
+"cc": "US",
+"city": "McLean County",
+"country": "United States",
+"lat": 40.4632,
+"lon": -88.8197
 },
 "Melbourne, Australia": {
 "cc": "AU",
@@ -956,6 +1055,13 @@
 "country": "Philippines",
 "lat": 14.6098,
 "lon": 120.9895
+},
+"Mexico": {
+"cc": "MX",
+"city": "Mexico",
+"country": "Mexico",
+"lat": 23.6585,
+"lon": -102.0077
 },
 "Mexico City": {
 "cc": "MX",
@@ -972,6 +1078,13 @@
 "lon": -99.1753
 },
 "Miami Beach, FL, USA, United States": null,
+"Miami, FL": {
+"cc": "US",
+"city": "Miami",
+"country": "United States",
+"lat": 25.7742,
+"lon": -80.1936
+},
 "Miami, FL, USA, United States": null,
 "Miami, United States": {
 "cc": "US",
@@ -1092,7 +1205,21 @@
 "lat": 48.1371,
 "lon": 11.5754
 },
+"Munich, Allemagne": {
+"cc": "DE",
+"city": "Munich",
+"country": "Germany",
+"lat": 48.1371,
+"lon": 11.5754
+},
 "Munich, Germany": {
+"cc": "DE",
+"city": "Munich",
+"country": "Germany",
+"lat": 48.1371,
+"lon": 11.5754
+},
+"München": {
 "cc": "DE",
 "city": "Munich",
 "country": "Germany",
@@ -1155,6 +1282,13 @@
 "lat": 40.7127,
 "lon": -74.006
 },
+"New York City, NY – U.S., United States": {
+"cc": "US",
+"city": "New York",
+"country": "United States",
+"lat": 40.7127,
+"lon": -74.006
+},
 "New York, 1 Columbus Circle, United States": null,
 "New York, 745 7th Avenue, United States": {
 "cc": "US",
@@ -1202,6 +1336,13 @@
 "lat": 40.7127,
 "lon": -74.006
 },
+"New York, us": {
+"cc": "US",
+"city": "New York",
+"country": "United States",
+"lat": 40.7127,
+"lon": -74.006
+},
 "North Andover, MA, United States": {
 "cc": "US",
 "city": "North Andover",
@@ -1217,6 +1358,13 @@
 "country": "Canada",
 "lat": 44.5678,
 "lon": -80.943
+},
+"PARIS, France": {
+"cc": "FR",
+"city": "Paris",
+"country": "France",
+"lat": 48.8589,
+"lon": 2.32
 },
 "PARIS, Paris, France": {
 "cc": "FR",
@@ -1260,6 +1408,27 @@
 "lat": 48.8535,
 "lon": 2.3484
 },
+"Pasadena, CA": {
+"cc": "US",
+"city": "Pasadena",
+"country": "United States",
+"lat": 34.1477,
+"lon": -118.1442
+},
+"Philadelphia": {
+"cc": "US",
+"city": "Philadelphia",
+"country": "United States",
+"lat": 39.9527,
+"lon": -75.1635
+},
+"Portugal": {
+"cc": "PT",
+"city": "Portugal",
+"country": "Portugal",
+"lat": 39.6622,
+"lon": -8.1354
+},
 "Quebec VIRTUAL, Canada": null,
 "Québec, Québec, Canada": {
 "cc": "CA",
@@ -1275,12 +1444,26 @@
 "lat": 52.2691,
 "lon": -113.8141
 },
+"Redwood City, CA": {
+"cc": "US",
+"city": "Redwood City",
+"country": "United States",
+"lat": 37.4863,
+"lon": -122.2325
+},
 "Region Metropolitana de Santiago, Chile": {
 "cc": "CL",
 "city": "Santiago Metropolitan Region",
 "country": "Chile",
 "lat": -33.5739,
 "lon": -70.6206
+},
+"Rennes, France": {
+"cc": "FR",
+"city": "Rennes",
+"country": "France",
+"lat": 48.1113,
+"lon": -1.68
 },
 "Repentigny, Québec, Canada": {
 "cc": "CA",
@@ -1304,6 +1487,13 @@
 "lon": -64.7119
 },
 "Richmond , VA": {
+"cc": "US",
+"city": "Richmond",
+"country": "United States",
+"lat": 37.5385,
+"lon": -77.4343
+},
+"Richmond, United States": {
 "cc": "US",
 "city": "Richmond",
 "country": "United States",
@@ -1359,6 +1549,13 @@
 "lat": 59.3251,
 "lon": 18.0711
 },
+"STOCKHOLM, Sweden": {
+"cc": "SE",
+"city": "Stockholm",
+"country": "Sweden",
+"lat": 59.3251,
+"lon": 18.0711
+},
 "Saint Petersburg": {
 "cc": "RU",
 "city": "Saint Petersburg",
@@ -1386,6 +1583,13 @@
 "country": "United States",
 "lat": 40.7596,
 "lon": -111.8868
+},
+"San Francisco": {
+"cc": "US",
+"city": "San Francisco",
+"country": "United States",
+"lat": 37.7879,
+"lon": -122.4075
 },
 "San Francisco , United States, CA": {
 "cc": "US",
@@ -1791,6 +1995,13 @@
 "lon": 12.4529
 },
 "VANCOUVER, British Columbia, Canada": {
+"cc": "CA",
+"city": "Vancouver",
+"country": "Canada",
+"lat": 49.2609,
+"lon": -123.114
+},
+"Vancouver": {
 "cc": "CA",
 "city": "Vancouver",
 "country": "Canada",

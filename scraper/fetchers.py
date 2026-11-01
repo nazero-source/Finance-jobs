@@ -194,7 +194,14 @@ def lever(name, etype, company):
 
 
 def workable(name, etype, account):
-    d = http(f"https://apply.workable.com/api/v1/widget/accounts/{account}")
+    try:
+        d = http(f"https://apply.workable.com/api/v1/widget/accounts/{account}", tries=2)
+    except Exception:   # API « widget » limitée : on passe par l'API publique v3
+        r = http(f"https://apply.workable.com/api/v3/accounts/{account}/jobs",
+                 {"query": "", "location": [], "department": [], "worktype": [], "remote": []}, tries=2)
+        d = {"jobs": [{"title": j.get("title"), "shortcode": j.get("shortcode"), "city": (j.get("location") or {}).get("city"),
+                       "country": (j.get("location") or {}).get("country"), "published_on": j.get("published"),
+                       "url": f"https://apply.workable.com/{account}/j/{j.get('shortcode')}/"} for j in r.get("results", [])]}
     out = []
     for j in d.get("jobs", []):
         loc = ", ".join(x for x in (j.get("city"), j.get("country")) if x)
@@ -263,7 +270,7 @@ def adzuna():
                 sal = None
                 if j.get("salary_min") and not str(j.get("salary_is_predicted")) == "1":
                     sal = (j.get("salary_min"), j.get("salary_max"))
-                out.append(job(source="Adzuna", employer=(j.get("company") or {}).get("display_name", "?"),
+                out.append(job(source="Adzuna · " + ((j.get("category") or {}).get("label") or "web"), employer=(j.get("company") or {}).get("display_name", "?"),
                                etype="bank", native_id=f"az:{j['id']}", title=j.get("title", ""),
                                url=j.get("redirect_url", ""), location=(j.get("location") or {}).get("display_name", ""),
                                country_hint=cc.upper(), posted=(j.get("created") or "")[:10] or None,
@@ -384,4 +391,56 @@ def cacib(name, etype):
                            url=url, location=", ".join(reversed(geo)) if geo else "", desc_fn=desc_fn))
         if not new:
             break
+    return out
+
+
+# ---------------- Teamtailor (flux RSS public) ----------------
+def teamtailor(name, etype, host):
+    import xml.etree.ElementTree as ET
+    root = ET.fromstring(http_text(f"https://{host}/jobs.rss"))
+    ns = {"tt": "https://teamtailor.com/locations"}
+    out = []
+    for it in root.iter("item"):
+        link = it.findtext("link") or ""
+        loc = ", ".join(x for x in (it.findtext("tt:locations/tt:location/tt:city", namespaces=ns),
+                                    it.findtext("tt:locations/tt:location/tt:country", namespaces=ns)) if x)
+        pub = it.findtext("pubDate") or ""
+        try:
+            posted = dt.datetime.strptime(pub[:25].strip(), "%a, %d %b %Y %H:%M:%S").date().isoformat()
+        except ValueError:
+            posted = None
+        out.append(job(source="Teamtailor", employer=name, etype=etype, native_id=f"tt:{link.rsplit('/', 1)[-1].split('-')[0]}",
+                       title=it.findtext("title") or "", url=link, location=loc, posted=posted,
+                       desc=strip_html(it.findtext("description"))))
+    return out
+
+
+# ---------------- Jooble (agrégateur, clé gratuite : reprend Indeed, eFinancialCareers, etc.) ----------------
+JOOBLE_LOCATIONS = ["Paris", "London", "New York", "Frankfurt", "Madrid", "Milan", "Amsterdam", "Zurich", "Geneva",
+                    "Luxembourg", "Brussels", "Munich", "Dubai", "Riyadh", "Singapore", "Hong Kong", "Tokyo", "Sydney",
+                    "Toronto", "Chicago", "San Francisco", "Boston", "São Paulo", "Mexico City", "Mumbai", "Stockholm"]
+JOOBLE_TERMS = ["M&A analyst", "investment banking analyst", "investment banking intern", "private equity analyst",
+                "private equity intern", "infrastructure investment analyst", "project finance analyst",
+                "leveraged finance analyst", "stage fusions acquisitions", "corporate finance intern"]
+
+
+def jooble():
+    key = os.environ.get("JOOBLE_API_KEY")
+    if not key:
+        return []
+    out = []
+    for loc in JOOBLE_LOCATIONS:
+        for term in JOOBLE_TERMS:
+            try:
+                d = http(f"https://jooble.org/api/{key}", {"keywords": term, "location": loc, "page": 1}, tries=2)
+            except Exception:
+                continue
+            for j in d.get("jobs", []):
+                sal = None
+                out.append(job(source=f"Jooble · {j.get('source') or 'web'}", employer=(j.get("company") or "?").strip(),
+                               etype="bank", native_id=f"jb:{j.get('id')}", title=strip_html(j.get("title", "")),
+                               url=j.get("link", ""), location=j.get("location") or loc,
+                               posted=(j.get("updated") or "")[:10] or None,
+                               desc=strip_html(j.get("snippet", "")) + ("\nSalary: " + j["salary"] if j.get("salary") else "")))
+            time.sleep(0.3)
     return out

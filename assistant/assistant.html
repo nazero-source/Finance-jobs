@@ -1,0 +1,323 @@
+<title>Finance Jobs Copilot</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Layout : colonne contexte (offre + CV) à gauche, conversation à droite ; une colonne sur téléphone.
+   Même système visuel que le site Finance Jobs Radar. */
+:root {
+  --bg: #f5f6f8; --surface: #ffffff; --surface-2: #f1f3f6; --border: #e3e6eb; --border-strong: #cfd4dc;
+  --text: #0f172a; --text-2: #475569; --muted: #8a94a6;
+  --accent: #2f5bea; --accent-soft: #edf1ff; --ink: #0f172a; --ink-text: #ffffff;
+  --good: #0a7f3f; --good-soft: #e5f5ec; --warn: #a15c00; --warn-soft: #fdf3e2; --danger: #c62828;
+  --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --radius: 14px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b0d12; --surface: #12151c; --surface-2: #181c25; --border: #252b37; --border-strong: #343b4a;
+    --text: #e9edf3; --text-2: #aab3c2; --muted: #7c8698;
+    --accent: #7c9cff; --accent-soft: #1b2340; --ink: #e9edf3; --ink-text: #0b0d12;
+    --good: #3ccf7c; --good-soft: #10291c; --warn: #f2b13b; --warn-soft: #2e2410; --danger: #ff7b7b;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b0d12; --surface: #12151c; --surface-2: #181c25; --border: #252b37; --border-strong: #343b4a;
+  --text: #e9edf3; --text-2: #aab3c2; --muted: #7c8698;
+  --accent: #7c9cff; --accent-soft: #1b2340; --ink: #e9edf3; --ink-text: #0b0d12;
+  --good: #3ccf7c; --good-soft: #10291c; --warn: #f2b13b; --warn-soft: #2e2410; --danger: #ff7b7b;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body { background: var(--bg); color: var(--text); font: 14.5px/1.55 var(--font); -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1240px; margin: 0 auto; padding-block: 18px 28px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 14px; }
+header { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.mark { width: 36px; height: 36px; border-radius: 10px; background: var(--ink); color: var(--ink-text); display: grid; place-items: center; flex: none; }
+.mark svg { width: 22px; height: 22px; }
+header h1 { font-size: 1.1rem; margin: 0; letter-spacing: -.01em; }
+header p { margin: 0; color: var(--muted); font-size: .8rem; }
+header .back { margin-left: auto; font-size: .85rem; color: var(--accent); text-decoration: none; font-weight: 500; }
+.grid { display: grid; grid-template-columns: 360px minmax(0, 1fr); gap: 14px; align-items: start; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; display: grid; gap: 10px; }
+.card h2 { font-size: .95rem; margin: 0; display: flex; align-items: center; gap: 8px; }
+.pill { font-size: .7rem; font-weight: 600; padding: 2px 8px; border-radius: 99px; background: var(--surface-2); color: var(--muted); }
+.pill.ok { background: var(--good-soft); color: var(--good); }
+textarea, input { width: 100%; font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 9px 11px; outline: none; resize: vertical; }
+textarea:focus, input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.hint { font-size: .78rem; color: var(--muted); margin: 0; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.btn { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--ink); background: var(--ink); color: var(--ink-text); border-radius: 10px; padding: 8px 13px; font: inherit; font-size: .84rem; font-weight: 600; cursor: pointer; }
+.btn.ghost { background: var(--surface); color: var(--text); border-color: var(--border); }
+.btn:disabled { opacity: .5; cursor: default; }
+.btn:focus-visible, .chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.side { display: grid; gap: 14px; }
+.chat { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; height: calc(100vh - 110px); min-height: 520px; padding: 0; overflow: hidden; }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; padding: 12px 14px; border-bottom: 1px solid var(--border); }
+.chip { border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 99px; padding: 6px 12px; font: inherit; font-size: .8rem; cursor: pointer; }
+.chip:hover { border-color: var(--border-strong); background: var(--surface-2); }
+.chip.key { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); font-weight: 600; }
+.log { overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+.msg { max-width: 92%; display: grid; gap: 4px; }
+.msg .who { font-size: .72rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+.msg .body { padding: 10px 13px; border-radius: 12px; min-width: 0; overflow-wrap: anywhere; }
+.msg.user { align-self: flex-end; }
+.msg.user .body { background: var(--ink); color: var(--ink-text); white-space: pre-wrap; }
+.msg.bot .body { background: var(--surface-2); }
+.msg.bot .body p { margin: .35em 0; }
+.msg.bot .body ul, .msg.bot .body ol { margin: .3em 0; padding-left: 1.2em; }
+.msg.bot .body h3, .msg.bot .body h4 { margin: .7em 0 .2em; font-size: .92rem; }
+.msg.bot .body a { color: var(--accent); font-weight: 500; }
+.msg.bot .body code { background: var(--surface); padding: 0 4px; border-radius: 4px; font-size: .85em; }
+.msg.bot .body blockquote { margin: .4em 0; padding: .4em .8em; border-left: 3px solid var(--border-strong); background: var(--surface); border-radius: 0 8px 8px 0; white-space: pre-wrap; }
+.msg .tools { display: flex; gap: 8px; }
+.msg .tools button { border: 0; background: none; color: var(--muted); font: inherit; font-size: .75rem; cursor: pointer; padding: 0; }
+.thinking { color: var(--muted); font-style: italic; }
+.empty { margin: auto; text-align: center; color: var(--muted); max-width: 420px; display: grid; gap: 6px; }
+.empty b { color: var(--text); font-size: 1rem; }
+.composer { display: flex; gap: 8px; padding: 12px 14px; border-top: 1px solid var(--border); align-items: flex-end; }
+.composer textarea { min-height: 44px; max-height: 160px; }
+.notice { font-size: .82rem; padding: 10px 12px; border-radius: 10px; background: var(--warn-soft); color: var(--warn); }
+.ctx-sum { font-size: .82rem; background: var(--surface-2); border-radius: 10px; padding: 8px 10px; }
+.ctx-sum b { display: block; }
+@media (max-width: 860px) {
+  .grid { grid-template-columns: 1fr; }
+  .chat { height: 78vh; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="16" cy="16" r="8"/><circle cx="16" cy="16" r="2.5" fill="currentColor"/></svg></div>
+    <div><h1>Finance Jobs Copilot</h1><p>Contacts clés, messages d'approche, préparation d'entretien — avec ton compte Claude</p></div>
+    <a class="back" href="https://nazero-source.github.io/Finance-jobs/" target="_blank" rel="noopener">← Retour aux offres</a>
+  </header>
+
+  <div id="unavailable" class="notice" hidden>Claude n'est pas disponible dans cet affichage. Ouvre cette page depuis claude.ai, connecté à ton compte, et autorise-la à utiliser Claude.</div>
+
+  <div class="grid">
+    <div class="side">
+      <section class="card" aria-labelledby="h-offer">
+        <h2 id="h-offer">L'offre <span class="pill" id="offerPill">vide</span></h2>
+        <p class="hint">Sur le site, ouvre une offre et clique sur <b>Demander à Claude</b> : l'offre est copiée. Colle-la ici.</p>
+        <textarea id="offer" rows="7" placeholder="Colle ici l'offre (ou son lien et sa description)…"></textarea>
+        <div id="offerSum" class="ctx-sum" hidden></div>
+      </section>
+      <section class="card" aria-labelledby="h-cv">
+        <h2 id="h-cv">Mon CV <span class="pill" id="cvPill">vide</span></h2>
+        <div class="row">
+          <label class="btn ghost" for="cvPdf">Importer le PDF</label>
+          <input type="file" id="cvPdf" accept="application/pdf,.pdf" hidden>
+          <button class="btn ghost" id="cvClear" type="button">Effacer</button>
+        </div>
+        <textarea id="cv" rows="5" placeholder="…ou colle le texte de ton CV"></textarea>
+        <p class="hint" id="cvNote">Gardé uniquement dans ce navigateur. Il n'est envoyé à Claude que quand tu poses une question.</p>
+      </section>
+    </div>
+
+    <section class="card chat" aria-label="Conversation avec Claude">
+      <div class="chips" id="chips">
+        <button class="chip key" data-q="contacts">Qui contacter et comment ?</button>
+        <button class="chip" data-q="linkedin">Message LinkedIn</button>
+        <button class="chip" data-q="email">E-mail d'approche</button>
+        <button class="chip" data-q="fit">Mon profil vs l'offre</button>
+        <button class="chip" data-q="interview">Préparer l'entretien</button>
+        <button class="chip" data-q="firm">Comprendre l'employeur</button>
+      </div>
+      <div class="log" id="log" aria-live="polite">
+        <div class="empty" id="emptyState"><b>Pose ta question à Claude</b><span>Colle une offre à gauche, puis clique sur « Qui contacter et comment ? » pour obtenir les profils à approcher, des recherches prêtes à ouvrir et un message à envoyer.</span></div>
+      </div>
+      <form class="composer" id="composer">
+        <label for="q" class="hint" hidden>Ta question</label>
+        <textarea id="q" rows="1" placeholder="Ex. : qui chez Lazard Paris gère le recrutement des stagiaires M&A ?"></textarea>
+        <button class="btn" id="send" type="submit">Envoyer</button>
+        <button class="btn ghost" id="stop" type="button" hidden>Stop</button>
+      </form>
+    </section>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+(() => {
+"use strict";
+const $ = s => document.querySelector(s);
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : v; } catch { return d; } },
+  set(k, v) { try { localStorage.setItem(k, v); } catch {} },
+};
+let sample = null, turns = [], ctl = null, busy = false;
+
+// ---------- contexte ----------
+const offer = $("#offer"), cv = $("#cv");
+offer.value = store.get("fjc_offer", ""); cv.value = store.get("fjc_cv", "");
+function refreshCtx() {
+  const o = offer.value.trim(), c = cv.value.trim();
+  $("#offerPill").textContent = o ? "prête" : "vide"; $("#offerPill").classList.toggle("ok", !!o);
+  $("#cvPill").textContent = c ? `${Math.round(c.length / 100) / 10}k caractères` : "vide"; $("#cvPill").classList.toggle("ok", !!c);
+  const m = o.match(/^(?:Poste|Title)\s*:\s*(.+)$/mi), e = o.match(/^(?:Employeur|Employer)\s*:\s*(.+)$/mi);
+  $("#offerSum").hidden = !(m && e);
+  if (m && e) $("#offerSum").innerHTML = `<b></b><span></span>`, $("#offerSum b").textContent = m[1], $("#offerSum span").textContent = e[1];
+}
+offer.addEventListener("input", () => { store.set("fjc_offer", offer.value); refreshCtx(); });
+cv.addEventListener("input", () => { store.set("fjc_cv", cv.value); refreshCtx(); });
+$("#cvClear").onclick = () => { cv.value = ""; store.set("fjc_cv", ""); refreshCtx(); };
+$("#cvPdf").addEventListener("change", async e => {
+  const f = e.target.files[0]; e.target.value = ""; if (!f) return;
+  if (!window.pdfjsLib) { $("#cvNote").textContent = "Lecteur PDF indisponible : colle le texte du CV."; return; }
+  $("#cvNote").textContent = "Lecture du PDF…";
+  try {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+    const pdf = await pdfjsLib.getDocument({ data: await f.arrayBuffer() }).promise;
+    let txt = "";
+    for (let i = 1; i <= pdf.numPages; i++) {
+      const tc = await (await pdf.getPage(i)).getTextContent();
+      let lastY = null;
+      for (const it of tc.items) { const y = it.transform[5]; if (lastY !== null && Math.abs(y - lastY) > 3) txt += "\n"; else if (lastY !== null) txt += " "; txt += it.str; lastY = y; }
+      txt += "\n";
+    }
+    cv.value = txt.replace(/[ \t]+/g, " ").replace(/\n\s*\n+/g, "\n").trim(); store.set("fjc_cv", cv.value); refreshCtx();
+    $("#cvNote").textContent = "CV importé. Gardé uniquement dans ce navigateur.";
+  } catch { $("#cvNote").textContent = "Impossible de lire ce PDF : colle le texte du CV."; }
+});
+refreshCtx();
+
+// ---------- outil : liens de recherche fiables ----------
+const g = q => "https://www.google.com/search?q=" + encodeURIComponent(q);
+const tools = [{
+  name: "search_links",
+  description: "Builds ready-to-open search URLs to find people at a company without inventing names: Google searches restricted to public LinkedIn profiles, a LinkedIn people search, and a search for the firm's own team page. Returns a list of {label, url}. Call it once per target profile you recommend.",
+  inputSchema: { type: "object", properties: {
+    company: { type: "string", description: "Employer name as people write it on LinkedIn, e.g. Lazard" },
+    role_keywords: { type: "string", description: "Titles or team words, e.g. \"M&A analyst\" or \"campus recruiting\"" },
+    city: { type: "string", description: "Office city, optional" },
+    school: { type: "string", description: "School to find alumni, optional" } }, required: ["company", "role_keywords"] },
+  execute(input) {
+    const c = String(input.company || "").trim(), r = String(input.role_keywords || "").trim(), city = String(input.city || "").trim(), sch = String(input.school || "").trim();
+    if (!c) throw new Error("company is required");
+    const links = [
+      { label: `Google · profils LinkedIn « ${c} » ${r}${city ? " " + city : ""}`, url: g(`site:linkedin.com/in "${c}" ${r}${city ? ` "${city}"` : ""}`) },
+      { label: `LinkedIn · ${c} ${r}`, url: "https://www.linkedin.com/search/results/people/?keywords=" + encodeURIComponent(`${c} ${r}${city ? " " + city : ""}`) },
+      { label: `Page équipe du site de ${c}`, url: g(`"${c}" team ${r} ${city}`.trim()) },
+    ];
+    if (sch) links.push({ label: `Anciens de ${sch} chez ${c}`, url: g(`site:linkedin.com/in "${c}" "${sch}"`) });
+    return links;
+  },
+}];
+
+// ---------- consignes ----------
+function rules() {
+  return `Tu es le copilote de recherche d'emploi de Nassim, étudiant en master (emlyon) qui vise des stages, VIE, graduate programmes et postes d'Analyst 1 en M&A, investment banking, private equity, infrastructure et project finance, partout dans le monde.
+
+Réponds en français, de façon concrète et structurée (titres courts, listes). Rédige les messages destinés aux recruteurs dans la langue du pays de l'offre (anglais par défaut ; français pour la France).
+
+RÈGLES SUR LES CONTACTS — impératives :
+- N'invente JAMAIS le nom d'une personne réelle, ni une adresse e-mail précise. Tu ne peux pas naviguer sur le web : tu ne connais pas l'équipe actuelle.
+- Recommande plutôt 3 à 5 PROFILS à cibler (ex. « Analyst ou Associate M&A au bureau de Paris », « Campus recruiter EMEA », « ancien d'emlyon dans l'équipe ») avec pour chacun : pourquoi ce profil, quoi lui demander.
+- Pour chaque profil, appelle l'outil search_links et présente les liens obtenus sous forme de liens Markdown cliquables. N'écris pas d'URL toi-même.
+- Si tu connais un format d'e-mail courant pour l'entreprise, présente-le comme une hypothèse à vérifier, jamais comme un fait.
+- Termine par une séquence d'approche (qui contacter en premier, relance) et un message prêt à envoyer (≤ 300 caractères pour une invitation LinkedIn).
+
+N'invente pas d'expérience pour le candidat : appuie-toi uniquement sur son CV.
+
+=== OFFRE ===
+${offer.value.trim().slice(0, 7000) || "(aucune offre collée)"}
+
+=== CV DU CANDIDAT ===
+${cv.value.trim().slice(0, 7000) || "(aucun CV fourni)"}`;
+}
+const PRESETS = {
+  contacts: "Qui dois-je contacter pour cette offre et comment ? Donne les profils clés à approcher, les liens de recherche pour les trouver, l'ordre d'approche et un message d'invitation LinkedIn.",
+  linkedin: "Rédige 2 versions d'un message d'invitation LinkedIn (≤ 300 caractères) et un message de suivi après acceptation, pour un analyst de l'équipe qui recrute.",
+  email: "Rédige un e-mail d'approche court (objet + corps, 120 mots max) à un membre de l'équipe ou au recruteur, en m'appuyant sur 2 éléments précis de mon CV liés à l'offre.",
+  fit: "Compare mon profil à l'offre : points forts à mettre en avant, lacunes et comment les compenser, mots-clés à reprendre, risque principal de refus.",
+  interview: "Prépare-moi à l'entretien : 8 questions techniques probables pour ce poste (avec les points clés de réponse), 5 questions fit/comportementales, et 3 questions intelligentes à poser à l'équipe.",
+  firm: "Explique-moi l'employeur et l'équipe : positionnement, deals ou investissements typiques, culture, ce qui le distingue de ses concurrents, et ce que je dois vérifier sur son site avant de postuler. Signale ce dont tu n'es pas sûr.",
+};
+
+// ---------- rendu Markdown minimal et sûr ----------
+function esc(s) { return s.replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
+function inline(s) {
+  return esc(s)
+    .replace(/\[([^\]]+)\]\((https:\/\/[^\s)]+)\)/g, (m, t, u) => `<a href="${u.replace(/"/g, "%22")}" target="_blank" rel="noopener">${t}</a>`)
+    .replace(/(^|[\s(])(https:\/\/[^\s<)]+)/g, (m, p, u) => `${p}<a href="${u}" target="_blank" rel="noopener">${u.length > 60 ? u.slice(0, 57) + "…" : u}</a>`)
+    .replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>").replace(/`([^`]+)`/g, "<code>$1</code>");
+}
+function md(text) {
+  const out = []; let list = null;
+  const close = () => { if (list) { out.push(`</${list}>`); list = null; } };
+  for (const raw of text.split("\n")) {
+    const l = raw.trimEnd();
+    let m;
+    if (!l.trim()) { close(); continue; }
+    if ((m = l.match(/^#{1,4}\s+(.*)/))) { close(); out.push(`<h4>${inline(m[1])}</h4>`); continue; }
+    if ((m = l.match(/^\s*[-*•]\s+(.*)/))) { if (list !== "ul") { close(); out.push("<ul>"); list = "ul"; } out.push(`<li>${inline(m[1])}</li>`); continue; }
+    if ((m = l.match(/^\s*\d+[.)]\s+(.*)/))) { if (list !== "ol") { close(); out.push("<ol>"); list = "ol"; } out.push(`<li>${inline(m[1])}</li>`); continue; }
+    if ((m = l.match(/^>\s?(.*)/))) { close(); out.push(`<blockquote>${inline(m[1])}</blockquote>`); continue; }
+    close(); out.push(`<p>${inline(l)}</p>`);
+  }
+  close(); return out.join("");
+}
+
+// ---------- conversation ----------
+const log = $("#log");
+function bubble(role, text) {
+  $("#emptyState")?.remove();
+  const el = document.createElement("div"); el.className = "msg " + (role === "user" ? "user" : "bot");
+  el.innerHTML = `<span class="who">${role === "user" ? "Toi" : "Claude"}</span><div class="body"></div>`;
+  const body = el.querySelector(".body");
+  if (role === "user") body.textContent = text; else body.innerHTML = text ? md(text) : `<span class="thinking">Réflexion…</span>`;
+  log.appendChild(el); log.scrollTop = log.scrollHeight; return el;
+}
+function addCopy(el, text) {
+  const t = document.createElement("div"); t.className = "tools";
+  const b = document.createElement("button"); b.type = "button"; b.textContent = "Copier la réponse";
+  b.onclick = async () => { try { await navigator.clipboard.writeText(text); b.textContent = "Copié ✔"; } catch { const r = document.createRange(); r.selectNodeContents(el.querySelector(".body")); getSelection().removeAllRanges(); getSelection().addRange(r); b.textContent = "Texte sélectionné : Ctrl/Cmd + C"; } };
+  t.appendChild(b); el.appendChild(t);
+}
+const ERR = { not_granted: "Tu n'as pas autorisé cette page à utiliser Claude. Recharge la page et accepte la demande pour l'utiliser.",
+  sampling_disabled: "Claude n'est pas disponible pour ce compte.", rate_limited: "Trop de demandes pour le moment : réessaie dans quelques minutes.",
+  session_expired: "Ta session claude.ai a expiré : reconnecte-toi puis réessaie.", prompt_too_large: "Le texte est trop long : raccourcis l'offre ou le CV.",
+  refused: "Claude n'a pas pu répondre à cette demande : reformule-la.", empty_completion: "Pas de réponse : reformule la question." };
+async function ask(question) {
+  if (busy || !question.trim()) return;
+  if (!sample) { $("#unavailable").hidden = false; return; }
+  busy = true; $("#send").disabled = true; $("#stop").hidden = false;
+  turns.push({ role: "user", content: question });
+  bubble("user", question);
+  const el = bubble("bot", ""), body = el.querySelector(".body");
+  ctl = new AbortController();
+  const history = turns.slice(-10);
+  if (history[0].role !== "user") history.shift();
+  const usesTools = /contact|qui |recrut|linkedin|réseau|reseau|approch|trouver/i.test(question);
+  try {
+    const opts = { signal: ctl.signal, onText: ({ text }) => { body.innerHTML = md(text); log.scrollTop = log.scrollHeight; } };
+    if (usesTools) opts.tools = tools; else opts.cache = false;
+    const { text, truncated } = await sample([{ role: "user", content: rules() }, ...history], opts);
+    body.innerHTML = md(text) + (truncated ? `<p class="hint">Réponse coupée : demande une partie à la fois.</p>` : "");
+    turns.push({ role: "assistant", content: text }); addCopy(el, text);
+  } catch (e) {
+    if (e && e.code === "tools_unavailable") { tools.length = 0; }
+    if (e && e.text) body.innerHTML = md(e.text) + `<p class="hint">Réponse interrompue.</p>`;
+    else if (e && e.code === "cancelled") body.innerHTML = `<span class="thinking">Arrêté.</span>`;
+    else body.innerHTML = `<p class="hint">${esc(ERR[e && e.code] || "Erreur de connexion : réessaie.")}</p>`;
+    if (e && (e.code === "not_granted" || e.code === "sampling_disabled")) { $("#unavailable").hidden = false; $("#unavailable").textContent = ERR[e.code]; }
+    turns.pop();
+  } finally { busy = false; $("#send").disabled = false; $("#stop").hidden = true; }
+}
+$("#chips").addEventListener("click", e => { const b = e.target.closest("[data-q]"); if (b) ask(PRESETS[b.dataset.q]); });
+$("#composer").addEventListener("submit", e => { e.preventDefault(); const v = $("#q").value; $("#q").value = ""; ask(v); });
+$("#q").addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); $("#composer").requestSubmit(); } });
+$("#stop").onclick = () => ctl && ctl.abort();
+
+// ---------- Claude ----------
+(async () => {
+  try { sample = window.claude ? await window.claude.use("sample") : null; } catch { sample = null; }
+  if (!sample) { $("#unavailable").hidden = false; return; }
+  try { const lim = await sample.limits(); if (!lim.tools) tools.length = 0; } catch {}
+})();
+})();
+</script>
