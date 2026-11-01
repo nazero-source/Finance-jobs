@@ -348,6 +348,13 @@
 "lon": -107.9917
 },
 "Canary Wharf, 1 Churchill Place, United Kingdom": null,
+"Casablanca, Morocco": {
+"cc": "MA",
+"city": "Casablanca",
+"country": "Morocco",
+"lat": 33.5945,
+"lon": -7.62
+},
 "Central London": {
 "cc": "GB",
 "city": "Greater London",
@@ -1286,6 +1293,13 @@
 "country": "Australia",
 "lat": -37.8142,
 "lon": 144.9632
+},
+"Mendota Heights, MN": {
+"cc": "US",
+"city": "Mendota Heights",
+"country": "United States",
+"lat": 44.8836,
+"lon": -93.1383
 },
 "Metro Manila, National Capital Region, Philippines": {
 "cc": "PH",
