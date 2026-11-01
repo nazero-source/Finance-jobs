@@ -158,7 +158,12 @@ def expired(title, today=None):
         if y < today.year:
             return mo is None or y < today.year - 1 or mo < today.month or True
         return y == today.year and mo is not None and mo < today.month
-    return all(past(y, mo) for y, mo in found)
+    if all(past(y, mo) for y, mo in found):
+        return True
+    # « 2026 Summer Analyst » lu en novembre 2026 : le stage d'été est passé
+    if re.search(r"\bsummer\b", title, re.I) and all(y == today.year for y, _ in found) and today.month >= 9:
+        return True
+    return False
 
 
 def classify(title, desc="", employer_type="bank", experience_hint=""):

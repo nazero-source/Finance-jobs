@@ -416,12 +416,16 @@ def teamtailor(name, etype, host):
 
 
 # ---------------- Jooble (agrégateur, clé gratuite : reprend Indeed, eFinancialCareers, etc.) ----------------
-JOOBLE_LOCATIONS = ["Paris", "London", "New York", "Frankfurt", "Madrid", "Milan", "Amsterdam", "Zurich", "Geneva",
-                    "Luxembourg", "Brussels", "Munich", "Dubai", "Riyadh", "Singapore", "Hong Kong", "Tokyo", "Sydney",
-                    "Toronto", "Chicago", "San Francisco", "Boston", "São Paulo", "Mexico City", "Mumbai", "Stockholm"]
-JOOBLE_TERMS = ["M&A analyst", "investment banking analyst", "investment banking intern", "private equity analyst",
-                "private equity intern", "infrastructure investment analyst", "project finance analyst",
-                "leveraged finance analyst", "stage fusions acquisitions", "corporate finance intern"]
+# La clé Jooble actuelle couvre les États-Unis (jooble.org) et a un quota limité (500 requêtes) :
+# ~16 requêtes ciblées par jour. Pour d'autres pays, il faut une clé par pays (fr.jooble.org, uk.jooble.org…).
+JOOBLE_QUERIES = [
+    ("investment banking analyst", "New York"), ("investment banking summer analyst", ""), ("M&A analyst", "New York"),
+    ("M&A analyst", ""), ("private equity analyst", "New York"), ("private equity analyst", ""),
+    ("private equity intern", ""), ("investment banking intern", ""), ("infrastructure investment analyst", ""),
+    ("project finance analyst", ""), ("leveraged finance analyst", ""), ("investment banking analyst", "Chicago"),
+    ("investment banking analyst", "San Francisco"), ("investment banking analyst", "Houston"),
+    ("M&A summer analyst 2027", ""), ("restructuring investment banking analyst", ""),
+]
 
 
 def jooble():
@@ -429,10 +433,9 @@ def jooble():
     if not key:
         return []
     out = []
-    for loc in JOOBLE_LOCATIONS:
-        for term in JOOBLE_TERMS:
+    for term, loc in JOOBLE_QUERIES:
             try:
-                d = http(f"https://jooble.org/api/{key}", {"keywords": term, "location": loc, "page": 1}, tries=2)
+                d = http(f"https://jooble.org/api/{key}", {"keywords": term, "location": loc, "page": 1}, tries=1)
             except Exception:
                 continue
             for j in d.get("jobs", []):
