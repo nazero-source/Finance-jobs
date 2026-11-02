@@ -555,38 +555,80 @@ async function unlockContacts(pass, remember) {
 $("#ctForm").addEventListener("submit", e => { e.preventDefault(); unlockContacts($("#ctPass").value, $("#ctRemember").checked); });
 $("#ctLockBtn").onclick = () => { try { localStorage.removeItem("fjr_ctpass"); } catch {} CT = null; $("#ctBody").hidden = true; $("#ctLock").hidden = false; $("#ctPass").value = ""; $("#ctMsg").textContent = "Liste verrouillée."; };
 document.addEventListener("fjr:tab", e => { if (e.detail === "contacts" && !CT) { let p = null; try { p = localStorage.getItem("fjr_ctpass"); } catch {} if (p) unlockContacts(p, true); } });
+let ctFirm = "", ctZone = "", ctSort = "junior";
+const CT_ZONES = [["", "Toutes"], ["France", "France"], ["UK", "UK"], ["Europe", "Europe"], ["Golfe", "Golfe"], ["Afrique", "Afrique"], ["DFI", "DFI"], ["Autres", "Autres"]];
+function ctMeta(name) {
+  const t = TARGETS.find(x => x.name === name) || TARGETS.find(x => x.name.split(" (")[0].toLowerCase() === name.split(" (")[0].toLowerCase());
+  const z = t?.zone || "", ty = t?.type || "";
+  const zone = /^DFI/.test(ty) ? "DFI" : /Dubaï|Abu Dhabi|Bahreïn|Riyad|Arabie|Qatar|Golfe/.test(z) ? "Golfe" : /Afrique|Maroc|Égypte|Nigeria|Kenya/.test(z) ? "Afrique"
+    : /^France/.test(z) ? "France" : /^UK/.test(z) ? "UK" : /Europe|Italie|Allemagne|Espagne|Belgique|Suisse|Pays-Bas|Danemark|Nordiques/.test(z) ? "Europe" : "Autres";
+  const jobs = S.data.jobs.filter(j => j.employer.toLowerCase().startsWith(name.split(" (")[0].toLowerCase().slice(0, 12))).length;
+  return { type: ty, zone: z, zkey: zone, url: t?.url || "", jobs };
+}
 function renderContacts() {
   if (!CT) return;
-  const q = norm($("#ctQ").value.trim());
-  const all = CT.firms.flatMap(f => f.people.map(p => ({ ...p, firm: f.firm, why: f.pattern_why, generic: f.generic })));
+  if (!TARGETS.length) { loadTargets(); setTimeout(renderContacts, 600); }
+  const q = norm($("#ctQ").value.trim()), fq = norm($("#ctFirmQ").value.trim());
+  const lvOk = p => !ctLevel || p.level === ctLevel;
+  const pMatch = p => !q || q.split(/\s+/).every(w => norm(`${p.name} ${p.title}`).includes(w));
+  const firms = CT.firms.filter(f => f.people.length).map(f => {
+    const m = ctMeta(f.firm), ppl = f.people.filter(pMatch);
+    const done = f.people.filter(p => ctDone[`${f.firm}|${p.name}`]).length;
+    return { f, m, ppl, n: ppl.filter(lvOk).length, jr: f.people.filter(p => p.level === "junior").length, rh: f.people.filter(p => p.level === "rh").length, done };
+  });
+  const zc = k => firms.filter(x => (!k || x.m.zkey === k) && x.n).length;
+  $("#ctZone").innerHTML = CT_ZONES.filter(([k]) => !k || zc(k)).map(([k, l]) => `<button class="${ctZone === k ? "on" : ""}" data-z="${k}">${l}<span class="n">${zc(k)}</span></button>`).join("");
+  let fl = firms.filter(x => x.n && (!ctZone || x.m.zkey === ctZone) && (!fq || norm(x.f.firm).includes(fq)));
+  const sorters = { junior: (a, b) => b.jr - a.jr || b.n - a.n, jobs: (a, b) => b.m.jobs - a.m.jobs || b.jr - a.jr, todo: (a, b) => (b.n - b.done) - (a.n - a.done), az: (a, b) => a.f.firm.localeCompare(b.f.firm) };
+  fl.sort(sorters[ctSort] || sorters.junior);
+  if (ctFirm && !fl.some(x => x.f.firm === ctFirm)) ctFirm = "";
+  const total = fl.reduce((a, x) => a + x.n, 0);
+  $("#ctFirmList").innerHTML = `<button class="ct-f ${ctFirm ? "" : "on"}" data-f=""><div class="logo">∑</div><div class="grow"><b>Toutes les entreprises</b><small>${fl.length} entreprises</small></div><span class="cnt">${total}</span></button>` +
+    fl.map(x => `<button class="ct-f ${ctFirm === x.f.firm ? "on" : ""}" data-f="${esc(x.f.firm)}">${logoHtml({ employer: x.f.firm, domain: x.f.domain })}
+      <div class="grow"><b>${esc(x.f.firm)}</b><small>${esc(x.m.type || "")}${x.m.type && x.m.zone ? " · " : ""}${esc(x.m.zone || "")}</small>
+      <span class="ct-badges">${x.jr ? `<i class="b-jr">${x.jr} junior${x.jr > 1 ? "s" : ""}</i>` : ""}${x.rh ? `<i class="b-rh">${x.rh} RH</i>` : ""}${x.m.jobs ? `<i class="b-job">${x.m.jobs} offre${x.m.jobs > 1 ? "s" : ""}</i>` : ""}${x.done ? `<i class="b-done">${x.done} contacté${x.done > 1 ? "s" : ""}</i>` : ""}</span></div>
+      <span class="cnt">${x.n}</span></button>`).join("") || `<p class="muted small" style="padding:.6rem">Aucune entreprise.</p>`;
+  // niveaux (comptés dans la sélection)
+  const scope = firms.filter(x => (!ctFirm || x.f.firm === ctFirm) && (!ctZone || ctFirm || x.m.zkey === ctZone) && (!fq || ctFirm || norm(x.f.firm).includes(fq)));
   const lv = { junior: "Analysts & associates", rh: "RH & recrutement", senior: "Seniors", "": "Tous" };
-  const base = all.filter(p => !q || q.split(/\s+/).every(w => norm(`${p.name} ${p.title} ${p.firm}`).includes(w)));
-  $("#ctLevel").innerHTML = Object.entries(lv).map(([k, l]) => `<button class="${ctLevel === k ? "on" : ""}" data-l="${k}">${l}<span class="n">${base.filter(p => !k || p.level === k).length}</span></button>`).join("");
-  const list = base.filter(p => !ctLevel || p.level === ctLevel);
-  $("#ctCount").textContent = `${all.length} personnes · ${CT.firms.filter(f => f.people.length).length} entreprises · mis à jour le ${new Date(CT.generated.replace("Z", ":00Z")).toLocaleDateString("fr-FR")}`;
+  $("#ctLevel").innerHTML = Object.entries(lv).map(([k, l]) => `<button class="${ctLevel === k ? "on" : ""}" data-l="${k}">${l}<span class="n">${scope.reduce((a, x) => a + x.ppl.filter(p => !k || p.level === k).length, 0)}</span></button>`).join("");
+  $("#ctCount").textContent = `${CT.firms.reduce((a, f) => a + f.people.length, 0)} personnes · ${firms.length} entreprises · mis à jour le ${new Date(CT.generated.replace("Z", ":00Z")).toLocaleDateString("fr-FR")}`;
+  // en-tête de l'entreprise choisie
+  const sel = ctFirm && firms.find(x => x.f.firm === ctFirm);
+  $("#ctFirmHead").innerHTML = sel ? `<div class="ct-head">${logoHtml({ employer: sel.f.firm, domain: sel.f.domain })}
+      <div class="grow"><h3>${esc(sel.f.firm)}</h3><small>${esc(sel.m.type)}${sel.m.zone ? " · " + esc(sel.m.zone) : ""}</small>
+      <div class="ct-fmt">Format d'e-mail : <code>${esc(sel.f.pattern || "?")}@${esc(sel.f.domain || "")}</code> <span class="conf ${/déduit/.test(sel.f.pattern_why || "") ? "ok" : "guess"}">${/déduit/.test(sel.f.pattern_why || "") ? "confirmé par le site" : "supposé"}</span>${sel.f.generic?.length ? ` · générique : ${sel.f.generic.map(g => `<a href="mailto:${esc(g)}">${esc(g)}</a>`).join(", ")}` : ""}</div></div>
+      <div class="ct-hacts">${sel.m.jobs ? `<button class="btn small accent" data-emp="${esc(sel.f.firm)}">${sel.m.jobs} offre${sel.m.jobs > 1 ? "s" : ""} junior${sel.m.jobs > 1 ? "s" : ""} →</button>` : ""}${sel.m.url ? `<a class="btn small ghost" href="${esc(sel.m.url)}" target="_blank" rel="noopener">Page carrière ↗</a>` : ""}
+      <a class="btn small ghost" href="https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(sel.f.firm + " analyst")}" target="_blank" rel="noopener">LinkedIn ↗</a></div></div>` : "";
+  // personnes
+  const list = scope.flatMap(x => x.ppl.filter(lvOk).map(p => ({ ...p, firm: x.f.firm, why: x.f.pattern_why })));
   let html = "", firm = "";
   list.slice(0, ctShown).forEach(p => {
-    if (p.firm !== firm) { firm = p.firm; html += `<div class="ctfirm">${esc(firm)}${p.generic?.length ? `<small>· ${esc(p.generic.join(", "))}</small>` : ""}</div>`; }
+    if (!ctFirm && p.firm !== firm) { firm = p.firm; html += `<button class="ctfirm" data-f="${esc(firm)}">${esc(firm)} <span>voir l'équipe →</span></button>`; }
     const id = `${p.firm}|${p.name}`, done = ctDone[id];
-    const sure = /déduit/.test(p.why || "");
     html += `<div class="ct ${done ? "done" : ""}" data-id="${esc(id)}">
-      <div><b>${esc(p.name)}</b><div class="ttl">${esc(p.title)}</div>
-        <div class="mail">${esc(p.email || "—")}<span class="conf ${sure ? "ok" : "guess"}" title="${esc(p.why || "")}">${sure ? "format confirmé" : "format supposé"}</span>${done ? ` · <span class="verified">contacté le ${fmtDate(done)}</span>` : ""}</div></div>
+      <div class="ct-who"><b>${esc(p.name)}</b><span class="lvl l-${p.level}">${{ junior: "Junior", rh: "RH", senior: "Senior" }[p.level] || ""}</span><div class="ttl">${esc(p.title)}</div></div>
+      <button class="ct-mail" data-ct="copy" title="Copier l'e-mail">${esc(p.email || "—")}<i>⧉</i></button>
       <div class="acts">
-        <a class="btn ghost small" target="_blank" rel="noopener" href="https://www.google.com/search?q=${encodeURIComponent(`"${p.name}" "${p.firm}" linkedin`)}">Vérifier ↗</a>
-        <button class="btn ghost small" data-ct="copy">Copier l'e-mail</button>
-        <button class="btn small" data-ct="claude">✦ E-mail par Claude</button>
-        <button class="btn ghost small" data-ct="done">${done ? "Annuler" : "Contacté ✓"}</button>
+        <a class="btn ghost small" target="_blank" rel="noopener" href="https://www.google.com/search?q=${encodeURIComponent(`"${p.name}" "${p.firm}" linkedin`)}" title="Vérifier sur Google / LinkedIn">Vérifier ↗</a>
+        <button class="btn small" data-ct="claude">✦ E-mail</button>
+        <button class="btn ghost small ${done ? "on" : ""}" data-ct="done" title="${done ? "Contacté le " + fmtDate(done) : "Marquer comme contacté"}">${done ? "✓ " + fmtDate(done).slice(0, 5) : "Contacté ?"}</button>
       </div></div>`;
   });
   $("#ctList").innerHTML = html || `<p class="empty">Aucun contact pour ces filtres.</p>`;
   $("#ctMore").hidden = list.length <= ctShown; $("#ctMore").textContent = `Afficher plus (${list.length - ctShown})`;
 }
+$("#ctFirmList").addEventListener("click", e => { const b = e.target.closest("[data-f]"); if (!b) return; ctFirm = b.dataset.f; ctShown = 60; renderContacts(); if (innerWidth < 900) $("#ctFirmHead").scrollIntoView({ behavior: "smooth", block: "start" }); });
+$("#ctZone").addEventListener("click", e => { const b = e.target.closest("[data-z]"); if (!b) return; ctZone = b.dataset.z; ctFirm = ""; ctShown = 60; renderContacts(); });
+$("#ctSort").onchange = e => { ctSort = e.target.value; renderContacts(); };
+let ctFT; $("#ctFirmQ").addEventListener("input", () => { clearTimeout(ctFT); ctFT = setTimeout(renderContacts, 120); });
+$("#ctFirmHead").addEventListener("click", e => { const b = e.target.closest("[data-emp]"); if (b) { setFilter("employer", b.dataset.emp); switchTab("list"); } });
+$("#ctList").addEventListener("click", e => { const b = e.target.closest(".ctfirm[data-f]"); if (b) { ctFirm = b.dataset.f; ctShown = 60; renderContacts(); scrollTo({ top: $("#ctBody").offsetTop - 80, behavior: "smooth" }); } });
 $("#ctMore").onclick = () => { ctShown += 60; renderContacts(); };
 let ctT; $("#ctQ").addEventListener("input", () => { clearTimeout(ctT); ctT = setTimeout(() => { ctShown = 60; renderContacts(); }, 150); });
 $("#ctLevel").onclick = e => { const b = e.target.closest("[data-l]"); if (b) { ctLevel = b.dataset.l; ctShown = 60; renderContacts(); } };
 $("#ctList").addEventListener("click", async e => {
-  const b = e.target.closest("[data-ct]"); if (!b) return;
+  const b = e.target.closest("[data-ct]"); if (!b || !b.closest(".ct")) return;
   const id = b.closest(".ct").dataset.id, [firm, name] = id.split("|");
   const p = CT.firms.find(f => f.firm === firm).people.find(x => x.name === name);
   if (b.dataset.ct === "copy") { navigator.clipboard?.writeText(p.email).then(() => toast("E-mail copié : " + p.email), () => toast(p.email)); }

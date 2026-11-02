@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=EB+Garamond:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="style.css?v=16">
+<link rel="stylesheet" href="style.css?v=18">
 <script>try{const t=localStorage.getItem("fjr_theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
 </head>
 <body>
@@ -223,14 +223,32 @@
       <p class="hint" id="ctMsg" style="margin:0"></p>
     </div>
     <div id="ctBody" hidden>
-      <div class="fb-row" style="margin-bottom:.7rem">
-        <label class="search" style="flex:1 1 260px"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="ctQ" type="search" placeholder="Entreprise, nom, fonction…" autocomplete="off"></label>
+      <div class="ct-top">
+        <label class="search" style="flex:1 1 280px"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="ctQ" type="search" placeholder="Chercher une personne, une fonction…" autocomplete="off"></label>
         <div class="seg" id="ctLevel"></div>
-        <button class="btn ghost small" id="ctLockBtn" title="Oublier la phrase secrète sur cet appareil">Verrouiller</button>
+        <button class="btn ghost small" id="ctLockBtn" title="Oublier la phrase secrète sur cet appareil">🔒 Verrouiller</button>
       </div>
-      <p class="hint">Les analysts et associates répondent le plus souvent : commence par eux. L'e-mail est <b>déduit</b> du format de l'entreprise, donc vérifie-le (lien « Vérifier ») avant d'écrire. Envoie depuis ta propre boîte et reste à quelques messages personnalisés par jour.</p>
-      <div id="ctList" class="ctlist"></div>
-      <button id="ctMore" class="btn ghost wide" hidden>Afficher plus</button>
+      <div class="ct-layout">
+        <aside class="ct-firms">
+          <div class="ct-fhead">
+            <input id="ctFirmQ" type="search" placeholder="Filtrer les entreprises…" autocomplete="off">
+            <select id="ctSort" aria-label="Trier les entreprises">
+              <option value="junior">Le plus d'analysts / associates</option>
+              <option value="jobs">Offres ouvertes en ce moment</option>
+              <option value="todo">Le plus de personnes à contacter</option>
+              <option value="az">Ordre alphabétique</option>
+            </select>
+            <div class="ct-zones" id="ctZone"></div>
+          </div>
+          <div id="ctFirmList" class="ct-flist"></div>
+        </aside>
+        <section class="ct-main">
+          <div id="ctFirmHead"></div>
+          <div id="ctList" class="ctlist"></div>
+          <button id="ctMore" class="btn ghost wide" hidden>Afficher plus</button>
+          <p class="hint" style="margin-top:1rem">Les analysts et associates répondent le plus souvent : commence par eux. L'e-mail est <b>déduit</b> du format de l'entreprise : vérifie-le avant d'écrire, envoie depuis ta propre boîte, et reste à quelques messages personnalisés par jour.</p>
+        </section>
+      </div>
     </div>
   </section>
 
@@ -282,12 +300,12 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="keywords.js?v=16"></script>
-<script src="app.js?v=17"></script>
-<script src="map.js?v=16"></script>
-<script src="studio.js?v=16"></script>
-<script src="home.js?v=16"></script>
-<script src="ui.js?v=16"></script>
+<script src="keywords.js?v=18"></script>
+<script src="app.js?v=18"></script>
+<script src="map.js?v=18"></script>
+<script src="studio.js?v=18"></script>
+<script src="home.js?v=18"></script>
+<script src="ui.js?v=18"></script>
 <!-- Mesure d'audience GoatCounter : sans cookies, aucune donnée personnelle -->
 <script data-goatcounter="https://financejobsradar.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
