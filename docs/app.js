@@ -70,7 +70,7 @@ fetch("data/jobs.json", { cache: "no-cache" }).then(r => r.json()).then(d => {
   $("#meta").textContent = `${d.jobs.length} offres juniors · mis à jour le ${gen.toLocaleDateString("fr-FR")} à ${gen.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })}`;
   buildFilters(); restoreFilters(); apply(); renderBoard(); renderAbout(); loadTargets();
   document.dispatchEvent(new CustomEvent("fjr:data"));
-  const hash = location.hash.slice(1); if (["list", "map", "apply", "targets", "contacts", "track", "about"].includes(hash)) switchTab(hash);
+  const hash = location.hash.slice(1); if (["home", "list", "map", "apply", "targets", "contacts", "track", "about"].includes(hash)) switchTab(hash);
 }).catch(e => { $("#list").innerHTML = `<p class="empty">Impossible de charger les offres (${esc(e.message)}).</p>`; });
 
 // ---------------------------------------------------------------- filtres
@@ -425,11 +425,12 @@ function loadTargets() {
   fetch("data/targets.json", { cache: "no-cache" }).then(r => r.ok ? r.json() : []).then(t => { TARGETS = t; renderTargets(); }).catch(() => {});
 }
 function renderTargets() {
-  const zones = ["France", "UK", "Dubaï", "Afrique", "DFI"];
-  const inT = (t, z) => !z || (z === "DFI" ? /^DFI/.test(t.type) : z === "Dubaï" ? /Dubaï|Abu Dhabi|Bahreïn/.test(t.zone) : t.zone.includes(z));
+  const zones = ["France", "UK", "Europe", "Dubaï", "Afrique", "DFI"];
+  const inT = (t, z) => !z || (z === "DFI" ? /^DFI/.test(t.type) : z === "Dubaï" ? /Dubaï|Abu Dhabi|Bahreïn|Riyad|Arabie|Qatar|Golfe/.test(t.zone)
+    : z === "Afrique" ? /Afrique|Maroc|Égypte|Nigeria|Kenya/.test(t.zone) : z === "Europe" ? /Europe|Italie|Allemagne|Espagne|Belgique|Suisse|Pays-Bas|Nordiques/.test(t.zone) : t.zone.includes(z));
   const zc = z => TARGETS.filter(t => inT(t, z)).length;
   $("#targetZone").innerHTML = `<button class="${tZone ? "" : "on"}" data-z="">Toutes<span class="n">${TARGETS.length}</span></button>` +
-    zones.map(z => `<button class="${tZone === z ? "on" : ""}" data-z="${z}">${z === "DFI" ? "Institutions de développement" : z}<span class="n">${zc(z)}</span></button>`).join("");
+    zones.map(z => `<button class="${tZone === z ? "on" : ""}" data-z="${z}">${z === "DFI" ? "Institutions de développement" : z === "Dubaï" ? "Golfe" : z}<span class="n">${zc(z)}</span></button>`).join("");
   const list = TARGETS.filter(t => inT(t, tZone))
     .sort((a, b) => b.jobs - a.jobs || (b.auto - a.auto) || a.name.localeCompare(b.name));
   $("#targetsCount").textContent = `${list.length} employeurs · ${list.filter(t => t.jobs).length} avec des offres juniors en ce moment`;
@@ -589,4 +590,5 @@ function renderAbout() {
     $("#about").onclick = e => { const r = e.target.closest("[data-emp]"); if (r) { setFilter("employer", r.dataset.emp); switchTab("list"); } };
   }).catch(() => {});
 }
+
 })();

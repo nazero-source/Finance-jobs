@@ -8,19 +8,20 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230f172a'/><circle cx='16' cy='16' r='8' fill='none' stroke='white' stroke-width='2.5'/><circle cx='16' cy='16' r='2.5' fill='%237c9cff'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=EB+Garamond:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="style.css?v=12">
+<link rel="stylesheet" href="style.css?v=13">
 <script>try{const t=localStorage.getItem("fjr_theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
 </head>
 <body>
 <header class="topbar">
-  <a class="brand" href="#" data-tab="list">
+  <a class="brand" href="#" data-tab="home">
     <span class="logo-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="8" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="16" cy="16" r="2.5" fill="currentColor"/></svg></span>
     <span><b>Finance Jobs Radar</b><small id="meta">Chargement…</small></span>
   </a>
   <nav class="tabs" role="tablist" aria-label="Sections">
-    <button role="tab" data-tab="list" class="active"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>Offres</span></button>
+    <button role="tab" data-tab="home" class="active"><svg viewBox="0 0 24 24"><path d="M3 11 12 4l9 7M5 10v10h14V10"/></svg><span>Accueil</span></button>
+    <button role="tab" data-tab="list"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>Offres</span></button>
     <button role="tab" data-tab="map"><svg viewBox="0 0 24 24"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/></svg><span>Carte</span></button>
     <button role="tab" data-tab="apply"><svg viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9zM14 3v6h6M8 13h8M8 17h5"/></svg><span>Candidature</span></button>
     <button role="tab" data-tab="targets"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg><span>Infra & énergie</span></button>
@@ -32,7 +33,7 @@
 </header>
 
 <!-- Barre de filtres partagée (Offres + Carte) -->
-<section id="filterbar" class="filterbar">
+<section id="filterbar" class="filterbar hidden">
   <div class="fb-row">
     <label class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       <input id="q" type="search" placeholder="Poste, banque, fonds, ville…" aria-label="Rechercher" autocomplete="off"></label>
@@ -54,8 +55,62 @@
 </section>
 
 <main>
+  <!-- ACCUEIL -->
+  <section id="tab-home" class="tab active">
+    <div class="hero">
+      <div class="hero-in">
+        <div>
+          <span class="eyebrow"><span class="live-dot"></span><span id="hEyebrow">Radar mis à jour chaque matin</span></span>
+          <h1>Toutes les offres <em>juniors en finance</em>, du monde entier, au même endroit.</h1>
+          <p class="lead">Stages, VIE, graduate programmes et Analyst 1 en M&amp;A, banque d'investissement, private equity, infrastructure et project finance, lus directement sur les sites carrière des banques, boutiques, fonds et institutions de développement (<span id="hSources">des centaines de</span> sources suivies).</p>
+          <div class="ctas">
+            <button class="btn accent" data-go="list">Voir les offres →</button>
+            <button class="btn ghost" data-go="map">Explorer la carte</button>
+            <button class="btn ghost" data-go="apply">Préparer ma candidature</button>
+          </div>
+          <div class="stats">
+            <div class="stat"><b data-count="jobs">0</b><span>offres juniors</span></div>
+            <div class="stat"><b data-count="employers">0</b><span>employeurs</span></div>
+            <div class="stat"><b data-count="countries">0</b><span>pays</span></div>
+            <div class="stat"><b data-count="fresh">0</b><span>publiées ces 7 derniers jours</span></div>
+          </div>
+        </div>
+        <div class="radar-wrap" aria-hidden="true">
+          <canvas id="radar"></canvas>
+          <div class="floaters" id="floaters"></div>
+        </div>
+      </div>
+      <div class="ticker" aria-label="Dernières offres"><div class="ticker-track" id="ticker"></div></div>
+    </div>
+
+    <div class="home-body">
+      <div class="sec-head"><span class="eyebrow-l">En 30 secondes</span><h2>Ce que le site fait pour toi</h2><p>De la découverte de l'offre à l'e-mail envoyé au bon contact, tout se passe ici.</p></div>
+      <div class="demo" id="demo">
+        <div class="demo-steps" id="demoSteps"></div>
+        <div class="demo-screen"><div class="chrome"><i></i><i></i><i></i></div><div id="demoImgs"></div></div>
+      </div>
+
+      <div class="sec-head"><h2>Les outils</h2></div>
+      <div class="feat-grid">
+        <button class="feat" data-go="list"><span class="ico">⌕</span><b>Offres filtrées</b><span>Seulement des postes juniors, triés par métier, zone, date, salaire ou score de match avec ton CV.</span><span class="go">Ouvrir →</span></button>
+        <button class="feat" data-go="map"><span class="ico">◎</span><b>Carte du monde</b><span>Où recrutent les banques et les fonds, pays par pays, ville par ville.</span><span class="go">Ouvrir →</span></button>
+        <button class="feat" data-go="apply"><span class="ico">✎</span><b>CV et lettre</b><span>Importe ton CV en PDF, exporte-le en Word ou PDF sur une page, et génère une lettre sur mesure avec Claude.</span><span class="go">Ouvrir →</span></button>
+        <button class="feat" data-go="targets"><span class="ico">⚡</span><b>Infra et énergie</b><span>Les boutiques, fonds infra et institutions de développement à suivre, avec leurs offres en cours.</span><span class="go">Ouvrir →</span></button>
+        <button class="feat" data-go="contacts"><span class="ico">✉</span><b>Contacts clés</b><span>Les équipes publiées par chaque firme, le format d'e-mail déduit, et un brouillon Gmail en un clic.</span><span class="go">Ouvrir →</span></button>
+        <button class="feat" data-go="track"><span class="ico">▤</span><b>Suivi</b><span>Un tableau de suivi de tes candidatures : à postuler, envoyée, entretien, offre.</span><span class="go">Ouvrir →</span></button>
+      </div>
+
+      <div class="sec-head"><h2>Comment ça marche</h2></div>
+      <div class="steps3">
+        <div class="st3"><span class="num">01</span><b>Chaque matin, le radar tourne</b><span>Un robot lit les sites carrière de centaines d'employeurs et garde uniquement les postes juniors encore ouverts.</span></div>
+        <div class="st3"><span class="num">02</span><b>Tu filtres et tu compares</b><span>Métier, pays, salaire estimé, score de match avec ton CV : tu repères vite les offres qui valent le coup.</span></div>
+        <div class="st3"><span class="num">03</span><b>Tu postules mieux</b><span>Lettre personnalisée, e-mail au bon contact, suivi de candidature : tout reste dans ton navigateur.</span></div>
+      </div>
+    </div>
+  </section>
+
   <!-- OFFRES -->
-  <section id="tab-list" class="tab active">
+  <section id="tab-list" class="tab">
     <div class="kpis" id="kpis"></div>
     <div class="list-head"><h2 id="listTitle">Offres</h2><span class="muted" id="count"></span></div>
     <div id="list" class="list"></div>
@@ -216,10 +271,11 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="keywords.js?v=12"></script>
-<script src="app.js?v=12"></script>
-<script src="map.js?v=12"></script>
-<script src="studio.js?v=12"></script>
+<script src="keywords.js?v=13"></script>
+<script src="app.js?v=13"></script>
+<script src="map.js?v=13"></script>
+<script src="studio.js?v=13"></script>
+<script src="home.js?v=13"></script>
 <!-- Mesure d'audience GoatCounter : sans cookies, aucune donnée personnelle -->
 <script data-goatcounter="https://financejobsradar.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
