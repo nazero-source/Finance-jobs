@@ -52,7 +52,7 @@ function setTarget(j) {
   $("#l_cat").innerHTML = CAT_ORDER.map(c => `<option value="${c}" ${c === j.category ? "selected" : ""}>${esc(CAT[c])}</option>`).join("");
   $("#l_role").value = cleanRole(j.title); $("#l_city").value = j.city || ""; $("#l_hook").value = "";
   $("#newsLink").href = `https://news.google.com/search?q=${encodeURIComponent(j.employer)}`;
-  ["#matchCard", "#cvControls", "#letterControls", "#claudeCard"].forEach(s => $(s).hidden = false);
+  ["#matchCard", "#letterControls", "#claudeCard"].forEach(s => $(s).hidden = false);
   renderAll();
 }
 function cleanRole(t) {
@@ -96,54 +96,194 @@ function renderCv() {
   const P = profile, c = P.cvData, el = $("#paperCv");
   const has = c.sections.some(s => (s.items || []).length || (s.lines || []).some(l => l.text));
   if (!has) { el.innerHTML = `<div style="font-family:var(--font);color:#555;padding:20mm 0;text-align:center"><b style="font-size:13pt">Ton CV apparaîtra ici</b><p>Clique sur <b>📄 Importer mon CV (PDF)</b> à gauche,<br>ou remplis les sections dans « Modifier mon profil ».</p></div>`; return; }
-  const reorder = $("#cvReorder").checked && target;
+  const edit = $("#cvEdit").checked;
+  const reorder = !edit && $("#cvReorder").checked && target;
+  const E = (path, text, cls = "") => edit ? `<span class="ed ${cls}" contenteditable="plaintext-only" spellcheck="true" data-e="${path}">${esc(text || "")}</span>` : (cls ? `<span class="${cls}">${hl(text || "")}</span>` : hl(text || ""));
   const contact = [P.phone, P.email, P.linkedin].filter(Boolean).join(" | ");
-  let html = `<h1 class="cv-name">${esc(P.name || "")}</h1><div class="cv-contact">${esc(contact)}</div>`;
+  let html = `<h1 class="cv-name">${E("name", P.name)}</h1><div class="cv-contact">${esc(contact)}</div>`;
   c.sections.forEach((s, si) => {
-    html += `<section class="cv-sec"><h4>${esc(s.title)}</h4>`;
+    html += `<section class="cv-sec"><h4>${E(`${si}.title`, s.title)}</h4>`;
     (s.items || []).forEach((it, ii) => {
+      const p = `${si}.${ii}`;
       let bl = (it.bullets || []).map((b, bi) => ({ b, bi, sc: target ? score(b) : 0 }));
       if (reorder) bl = bl.slice().sort((a, b) => b.sc - a.sc || a.bi - b.bi);
-      html += `<div class="cv-item"><div class="cv-dates">${esc(it.dates || "")}${it.duration ? `<small>${esc(it.duration)}</small>` : ""}</div><div>
-        <div class="cv-head"><span><b>${esc(it.org || "")}</b>${it.orgDesc ? `<span class="org-d"> - ${esc(it.orgDesc)}</span>` : ""}</span><span class="cv-loc">${esc(it.location || "")}</span></div>
-        ${it.role ? `<div class="cv-role">${esc(it.role)}</div>` : ""}
-        ${bl.length ? `<ul class="cv-bul">${bl.map(x => { const k = `${si}.${ii}.${x.bi}`; return `<li data-k="${k}" class="${cvOff.has(k) ? "off" : ""} ${reorder && x.sc >= 1 ? "rel" : ""}" title="Cliquer pour masquer / afficher">${hl(x.b)}</li>`; }).join("")}</ul>` : ""}
+      if (!edit) bl = bl.filter(x => x.b);
+      html += `<div class="cv-item"><div class="cv-dates">${E(p + ".dates", it.dates)}${it.duration || edit ? `<small>${E(p + ".duration", it.duration)}</small>` : ""}</div><div>
+        <div class="cv-head"><span><b>${E(p + ".org", it.org)}</b>${it.orgDesc || edit ? `<span class="org-d"> - ${E(p + ".orgDesc", it.orgDesc)}</span>` : ""}</span><span class="cv-loc">${E(p + ".location", it.location)}</span></div>
+        ${it.role || edit ? `<div class="cv-role">${E(p + ".role", it.role)}</div>` : ""}
+        ${bl.length ? `<ul class="cv-bul">${bl.map(x => { const k = `${si}.${ii}.${x.bi}`;
+          return edit ? `<li class="ed" contenteditable="plaintext-only" spellcheck="true" data-e="${p}.b.${x.bi}">${esc(x.b)}</li>`
+            : `<li data-k="${k}" class="${cvOff.has(k) ? "off" : ""} ${reorder && x.sc >= 1 ? "rel" : ""}" title="Cliquer pour masquer / afficher">${hl(x.b)}</li>`; }).join("")}</ul>`
+          : edit ? `<ul class="cv-bul"><li class="ed" contenteditable="plaintext-only" data-e="${p}.b.0"></li></ul>` : ""}
       </div></div>`;
     });
-    (s.lines || []).filter(l => l.text).forEach(l => {
+    (s.lines || []).filter(l => l.text || edit).forEach(l => {
+      const li = s.lines.indexOf(l);
       let txt = l.text;
       if (reorder && /technical|skills|tools/i.test(l.label)) {
         const parts = txt.split(/,\s*/); txt = parts.map((p, i) => ({ p, i, s: score(p) })).sort((a, b) => b.s - a.s || a.i - b.i).map(x => x.p).join(", ");
       }
-      html += `<div class="cv-skill"><b>${esc(l.label)}</b><span>${hl(txt)}</span></div>`;
+      html += `<div class="cv-skill"><b>${E(`${si}.l.${li}.label`, l.label)}</b><span>${E(`${si}.l.${li}.text`, txt)}</span></div>`;
     });
     html += `</section>`;
   });
   el.innerHTML = html;
-  el.classList.toggle("nohl", !$("#cvHighlight").checked);
+  el.classList.toggle("nohl", !$("#cvHighlight").checked || edit);
+  el.classList.toggle("editing", edit);
   fitCv();
 }
-$("#paperCv").addEventListener("click", e => { const li = e.target.closest("li[data-k]"); if (!li) return; const k = li.dataset.k; cvOff.has(k) ? cvOff.delete(k) : cvOff.add(k); li.classList.toggle("off"); });
+// ---- édition directe sur la feuille
+function setPath(path, val) {
+  const c = profile.cvData, k = path.split(".");
+  if (k[0] === "name") { profile.name = val; return; }
+  const sec = c.sections[+k[0]];
+  if (k[1] === "title") sec.title = val;
+  else if (k[1] === "l") sec.lines[+k[2]][k[3]] = val;
+  else { const it = sec.items[+k[1]]; if (k[2] === "b") { it.bullets = it.bullets || []; it.bullets[+k[3]] = val; } else it[k[2]] = val; }
+}
+$("#paperCv").addEventListener("input", e => {
+  const t = e.target.closest("[data-e]"); if (!t) return;
+  setPath(t.dataset.e, t.textContent.replace(/\s+/g, " ").trim());
+  clearTimeout(renderCv._s); renderCv._s = setTimeout(() => { save(); fitCv(); }, 350);
+});
+$("#paperCv").addEventListener("keydown", e => {
+  const t = e.target.closest("[data-e]"); if (!t) return;
+  const k = t.dataset.e.split(".");
+  if (e.key === "Enter") {
+    e.preventDefault();
+    if (k[2] !== "b") { t.blur(); return; }                 // Entrée dans une puce = nouvelle puce
+    const it = profile.cvData.sections[+k[0]].items[+k[1]]; const bi = +k[3];
+    it.bullets = (it.bullets || []).filter((b, i) => b || i === bi); it.bullets.splice(bi + 1, 0, "");
+    save(); renderCv(); $(`#paperCv [data-e="${k[0]}.${k[1]}.b.${bi + 1}"]`)?.focus();
+  } else if (e.key === "Backspace" && k[2] === "b" && !t.textContent) {
+    e.preventDefault();
+    const it = profile.cvData.sections[+k[0]].items[+k[1]]; const bi = +k[3];
+    it.bullets.splice(bi, 1); save(); renderCv();
+    const prev = $(`#paperCv [data-e="${k[0]}.${k[1]}.b.${Math.max(0, bi - 1)}"]`);
+    if (prev) { prev.focus(); getSelection().selectAllChildren(prev); getSelection().collapseToEnd(); }
+  }
+});
+$("#paperCv").addEventListener("focusout", () => save());
+$("#cvEdit").addEventListener("change", () => {
+  $("#cvHint").textContent = $("#cvEdit").checked ? "Clique sur n'importe quel texte du CV pour le corriger. Entrée = nouvelle puce, Retour arrière sur une puce vide = la supprimer. Tout est enregistré dans ton navigateur."
+    : "Clique sur une puce de l'aperçu pour la masquer ou l'afficher. Le point vert signale les puces liées à l'offre.";
+  if (!$("#cvEdit").checked) { profile.cvData.sections.forEach(s => (s.items || []).forEach(it => it.bullets && (it.bullets = it.bullets.filter(Boolean)))); save(); }
+  renderCv(); if (!$("#cvEdit").checked) { analyse(); renderLetter(); }
+});
+$("#paperCv").addEventListener("click", e => { if ($("#cvEdit").checked) return; const li = e.target.closest("li[data-k]"); if (!li) return; const k = li.dataset.k; cvOff.has(k) ? cvOff.delete(k) : cvOff.add(k); li.classList.toggle("off"); });
 ["#cvReorder", "#cvHighlight"].forEach(s => $(s).addEventListener("change", renderCv));
 
 // ---------------------------------------------------------------- lettre
 function fill(s, v) { return s.replace(/\{(\w+)\}/g, (m, k) => v[k] ?? m); }
+const custom = k => { const b = (profile.blocks[k] || "").trim(); return b && b !== (DEFAULT_BLOCKS[k] || "").trim() ? b : ""; };
+const ACR = /^(?:[A-Z0-9&]{2,5}|BNP|EY|PwC|KPMG|LCA|AXA|SA|SAS|LLP|LLC|UK|US|EU|PE|M&A)$/;
+function tidyOrg(o) {
+  o = (o || "").trim();
+  if (o && o === o.toUpperCase() && /[A-Z]{3}/.test(o)) o = o.split(/\s+/).map(w => ACR.test(w) && w.length <= 3 ? w : w.charAt(0) + w.slice(1).toLowerCase()).join(" ");
+  return o;
+}
+const tidyPlace = l => (l || "").split(",")[0].trim().replace(/\b([A-ZÀ-Ý])([A-ZÀ-Ý]+)\b/g, (m, a, b) => a + b.toLowerCase());
+const art = w => /^[aeiouAEIOU]/.test(w) && !/^(?:uni|eur|one)/i.test(w) ? "an" : "a";
+const lcFirst = t => /^[A-Z][a-z]/.test(t) ? t.charAt(0).toLowerCase() + t.slice(1) : t;
+const listJoin = a => a.length < 2 ? (a[0] || "") : a.slice(0, -1).join(", ") + " and " + a[a.length - 1];
+const MONTHS = { jan: "January", feb: "February", mar: "March", apr: "April", may: "May", jun: "June", jul: "July", aug: "August", sep: "September", oct: "October", nov: "November", dec: "December",
+  janv: "January", fev: "February", févr: "February", avr: "April", mai: "May", juin: "June", juil: "July", août: "August", aout: "August", déc: "December" };
+function parseDate(t) {   // "Sep 26", "Sept 2026", "09/2026", "2026"
+  t = (t || "").trim().toLowerCase(); let m;
+  if ((m = t.match(/^([a-zéû]+)\.?\s*'?(\d{2,4})/))) { const mo = MONTHS[m[1].slice(0, 4)] || MONTHS[m[1].slice(0, 3)]; let y = +m[2]; if (y < 100) y += 2000; return mo ? { label: `${mo} ${y}`, t: new Date(`${mo} 1, ${y}`).getTime() } : null; }
+  if ((m = t.match(/^(\d{1,2})\/(\d{2,4})/))) { let y = +m[2]; if (y < 100) y += 2000; const d = new Date(y, +m[1] - 1, 1); return { label: d.toLocaleDateString("en-GB", { month: "long", year: "numeric" }), t: d.getTime() }; }
+  if ((m = t.match(/^((?:19|20)\d{2})/))) return { label: m[1], t: new Date(+m[1], 0, 1).getTime() };
+  return null;
+}
+function expItems() {
+  const sec = profile.cvData.sections.find(x => /experience|expérience|professional/i.test(x.title)) || profile.cvData.sections.find(x => (x.items || []).length);
+  return (sec?.items || []).filter(it => it.org || it.role).map(it => {
+    const [a, b] = (it.dates || "").split(/\s*[-–—]\s*|\s+to\s+/i);
+    const start = parseDate(a), end = /present|today|now|current|aujourd/i.test(b || "") ? { t: Infinity } : parseDate(b);
+    return { ...it, start, current: !!end && end.t > Date.now(), sc: score([it.org, it.orgDesc, it.role, ...(it.bullets || [])].join(" ")) };
+  });
+}
+function expPara(it, nth) {
+  const org = tidyOrg(it.org), city = tidyPlace(it.location);
+  const desc = it.orgDesc ? `, ${art(it.orgDesc)} ${lcFirst(it.orgDesc.trim())}` : "";
+  const role = (it.role || "").trim();
+  const bl = (it.bullets || []).map((b, i) => ({ b: b.trim().replace(/[.;]+$/, ""), i, s: score(b) })).sort((a, b) => b.s - a.s || a.i - b.i).slice(0, 3).sort((a, b) => a.i - b.i).map(x => lcFirst(x.b));
+  const did = bl.length ? ` I ${bl[0]}.${bl.length > 1 ? ` I also ${listJoin(bl.slice(1))}.` : ""}` : "";
+  if (it.current && it.start) return `Since ${it.start.label}, I have been working as ${role ? `${art(role)} ${role}` : "an intern"} at ${org}${desc}${city ? `, in ${city}` : ""}.${did}`;
+  const lead = nth === 0 ? "At" : "Before that, at";
+  return `${lead} ${org}${desc}${city ? ` in ${city}` : ""}, I worked as ${role ? `${art(role)} ${role}` : "an intern"}.${did}`;
+}
+const DOMAIN_RE = [["project finance", /project finance/i], ["private equity", /private equity|lbo|buy-?out/i], ["infrastructure investment", /infra/i],
+  ["M&A advisory", /m&a|merger|advisory|transaction/i], ["investment banking", /investment bank/i], ["corporate finance", /corporate finance/i],
+  ["consulting", /consult/i], ["asset management", /asset management/i], ["debt finance", /debt|credit|lev(?:erage)?d? fin/i]];
+const PH = t => `⟦${t}⟧`;   // passage à compléter (surligné à l'écran)
+function autoLetter(v, cat) {
+  const ex = expItems(), cur = ex.find(e => e.current);
+  const ranked = ex.slice().sort((a, b) => b.sc - a.sc || (b.start?.t || 0) - (a.start?.t || 0));
+  const top = [], seen = new Set();
+  if (cur) { top.push(cur); seen.add(cur); }
+  for (const e of ranked) if (top.length < 2 && !seen.has(e)) { top.push(e); seen.add(e); }
+  top.sort((a, b) => (b.current - a.current) || (b.start?.t || 0) - (a.start?.t || 0));
+  const allTxt = ex.map(e => [e.org, e.orgDesc, e.role].join(" ")).join(" ");
+  const domains = DOMAIN_RE.filter(([, re]) => re.test(allTxt)).map(([d]) => d).slice(0, 4);
+  const nInt = ex.filter(e => /intern|stagiaire|analyst|assistant/i.test(e.role || "")).length || ex.length;
+  const NUM = ["", "one", "two", "three", "four", "five", "six"];
+  const intro = `I would like to join the ${v.team} team at ${v.company}${v.city ? ` in ${v.city}` : ""} as ${v.role ? art(v.role) + " " + v.role : "an intern"}` +
+    (ex.length ? `, building on ${NUM[nInt] || nInt} ${nInt > 1 ? "internships" : "internship"}${domains.length ? ` across ${listJoin(domains)}` : ""}.` : ".");
+  const why = v.hookRaw ? `${v.hookRaw.replace(/\s*$/, "")} ${PH(`Explain in one or two sentences why this makes you want to join ${v.company}.`)}`
+    : `What draws me to ${v.company} is ${PH(`a specific reason: a recent deal, a fund, the team's strategy or a sector focus`)}.`;
+  const matched = offerKw.filter(([, re]) => kwRe(re).test(cvText())).map(([l]) => /^[A-Z]{2,}|^M&A|Excel|PowerPoint/.test(l) ? l : l.toLowerCase()).slice(0, 3);
+  const fit = matched.length ? ` The role's focus on ${listJoin(matched)} matches the work I have done so far.` : "";
+  const skills = (profile.cvData.sections.flatMap(s => s.lines || []).find(l => /technical|skills|outils|compétences/i.test(l.label))?.text || "").split(/,\s*/).filter(Boolean).slice(0, 4);
+  const langs = profile.cvData.sections.flatMap(s => s.lines || []).find(l => /language|langue/i.test(l.label))?.text || "";
+  const av = profile.available ? new Date(profile.available + "-01T12:00:00").toLocaleDateString("en-GB", { month: "long", year: "numeric" }) : "";
+  const bring = `I would bring ${skills.length ? `a solid command of ${listJoin(skills)}` : "solid modelling and analytical skills"}${langs ? `, and I speak ${langs.replace(/\s*\|\s*/g, ", ")}` : ""}.` +
+    (av ? ` I am available from ${av}.` : "");
+  const close = `I would welcome the opportunity to discuss how I could contribute to the ${v.team} team at ${v.company}.\n\nYours sincerely,\n\n${v.name}`;
+  const body = [intro, ...top.map((e, i) => expPara(e, i)), why + fit, bring + " " + close];
+  return body;
+}
 function letterText() {
   const b = profile.blocks, cat = $("#l_cat").value || target?.category || "ma";
   const hook = $("#l_hook").value.trim();
   const v = { company: target?.employer || "", role: $("#l_role").value, city: $("#l_city").value, team: TEAM[cat],
-    hook: hook ? hook.replace(/\s*$/, " ") : "", name: profile.name || "" };
+    hook: hook ? hook.replace(/\s*$/, " ") : "", hookRaw: hook, name: profile.name || "" };
   const date = new Date().toLocaleDateString("en-GB", { month: "long", year: "numeric" });
-  const header = [profile.name, profile.city, "", `${v.company}${v.city ? ", " + v.city : ""}`, "", `${profile.city ? profile.city + ", " : ""}${date}`, "", `Re: ${v.role}`, ""].join("\n");
-  const body = [b.intro, b[cat] || b.ib || b.ma, b.experience, b.closing].filter(x => x && x.trim()).map(x => fill(x, v).trim()).join("\n\n");
-  return (header + "\n" + body).replace(/\n{3,}/g, "\n\n").trim();
+  const header = [profile.name, profile.city, "", `${v.company}${v.city ? ", " + v.city : ""}`, "", `${profile.city ? profile.city + ", " : ""}${date}`, "", `Re: ${v.role}`, "", "Dear Hiring Team,", ""].join("\n");
+  let paras;
+  const hasModel = custom("intro") || custom(cat) || custom("experience") || custom("closing") || CAT_ORDER.some(c => custom(c));
+  if (hasModel) {
+    // ta lettre modèle (ou tes paragraphes) + ce qui est propre à l'offre
+    const auto = autoLetter(v, cat);
+    const intro = (custom("intro") || DEFAULT_BLOCKS.intro).replace(/^Dear[^\n]*\n+/i, "");
+    const mid = [custom(cat), custom("experience")].filter(Boolean);
+    const bodyExp = mid.length ? mid : auto.slice(1, -2);
+    const hookSlot = intro.includes("{hook}");
+    const why = hookSlot ? "" : auto[auto.length - 2];
+    const hook = hookSlot ? (v.hookRaw ? v.hook : PH(`One sentence on a recent deal, fund or news of ${v.company}`) + " ") : "";
+    const closing = custom("closing") || auto[auto.length - 1];
+    paras = [fill(intro, { ...v, hook }), ...bodyExp.map(x => fill(x, v)), why, fill(closing, v)].filter(x => x && x.trim());
+    if (!/sincerely|regards|faithfully/i.test(paras[paras.length - 1])) paras.push(`Yours sincerely,\n\n${v.name}`);
+  } else paras = autoLetter(v, cat);
+  return (header + "\n" + paras.map(x => x.trim()).join("\n\n")).replace(/\n{3,}/g, "\n\n").trim();
 }
 function renderLetter(force) {
   if (!target) { $("#paperLetter").textContent = "Choisis une offre pour générer la lettre."; return; }
   if (letterDirty && !force) return;
-  $("#paperLetter").textContent = letterText(); letterDirty = false;
+  $("#paperLetter").innerHTML = esc(letterText()).replace(/⟦([^⟧]*)⟧/g, '<mark class="ph">[$1]</mark>'); letterDirty = false;
+  fitLetter();
 }
-$("#paperLetter").addEventListener("input", () => letterDirty = true);
+// la lettre doit tenir sur une page A4 : police et marges réduites progressivement si besoin
+function fitLetter() {
+  const el = $("#paperLetter"), z = el.style.zoom, hid = el.hidden;
+  el.hidden = false; el.style.zoom = 1; el.style.minHeight = "0";
+  const PAGE = 297 * 96 / 25.4 - 2;
+  let size = 11.2, pad = 22; el.style.fontSize = size + "pt"; el.style.padding = `${pad}mm`;
+  let g = 0;
+  while (el.scrollHeight > PAGE && g++ < 24) { if (pad > 15) pad -= 1.5; else size -= 0.2; el.style.fontSize = size.toFixed(1) + "pt"; el.style.padding = `${pad}mm ${pad + 1}mm`; if (size < 9.6) break; }
+  el.style.minHeight = ""; el.style.zoom = z; el.hidden = hid;
+}
+$("#paperLetter").addEventListener("input", () => { letterDirty = true; clearTimeout(fitLetter._t); fitLetter._t = setTimeout(fitLetter, 500); });
 $("#genLetter").onclick = () => { renderLetter(true); toast("Lettre régénérée : relis-la et ajuste-la directement sur la feuille"); };
 ["#l_cat", "#l_role", "#l_city", "#l_hook"].forEach(s => $(s).addEventListener("input", () => { renderLetter(); if (s === "#l_cat") { renderCv(); } }));
 $("#copyLetter").onclick = () => navigator.clipboard?.writeText($("#paperLetter").innerText).then(() => toast("Lettre copiée"), () => toast("Copie impossible"));
@@ -165,11 +305,12 @@ function fitCv() {
   const el = $("#paperCv"); if (!el.offsetParent && el.hidden) { el.style.fontSize = ""; }
   const z = el.style.zoom; el.style.zoom = 1;
   const PAGE = 297 * 96 / 25.4 - 2;                 // hauteur A4 en px CSS
+  el.style.minHeight = "0";
   let size = 10.6; el.style.fontSize = size + "pt"; el.style.lineHeight = "";
   let guard = 0;
   while (el.scrollHeight > PAGE && size > 8.6 && guard++ < 20) { size -= 0.2; el.style.fontSize = size.toFixed(1) + "pt"; }
   if (el.scrollHeight > PAGE) el.style.lineHeight = "1.22";
-  el.style.zoom = z;
+  el.style.minHeight = ""; el.style.zoom = z;
   const note = $("#paperNote"); if (note) note.textContent = size < 10.5 ? `Aperçu A4 · police ajustée à ${size.toFixed(1)} pt pour tenir sur une page` : "Aperçu A4 · en anglais";
 }
 
@@ -340,7 +481,7 @@ async function pdfLines(file) {
     items.sort((a, b) => b.y - a.y || a.x - b.x);
     let cur = null;
     for (const it of items) {
-      if (!cur || Math.abs(cur.y - it.y) > Math.max(2.5, it.h * 0.45)) { cur = { y: it.y, items: [] }; lines.push(cur); }
+      if (!cur || Math.abs(cur.y - it.y) > Math.max(2.5, it.h * 0.45)) { cur = { y: it.y, page: n, items: [] }; lines.push(cur); }
       cur.items.push(it);
     }
   }
@@ -353,7 +494,7 @@ async function pdfLines(file) {
       last = it;
     }
     cells.forEach(c => c.s = c.s.replace(/\s+/g, " ").trim());
-    return { cells: cells.filter(c => c.s), x: l.items[0].x, h: Math.max(...l.items.map(i => i.h)), text: cells.map(c => c.s).join(" ").trim() };
+    return { cells: cells.filter(c => c.s), y: l.y, page: l.page, x: l.items[0].x, h: Math.max(...l.items.map(i => i.h)), text: cells.map(c => c.s).join(" ").trim() };
   }).filter(l => l.text);
 }
 
@@ -440,6 +581,60 @@ document.addEventListener("change", async e => {
   }
 });
 
+// ---------------------------------------------------------------- lettre modèle (PDF, lue localement)
+function modelStatus() {
+  const m = profile.model;
+  $("#modelStatus").innerHTML = m ? `✔ Lettre modèle chargée (${m.n} paragraphes${m.company ? `, « ${esc(m.company)} » remplacé par l'entreprise visée` : ""}). Ses paragraphes sont repris et adaptés à chaque offre.`
+    : (custom("intro") || custom("experience") ? "✔ Tes paragraphes de lettre (profil) sont utilisés." : "Aucune lettre modèle : la lettre est écrite à partir de ton CV. Importe ta lettre pour qu'elle serve de modèle.");
+}
+$("#modelPdf").onchange = async e => {
+  const f = e.target.files[0]; e.target.value = ""; if (!f) return;
+  $("#modelStatus").textContent = "Lecture de ta lettre dans ton navigateur…";
+  try {
+    await loadPdfJs();
+    const lines = await pdfLines(f);
+    // paragraphes : un saut vertical plus grand que l'interligne habituel
+    const gaps = lines.slice(1).map((l, i) => l.page === lines[i].page ? lines[i].y - l.y : 0).filter(g => g > 0).sort((a, b) => a - b);
+    const lh = gaps[Math.floor(gaps.length * 0.35)] || 12;
+    const paras = []; let cur = [];
+    lines.forEach((l, i) => {
+      const gap = i && l.page === lines[i - 1].page ? lines[i - 1].y - l.y : lh;
+      if (i && (gap > lh * 1.45 || l.page !== lines[i - 1].page && /^\s*[A-Z]/.test(l.text) && /[.:]$/.test(lines[i - 1].text))) { paras.push(cur); cur = []; }
+      cur.push(l.text);
+    });
+    if (cur.length) paras.push(cur);
+    const P = paras.map(p => p.join(" ").replace(/-\s+(?=[a-z])/g, "").replace(/\s+/g, " ").trim()).filter(Boolean);
+    const d = P.findIndex(p => /^(dear|to whom|madame|monsieur|hello)/i.test(p));
+    let head = d > 0 ? P.slice(0, d) : [], body = P.slice(d >= 0 ? d : 0);
+    if (d >= 0) body[0] = body[0].replace(/^(dear|to whom|madame|monsieur|hello)[^,]*,\s*/i, "");
+    body = body.filter(Boolean);
+    const sig = body.findIndex(p => /^(yours|sincerely|kind regards|best regards|regards|cordialement)/i.test(p));
+    if (sig >= 0) body = body.slice(0, sig);
+    if (body.length < 2) throw new Error("paragraphes introuvables");
+    // entreprise et poste du modèle, à remplacer par ceux de chaque offre
+    const re = head.join(" \n ").match(/\b(?:Re|Objet|Subject)\s*:\s*([^\n]+)/i);
+    let role = re ? re[1].replace(/\s+\d{4}.*$/, "").trim() : "";
+    const freq = {};
+    body.join(" ").replace(/\b(?:at|join|joining|to|with|within|for)\s+((?:[A-Z][\w&'.-]*\s?){1,4})/g, (m, c) => { c = c.trim(); if (!/^(I|The|My|In|This|Brazil|Africa|Europe|Paris|London|Latin)$/.test(c) && !(profile.name || "").includes(c)) freq[c] = (freq[c] || 0) + 1; });
+    const cvOrgs = expItems().map(e => tidyOrg(e.org).toLowerCase());
+    const company = Object.entries(freq).filter(([c]) => !cvOrgs.some(o => o.includes(c.toLowerCase()) || c.toLowerCase().includes(o))).sort((a, b) => b[1] - a[1])[0]?.[0] || "";
+    const sub = t => { if (company) t = t.split(company).join("{company}"); if (role && role.length > 4) t = t.split(role).join("{role}"); return t; };
+    const B = body.map(sub);
+    // l'accroche propre à l'ancienne entreprise devient un emplacement {hook}, et sa ville devient {city}
+    const k = B[0].search(/(?:^|[.!?]\s+)I(?: would| am|'m| wish| want| was)\b/);
+    B[0] = "{hook}" + (k > 0 ? B[0].slice(k).replace(/^[.!?]\s+/, "") : B[0]);
+    B[0] = B[0].replace(/(\{company\}[^.]*?) in ([A-Z][\wÀ-ÿ-]+(?: [A-Z][\wÀ-ÿ-]+)?)\b/, "$1 in {city}");
+    profile.blocks = { ...profile.blocks, intro: B[0], experience: B.slice(1, -1).join("\n\n"), closing: B.length > 1 ? B[B.length - 1] + "\n\nYours sincerely,\n\n{name}" : DEFAULT_BLOCKS.closing };
+    CAT_ORDER.forEach(c => { if (!custom(c)) profile.blocks[c] = ""; });
+    profile.model = { n: body.length, company, role, at: new Date().toISOString().slice(0, 10) };
+    save(); modelStatus(); renderProfileEditor(); renderLetter(true);
+    toast("Lettre modèle importée ✔");
+  } catch (err) {
+    console.error(err);
+    $("#modelStatus").textContent = `Impossible de découper cette lettre (${err.message || "format inhabituel"}). Colle plutôt tes paragraphes dans « Modifier mon profil ».`;
+  }
+};
+
 $("#importProfile").onchange = async e => {
   const f = e.target.files[0]; if (!f) return;
   try { const p = JSON.parse(await f.text()); profile = migrate({ ...profile, ...p, blocks: { ...(p.blocks || {}) } }); save(); renderProfileEditor(); renderAll(); toast("Profil importé ✔"); }
@@ -449,6 +644,6 @@ $("#importProfile").onchange = async e => {
 $("#exportProfile").onclick = () => { const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([JSON.stringify(profile, null, 2)], { type: "application/json" })); a.download = "mon-profil-finance-jobs.json"; a.click(); };
 $("#clearProfile").onclick = () => { if (!confirm("Effacer ton profil, ton CV et tes paragraphes de lettre de ce navigateur ?")) return; store.del("fjr_profile"); profile = migrate(null); renderProfileEditor(); renderAll(); toast("Profil effacé"); };
 
-function renderAll() { analyse(); renderCv(); renderLetter(); fitPaper(); }
+function renderAll() { analyse(); renderCv(); renderLetter(); fitPaper(); modelStatus(); }
 renderAll();
 })();

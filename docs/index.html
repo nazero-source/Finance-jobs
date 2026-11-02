@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=EB+Garamond:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="style.css?v=13">
+<link rel="stylesheet" href="style.css?v=14">
 <script>try{const t=localStorage.getItem("fjr_theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
 </head>
 <body>
@@ -151,26 +151,28 @@
           </div>
           <div id="kw" class="kw"></div>
         </div>
-        <div class="card" id="cvControls" hidden>
+        <div class="card" id="cvControls">
           <h3>CV</h3>
           <label class="check"><input type="checkbox" id="cvReorder" checked> Mettre en avant les puces liées à l'offre</label>
           <label class="check"><input type="checkbox" id="cvHighlight" checked> Surligner les mots-clés (écran seulement)</label>
-          <p class="hint">Clique sur une puce de l'aperçu pour la masquer ou l'afficher. Le point vert signale les puces liées à l'offre. Pour modifier le texte : <b>Mon profil</b>.</p>
+          <label class="check"><input type="checkbox" id="cvEdit"> <b>✎ Modifier le texte directement sur la feuille</b></label>
+          <p class="hint" id="cvHint">Clique sur une puce de l'aperçu pour la masquer ou l'afficher. Le point vert signale les puces liées à l'offre.</p>
           <div class="actions"><button class="btn" id="printCv">Exporter en PDF</button><button class="btn ghost" id="docCv">Word (.docx)</button></div>
         </div>
         <div class="card" id="letterControls" hidden>
           <h3>Lettre de motivation</h3>
-          <p class="hint" style="margin:0">Claude rédige une lettre propre à cette offre, à partir de ton CV, de l'offre et de l'entreprise, dans le style de ta lettre modèle. Utilise ton compte Claude.</p>
-          <button class="btn accent wide" id="letterClaude">✦ Rédiger ma lettre avec Claude ↗</button>
-          <details class="quick"><summary class="muted small">Brouillon rapide sans Claude (assemblage de tes paragraphes)</summary>
-          
+          <div class="model-row" id="modelRow">
+            <span id="modelStatus" class="hint" style="margin:0">Aucune lettre modèle : la lettre est écrite à partir de ton CV.</span>
+            <label class="btn ghost small">Importer ma lettre modèle (PDF)<input type="file" id="modelPdf" accept="application/pdf,.pdf" hidden></label>
+          </div>
           <label>Paragraphe métier<select id="l_cat"></select></label>
-          <label>Poste<input id="l_role"></label>
-          <label>Ville<input id="l_city"></label>
-          <label>Accroche — une actualité récente de l'entreprise <a id="newsLink" target="_blank" rel="noopener">chercher ↗</a>
-            <textarea id="l_hook" rows="3" placeholder="In March 2026, the bank increased the capital of its Brazilian subsidiary by €200m…"></textarea></label>
+          <div class="formgrid" style="grid-template-columns:1fr 1fr"><label>Poste<input id="l_role"></label><label>Ville<input id="l_city"></label></div>
+          <label>Pourquoi cette entreprise <a id="newsLink" target="_blank" rel="noopener">chercher une actualité ↗</a>
+            <textarea id="l_hook" rows="3" placeholder="Ex. : In March 2026, the fund closed its third infrastructure vehicle at €2bn, with a focus on energy transition in Europe."></textarea></label>
+          <p class="hint" style="margin:0">Les passages <mark class="ph">surlignés</mark> sont à compléter avant l'envoi. Tu peux modifier la lettre directement sur la feuille.</p>
           <div class="actions"><button class="btn" id="genLetter">Régénérer</button><button class="btn ghost" id="printLetter">PDF</button><button class="btn ghost" id="docLetter">Word</button><button class="btn ghost" id="copyLetter">Copier</button></div>
-        </details>
+          <button class="btn accent wide" id="letterClaude">✦ Version 100 % sur mesure avec Claude ↗</button>
+          <p class="hint" style="margin:0">Claude lit l'offre, l'entreprise, ton CV et ta lettre modèle, et réécrit chaque paragraphe pour ce poste (avec ton compte Claude).</p>
         </div>
         <div class="card" id="claudeCard" hidden>
           <h3>Claude</h3>
@@ -271,11 +273,11 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="keywords.js?v=13"></script>
-<script src="app.js?v=13"></script>
-<script src="map.js?v=13"></script>
-<script src="studio.js?v=13"></script>
-<script src="home.js?v=13"></script>
+<script src="keywords.js?v=14"></script>
+<script src="app.js?v=14"></script>
+<script src="map.js?v=14"></script>
+<script src="studio.js?v=14"></script>
+<script src="home.js?v=14"></script>
 <!-- Mesure d'audience GoatCounter : sans cookies, aucune donnée personnelle -->
 <script data-goatcounter="https://financejobsradar.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

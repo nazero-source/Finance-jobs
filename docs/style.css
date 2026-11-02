@@ -514,3 +514,28 @@ html, body { overflow-x: clip; }
   .demo-screen img { transition: none; }
 }
 .tabs button > span:not(.badge) { white-space: nowrap; }
+
+/* ============ Studio · correctifs V7 ============ */
+.paper h1, .paper .cv-name { font-family: "EB Garamond", Garamond, "Times New Roman", serif; letter-spacing: .02em; }
+.studio .match { font-family: var(--font); }
+.studio .match #matchPct { font-family: var(--mono); }
+.paper.editing .ed { outline: 1px dashed transparent; border-radius: 2px; cursor: text; min-width: 1.5em; display: inline-block; }
+.paper.editing li.ed { display: list-item; cursor: text; }
+.paper.editing .ed:hover { outline-color: #9db4ff; background: #f5f8ff; }
+.paper.editing .ed:focus { outline: 1.5px solid #2e62ff; background: #fff; }
+.paper.editing .ed:empty::before { content: "…"; color: #aab; }
+.paper.editing .cv-bul li::before { cursor: text; }
+mark.ph { background: #ffe58a; color: inherit; border-radius: 3px; padding: 0 .15em; }
+.model-row { display: grid; gap: .45rem; padding: .6rem .7rem; border: 1px dashed var(--border-strong); border-radius: 12px; background: var(--surface-2); }
+.model-row .btn { justify-self: start; }
+#letterControls { display: grid; gap: .6rem; }
+#letterControls label { display: grid; gap: .25rem; font-size: .82rem; color: var(--text-2); }
+@media print {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .tab.active { transform: none !important; }
+  mark.ph { background: none; }
+  .paper.editing .ed { outline: none !important; background: none !important; }
+}
+.studio-side .card { grid-template-columns: minmax(0, 1fr); }
+.studio-side input, .studio-side select, .studio-side textarea { min-width: 0; width: 100%; box-sizing: border-box; }
+.studio-side .formgrid > * { min-width: 0; }
