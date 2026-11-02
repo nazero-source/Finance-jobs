@@ -1,0 +1,981 @@
+{
+"3i Infrastructure": {
+"ats": [
+"myworkdayjobs.com"
+],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"ACWA Power": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"ADQ": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (HTTPError)"
+},
+"AIIM (African Infrastructure Investment Managers)": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"AMEA Power": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (RemoteDisconnected)"
+},
+"AXA IM Alts": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"Accuracy": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"Actis": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (RemoteDisconnected)"
+},
+"Acxior Corporate Finance": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (URLError)"
+},
+"Adenia Partners": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Aelios Finance": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (URLError)"
+},
+"AfDB": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (HTTPError)"
+},
+"AfricInvest": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Alcazar Energy Partners": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (HTTPError)"
+},
+"Alpha Dhabi": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"Amber Infrastructure": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Ambienta": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"Amethis": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Amundi Transition Énergétique": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Ancala Partners": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Apricum": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"Aream": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Arjil": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (URLError)"
+},
+"Arjun Infrastructure Partners": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"Arma Partners": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {
+"https://www.armapartners.com/careers/interns/": {
+"first": "initial",
+"seen": "2026-11-02",
+"t": "Munich Internship"
+}
+},
+"seeded": true,
+"status": "ok"
+},
+"Arqaam Capital": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (RemoteDisconnected)"
+},
+"Asterion Industrial Partners": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"Attijari Finances Corp": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (URLError)"
+},
+"Augusta & Co": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Aurora Energy Research": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {
+"https://auroraer.com/careers/early-careers/athens-graduate-analyst-opportunity": {
+"first": "initial",
+"seen": "2026-11-02",
+"t": "Greece Graduate Analyst Opportunity"
+},
+"https://auroraer.com/careers/early-careers/austin-graduate-analyst-program": {
+"first": "initial",
+"seen": "2026-11-02",
+"t": "Live United States Graduate Analyst Program"
+},
+"https://auroraer.com/careers/early-careers/berlin-graduate-analyst-programme": {
+"first": "initial",
+"seen": "2026-11-02",
+"t": "Germany Graduate Analyst Programme"
+},
+"https://auroraer.com/careers/early-careers/gurugram-graduate-modelling-programme": {
+"first": "initial",
+"seen": "2026-11-02",
+"t": "India Graduate Modelling Programme"
+},
+"https://auroraer.com/careers/early-careers/madrid-graduate-analyst-opportunity": {
+"first": "initial",
+"seen": "2026-11-02",
+"t": "Spain Graduate Analyst Opportunity"
+},
+"https://auroraer.com/careers/early-careers/sao-paulo-graduate-modelling-programme": {
+"first": "initial",
+"seen": "2026-11-02",
+"t": "Live Brazil Graduate Modelling Programme"
+},
+"https://auroraer.com/careers/early-careers/singapore-graduate-analyst-opportunity": {
+"first": "initial",
+"seen": "2026-11-02",
+"t": "Singapore Graduate Analyst Opportunity"
+},
+"https://auroraer.com/careers/early-careers/sydney-graduate-analyst-programme": {
+"first": "initial",
+"seen": "2026-11-02",
+"t": "Australia Graduate Analyst Opportunity"
+},
+"https://auroraer.com/careers/early-careers/tokyo-graduate-analyst-programme": {
+"first": "initial",
+"seen": "2026-11-02",
+"t": "Japan Graduate Analyst Programme"
+}
+},
+"seeded": true,
+"status": "ok"
+},
+"BMCE Capital": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"BNP Paribas AM (Private Debt & Real Assets)": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"Banque des Territoires": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Baringa": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Blunomy": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (URLError)"
+},
+"Bpifrance": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (HTTPError)"
+},
+"British International Investment": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (HTTPError)"
+},
+"Bryan Garnier": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (URLError)"
+},
+"CDG Invest": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (URLError)"
+},
+"Cambon Partners": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Capitalmind": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (HTTPError)"
+},
+"Cavendish": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"Centerview Partners": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Clean Horizon": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"CohnReznick Capital": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"Cube Infrastructure": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (URLError)"
+},
+"Cubico Sustainable Investments": {
+"ats": [
+"hibob.com"
+],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"DEG / KfW": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"DIF Capital Partners (CVC DIF)": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Dalmore Capital": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"Degroof Petercam CF": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Development Partners International": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (RemoteDisconnected)"
+},
+"Downing": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {
+"https://www.downing.co.uk/careers/business-development-operations-associate": {
+"first": "initial",
+"seen": "2026-11-02",
+"t": "Business Development Operations Associate London"
+}
+},
+"seeded": true,
+"status": "ok"
+},
+"E-CUBE Strategy Consultants": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {
+"https://e-cube.com/en/job-offers/internship-master-project/": {
+"first": "initial",
+"seen": "2026-11-02",
+"t": "Lausanne [Switzerland] – Internship / Master Thesis as Junior Consultant (1st Semester 2027) Stage"
+}
+},
+"seeded": true,
+"status": "ok"
+},
+"EFG Holding": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"EIB / EIF": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"Eiffel Investment Group": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Encavis Asset Management": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Equitix": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (RemoteDisconnected)"
+},
+"Eurazeo Infrastructure": {
+"ats": [
+"jobteaser.com"
+],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Evercore": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Everoze": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"F2i": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Federated Hermes Infrastructure": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Fenchurch Advisory": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Fieldstone": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (URLError)"
+},
+"Financière de Courcelles": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (URLError)"
+},
+"Finergreen": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (HTTPError)"
+},
+"Foresight Group": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"GP Bullhound": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"Gneiss Energy": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Gravis Capital": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Gresham House": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (HTTPError)"
+},
+"Hampleton Partners": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Hannam & Partners": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"Harith": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"Idinvest / Eurazeo Mid-cap": {
+"ats": [
+"jobteaser.com"
+],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Igneo Infrastructure Partners": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"In Extenso Finance": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"InfraVia Capital Partners": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"Infracapital (M&G)": {
+"ats": [
+"myworkdayjobs.com"
+],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Infranity": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Inspired Evolution": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Investcorp (infrastructure)": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"Investec": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (HTTPError)"
+},
+"Ithmar Capital": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (URLError)"
+},
+"Jadwa Investment": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"John Laing": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (HTTPError)"
+},
+"La Banque Postale AM": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"Largillière Finance": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {
+"https://largilliere-finance.com/offre-emploi/cdi-analyste-ma-paris/": {
+"first": "initial",
+"seen": "2026-11-02",
+"t": "CDI – Analyste M&A – Paris"
+},
+"https://largilliere-finance.com/offre-emploi/cdi-associate-ma-paris/": {
+"first": "initial",
+"seen": "2026-11-02",
+"t": "CDI – Associate M&A – Paris"
+}
+},
+"seeded": true,
+"status": "ok"
+},
+"Legal & General Capital": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "page vide"
+},
+"Linkers": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Livingstone Partners": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {
+"https://livingstonepartners.com/en/position/experienced-investment-banking-analyst/": {
+"first": "initial",
+"seen": "2026-11-02",
+"t": "Experienced Investment Banking Analyst Chicago, Los Angeles"
+},
+"https://livingstonepartners.com/en/position/ma-internship-october-2026/": {
+"first": "initial",
+"seen": "2026-11-02",
+"t": "M&A Internship | October 2026 Milan"
+}
+},
+"seeded": true,
+"status": "ok"
+},
+"Lunate": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Marguerite": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Masdar": {
+"ats": [
+"smartrecruiters.com"
+],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Masen": {
+"ats": [
+"talent-soft"
+],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Mediterrania Capital Partners": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (URLError)"
+},
+"Messier & Associés": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "page vide"
+},
+"Midcap Partners": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (URLError)"
+},
+"Mirova": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"Mirova Energy Transition": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"Mubadala": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"Natixis Partners": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"NextEnergy Capital": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Ninety One": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (HTTPError)"
+},
+"Norfund": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"ODDO BHF Corporate Finance": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"Omnes Capital": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"PIDG / InfraCo Africa": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {
+"https://pidg.org/job/business-integrity-manager-2/": {
+"first": "initial",
+"seen": "2026-11-02",
+"t": "Business Integrity Manager PIDG London (+2 locations) 13 November 2026 00:00 UTC+0"
+}
+},
+"seeded": true,
+"status": "ok"
+},
+"Peel Hunt": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (HTTPError)"
+},
+"Plenium Partners": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Proparco / AFD": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Quinbrook": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"RGreen Invest": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"Rasmala": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Robey Warshaw": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (URLError)"
+},
+"SHUAA Capital": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"Schroders Greencoat": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (URLError)"
+},
+"Sorgem Evaluation": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"Standard Bank CIB": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {
+"https://www.standardbank.com/sbg/standard-bank-group/careers/students-and-graduates/graduate-programmes": {
+"first": "initial",
+"seen": "2026-11-02",
+"t": "Graduate programmes"
+}
+},
+"seeded": true,
+"status": "ok"
+},
+"Swen Capital Partners": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"TAQA": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Transaction R": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (URLError)"
+},
+"Triple Point": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"Vantage Capital": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "page dynamique (offres chargées par script)"
+},
+"Vauban Infrastructure Partners": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Waha Capital": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"seeded": true,
+"status": "ok"
+},
+"Zaoui & Co": {
+"ats": [],
+"checked": "2026-11-02",
+"links": {},
+"status": "inaccessible (HTTPError)"
+}
+}

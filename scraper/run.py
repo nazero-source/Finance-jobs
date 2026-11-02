@@ -246,6 +246,14 @@ def main():
     targets = [{"name": n, "type": t, "zone": z, "url": u, "email": e, "note": note, "jobs": n_for(n),
                 "auto": any(n.split(" (")[0].lower().startswith(f.lower()[:10]) for f in followed)}
                for n, t, z, u, e, note in E.TARGETS]
+    try:
+        import watch
+        w = watch.run(targets)
+        for t in targets:
+            if t["name"] in w:
+                t["watch"] = w[t["name"]]
+    except Exception as e:  # la veille ne doit jamais bloquer la collecte
+        print("Veille des pages carrière : erreur", e)
     with open(os.path.join(OUT, "targets.json"), "w") as f:
         json.dump(targets, f, ensure_ascii=False, indent=0)
     print(f"\nTerminé : {len(jobs)} offres, {geo.calls} géolocalisations, {time.time()-t0:.0f}s")

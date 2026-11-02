@@ -53,8 +53,9 @@ function targetStats() {
   const pt = $("#phTargets"); if (!pt || pt.dataset.ok) return;
   fetch("data/targets.json").then(r => r.json()).then(t => {
     pt.dataset.ok = 1;
-    const n = t.length, wj = t.filter(x => x.jobs).length, auto = t.filter(x => x.auto).length, jobs = t.reduce((a, x) => a + x.jobs, 0);
-    pt.innerHTML = [[n, "employeurs suivis"], [auto, "lus automatiquement"], [wj, "recrutent en ce moment"], [jobs, "offres juniors"]].map(([v, l]) => `<div class="stat"><b>${v}</b><span>${l}</span></div>`).join("");
+    const n = t.length, ok = t.filter(x => x.auto || x.watch?.status === "ok").length;
+    const rec = t.filter(x => x.jobs || x.watch?.count).length, nw = t.filter(x => x.watch?.new).length;
+    pt.innerHTML = [[n, "employeurs suivis"], [ok, "vérifiés chaque matin"], [rec, "recrutent en ce moment"], [nw, "nouveautés cette semaine"]].map(([v, l]) => `<div class="stat"><b>${v}</b><span>${l}</span></div>`).join("");
   }).catch(() => {});
 }
 document.addEventListener("fjr:tab", e => { if (e.detail === "track") heroStats(); if (e.detail === "targets") targetStats(); });

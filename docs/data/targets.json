@@ -7,7 +7,16 @@
 "email": "careers@finergreen.com",
 "note": "Offres publiées uniquement sur LinkedIn",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (HTTPError)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Green Giraffe",
@@ -27,7 +36,16 @@
 "email": "careers@augustaco.com",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Apricum",
@@ -37,7 +55,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Gneiss Energy",
@@ -47,7 +74,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Blunomy",
@@ -57,7 +93,16 @@
 "email": "",
 "note": "Offres sur Welcome to the Jungle",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (URLError)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Capitalmind",
@@ -67,7 +112,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (HTTPError)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Cambon Partners",
@@ -77,7 +131,16 @@
 "email": "recrutement@cambonpartners.com",
 "note": "Stages publiés sur Welcome to the Jungle",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Messier & Associés",
@@ -87,7 +150,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page vide",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Everoze",
@@ -97,7 +169,16 @@
 "email": "recruitment@everoze.com",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Fieldstone",
@@ -107,7 +188,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (URLError)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "CohnReznick Capital",
@@ -117,7 +207,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Marathon Capital",
@@ -167,7 +266,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Actis",
@@ -177,7 +285,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (RemoteDisconnected)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Africa Finance Corporation",
@@ -207,7 +324,23 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 1,
+"new": 0,
+"new_junior": 0,
+"links": [
+{
+"title": "Business Integrity Manager PIDG London (+2 locations) 13 November 2026 00:00 UTC+0",
+"url": "https://pidg.org/job/business-integrity-manager-2/",
+"first": "initial",
+"junior": false
+}
+]
+}
 },
 {
 "name": "Harith",
@@ -217,7 +350,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Inspired Evolution",
@@ -227,7 +369,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Meridiam",
@@ -247,7 +398,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "InfraVia Capital Partners",
@@ -257,7 +417,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Antin Infrastructure Partners",
@@ -277,7 +446,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "RGreen Invest",
@@ -287,7 +465,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Eiffel Investment Group",
@@ -297,7 +484,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Omnes Capital",
@@ -307,7 +503,16 @@
 "email": "",
 "note": "Offres publiées sur LinkedIn",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Infranity",
@@ -317,7 +522,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Sienna Investment Managers",
@@ -337,7 +551,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Eurazeo Infrastructure",
@@ -347,7 +570,18 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [
+"jobteaser.com"
+],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Edmond de Rothschild (infra)",
@@ -377,7 +611,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Asterion Industrial Partners",
@@ -387,7 +630,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "DIF Capital Partners (CVC DIF)",
@@ -397,7 +649,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Cube Infrastructure",
@@ -407,7 +668,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (URLError)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "InfraRed Capital Partners",
@@ -427,7 +697,16 @@
 "email": "recruitment@equitix.com",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (RemoteDisconnected)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Amber Infrastructure",
@@ -437,7 +716,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Ancala Partners",
@@ -447,7 +735,16 @@
 "email": "careers@ancala.com",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Foresight Group",
@@ -457,7 +754,16 @@
 "email": "careers@foresightgroup.eu",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Gresham House",
@@ -467,7 +773,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (HTTPError)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "NextEnergy Capital",
@@ -477,7 +792,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Octopus Energy Generation",
@@ -497,7 +821,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "John Laing",
@@ -507,7 +840,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (HTTPError)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "3i Infrastructure",
@@ -517,7 +859,18 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [
+"myworkdayjobs.com"
+],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Gravis Capital",
@@ -527,7 +880,16 @@
 "email": "careers@graviscapital.com",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Bluefield",
@@ -547,7 +909,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Schroders Greencoat",
@@ -557,7 +928,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (URLError)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Infracapital (M&G)",
@@ -567,7 +947,18 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [
+"myworkdayjobs.com"
+],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Dalmore Capital",
@@ -577,7 +968,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Copenhagen Infrastructure Partners",
@@ -597,7 +997,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Masdar",
@@ -607,7 +1016,18 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [
+"smartrecruiters.com"
+],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "AMEA Power",
@@ -617,7 +1037,16 @@
 "email": "talent@ameapower.com",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (RemoteDisconnected)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Alcazar Energy Partners",
@@ -627,7 +1056,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (HTTPError)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Investcorp (infrastructure)",
@@ -637,7 +1075,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Lunate",
@@ -647,7 +1094,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Mubadala",
@@ -657,7 +1113,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "ADQ",
@@ -667,7 +1132,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (HTTPError)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "World Bank Group / IFC",
@@ -697,7 +1171,16 @@
 "email": "",
 "note": "Site non lisible par le robot : stages et Graduate Programme à surveiller",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "IDB / IDB Invest",
@@ -717,7 +1200,16 @@
 "email": "",
 "note": "Site protégé : Young Professionals Program à surveiller",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (HTTPError)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Proparco / AFD",
@@ -727,7 +1219,16 @@
 "email": "",
 "note": "Stages et VIE fréquents ; site non lisible par le robot",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "British International Investment",
@@ -737,7 +1238,16 @@
 "email": "",
 "note": "Site protégé : à surveiller",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (HTTPError)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "FMO",
@@ -757,7 +1267,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Norfund",
@@ -767,7 +1286,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Bpifrance",
@@ -777,7 +1305,16 @@
 "email": "",
 "note": "Stages et VIE",
 "jobs": 1,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (HTTPError)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "AIIB",
@@ -827,7 +1364,16 @@
 "email": "careers@np.partners",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "ODDO BHF Corporate Finance",
@@ -837,7 +1383,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Degroof Petercam CF",
@@ -847,7 +1402,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Bryan Garnier",
@@ -857,7 +1421,16 @@
 "email": "",
 "note": "Site protégé : à consulter à la main",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (URLError)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Linkers",
@@ -867,7 +1440,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Aelios Finance",
@@ -877,7 +1459,16 @@
 "email": "",
 "note": "Site protégé : à consulter à la main",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (URLError)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Financière de Courcelles",
@@ -887,7 +1478,16 @@
 "email": "",
 "note": "Site protégé : à consulter à la main",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (URLError)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "In Extenso Finance",
@@ -897,7 +1497,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Transaction R",
@@ -907,7 +1516,16 @@
 "email": "",
 "note": "Site protégé : à consulter à la main",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (URLError)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Largillière Finance",
@@ -917,7 +1535,29 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 2,
+"new": 0,
+"new_junior": 0,
+"links": [
+{
+"title": "CDI – Analyste M&A – Paris",
+"url": "https://largilliere-finance.com/offre-emploi/cdi-analyste-ma-paris/",
+"first": "initial",
+"junior": true
+},
+{
+"title": "CDI – Associate M&A – Paris",
+"url": "https://largilliere-finance.com/offre-emploi/cdi-associate-ma-paris/",
+"first": "initial",
+"junior": false
+}
+]
+}
 },
 {
 "name": "Acxior Corporate Finance",
@@ -927,7 +1567,16 @@
 "email": "",
 "note": "Site protégé : à consulter à la main",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (URLError)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Arjil",
@@ -937,7 +1586,16 @@
 "email": "",
 "note": "Site protégé : à consulter à la main",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (URLError)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Midcap Partners",
@@ -947,7 +1605,16 @@
 "email": "",
 "note": "Site protégé : à consulter à la main",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (URLError)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "BDO France (Advance Capital)",
@@ -967,7 +1634,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Sorgem Evaluation",
@@ -977,7 +1653,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "E-CUBE Strategy Consultants",
@@ -987,7 +1672,23 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 1,
+"new": 0,
+"new_junior": 0,
+"links": [
+{
+"title": "Lausanne [Switzerland] – Internship / Master Thesis as Junior Consultant (1st Semester 2027) Stage",
+"url": "https://e-cube.com/en/job-offers/internship-master-project/",
+"first": "initial",
+"junior": true
+}
+]
+}
 },
 {
 "name": "Clean Horizon",
@@ -997,7 +1698,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Robey Warshaw",
@@ -1007,7 +1717,16 @@
 "email": "",
 "note": "Site protégé : à consulter à la main",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (URLError)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Zaoui & Co",
@@ -1017,7 +1736,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (HTTPError)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Fenchurch Advisory",
@@ -1027,7 +1755,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Arma Partners",
@@ -1037,7 +1774,23 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 1,
+"new": 0,
+"new_junior": 0,
+"links": [
+{
+"title": "Munich Internship",
+"url": "https://www.armapartners.com/careers/interns/",
+"first": "initial",
+"junior": true
+}
+]
+}
 },
 {
 "name": "GP Bullhound",
@@ -1047,7 +1800,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Hampleton Partners",
@@ -1057,7 +1819,16 @@
 "email": "careers@hampletonpartners.com",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Livingstone Partners",
@@ -1067,7 +1838,29 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 2,
+"new": 0,
+"new_junior": 0,
+"links": [
+{
+"title": "M&A Internship | October 2026 Milan",
+"url": "https://livingstonepartners.com/en/position/ma-internship-october-2026/",
+"first": "initial",
+"junior": true
+},
+{
+"title": "Experienced Investment Banking Analyst Chicago, Los Angeles",
+"url": "https://livingstonepartners.com/en/position/experienced-investment-banking-analyst/",
+"first": "initial",
+"junior": true
+}
+]
+}
 },
 {
 "name": "Hannam & Partners",
@@ -1077,7 +1870,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Cavendish",
@@ -1087,7 +1889,16 @@
 "email": "",
 "note": "Site protégé : à consulter à la main",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Peel Hunt",
@@ -1097,7 +1908,16 @@
 "email": "",
 "note": "Site protégé : à consulter à la main",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (HTTPError)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Panmure Liberum",
@@ -1117,7 +1937,16 @@
 "email": "",
 "note": "Site protégé : à consulter à la main",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (HTTPError)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Centerview Partners",
@@ -1127,7 +1956,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Evercore",
@@ -1137,7 +1975,16 @@
 "email": "",
 "note": "Candidatures via evercore.tal.net (non lisible automatiquement)",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Baringa",
@@ -1147,7 +1994,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Aurora Energy Research",
@@ -1157,7 +2013,71 @@
 "email": "myrto.polychronopoulou@auroraer.com",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 9,
+"new": 0,
+"new_junior": 0,
+"links": [
+{
+"title": "Japan Graduate Analyst Programme",
+"url": "https://auroraer.com/careers/early-careers/tokyo-graduate-analyst-programme",
+"first": "initial",
+"junior": true
+},
+{
+"title": "Greece Graduate Analyst Opportunity",
+"url": "https://auroraer.com/careers/early-careers/athens-graduate-analyst-opportunity",
+"first": "initial",
+"junior": true
+},
+{
+"title": "Spain Graduate Analyst Opportunity",
+"url": "https://auroraer.com/careers/early-careers/madrid-graduate-analyst-opportunity",
+"first": "initial",
+"junior": true
+},
+{
+"title": "Singapore Graduate Analyst Opportunity",
+"url": "https://auroraer.com/careers/early-careers/singapore-graduate-analyst-opportunity",
+"first": "initial",
+"junior": true
+},
+{
+"title": "Live Brazil Graduate Modelling Programme",
+"url": "https://auroraer.com/careers/early-careers/sao-paulo-graduate-modelling-programme",
+"first": "initial",
+"junior": true
+},
+{
+"title": "Australia Graduate Analyst Opportunity",
+"url": "https://auroraer.com/careers/early-careers/sydney-graduate-analyst-programme",
+"first": "initial",
+"junior": true
+},
+{
+"title": "Live United States Graduate Analyst Program",
+"url": "https://auroraer.com/careers/early-careers/austin-graduate-analyst-program",
+"first": "initial",
+"junior": true
+},
+{
+"title": "India Graduate Modelling Programme",
+"url": "https://auroraer.com/careers/early-careers/gurugram-graduate-modelling-programme",
+"first": "initial",
+"junior": true
+},
+{
+"title": "Germany Graduate Analyst Programme",
+"url": "https://auroraer.com/careers/early-careers/berlin-graduate-analyst-programme",
+"first": "initial",
+"junior": true
+}
+]
+}
 },
 {
 "name": "Downing",
@@ -1167,7 +2087,23 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 1,
+"new": 0,
+"new_junior": 0,
+"links": [
+{
+"title": "Business Development Operations Associate London",
+"url": "https://www.downing.co.uk/careers/business-development-operations-associate",
+"first": "initial",
+"junior": false
+}
+]
+}
 },
 {
 "name": "Pantheon Infrastructure",
@@ -1187,7 +2123,16 @@
 "email": "HRAssist@federatedhermes.com",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Legal & General Capital",
@@ -1197,7 +2142,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page vide",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Cubico Sustainable Investments",
@@ -1207,7 +2161,18 @@
 "email": "",
 "note": "Offres sur cubicojobs.careers.hibob.com",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [
+"hibob.com"
+],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Rasmala",
@@ -1217,7 +2182,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "EFG Holding",
@@ -1227,7 +2201,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "SHUAA Capital",
@@ -1237,7 +2220,16 @@
 "email": "hr@shuaa.com",
 "note": "Offres publiées surtout sur LinkedIn",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Arqaam Capital",
@@ -1247,7 +2239,16 @@
 "email": "hr@arqaamcapital.com",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (RemoteDisconnected)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Waha Capital",
@@ -1257,7 +2258,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Jadwa Investment",
@@ -1267,7 +2277,16 @@
 "email": "careers@jadwa.com",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "ACWA Power",
@@ -1277,7 +2296,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "TAQA",
@@ -1287,7 +2315,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Alpha Dhabi",
@@ -1297,7 +2334,16 @@
 "email": "talent@alphadhabi.com",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Rand Merchant Bank",
@@ -1317,7 +2363,23 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 1,
+"new": 0,
+"new_junior": 0,
+"links": [
+{
+"title": "Graduate programmes",
+"url": "https://www.standardbank.com/sbg/standard-bank-group/careers/students-and-graduates/graduate-programmes",
+"first": "initial",
+"junior": true
+}
+]
+}
 },
 {
 "name": "Development Partners International",
@@ -1327,7 +2389,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (RemoteDisconnected)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Adenia Partners",
@@ -1337,7 +2408,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Amethis",
@@ -1347,7 +2427,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "AfricInvest",
@@ -1357,7 +2446,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Ninety One",
@@ -1367,7 +2465,16 @@
 "email": "",
 "note": "Site protégé : à consulter à la main",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (HTTPError)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Globeleq",
@@ -1387,7 +2494,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "CDG Invest",
@@ -1397,7 +2513,16 @@
 "email": "",
 "note": "Site protégé : à consulter à la main",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (URLError)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "BMCE Capital",
@@ -1407,7 +2532,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "CFG Bank",
@@ -1427,7 +2561,16 @@
 "email": "",
 "note": "Site protégé : à consulter à la main",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (URLError)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Masen",
@@ -1437,7 +2580,18 @@
 "email": "recrutement@masen.ma",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [
+"talent-soft"
+],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Mediterrania Capital Partners",
@@ -1447,7 +2601,16 @@
 "email": "",
 "note": "Site protégé : à consulter à la main",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (URLError)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Attijari Finances Corp",
@@ -1457,7 +2620,16 @@
 "email": "",
 "note": "Site protégé : à consulter à la main",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "inaccessible (URLError)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Banque des Territoires",
@@ -1467,7 +2639,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Amundi Transition Énergétique",
@@ -1477,7 +2658,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "BNP Paribas AM (Private Debt & Real Assets)",
@@ -1487,7 +2677,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "AXA IM Alts",
@@ -1497,7 +2696,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "La Banque Postale AM",
@@ -1507,7 +2715,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Idinvest / Eurazeo Mid-cap",
@@ -1517,7 +2734,18 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [
+"jobteaser.com"
+],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "F2i",
@@ -1527,7 +2755,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Ambienta",
@@ -1537,7 +2774,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Aream",
@@ -1547,7 +2793,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Encavis Asset Management",
@@ -1557,7 +2812,16 @@
 "email": "jobs@encavis.com",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Plenium Partners",
@@ -1567,7 +2831,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "ok",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Q-Energy",
@@ -1587,7 +2860,16 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 },
 {
 "name": "Arjun Infrastructure Partners",
@@ -1597,6 +2879,15 @@
 "email": "",
 "note": "",
 "jobs": 0,
-"auto": false
+"auto": false,
+"watch": {
+"checked": "2026-11-02",
+"status": "page dynamique (offres chargées par script)",
+"ats": [],
+"count": 0,
+"new": 0,
+"new_junior": 0,
+"links": []
+}
 }
 ]

@@ -58,7 +58,7 @@ jobs:
         run: |
           git config user.name "finance-jobs-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/data scraper/geocache.json
+          git add docs/data scraper/geocache.json scraper/watch_state.json 2>/dev/null || git add docs/data scraper/geocache.json
           git diff --cached --quiet || git commit -m "Offres du $(date -u +%Y-%m-%d)"
           ok=0; for i in 1 2 3; do git pull --rebase --autostash -X theirs origin main && git push && { ok=1; break; }; sleep 5; done; [ "$ok" = 1 ]
       - uses: actions/configure-pages@v5

@@ -802,3 +802,11 @@ mark.ph { background: #ffe58a; color: inherit; border-radius: 3px; padding: 0 .1
   .ct-firms { position: static; max-height: 360px; }
   .ct { grid-template-columns: 1fr; gap: .4rem; }
 }
+.wlist { font-size: .8rem; border-top: 1px dashed var(--border); padding-top: .4rem; }
+.wlist summary { cursor: pointer; color: var(--text-2); font-weight: 600; }
+.wlist a { display: block; padding: .25rem 0; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); }
+.wlist a:hover { color: var(--accent); }
+.wlist i { font-style: normal; font-size: .64rem; font-weight: 700; text-transform: uppercase; padding: .05rem .35rem; border-radius: 5px; margin-right: .35rem; }
+.wlist i.nw { background: color-mix(in srgb, var(--accent-2) 30%, transparent); color: color-mix(in srgb, var(--accent-2) 50%, var(--text)); }
+.wlist i.jr { background: var(--accent-soft); color: var(--accent); }
+#targetZone .hot.on, #targetZone .hot { font-weight: 700; }

@@ -484,22 +484,44 @@ let TARGETS = [], tZone = "";
 function loadTargets() {
   fetch("data/targets.json", { cache: "no-cache" }).then(r => r.ok ? r.json() : []).then(t => { TARGETS = t; renderTargets(); }).catch(() => {});
 }
+function watchTag(t) {
+  const w = t.watch; if (!w) return `<span class="tag watch">À surveiller</span>`;
+  if (w.new) return `<span class="tag new">✦ ${w.new} nouveau${w.new > 1 ? "x" : ""} poste${w.new > 1 ? "s" : ""}${w.new_junior ? ` (${w.new_junior} junior${w.new_junior > 1 ? "s" : ""})` : ""}</span>`;
+  if (w.status === "ok") return `<span class="tag auto" title="Page carrière ouverte par le robot le ${fmtDate(w.checked)}">Page vérifiée chaque jour</span>`;
+  if (/dynamique/.test(w.status || "")) return `<span class="tag watch" title="Les offres de cette page sont chargées par un script que le robot ne lit pas">Page non lisible : à vérifier</span>`;
+  return `<span class="tag watch" title="${esc(w.status || "")}">Site bloqué : à vérifier</span>`;
+}
+function watchList(t) {
+  const w = t.watch; if (!w || !w.links?.length) return "";
+  const wk = new Date(Date.now() - 7 * 864e5).toISOString().slice(0, 10);
+  return `<details class="wlist" ${w.new ? "open" : ""}><summary>${w.count} poste${w.count > 1 ? "s" : ""} affiché${w.count > 1 ? "s" : ""} sur la page carrière</summary>
+    ${w.links.slice(0, 8).map(x => `<a href="${esc(x.url)}" target="_blank" rel="noopener">${x.first !== "initial" && x.first >= wk ? `<i class="nw">nouveau</i>` : ""}${x.junior ? `<i class="jr">junior</i>` : ""}${esc(x.title)} ↗</a>`).join("")}</details>`;
+}
 function renderTargets() {
   const zones = ["France", "UK", "Europe", "Dubaï", "Afrique", "DFI"];
   const inT = (t, z) => !z || (z === "DFI" ? /^DFI/.test(t.type) : z === "Dubaï" ? /Dubaï|Abu Dhabi|Bahreïn|Riyad|Arabie|Qatar|Golfe/.test(t.zone)
     : z === "Afrique" ? /Afrique|Maroc|Égypte|Nigeria|Kenya/.test(t.zone) : z === "Europe" ? /Europe|Italie|Allemagne|Espagne|Belgique|Suisse|Pays-Bas|Nordiques/.test(t.zone) : t.zone.includes(z));
-  const zc = z => TARGETS.filter(t => inT(t, z)).length;
+  const W = t => t.watch || {};
+  const hasNews = t => (W(t).new || 0) > 0, hasPosts = t => t.jobs > 0 || (W(t).count || 0) > 0;
+  const inT2 = (t, z) => z === "NEW" ? hasNews(t) : z === "POSTS" ? hasPosts(t) : inT(t, z);
+  const zc = z => TARGETS.filter(t => inT2(t, z)).length;
+  const nNew = zc("NEW");
   $("#targetZone").innerHTML = `<button class="${tZone ? "" : "on"}" data-z="">Toutes<span class="n">${TARGETS.length}</span></button>` +
+    `<button class="${tZone === "NEW" ? "on" : ""} hot" data-z="NEW">✦ Nouveautés (7 j)<span class="n">${nNew}</span></button>` +
+    `<button class="${tZone === "POSTS" ? "on" : ""}" data-z="POSTS">Recrutent<span class="n">${zc("POSTS")}</span></button>` +
     zones.map(z => `<button class="${tZone === z ? "on" : ""}" data-z="${z}">${z === "DFI" ? "Institutions de développement" : z === "Dubaï" ? "Golfe" : z}<span class="n">${zc(z)}</span></button>`).join("");
-  const list = TARGETS.filter(t => inT(t, tZone))
-    .sort((a, b) => b.jobs - a.jobs || (b.auto - a.auto) || a.name.localeCompare(b.name));
-  $("#targetsCount").textContent = `${list.length} employeurs · ${list.filter(t => t.jobs).length} avec des offres juniors en ce moment`;
+  const list = TARGETS.filter(t => inT2(t, tZone))
+    .sort((a, b) => (W(b).new || 0) - (W(a).new || 0) || b.jobs - a.jobs || (W(b).count || 0) - (W(a).count || 0) || (b.auto - a.auto) || a.name.localeCompare(b.name));
+  const checked = TARGETS.map(t => W(t).checked).filter(Boolean).sort().pop();
+  $("#targetsCount").innerHTML = `${list.length} employeurs · ${list.filter(t => t.jobs).length} avec des offres juniors sur le site` +
+    (checked ? ` · <b>${TARGETS.filter(t => !t.auto).length} pages carrière vérifiées le ${fmtDate(checked)}</b>${nNew ? `, <span style="color:var(--good);font-weight:700">${nNew} avec du nouveau</span>` : ""}` : "");
   $("#targets").innerHTML = list.map(t => {
     const dom = (t.url.match(/https?:\/\/(?:www\.)?([^/]+)/) || [])[1] || "";
     return `<div class="tcard2">
       <div class="th">${logoHtml({ employer: t.name, domain: dom })}<div><b>${esc(t.name)}</b><small>${esc(t.type)} · ${esc(t.zone)}</small></div></div>
       <div class="tags">${t.jobs ? `<button class="tag new" data-emp="${esc(t.name)}" style="border:0;cursor:pointer">${t.jobs} offre${t.jobs > 1 ? "s" : ""} junior${t.jobs > 1 ? "s" : ""} →</button>` : ""}
-        <span class="tag ${t.auto ? "auto" : "watch"}">${t.auto ? "Suivi automatique" : "À surveiller"}</span></div>
+        ${t.auto ? `<span class="tag auto">Offres lues chaque jour</span>` : watchTag(t)}</div>
+      ${watchList(t)}
       ${t.note ? `<div class="note">${esc(t.note)}</div>` : ""}
       <div class="acts">
         <a class="btn small" href="${esc(t.url)}" target="_blank" rel="noopener">Page carrière ↗</a>
