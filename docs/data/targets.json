@@ -181,7 +181,7 @@
 },
 {
 "name": "Africa Finance Corporation",
-"type": "Institution de financement infra",
+"type": "DFI · Financement infra",
 "zone": "Afrique (Lagos)",
 "url": "https://www.africafc.org/careers",
 "email": "",
@@ -226,16 +226,6 @@
 "url": "https://inspiredevolution.co.za/careers/",
 "email": "",
 "note": "",
-"jobs": 0,
-"auto": false
-},
-{
-"name": "Proparco / AFD",
-"type": "Institution de financement du développement",
-"zone": "France · Afrique",
-"url": "https://www.afd.fr/fr/lafd-recrute",
-"email": "",
-"note": "Stages et VIE fréquents",
 "jobs": 0,
 "auto": false
 },
@@ -680,24 +670,124 @@
 "auto": false
 },
 {
+"name": "World Bank Group / IFC",
+"type": "DFI · Groupe Banque mondiale",
+"zone": "Washington · Paris · monde",
+"url": "https://www.ifc.org/en/about/careers",
+"email": "",
+"note": "Programmes YPP, JPA et stages",
+"jobs": 0,
+"auto": true
+},
+{
+"name": "EBRD",
+"type": "DFI · Banque multilatérale",
+"zone": "Londres",
+"url": "https://jobs.ebrd.com/",
+"email": "",
+"note": "Graduate programme et stages",
+"jobs": 1,
+"auto": true
+},
+{
+"name": "EIB / EIF",
+"type": "DFI · Banque de l'UE",
+"zone": "Luxembourg",
+"url": "https://www.eib.org/en/about/careers/index",
+"email": "",
+"note": "Site non lisible par le robot : stages et Graduate Programme à surveiller",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "IDB / IDB Invest",
+"type": "DFI · Banque multilatérale",
+"zone": "Washington · Amérique latine",
+"url": "https://idbinvest.org/en/careers",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": true
+},
+{
+"name": "AfDB",
+"type": "DFI · Banque multilatérale",
+"zone": "Abidjan",
+"url": "https://www.afdb.org/en/about-us/careers",
+"email": "",
+"note": "Site protégé : Young Professionals Program à surveiller",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Proparco / AFD",
+"type": "DFI · France",
+"zone": "Paris · Afrique",
+"url": "https://www.afd.fr/fr/lafd-recrute",
+"email": "",
+"note": "Stages et VIE fréquents ; site non lisible par le robot",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "British International Investment",
+"type": "DFI · UK",
+"zone": "Londres · Afrique · Asie",
+"url": "https://www.bii.co.uk/en/careers/",
+"email": "",
+"note": "Site protégé : à surveiller",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "FMO",
+"type": "DFI · Pays-Bas",
+"zone": "La Haye",
+"url": "https://fmo.jobs.hr.cloud.sap/",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": true
+},
+{
+"name": "DEG / KfW",
+"type": "DFI · Allemagne",
+"zone": "Cologne · Francfort",
+"url": "https://www.deginvest.de/",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Norfund",
+"type": "DFI · Norvège",
+"zone": "Oslo · Afrique",
+"url": "https://www.norfund.no/",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Bpifrance",
+"type": "Banque publique (fonds infra, international)",
+"zone": "France",
+"url": "https://www.bpifrance.fr/nous-rejoindre",
+"email": "",
+"note": "Stages et VIE",
+"jobs": 1,
+"auto": false
+},
+{
 "name": "AIIB",
-"type": "Banque multilatérale infra",
+"type": "DFI · Banque multilatérale infra",
 "zone": "Pékin",
 "url": "https://www.aiib.org/en/work-with-us/join-the-team/young-talent-programs/index.html",
 "email": "talentacquisition@aiib.org",
 "note": "Programmes jeunes talents",
 "jobs": 0,
 "auto": true
-},
-{
-"name": "EBRD",
-"type": "Banque multilatérale",
-"zone": "Londres",
-"url": "https://www.ebrd.com/home/work-with-us.html",
-"email": "",
-"note": "Graduate programme annuel",
-"jobs": 0,
-"auto": false
 },
 {
 "name": "Macquarie Asset Management (infra)",
