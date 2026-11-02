@@ -33,7 +33,7 @@ TITLE_RULES = [
     ("ma", rx(r"m ?& ?a", r"mergers?", r"acquisitions?", r"m&amp;a", r"fusions?", r"corporate financ\w*",
               r"financial advisory", r"strategic advisory", r"shareholder advisory", r"restructuring",
               r"sell[- ]side", r"transaction services", r"advisory analyst", r"advisory associate",
-              r"corporate advisory", r"fairness opinion", r"conseil en fusions", r"sectors? (?:&|and) advisory", r"conseil",
+              r"corporate advisory", r"fairness opinion", r"conseil en fusions", r"sectors? (?:&|and) advisory", r"conseil financier",
               r"m&a", r"fusions? (?:&|et) acquisitions")),
     ("ib", rx(r"investment bank\w*", r"ibd", r"global banking", r"corporate (?:&|and) investment bank\w*",
               r"banking analyst", r"banking associate", r"banking summer", r"coverage", r"industry group",
@@ -78,11 +78,11 @@ EXCLUDE_TITLE = rx(
     r"relationship partner", r"re debt", r"enablement", r"deal services", r"conflicts", r"documentation", r"credit officer", r"portfolio manager", r"agency services", r"structurer",
     r"rates", r"commodities", r"trade finance", r"working capital", r"trade (?:&|and) working capital",
     r"fp&a", r"finance manager", r"finance & strategy", r"finance (?:and|&) strategy", r"middle market banking",
-    r"loan", r"loans", r"syndicate", r"public affairs", r"governance", r"camberview", r"securities services",
+    r"loan", r"loans", r"syndicate", r"public affairs", r"affaires publiques", r"gouvernementales?", r"governance", r"camberview", r"securities services",
     r"leadership program\w*", r"personal banking", r"complex care", r"ia manager", r"ai manager", r"artificial intelligence",
     r"intelligence artificielle", r"mba", r"summer associate", r"summer (?:\w+ ){1,3}associate", r"senior associate", r"chef de projet", r"project manager",
     r"pilotage", r"surveillance", r"credit research", r"research", r"structured products?", r"structuring - dynamic",
-    r"roadshow", r"corporate access", r"rfp", r"remote", r"avocat\w*", r"lawyer", r"droit", r"merchant acquisition", r"strategy consult\w*", r"notaire", r"freelance", r"ai trainer", r"annotat\w*", r"subject matter expert", r"networking", r"implementation", r"interest form", r"information session", r"financial engineer\w*", r"kyc", r"juriste", r"legal", r"assistant\(e\)", r"business manager", r"portfolio management", r"asset management", r"investment management",
+    r"roadshow", r"corporate access", r"rfp", r"records", r"pmo", r"project managers?", r"transition [ée]cologique", r"remote", r"avocat\w*", r"lawyer", r"droit", r"merchant acquisition", r"strategy consult\w*", r"notaire", r"freelance", r"ai trainer", r"annotat\w*", r"subject matter expert", r"networking", r"implementation", r"interest form", r"information session", r"financial engineer\w*", r"kyc", r"juriste", r"legal", r"assistant\(e\)", r"business manager", r"portfolio management", r"asset management", r"investment management",
 )
 # Dans les fonds, on accepte un titre générique (Analyst, Associate…) sauf ces mots
 EXCLUDE_DEFAULT = rx(r"credit", r"lending", r"real estate", r"hedge", r"liquid", r"multi-asset", r"bxma",

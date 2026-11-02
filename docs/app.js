@@ -146,6 +146,7 @@ function apply() {
   S.filtered.sort(s === "employer" ? (a, b) => a.employer.localeCompare(b.employer) || dateKey(b).localeCompare(dateKey(a))
     : s === "country" ? (a, b) => (a.country || "~").localeCompare(b.country || "~") || dateKey(b).localeCompare(dateKey(a))
     : s === "salary" ? (a, b) => salKey(b) - salKey(a)
+    : s === "match" ? (a, b) => (matchScore(b)?.score ?? -1) - (matchScore(a)?.score ?? -1) || dateKey(b).localeCompare(dateKey(a))
     : (a, b) => dateKey(b).localeCompare(dateKey(a)));
   if ((s === "date" || !s) && !S.zone) {
     // à date égale, on alterne États-Unis et reste du monde pour équilibrer le haut de la liste
@@ -174,6 +175,100 @@ function renderKpis() {
   $("#kpis").innerHTML = tiles.map(([lv, n, l]) => `<button class="kpi ${S.level === lv && lv ? "on" : ""}" data-level="${lv}"><b>${n}</b><span>${l}${lv === "" && fresh ? ` · <span style="color:var(--good);font-weight:600">${fresh} nouvelles</span>` : ""}</span></button>`).join("");
   $("#kpis").onclick = e => { const k = e.target.closest(".kpi"); if (k) { S.level = S.level === k.dataset.level ? "" : k.dataset.level; apply(); } };
 }
+// ---------------------------------------------------------------- score de correspondance CV ↔ offre
+const CAT_SIGNALS = { ma: "m&a|merger|acquisition|valuation|dcf|sell-side|buy-side|transaction|advisory|due diligence",
+  ib: "investment bank|pitch|capital markets|advisory|transaction|valuation", levfin: "lbo|leverage|debt|financing|credit|debt sizing",
+  ecmdcm: "capital markets|ipo|bond|equity|debt", pe: "private equity|lbo|buy-?out|add-on|investment|portfolio|due diligence|family office",
+  infra: "infrastructure|energy|renewable|solar|wind|transmission|transport|greenfield|brownfield|epc|bot|concession",
+  pf: "project finance|debt sizing|dscr|financing structure|renewable|epc|bot|concession|biogas" };
+const LANGS = { French: "french|français|francophone", German: "german|allemand|deutsch", Spanish: "spanish|espagnol|español",
+  Portuguese: "portuguese|portugais", Italian: "italian|italien", Arabic: "arabic|arabe", Mandarin: "mandarin|chinese|chinois",
+  Dutch: "dutch|néerlandais", Swedish: "swedish|suédois", Japanese: "japanese|japonais", Korean: "korean|coréen", Polish: "polish|polonais" };
+const MONTHS = { jan: 1, janv: 1, january: 1, janvier: 1, feb: 2, february: 2, fevrier: 2, février: 2, mar: 3, march: 3, mars: 3, apr: 4, april: 4, avril: 4,
+  may: 5, mai: 5, jun: 6, june: 6, juin: 6, jul: 7, july: 7, juillet: 7, aug: 8, august: 8, aout: 8, août: 8, sep: 9, sept: 9, september: 9, septembre: 9,
+  oct: 10, october: 10, octobre: 10, nov: 11, november: 11, novembre: 11, dec: 12, december: 12, decembre: 12, décembre: 12,
+  summer: 6, été: 6, spring: 4, printemps: 4, autumn: 9, fall: 9, automne: 9, winter: 1, hiver: 1, q1: 1, q2: 4, q3: 7, q4: 10 };
+let PROFILE_CACHE = null;
+function profileInfo() {
+  if (PROFILE_CACHE) return PROFILE_CACHE;
+  const p = store.get("fjr_profile", null);
+  if (!p) return (PROFILE_CACHE = { ok: false });
+  const c = p.cvData || { sections: [] };
+  const text = (c.sections || []).map(s => (s.items || []).map(i => [i.org, i.orgDesc, i.role, ...(i.bullets || [])].join(" ")).join(" ") + " " + (s.lines || []).map(l => l.label + " " + l.text).join(" ")).join(" ") + " " + (p.cv || "");
+  const langLine = ((c.sections || []).flatMap(s => s.lines || []).find(l => /language|langue/i.test(l.label)) || {}).text || text;
+  const langs = Object.keys(LANGS).filter(L => new RegExp(LANGS[L], "i").test(langLine)).concat(["English"]);
+  let avail = null;
+  if (p.available) { const [y, m] = p.available.split("-").map(Number); avail = y * 12 + m; }
+  return (PROFILE_CACHE = { ok: text.trim().length > 200, text, langs, avail });
+}
+document.addEventListener("fjr:profile", () => { PROFILE_CACHE = null; SCORES.clear(); apply(); });
+const SCORES = new Map();
+const kwRx = re => new RegExp(`(?<![a-z])(?:${re})(?![a-z])`, "i");
+function offerStart(j) {
+  const t = `${j.title} ${(j.desc || "").slice(0, 2500)}`.toLowerCase();
+  const m = t.match(/\b(jan(?:uary|vier|v)?|feb(?:ruary)?|f[eé]vrier|mar(?:ch|s)?|apr(?:il)?|avril|may|mai|june?|juin|july?|juillet|aug(?:ust)?|ao[uû]t|sept?(?:ember|embre)?|oct(?:ober|obre)?|nov(?:ember|embre)?|dec(?:ember)?|d[eé]cembre|summer|[eé]t[eé]|spring|printemps|autumn|fall|automne|winter|hiver|q[1-4])\.?\s*(20[2-3]\d)\b/);
+  if (!m) return null;
+  const mo = MONTHS[m[1].replace(/\.$/, "")] || MONTHS[m[1].slice(0, 3)] || 1;
+  return +m[2] * 12 + mo;
+}
+function matchScore(j) {
+  const P = profileInfo(); if (!P.ok) return null;
+  if (SCORES.has(j.id)) return SCORES.get(j.id);
+  const offer = `${j.title}\n${j.desc || ""}`;
+  const parts = [];
+  // 1. mots-clés de l'offre présents dans le CV
+  const kws = FIN_KEYWORDS.filter(([, re]) => kwRx(re).test(offer));
+  const okK = kws.filter(([, re]) => kwRx(re).test(P.text));
+  // peu de mots-clés = information faible : on ramène vers 50 %
+  const conf = Math.min(1, kws.length / 8);
+  const kwScore = kws.length ? (okK.length / kws.length) * conf + 0.5 * (1 - conf) : 0.5;
+  parts.push(["Compétences et mots-clés", kwScore, 35, kws.length ? `${okK.length}/${kws.length} mots-clés de l'offre dans ton CV${kws.length < 5 ? " (description courte)" : ""}` : "description trop courte : estimation neutre"]);
+  // 2. expérience dans le métier de l'offre
+  const hits = (P.text.match(new RegExp(CAT_SIGNALS[j.category] || "finance", "gi")) || []).length;
+  const catScore = Math.min(1, hits / 7);
+  parts.push(["Expérience dans le métier", catScore, 20, `${hits} signal${hits > 1 ? "s" : ""} « ${CAT[j.category]} » dans ton CV`]);
+  // 3. niveau du poste
+  const lv = { Stage: 1, VIE: 1, Graduate: 1, "Analyst 1": 0.85, Alternance: 0.35 }[j.seniority] ?? 0.7;
+  parts.push(["Niveau du poste", lv, 10, j.seniority]);
+  // 4. langues exigées
+  const need = Object.keys(LANGS).filter(L => new RegExp(`(?:fluent|fluency|native|proficien\\w*|business[- ]level|courant|bilingue?|maîtrise|speaking|speaker)[^.\\n]{0,40}(?:${LANGS[L]})|(?:${LANGS[L]})[^.\\n]{0,25}(?:required|essential|mandatory|fluent|courant|exigé|indispensable|native)`, "i").test(offer));
+  const missing = need.filter(L => !P.langs.includes(L));
+  parts.push(["Langues", missing.length ? 0 : 1, 15, missing.length ? `exige : ${missing.join(", ")}` : need.length ? `exigées : ${need.join(", ")} ✓` : "aucune langue particulière exigée"]);
+  // 5. droit de travailler dans le pays (citoyen de l'UE)
+  const EU = "FR DE NL BE LU IT ES PT IE AT SE DK FI PL CZ HU RO GR SK SI HR BG EE LV LT CY MT CH NO IS".split(" ");
+  const noSponsor = /(not|unable to|cannot|won't|will not|no)\s+(?:\w+\s+){0,3}(sponsor|sponsorship)|without (?:the need for )?(?:visa )?sponsorship|must (?:be (?:legally )?)?(?:authori[sz]ed|eligible) to work|right to work in the (?:uk|united kingdom)|(?:us|u\.s\.) citizens?(?:hip)? (?:or|and) (?:permanent|green)|security clearance/i.test(offer);
+  let wa, waWhy;
+  if (EU.includes(j.cc)) { wa = 1; waWhy = "pays de l'UE / AELE : pas de visa nécessaire"; }
+  else if (j.contract === "VIE") { wa = 1; waWhy = "VIE : visa géré par Business France"; }
+  else if (noSponsor) { wa = 0.1; waWhy = "l'offre exclut le parrainage de visa ou exige un droit de travail local"; }
+  else if (["US", "GB", "CA", "AU", "SG", "HK", "JP", "CN", "AE", "SA"].includes(j.cc)) { wa = 0.55; waWhy = "visa ou permis de travail probablement nécessaire"; }
+  else { wa = 0.7; waWhy = "à vérifier selon le pays"; }
+  parts.push(["Droit de travailler sur place", wa, 15, waWhy]);
+  // 6. disponibilité
+  const st = offerStart(j);
+  if (P.avail && st) {
+    const gap = st - P.avail;
+    const a = gap >= 0 ? 1 : gap >= -2 ? 0.5 : 0;
+    parts.push(["Disponibilité", a, 10, gap >= 0 ? "date de début compatible" : `début avant ta disponibilité (${-gap} mois)`]);
+  }
+  const W = parts.reduce((x, p) => x + p[2], 0);
+  const score = Math.round(100 * parts.reduce((x, p) => x + p[1] * p[2], 0) / W);
+  const res = { score, parts };
+  SCORES.set(j.id, res);
+  return res;
+}
+function matchHtml(j) {
+  const m = matchScore(j); if (!m) return "";
+  const cls = m.score >= 75 ? "hi" : m.score >= 55 ? "mid" : "lo";
+  return `<span class="match ${cls}" title="Correspondance entre ton CV et l'offre">${m.score} %<small>match</small></span>`;
+}
+window.FJR.matchScore = matchScore;
+
+function verifHtml(j) {
+  if (j.verified === "site carrière") return `<span class="verified" title="Offre retrouvée sur le site carrière de l'employeur : le lien mène directement à la candidature">✔ lien direct</span>`;
+  if (j.verified === "") return `<span class="unverified" title="Offre trouvée via un agrégateur, absente des sites carrière lisibles par le robot : vérifie qu'elle est toujours ouverte avant de postuler">via agrégateur</span>`;
+  return "";
+}
 function salaryHtml(s) {
   if (!s) return "";
   const main = s.text.replace(/\s*\(≈.*\)$/, "");
@@ -185,8 +280,9 @@ function jobCard(j) {
   return `<article class="job ${S.reported.has(j.id) ? "reported" : ""}" data-id="${j.id}" tabindex="0">
     ${logoHtml(j)}
     <div><h3>${esc(j.title)}</h3><div class="sub"><b>${esc(j.employer)}</b> · ${flag(j.cc)} ${esc(j.city || j.location || "—")}${j.country && j.city ? ", " + esc(j.country) : ""}</div></div>
-    <div class="right"><span class="when">${j.posted ? rel(j.posted) : "repérée " + rel(j.first_seen)}</span></div>
+    <div class="right"><span class="when">${j.posted ? rel(j.posted) : "repérée " + rel(j.first_seen)}</span>${verifHtml(j)}</div>
     <div class="tags">
+      ${matchHtml(j)}
       <span class="tag level">${esc(j.seniority)}</span>
       <span class="tag"><span class="dot" style="background:${catColor(j.category)}"></span>${esc(CAT[j.category])}</span>
       ${isNew ? `<span class="tag new">Nouveau</span>` : ""}
@@ -233,10 +329,10 @@ const shortEmp = e => e.replace(/\b(Group|Capital Markets|Partners|Company|& Co\
 function jobContext(j) {
   return `Poste : ${j.title}\nEmployeur : ${j.employer}\nLieu : ${[j.city, j.country].filter(Boolean).join(", ") || j.location}\nType : ${j.seniority} · ${CAT[j.category]}\nLien : ${j.url}\n\nDescription :\n${(j.desc || "").slice(0, 3000)}`;
 }
-async function askClaude(j) {
-  try { await navigator.clipboard.writeText(jobContext(j)); toast("Offre copiée : colle-la dans l'assistant Claude (Ctrl/Cmd + V)"); }
+async function askClaude(j, mode = "chat") {
+  try { await navigator.clipboard.writeText(jobContext(j)); toast(mode === "letter" ? "Offre copiée : dans l'assistant, colle-la (Ctrl/Cmd + V) puis « Rédiger la lettre »" : "Offre copiée : colle-la dans l'assistant Claude (Ctrl/Cmd + V)"); }
   catch { toast("Ouvre l'assistant puis colle l'offre"); }
-  window.open(ASSISTANT, "_blank", "noopener");
+  window.open(ASSISTANT + "#" + mode, "_blank", "noopener");
 }
 window.FJR.askClaude = askClaude;
 function openJob(j) {
@@ -259,10 +355,14 @@ function openJob(j) {
     <div class="drawer-body">
       <div class="actions" style="margin:0">
         <a class="btn accent" href="${esc(j.url)}" target="_blank" rel="noopener">Voir et postuler ↗</a>
+        ${j.verified === "" ? `<a class="btn ghost" href="https://www.google.com/search?q=${encodeURIComponent(`"${j.employer}" ${j.title} careers`)}" target="_blank" rel="noopener">Chercher sur le site de l'employeur ↗</a>` : ""}
         <button class="btn ghost" data-act="prep">Préparer CV & lettre</button>
-        <button class="btn ghost" data-act="claude">✦ Demander à Claude</button>
+        <button class="btn ghost" data-act="letter">✦ Lettre de motivation par Claude</button>
         <select data-act="status" aria-label="Statut de suivi"><option value="">Suivi : aucun</option>${STATUSES.map(s => `<option ${s === st ? "selected" : ""}>${s}</option>`).join("")}</select>
       </div>
+      ${(() => { const m = matchScore(j); if (!m) return `<div class="fact" style="background:var(--accent-soft)"><span>Score de correspondance</span><b>Importe ton CV (onglet Candidature → Mon CV) pour voir ton score sur chaque offre</b></div>`;
+        return `<div class="matchbox"><div class="mb-head"><b class="match ${m.score >= 75 ? "hi" : m.score >= 55 ? "mid" : "lo"}">${m.score} %</b><span>de correspondance avec ton CV</span></div>
+        ${m.parts.map(([l, v, w, why]) => `<div class="mb-row"><span>${esc(l)}</span><span class="mb-bar"><span style="width:${Math.round(v * 100)}%"></span></span><small>${esc(why)}</small></div>`).join("")}</div>`; })()}
       <div class="facts">
         <div class="fact"><span>Type de poste</span><b>${esc(j.seniority)}</b></div>
         <div class="fact"><span>Métier</span><b><span class="dot" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${catColor(j.category)};margin-right:.35rem"></span>${esc(CAT[j.category])}</b></div>
@@ -283,7 +383,8 @@ function openJob(j) {
     if (e.target.closest("[data-close]")) closeDrawers();
     if (a === "prep") { closeDrawers(); window.FJR.prepare?.(j); }
     if (a === "report") report(j);
-    if (a === "claude") askClaude(j);
+    if (a === "claude") askClaude(j, "chat");
+    if (a === "letter") askClaude(j, "letter");
   };
   $("[data-act=status]", d).onchange = e => { if (!e.target.value) { delete S.track[j.id]; store.set("fjr_track", S.track); renderBoard(); renderList(); toast("Retirée du suivi"); } else toggleTrack(j, e.target.value); };
   openDrawer(d);

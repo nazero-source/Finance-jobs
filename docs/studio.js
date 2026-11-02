@@ -28,7 +28,7 @@ function migrate(p) {
   if (!p.cvData) p.cvData = JSON.parse(JSON.stringify(EMPTY_CV));
   return p;
 }
-const save = () => store.set("fjr_profile", profile);
+const save = () => { store.set("fjr_profile", profile); clearTimeout(save._e); save._e = setTimeout(() => document.dispatchEvent(new CustomEvent("fjr:profile")), 300); };
 
 // ---------------------------------------------------------------- entrée depuis la liste
 F.prepare = j => { setTarget(j); F.switchTab("apply"); };
@@ -264,7 +264,8 @@ $("#docCv").onclick = async () => {
 };
 $("#docLetter").onclick = () => docDownload(`Cover_Letter_${fileBase()}.doc`, esc($("#paperLetter").innerText).split("\n\n").map(p => `<p>${p.replace(/\n/g, "<br>")}</p>`).join(""));
 
-$("#askAssistant").onclick = () => { if (target) F.askClaude(target); };
+$("#askAssistant").onclick = () => { if (target) F.askClaude(target, "chat"); };
+$("#letterClaude").onclick = () => { if (target) F.askClaude(target, "letter"); };
 $("#claudePrompt").onclick = () => {
   if (!target) return;
   const p = `You are an experienced ${CAT[target.category]} recruiter and application coach.
@@ -295,7 +296,7 @@ ${$("#paperLetter").innerText}`;
 // ---------------------------------------------------------------- profil (tiroir)
 $("#openProfile").onclick = () => { renderProfileEditor(); F.openDrawer($("#profileDrawer")); };
 function renderProfileEditor() {
-  ["name", "email", "phone", "city", "school"].forEach(k => $("#p_" + k).value = profile[k] || "");
+  ["name", "email", "phone", "city", "school", "available"].forEach(k => $("#p_" + k).value = profile[k] || "");
   const c = profile.cvData;
   $("#cvEditor").innerHTML = c.sections.map((s, si) => `<div class="cv-ed"><h4>${esc(s.title)}</h4>
     ${(s.items || []).map((it, ii) => `<div class="cv-ed" data-si="${si}" data-ii="${ii}">

@@ -362,3 +362,21 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
 .tag.watch { background: var(--warn-soft); color: var(--warn); font-weight: 600; }
 .tcard2 .note { font-size: .78rem; color: var(--text-2); }
 .tcard2 .acts { display: flex; flex-wrap: wrap; gap: .35rem; }
+
+/* ============ Score de correspondance ============ */
+.match { display: inline-flex; align-items: baseline; gap: .25rem; font-size: .76rem; font-weight: 700; padding: .14rem .55rem; border-radius: 99px; font-variant-numeric: tabular-nums; }
+.match small { font-weight: 500; font-size: .68rem; opacity: .8; }
+.match.hi { background: var(--good-soft); color: var(--good); }
+.match.mid { background: var(--warn-soft); color: var(--warn); }
+.match.lo { background: var(--surface-2); color: var(--muted); }
+.matchbox { border: 1px solid var(--border); border-radius: 12px; padding: .7rem .8rem; display: grid; gap: .45rem; }
+.mb-head { display: flex; align-items: center; gap: .55rem; }
+.mb-head .match { font-size: 1rem; padding: .2rem .7rem; }
+.mb-head span { color: var(--text-2); font-size: .85rem; }
+.mb-row { display: grid; grid-template-columns: 170px 1fr; gap: .1rem .6rem; align-items: center; font-size: .8rem; }
+.mb-row small { grid-column: 2; color: var(--muted); font-size: .74rem; }
+.mb-bar { height: 7px; border-radius: 0 4px 4px 0; background: var(--surface-2); position: relative; overflow: hidden; }
+.mb-bar span { position: absolute; inset: 0 auto 0 0; background: var(--accent); border-radius: 0 4px 4px 0; }
+.verified { font-size: .72rem; color: var(--good); font-weight: 600; }
+.unverified { font-size: .72rem; color: var(--warn); font-weight: 600; }
+@media (max-width: 560px) { .mb-row { grid-template-columns: 1fr; } .mb-row small { grid-column: 1; } }

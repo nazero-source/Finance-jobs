@@ -150,6 +150,14 @@ def main():
 
     with cf.ThreadPoolExecutor(12) as ex:
         kept = [j for j in ex.map(enrich, cand) if j]
+    # Offres d'agrégateurs : retrouver le lien direct sur le site carrière, écarter les offres douteuses
+    import resolve as R
+    agg = [j for j in kept if j["source"].startswith(("Jooble", "Adzuna"))]
+    direct = [j for j in raw if not j["source"].startswith(("Jooble", "Adzuna"))]
+    agg_kept, agg_stats = R.resolve(agg, direct)
+    kept = [j for j in kept if not j["source"].startswith(("Jooble", "Adzuna"))] + agg_kept
+    report["Agrégateurs · vérification"] = {"fetched": len(agg), "error": None, "seconds": 0, "stats": agg_stats}
+    print("Vérification agrégateurs :", agg_stats, flush=True)
     print(f"{len(kept)} offres retenues après classement", flush=True)
 
     geo = Geocoder()
@@ -193,6 +201,7 @@ def main():
             "lat": (g or {}).get("lat"), "lon": (g or {}).get("lon"),
             "posted": j.get("posted") or old.get("posted"),
             "first_seen": old.get("first_seen", TODAY),
+            "verified": "source directe" if not j["source"].startswith(("Jooble", "Adzuna")) and "via" not in j["source"] else j.get("verified", ""),
             "_sal": sal, "emails": emails, "recruiters": recruiters, "domain": E.DOMAINS.get(j["employer"], ""),
             "desc": desc[:3500],
         })

@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="style.css?v=9">
+<link rel="stylesheet" href="style.css?v=11">
 <script>try{const t=localStorage.getItem("fjr_theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
 </head>
 <body>
@@ -46,7 +46,7 @@
     <label>Type d'employeur<select id="etype"><option value="">Tous</option></select></label>
     <label>Employeur<select id="employer"><option value="">Tous</option></select></label>
     <label>Publiée<select id="since"><option value="">Toutes dates</option><option value="1">Nouvelles (24 h)</option><option value="7">7 derniers jours</option><option value="30">30 derniers jours</option></select></label>
-    <label>Trier par<select id="sort"><option value="date">Plus récentes</option><option value="salary">Salaire</option><option value="employer">Employeur</option><option value="country">Pays</option></select></label>
+    <label>Trier par<select id="sort"><option value="date">Plus récentes</option><option value="match">Meilleur match</option><option value="salary">Salaire</option><option value="employer">Employeur</option><option value="country">Pays</option></select></label>
     <label class="check"><input type="checkbox" id="hideReported" checked> Masquer les offres signalées</label>
     <button class="btn ghost small" id="reset">Tout effacer</button>
   </div>
@@ -104,12 +104,17 @@
         </div>
         <div class="card" id="letterControls" hidden>
           <h3>Lettre de motivation</h3>
+          <p class="hint" style="margin:0">Claude rédige une lettre propre à cette offre, à partir de ton CV, de l'offre et de l'entreprise, dans le style de ta lettre modèle. Utilise ton compte Claude.</p>
+          <button class="btn accent wide" id="letterClaude">✦ Rédiger ma lettre avec Claude ↗</button>
+          <details class="quick"><summary class="muted small">Brouillon rapide sans Claude (assemblage de tes paragraphes)</summary>
+          
           <label>Paragraphe métier<select id="l_cat"></select></label>
           <label>Poste<input id="l_role"></label>
           <label>Ville<input id="l_city"></label>
           <label>Accroche — une actualité récente de l'entreprise <a id="newsLink" target="_blank" rel="noopener">chercher ↗</a>
             <textarea id="l_hook" rows="3" placeholder="In March 2026, the bank increased the capital of its Brazilian subsidiary by €200m…"></textarea></label>
           <div class="actions"><button class="btn" id="genLetter">Régénérer</button><button class="btn ghost" id="printLetter">PDF</button><button class="btn ghost" id="docLetter">Word</button><button class="btn ghost" id="copyLetter">Copier</button></div>
+        </details>
         </div>
         <div class="card" id="claudeCard" hidden>
           <h3>Claude</h3>
@@ -168,6 +173,7 @@
       <label>Nom<input id="p_name"></label><label>E-mail<input id="p_email"></label>
       <label>Téléphone<input id="p_phone"></label><label>Ville<input id="p_city"></label>
       <label>École (pour trouver les anciens)<input id="p_school"></label>
+      <label>Disponible à partir de<input id="p_available" type="month"></label>
     </div>
     <p class="hint" id="pdfStatus">Le PDF est lu directement par ton navigateur : il n'est envoyé nulle part. Après l'import, vérifie les sections ci-dessous et corrige si besoin.</p>
     <h3>CV (en anglais)</h3>
@@ -184,9 +190,9 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="keywords.js?v=9"></script>
-<script src="app.js?v=9"></script>
-<script src="map.js?v=9"></script>
-<script src="studio.js?v=9"></script>
+<script src="keywords.js?v=11"></script>
+<script src="app.js?v=11"></script>
+<script src="map.js?v=11"></script>
+<script src="studio.js?v=11"></script>
 </body>
 </html>

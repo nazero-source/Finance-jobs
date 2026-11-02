@@ -2,7 +2,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:wght@400;500;600&display=swap">
 <style>
 /* Layout : colonne contexte (offre + CV) à gauche, conversation à droite ; une colonne sur téléphone.
    Même système visuel que le site Finance Jobs Radar. */
@@ -82,7 +82,24 @@ textarea:focus, input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px
 .notice { font-size: .82rem; padding: 10px 12px; border-radius: 10px; background: var(--warn-soft); color: var(--warn); }
 .ctx-sum { font-size: .82rem; background: var(--surface-2); border-radius: 10px; padding: 8px 10px; }
 .ctx-sum b { display: block; }
+.modes { display: flex; gap: 6px; padding: 4px; background: var(--surface-2); border-radius: 12px; width: fit-content; max-width: 100%; overflow-x: auto; }
+.modes button { border: 0; background: none; color: var(--text-2); font: inherit; font-size: .88rem; font-weight: 500; padding: 7px 14px; border-radius: 9px; cursor: pointer; white-space: nowrap; }
+.modes button.on { background: var(--surface); color: var(--text); font-weight: 600; box-shadow: 0 1px 3px rgba(15,23,42,.12); }
+.letterpane { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; height: calc(100vh - 150px); min-height: 560px; padding: 0; overflow: hidden; }
+.lp-head { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; padding: 12px 14px; border-bottom: 1px solid var(--border); }
+.lp-head select { font: inherit; font-size: .84rem; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 7px 9px; }
+.lp-stage { overflow: auto; background: var(--surface-2); padding: 18px; display: grid; justify-items: center; }
+.paper { width: 100%; max-width: 760px; background: #fff; color: #111; border-radius: 4px; box-shadow: 0 2px 6px rgba(0,0,0,.08), 0 18px 40px rgba(0,0,0,.12); padding: 48px 56px; font: 11.5pt/1.55 "EB Garamond", Garamond, "Times New Roman", serif; white-space: pre-wrap; outline: none; min-height: 600px; }
+.paper.empty { color: #777; font-family: var(--font); font-size: .9rem; display: grid; place-content: center; text-align: center; white-space: normal; }
+.paper .ph { background: #fff3b0; }
+.lp-foot { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; padding: 12px 14px; border-top: 1px solid var(--border); }
+.lp-foot .hint { margin-left: auto; }
+.check { display: flex; gap: 8px; align-items: center; font-size: .82rem; color: var(--text-2); }
+label.fld { display: grid; gap: 4px; font-size: .78rem; color: var(--text-2); font-weight: 500; }
+label.fld input, label.fld select { font: inherit; font-size: .85rem; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px; }
 @media (max-width: 860px) {
+  .letterpane { height: auto; min-height: 0; }
+  .paper { padding: 28px 22px; }
   .grid { grid-template-columns: 1fr; }
   .chat { height: 78vh; }
 }
@@ -96,6 +113,11 @@ textarea:focus, input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px
     <a class="back" href="https://nazero-source.github.io/Finance-jobs/" target="_blank" rel="noopener">← Retour aux offres</a>
   </header>
 
+  <div class="modes" role="tablist" aria-label="Mode">
+    <button class="on" data-mode="letter" role="tab">Lettre de motivation</button>
+    <button data-mode="chat" role="tab">Contacts, entretien & questions</button>
+  </div>
+
   <div id="unavailable" class="notice" hidden>Claude n'est pas disponible dans cet affichage. Ouvre cette page depuis claude.ai, connecté à ton compte, et autorise-la à utiliser Claude.</div>
 
   <div class="grid">
@@ -105,6 +127,11 @@ textarea:focus, input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px
         <p class="hint">Sur le site, ouvre une offre et clique sur <b>Demander à Claude</b> : l'offre est copiée. Colle-la ici.</p>
         <textarea id="offer" rows="7" placeholder="Colle ici l'offre (ou son lien et sa description)…"></textarea>
         <div id="offerSum" class="ctx-sum" hidden></div>
+      </section>
+      <section class="card" aria-labelledby="h-co" data-letter-only>
+        <h2 id="h-co">L'entreprise <span class="pill" id="coPill">optionnel</span></h2>
+        <p class="hint">Colle ici 3 ou 4 faits tirés de son site : actifs sous gestion, stratégie, bureaux, deals récents. Claude s'en sert pour une accroche précise, comme dans ta lettre ACP. Sans ces faits, il laisse un repère <b>[à compléter]</b> plutôt que d'inventer un chiffre.</p>
+        <textarea id="company" rows="4" placeholder="Ex. : €14bn d'engagements, bureaux à Paris, Londres, Bruxelles, Helsinki ; primaires + secondaires (LP stakes, GP-leds)…"></textarea>
       </section>
       <section class="card" aria-labelledby="h-cv">
         <h2 id="h-cv">Mon CV <span class="pill" id="cvPill">vide</span></h2>
@@ -116,9 +143,39 @@ textarea:focus, input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px
         <textarea id="cv" rows="5" placeholder="…ou colle le texte de ton CV"></textarea>
         <p class="hint" id="cvNote">Gardé uniquement dans ce navigateur. Il n'est envoyé à Claude que quand tu poses une question.</p>
       </section>
+      <section class="card" aria-labelledby="h-model" data-letter-only>
+        <h2 id="h-model">Ma lettre modèle <span class="pill" id="modelPill">vide</span></h2>
+        <p class="hint">Importe une lettre que tu as écrite et dont tu es content (ta lettre ACP par exemple). Claude reprend sa structure, son ton et son niveau de détail, avec un contenu neuf pour chaque offre.</p>
+        <div class="row">
+          <label class="btn ghost" for="modelPdf">Importer le PDF</label>
+          <input type="file" id="modelPdf" accept="application/pdf,.pdf" hidden>
+        </div>
+        <textarea id="model" rows="4" placeholder="…ou colle le texte de ta lettre modèle"></textarea>
+        <div class="row">
+          <label class="fld" style="flex:1">Disponible à partir de<input id="avail" placeholder="March 2027"></label>
+          <label class="fld" style="flex:1">Langue de la lettre<select id="lang"><option value="auto">Comme l'offre</option><option value="en">Anglais</option><option value="fr">Français</option></select></label>
+        </div>
+      </section>
     </div>
 
-    <section class="card chat" aria-label="Conversation avec Claude">
+    <section class="card letterpane" id="letterPane" aria-label="Lettre de motivation">
+      <div class="lp-head">
+        <button class="btn" id="genBtn" type="button">✦ Rédiger la lettre</button>
+        <button class="btn ghost" id="stopLetter" type="button" hidden>Stop</button>
+        <span class="hint" id="letterStatus">Colle l'offre, vérifie ton CV et ta lettre modèle, puis lance la rédaction.</span>
+      </div>
+      <div class="lp-stage"><div class="paper empty" id="paper" contenteditable="false" spellcheck="true">La lettre apparaîtra ici. Tu pourras la modifier directement sur la feuille.</div></div>
+      <div class="lp-foot">
+        <button class="btn ghost" data-rev="shorter" type="button">Plus courte</button>
+        <button class="btn ghost" data-rev="sharper" type="button">Plus percutante</button>
+        <button class="btn ghost" data-rev="company" type="button">Plus centrée sur l'entreprise</button>
+        <button class="btn ghost" data-rev="translate" type="button">Traduire FR ↔ EN</button>
+        <button class="btn ghost" id="copyLetter" type="button">Copier</button>
+        <button class="btn" id="docxLetter" type="button">Télécharger (.docx)</button>
+      </div>
+    </section>
+
+    <section class="card chat" id="chatPane" aria-label="Conversation avec Claude" hidden>
       <div class="chips" id="chips">
         <button class="chip key" data-q="contacts">Qui contacter et comment ?</button>
         <button class="chip" data-q="linkedin">Message LinkedIn</button>
@@ -141,6 +198,7 @@ textarea:focus, input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js"></script>
 <script>
 (() => {
 "use strict";
@@ -165,23 +223,24 @@ function refreshCtx() {
 offer.addEventListener("input", () => { store.set("fjc_offer", offer.value); refreshCtx(); });
 cv.addEventListener("input", () => { store.set("fjc_cv", cv.value); refreshCtx(); });
 $("#cvClear").onclick = () => { cv.value = ""; store.set("fjc_cv", ""); refreshCtx(); };
+async function pdfText(f) {
+  pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+  const pdf = await pdfjsLib.getDocument({ data: await f.arrayBuffer() }).promise;
+  let txt = "";
+  for (let i = 1; i <= pdf.numPages; i++) {
+    const tc = await (await pdf.getPage(i)).getTextContent();
+    let lastY = null;
+    for (const it of tc.items) { const y = it.transform[5]; if (lastY !== null && Math.abs(y - lastY) > 3) txt += "\n"; else if (lastY !== null) txt += " "; txt += it.str; lastY = y; }
+    txt += "\n";
+  }
+  return txt.replace(/[ \t]+/g, " ").replace(/\n\s*\n+/g, "\n").trim();
+}
 $("#cvPdf").addEventListener("change", async e => {
   const f = e.target.files[0]; e.target.value = ""; if (!f) return;
   if (!window.pdfjsLib) { $("#cvNote").textContent = "Lecteur PDF indisponible : colle le texte du CV."; return; }
   $("#cvNote").textContent = "Lecture du PDF…";
-  try {
-    pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-    const pdf = await pdfjsLib.getDocument({ data: await f.arrayBuffer() }).promise;
-    let txt = "";
-    for (let i = 1; i <= pdf.numPages; i++) {
-      const tc = await (await pdf.getPage(i)).getTextContent();
-      let lastY = null;
-      for (const it of tc.items) { const y = it.transform[5]; if (lastY !== null && Math.abs(y - lastY) > 3) txt += "\n"; else if (lastY !== null) txt += " "; txt += it.str; lastY = y; }
-      txt += "\n";
-    }
-    cv.value = txt.replace(/[ \t]+/g, " ").replace(/\n\s*\n+/g, "\n").trim(); store.set("fjc_cv", cv.value); refreshCtx();
-    $("#cvNote").textContent = "CV importé. Gardé uniquement dans ce navigateur.";
-  } catch { $("#cvNote").textContent = "Impossible de lire ce PDF : colle le texte du CV."; }
+  try { cv.value = await pdfText(f); store.set("fjc_cv", cv.value); refreshCtx(); $("#cvNote").textContent = "CV importé. Gardé uniquement dans ce navigateur."; }
+  catch { $("#cvNote").textContent = "Impossible de lire ce PDF : colle le texte du CV."; }
 });
 refreshCtx();
 
@@ -313,9 +372,143 @@ $("#composer").addEventListener("submit", e => { e.preventDefault(); const v = $
 $("#q").addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); $("#composer").requestSubmit(); } });
 $("#stop").onclick = () => ctl && ctl.abort();
 
+// ---------- mode lettre ----------
+const company = $("#company"), model = $("#model"), avail = $("#avail"), lang = $("#lang"), paper = $("#paper");
+company.value = store.get("fjc_company", ""); model.value = store.get("fjc_model", ""); avail.value = store.get("fjc_avail", "March 2027"); lang.value = store.get("fjc_lang", "auto");
+let letterText = store.get("fjc_letter", ""), lctl = null, lbusy = false;
+function refreshLetterCtx() {
+  $("#coPill").textContent = company.value.trim() ? "renseignée" : "optionnel"; $("#coPill").classList.toggle("ok", !!company.value.trim());
+  $("#modelPill").textContent = model.value.trim() ? `${model.value.trim().split(/\s+/).length} mots` : "vide"; $("#modelPill").classList.toggle("ok", !!model.value.trim());
+}
+company.addEventListener("input", () => { store.set("fjc_company", company.value); refreshLetterCtx(); });
+model.addEventListener("input", () => { store.set("fjc_model", model.value); refreshLetterCtx(); });
+avail.addEventListener("input", () => store.set("fjc_avail", avail.value));
+lang.addEventListener("change", () => store.set("fjc_lang", lang.value));
+$("#modelPdf").addEventListener("change", async e => {
+  const f = e.target.files[0]; e.target.value = ""; if (!f || !window.pdfjsLib) return;
+  try { model.value = await pdfText(f); store.set("fjc_model", model.value); refreshLetterCtx(); } catch { $("#letterStatus").textContent = "Impossible de lire ce PDF : colle le texte de ta lettre modèle."; }
+});
+// Une offre collée n'importe où dans la page (depuis le bouton du site) remplit le champ « offre »
+document.addEventListener("paste", e => {
+  if (e.target.closest("textarea, input, [contenteditable=true]")) return;
+  const t = e.clipboardData?.getData("text") || "";
+  if (/^Poste\s*:/m.test(t)) { e.preventDefault(); offer.value = t; store.set("fjc_offer", t); refreshCtx(); $("#letterStatus").textContent = "Offre collée. Lance la rédaction quand tu veux."; }
+});
+function setPaper(t, editable) {
+  paper.classList.toggle("empty", !t);
+  paper.textContent = t || "La lettre apparaîtra ici. Tu pourras la modifier directement sur la feuille.";
+  paper.contentEditable = editable && t ? "true" : "false";
+}
+paper.addEventListener("input", () => { letterText = paper.innerText; store.set("fjc_letter", letterText); });
+if (letterText) setPaper(letterText, true);
+refreshLetterCtx();
+
+const STYLE_GUIDE = `STRUCTURE AND VOICE (follow closely; it mirrors the candidate's best letter):
+1. Salutation: "Dear Sir or Madam," unless the offer names a contact (then "Dear Ms/Mr Surname,"). In French: "Madame, Monsieur,".
+2. Opening paragraph: what specifically draws the candidate to THIS firm. Describe its vantage point, business model, strategy, scale, team and geography with precise facts, then explain why the candidate's mix of experiences maps onto that logic, and why this exact role and team (size, seniority, proximity to decision-makers) is the right next step. No generic flattery.
+3. Two or three experience paragraphs, using the CV only. For each experience: the concrete work done, then the lesson learned, then one explicit sentence connecting it to what this role requires ("which is also what…", "directly useful when…").
+4. Current-role paragraph: daily work in detail (models, analyses, due diligence, coordination of advisors), ending on what it taught that matters for this employer.
+5. Short academic and international paragraph (classes préparatoires, emlyon, exchange, countries lived in, cultures) only where it adds to the fit.
+6. Closing paragraph: honestly name what the candidate has not done yet, then show the building blocks already acquired and why this role is the natural next step; availability; flexibility on the contract type if relevant (intern or analyst); languages; "I would be glad to discuss how I could contribute to your team in <city>."
+7. Sign-off: "Yours faithfully," after "Dear Sir or Madam", otherwise "Yours sincerely,"; French: "Je vous prie d'agréer, Madame, Monsieur, l'expression de mes salutations distinguées." Then the candidate's name.
+Tone: sober, precise, confident, analytical; long well-built sentences; no bullet points; no clichés ("I am writing to apply", "passionate", "dynamic", "I am confident that"). 550 to 700 words.`;
+
+function letterPrompt(extra) {
+  const L = lang.value === "fr" ? "French" : lang.value === "en" ? "British English" : "the language of the job offer (British English if the offer is in English, French if it is in French)";
+  return `You write cover letters for Nassim, a master's student (emlyon) applying to entry-level roles in M&A, investment banking, private equity, infrastructure and project finance.
+
+Write ONE complete cover letter for the job below, in ${L}.
+
+${STYLE_GUIDE}
+
+FACTS — strict rules:
+- About the candidate: use ONLY what is in the CV. Never invent experience, figures, deals, tools or results.
+- About the employer: use the job offer and the company notes. You may add widely known public facts you are highly confident about. Never invent figures, names, deals or office locations: when a precise figure would strengthen a sentence but is not provided, write a placeholder in square brackets such as [montant des actifs sous gestion à vérifier].
+- Availability: ${avail.value || "March 2027"}.
+
+${model.value.trim() ? `MODEL LETTER (reproduce its structure, rhythm and level of detail; do NOT copy its employer-specific content):\n${model.value.trim().slice(0, 7000)}\n` : ""}
+=== JOB OFFER ===
+${offer.value.trim().slice(0, 7000) || "(no offer pasted)"}
+
+=== COMPANY NOTES ===
+${company.value.trim().slice(0, 3000) || "(none)"}
+
+=== CANDIDATE CV ===
+${cv.value.trim().slice(0, 7000) || "(no CV provided)"}
+${extra || ""}
+Return ONLY the letter text, starting with the salutation and ending with the candidate's name.`;
+}
+const REVISIONS = {
+  shorter: "Rewrite the letter below to about 420 words, keeping the opening hook, the strongest experience links and the closing.",
+  sharper: "Rewrite the letter below to be sharper: stronger first sentence specific to the firm, tighter links between each experience and the role, remove any generic sentence.",
+  company: "Rewrite the letter below so that it engages more with the employer: its strategy, positioning and what this team does, using only the job offer and company notes (placeholders in brackets for any missing figure).",
+  translate: "Translate the letter below into the other language (English <-> French), with the matching formal salutation and sign-off. Keep the meaning and level of detail.",
+};
+function hl(t) { return t.replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c])).replace(/\[[^\]\n]{3,80}\]/g, m => `<span class="ph">${m}</span>`); }
+async function writeLetter(rev) {
+  if (lbusy) return;
+  if (!sample) { $("#unavailable").hidden = false; return; }
+  if (!offer.value.trim()) { $("#letterStatus").textContent = "Colle d'abord l'offre à gauche (bouton « Demander à Claude » sur le site)."; return; }
+  if (!cv.value.trim()) { $("#letterStatus").textContent = "Ajoute ton CV à gauche (PDF ou texte)."; return; }
+  const current = paper.classList.contains("empty") ? "" : paper.innerText;
+  if (rev && !current) return;
+  lbusy = true; $("#genBtn").disabled = true; $("#stopLetter").hidden = false;
+  $("#letterStatus").textContent = rev ? "Claude retravaille la lettre…" : "Claude lit l'offre, ton CV et ton modèle, puis rédige… (30 à 60 s)";
+  lctl = new AbortController();
+  const input = rev ? `${REVISIONS[rev]}\nKeep every rule: no invented facts about the candidate or the employer, placeholders in brackets for missing figures.\nReturn ONLY the letter.\n\n=== JOB OFFER ===\n${offer.value.trim().slice(0, 4000)}\n\n=== COMPANY NOTES ===\n${company.value.trim().slice(0, 2000) || "(none)"}\n\n=== LETTER ===\n${current}` : letterPrompt();
+  paper.classList.remove("empty"); paper.contentEditable = "false"; paper.innerHTML = `<span style="color:#777;font-style:italic">Rédaction…</span>`;
+  try {
+    const { text, truncated } = await sample(input, { signal: lctl.signal, cache: false, modelTier: "complex",
+      onText: ({ text }) => { paper.innerHTML = hl(text); } });
+    letterText = text.trim(); store.set("fjc_letter", letterText);
+    paper.innerHTML = hl(letterText); paper.contentEditable = "true";
+    const n = (letterText.match(/\[[^\]\n]{3,80}\]/g) || []).length;
+    $("#letterStatus").textContent = `${letterText.split(/\s+/).length} mots.${n ? ` ${n} repère${n > 1 ? "s" : ""} [à compléter] surligné${n > 1 ? "s" : ""} en jaune.` : ""} Relis et modifie directement sur la feuille.${truncated ? " (réponse coupée)" : ""}`;
+  } catch (e) {
+    if (e && e.text) { paper.innerHTML = hl(e.text); paper.contentEditable = "true"; }
+    else setPaper(letterText, true);
+    $("#letterStatus").textContent = e && e.code === "cancelled" ? "Arrêté." : (ERR[e && e.code] || "Erreur de connexion : réessaie.");
+    if (e && (e.code === "not_granted" || e.code === "sampling_disabled")) { $("#unavailable").hidden = false; $("#unavailable").textContent = ERR[e.code]; }
+  } finally { lbusy = false; $("#genBtn").disabled = false; $("#stopLetter").hidden = true; }
+}
+$("#genBtn").onclick = () => writeLetter();
+$("#stopLetter").onclick = () => lctl && lctl.abort();
+document.querySelectorAll("[data-rev]").forEach(b => b.onclick = () => writeLetter(b.dataset.rev));
+$("#copyLetter").onclick = async () => {
+  const t = paper.innerText;
+  try { await navigator.clipboard.writeText(t); $("#letterStatus").textContent = "Lettre copiée."; }
+  catch { const r = document.createRange(); r.selectNodeContents(paper); getSelection().removeAllRanges(); getSelection().addRange(r); $("#letterStatus").textContent = "Texte sélectionné : Ctrl/Cmd + C pour copier."; }
+};
+let downloads = null;
+$("#docxLetter").onclick = async () => {
+  const t = paper.classList.contains("empty") ? "" : paper.innerText.trim();
+  if (!t) return;
+  if (!downloads || !window.docx) { $("#letterStatus").textContent = "Téléchargement indisponible ici : utilise « Copier »."; return; }
+  const D = window.docx;
+  const paras = t.split(/\n\s*\n|\n/).map(x => x.trim()).filter(Boolean).map(x => new D.Paragraph({
+    children: [new D.TextRun({ text: x, font: "Garamond", size: 22 })], spacing: { after: 160, line: 276 }, alignment: x.length > 90 ? D.AlignmentType.JUSTIFIED : D.AlignmentType.LEFT }));
+  const doc = new D.Document({ sections: [{ properties: { page: { margin: { top: 1134, bottom: 1134, left: 1247, right: 1247 } } }, children: paras }] });
+  const blob = await D.Packer.toBlob(doc);
+  const emp = (offer.value.match(/^(?:Employeur|Employer)\s*:\s*(.+)$/mi) || [, "Entreprise"])[1].replace(/[^\w]+/g, "_").slice(0, 40);
+  try { await downloads.save({ filename: `Cover_Letter_${emp}.docx`, data: blob }); $("#letterStatus").textContent = "Lettre téléchargée."; }
+  catch (e) { $("#letterStatus").textContent = e && e.code === "declined" ? "Téléchargement annulé." : "Téléchargement impossible : utilise « Copier »."; }
+};
+
+// ---------- modes ----------
+function setMode(m) {
+  document.querySelectorAll(".modes button").forEach(b => b.classList.toggle("on", b.dataset.mode === m));
+  $("#letterPane").hidden = m !== "letter"; $("#chatPane").hidden = m !== "chat";
+  document.querySelectorAll("[data-letter-only]").forEach(x => x.hidden = m !== "letter");
+  if (location.hash.slice(1) !== m) history.replaceState(null, "", "#" + m);
+}
+document.querySelector(".modes").addEventListener("click", e => { const b = e.target.closest("[data-mode]"); if (b) setMode(b.dataset.mode); });
+setMode(location.hash.slice(1) === "chat" ? "chat" : "letter");
+addEventListener("hashchange", () => setMode(location.hash.slice(1) === "chat" ? "chat" : "letter"));
+
 // ---------- Claude ----------
 (async () => {
   try { sample = window.claude ? await window.claude.use("sample") : null; } catch { sample = null; }
+  try { downloads = window.claude ? await window.claude.use("downloads") : null; } catch { downloads = null; }
   if (!sample) { $("#unavailable").hidden = false; return; }
   try { const lim = await sample.limits(); if (!lim.tools) tools.length = 0; } catch {}
 })();
