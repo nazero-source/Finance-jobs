@@ -44,7 +44,8 @@ TITLE_RULES = [
 # Mots-clés dans la DESCRIPTION (signal plus faible, pour les titres génériques)
 DESC_RULES = [
     ("pf", rx(r"project finance", r"debt sizing", r"dscr", r"financement de projets")),
-    ("infra", rx(r"infrastructure (?:fund|investment|equity|investing|assets)", r"greenfield", r"brownfield")),
+    ("infra", rx(r"infrastructure (?:fund|investment|equity|investing|assets|projects?)", r"greenfield", r"brownfield",
+                 r"development finance", r"private sector (?:investment|operations)", r"blended finance", r"renewable energy")),
     ("pe", rx(r"private equity", r"buyouts?", r"portfolio compan(?:y|ies)", r"lbo model\w*", r"secondaries", r"co-?investments?",
               r"investment team", r"capital investissement", r"growth equity")),
     ("levfin", rx(r"leveraged finance", r"acquisition finance")),
@@ -99,7 +100,7 @@ CONTRACT_RULES = [
                  r"summer associate", r"summer", r"off[- ]cycle", r"placement", r"praktikum", r"praktikant\w*",
                  r"tirocinio", r"pr[aá]cticas", r"est[aá]gio", r"spring week", r"insight (?:week|program\w*)",
                  r"trainee", r"working student")),
-    ("Graduate", rx(r"graduate", r"graduates", r"new analyst", r"analyst program\w*", r"analyst class",
+    ("Graduate", rx(r"young professionals? program\w*", r"junior professional associate", r"graduate", r"graduates", r"new analyst", r"analyst program\w*", r"analyst class",
                     r"full[- ]time analyst", r"campus", r"entry[- ]level", r"new grad\w*", r"early careers?",
                     r"class of 20\d\d", r"jeune dipl[oô]m[ée]e?", r"junior analyst")),
 ]
@@ -118,7 +119,7 @@ SENIOR_TITLE = rx(r"senior", r"sr\.?", r"lead", r"head", r"director", r"directeu
                   r"associate", r"experienced", r"exp[ée]riment[ée]e?", r"confirm[ée]e?", r"lateral", r"analyst (?:ii|iii|2|3)",
                   r"(?:2nd|second|3rd|third) year", r"ii", r"iii", r"chargé d'affaires", r"responsable", r"senior analyst",
                   r"counsel", r"specialist", r"expert", r"consultant", r"originator", r"banker", r"md", r"ed")
-JUNIOR_TITLE = rx(r"analyst", r"analyste", r"junior", r"graduate", r"entry[- ]level", r"analyst i", r"analyst 1",
+JUNIOR_TITLE = rx(r"young professionals?", r"junior professional", r"jpa", r"analyst", r"analyste", r"junior", r"graduate", r"entry[- ]level", r"analyst i", r"analyst 1",
                   r"first[- ]year", r"1st year", r"trainee", r"new grad\w*", r"early careers?", r"campus")
 NUMW = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7, "eight": 8, "ten": 10,
         "deux": 2, "trois": 3, "quatre": 4, "cinq": 5}
@@ -188,7 +189,7 @@ def classify(title, desc="", employer_type="bank", experience_hint=""):
             cat = best
         elif total >= 1 and employer_type == "pe":       # titre générique dans un fonds : il faut au moins
             cat = "pe"                                    # un signal métier dans la description
-        elif total >= 1 and employer_type == "infra":
+        elif total >= 1 and employer_type in ("infra", "dfi"):
             cat = "infra"
         elif total >= 1 and employer_type == "boutique":
             cat = "ma"

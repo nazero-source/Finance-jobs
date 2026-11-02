@@ -159,8 +159,19 @@ JAZZHR = [
 ]
 
 SUCCESSFACTORS = [
-    ("AIIB", "infra", "career5.successfactors.eu", "AIIB"),
-    ("Africa Finance Corporation", "infra", "career2.successfactors.eu", "africafina"),
+    ("AIIB", "dfi", "career5.successfactors.eu", "AIIB"),
+    ("Africa Finance Corporation", "dfi", "career2.successfactors.eu", "africafina"),
+    ("EBRD", "dfi", "career5.successfactors.eu", "C0009154570P"),
+]
+
+# Institutions financières de développement (DFI)
+CORNERSTONE = [
+    ("World Bank Group / IFC", "dfi", "worldbankgroup"),
+]
+
+RMK_RSS = [
+    ("IDB / IDB Invest", "dfi", "jobs.iadb.org", "en_US"),
+    ("FMO", "dfi", "fmo.jobs.hr.cloud.sap", "en_GB"),
 ]
 
 AVATURE = [
@@ -250,7 +261,7 @@ DOMAINS = {
     "Sienna Investment Managers": "sienna-im.com", "Climate Fund Managers": "climatefundmanagers.com", "InfraRed Capital Partners": "ircp.com",
     "Bluefield": "thebluefieldgroup.com", "Antin Infrastructure Partners": "antin-ip.com", "Marathon Capital": "marathoncapital.com",
     "CrossBoundary": "crossboundary.com", "AIIB": "aiib.org", "Africa Finance Corporation": "africafc.org", "Macquarie": "macquarie.com",
-    "Africa50": "africa50.com", "Pemberton": "pembertonam.com", "HSBC": "hsbc.com", "Crédit Agricole CIB": "ca-cib.com",
+    "Africa50": "africa50.com", "EBRD": "ebrd.com", "World Bank Group / IFC": "ifc.org", "IDB / IDB Invest": "idbinvest.org", "FMO": "fmo.nl", "Pemberton": "pembertonam.com", "HSBC": "hsbc.com", "Crédit Agricole CIB": "ca-cib.com",
 }
 
 # Boutiques et fonds infra / énergie suivis de près (France, Royaume-Uni, Dubaï, Afrique).
@@ -276,12 +287,11 @@ TARGETS = [
     ("Africa50", "Fonds infra", "Afrique (Casablanca)", "https://www.africa50.com/working-with-us/", "", ""),
     ("AIIM (African Infrastructure Investment Managers)", "Fonds infra", "Afrique", "https://www.aiimafrica.com/", "", ""),
     ("Actis", "Fonds infra / énergie", "UK · Afrique · Moyen-Orient", "https://www.act.is/people/careers/", "", ""),
-    ("Africa Finance Corporation", "Institution de financement infra", "Afrique (Lagos)", "https://www.africafc.org/careers", "", ""),
+    ("Africa Finance Corporation", "DFI · Financement infra", "Afrique (Lagos)", "https://www.africafc.org/careers", "", ""),
     ("Climate Fund Managers", "Fonds infra climat", "Afrique du Sud · Pays-Bas", "https://climatefundmanagers.com/careers-and-internships/", "", ""),
     ("PIDG / InfraCo Africa", "Développeur & fonds infra", "UK · Afrique", "https://pidg.org/about-us/careers/", "", ""),
     ("Harith", "Fonds infra", "Afrique du Sud", "https://harith.africa/careers/", "", ""),
     ("Inspired Evolution", "Fonds énergie", "Afrique du Sud", "https://inspiredevolution.co.za/careers/", "", ""),
-    ("Proparco / AFD", "Institution de financement du développement", "France · Afrique", "https://www.afd.fr/fr/lafd-recrute", "", "Stages et VIE fréquents"),
     ("Meridiam", "Fonds infra", "France · monde", "https://meridiam.recruitee.com/", "", ""),
     ("Mirova", "Fonds transition énergétique", "France", "https://www.mirova.com/en/join-us", "", ""),
     ("InfraVia Capital Partners", "Fonds infra", "France", "https://www.infraviacapital.com/", "", ""),
@@ -326,7 +336,17 @@ TARGETS = [
     ("Lunate", "Gestionnaire d'actifs (infra)", "Abu Dhabi", "https://www.lunate.com/en/careers/", "", ""),
     ("Mubadala", "Fonds souverain (infra, énergie)", "Abu Dhabi", "https://www.mubadala.com/en/careers", "", ""),
     ("ADQ", "Fonds souverain (infra, énergie)", "Abu Dhabi", "https://www.adq.ae/careers/", "", ""),
-    ("AIIB", "Banque multilatérale infra", "Pékin", "https://www.aiib.org/en/work-with-us/join-the-team/young-talent-programs/index.html", "talentacquisition@aiib.org", "Programmes jeunes talents"),
-    ("EBRD", "Banque multilatérale", "Londres", "https://www.ebrd.com/home/work-with-us.html", "", "Graduate programme annuel"),
+    ("World Bank Group / IFC", "DFI · Groupe Banque mondiale", "Washington · Paris · monde", "https://www.ifc.org/en/about/careers", "", "Programmes YPP, JPA et stages"),
+    ("EBRD", "DFI · Banque multilatérale", "Londres", "https://jobs.ebrd.com/", "", "Graduate programme et stages"),
+    ("EIB / EIF", "DFI · Banque de l'UE", "Luxembourg", "https://www.eib.org/en/about/careers/index", "", "Site non lisible par le robot : stages et Graduate Programme à surveiller"),
+    ("IDB / IDB Invest", "DFI · Banque multilatérale", "Washington · Amérique latine", "https://idbinvest.org/en/careers", "", ""),
+    ("AfDB", "DFI · Banque multilatérale", "Abidjan", "https://www.afdb.org/en/about-us/careers", "", "Site protégé : Young Professionals Program à surveiller"),
+    ("Proparco / AFD", "DFI · France", "Paris · Afrique", "https://www.afd.fr/fr/lafd-recrute", "", "Stages et VIE fréquents ; site non lisible par le robot"),
+    ("British International Investment", "DFI · UK", "Londres · Afrique · Asie", "https://www.bii.co.uk/en/careers/", "", "Site protégé : à surveiller"),
+    ("FMO", "DFI · Pays-Bas", "La Haye", "https://fmo.jobs.hr.cloud.sap/", "", ""),
+    ("DEG / KfW", "DFI · Allemagne", "Cologne · Francfort", "https://www.deginvest.de/", "", ""),
+    ("Norfund", "DFI · Norvège", "Oslo · Afrique", "https://www.norfund.no/", "", ""),
+    ("Bpifrance", "Banque publique (fonds infra, international)", "France", "https://www.bpifrance.fr/nous-rejoindre", "", "Stages et VIE"),
+    ("AIIB", "DFI · Banque multilatérale infra", "Pékin", "https://www.aiib.org/en/work-with-us/join-the-team/young-talent-programs/index.html", "talentacquisition@aiib.org", "Programmes jeunes talents"),
     ("Macquarie Asset Management (infra)", "Fonds infra", "UK · France · monde", "https://recruitment.macquarie.com/en_US/careers/SearchJobs/?7959=%5B421070%2C421069%5D&7959_format=14495&listFilterMode=1", "", ""),
 ]

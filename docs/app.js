@@ -9,7 +9,7 @@ const CAT = { ma: "M&A / Conseil", ib: "Investment Banking", levfin: "LevFin / A
 const TEAM = { ma: "M&A", ib: "Investment Banking", levfin: "Leveraged Finance", ecmdcm: "Capital Markets",
   pe: "Private Equity", infra: "Infrastructure", pf: "Project Finance" };
 const LEVELS = ["Stage", "VIE", "Graduate", "Analyst 1", "Alternance"];
-const ETYPE = { bank: "Banque", boutique: "Boutique / conseil", pe: "Private equity", infra: "Infrastructure", am: "Gestion d'actifs" };
+const ETYPE = { bank: "Banque", boutique: "Boutique / conseil", pe: "Private equity", infra: "Infrastructure", dfi: "Institution de développement (DFI)", am: "Gestion d'actifs" };
 const STATUSES = ["À postuler", "Envoyée", "Entretien", "Offre", "Refusée"];
 const REPO = "nazero-source/Finance-jobs";
 const ASSISTANT = "https://claude.ai/artifact/6uMV13yHifjonSU1jhK8o3";
@@ -323,11 +323,12 @@ function loadTargets() {
   fetch("data/targets.json", { cache: "no-cache" }).then(r => r.ok ? r.json() : []).then(t => { TARGETS = t; renderTargets(); }).catch(() => {});
 }
 function renderTargets() {
-  const zones = ["France", "UK", "Dubaï", "Afrique"];
-  const zc = z => TARGETS.filter(t => !z || (z === "Dubaï" ? /Dubaï|Abu Dhabi|Bahreïn/.test(t.zone) : t.zone.includes(z))).length;
+  const zones = ["France", "UK", "Dubaï", "Afrique", "DFI"];
+  const inT = (t, z) => !z || (z === "DFI" ? /^DFI/.test(t.type) : z === "Dubaï" ? /Dubaï|Abu Dhabi|Bahreïn/.test(t.zone) : t.zone.includes(z));
+  const zc = z => TARGETS.filter(t => inT(t, z)).length;
   $("#targetZone").innerHTML = `<button class="${tZone ? "" : "on"}" data-z="">Toutes<span class="n">${TARGETS.length}</span></button>` +
-    zones.map(z => `<button class="${tZone === z ? "on" : ""}" data-z="${z}">${z}<span class="n">${zc(z)}</span></button>`).join("");
-  const list = TARGETS.filter(t => !tZone || (tZone === "Dubaï" ? /Dubaï|Abu Dhabi|Bahreïn/.test(t.zone) : t.zone.includes(tZone)))
+    zones.map(z => `<button class="${tZone === z ? "on" : ""}" data-z="${z}">${z === "DFI" ? "Institutions de développement" : z}<span class="n">${zc(z)}</span></button>`).join("");
+  const list = TARGETS.filter(t => inT(t, tZone))
     .sort((a, b) => b.jobs - a.jobs || (b.auto - a.auto) || a.name.localeCompare(b.name));
   $("#targetsCount").textContent = `${list.length} employeurs · ${list.filter(t => t.jobs).length} avec des offres juniors en ce moment`;
   $("#targets").innerHTML = list.map(t => {

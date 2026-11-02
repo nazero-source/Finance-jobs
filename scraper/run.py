@@ -47,6 +47,10 @@ def sources():
         s.append((f"JazzHR · {args[0]}", F.jazzhr, args))
     for args in E.SUCCESSFACTORS:
         s.append((f"SuccessFactors · {args[0]}", F.successfactors, args))
+    for args in E.CORNERSTONE:
+        s.append((f"Cornerstone · {args[0]}", F.cornerstone, args))
+    for args in E.RMK_RSS:
+        s.append((f"SuccessFactors · {args[0]}", F.rmk_rss, args))
     for args in E.AVATURE:
         s.append((f"Avature · {args[0]}", F.avature, args))
     for args in E.HTML_PAGES:

@@ -575,3 +575,72 @@ def html_links(name, etype, page_url, link_pattern, location=""):
         out.append(job(source="Site carrière", employer=name, etype=etype, native_id=f"web:{url}", title=title, url=url,
                        location=location, desc_fn=desc_fn))
     return out
+
+
+# ---------------- Cornerstone (Groupe Banque mondiale / IFC) ----------------
+CSOD_TERMS = ["investment", "analyst", "intern", "internship", "infrastructure", "project finance", "private equity",
+              "young professionals", "junior professional", "energy", "financial sector", "PPP"]
+
+
+def cornerstone(name, etype, corp, site=1):
+    page = http_text(f"https://{corp}.csod.com/ux/ats/careersite/{site}/home?c={corp}")
+    token = re.search(r'"token":"([^"]+)"', page).group(1)
+    cloud = (re.search(r'"cloud":"([^"]+)"', page) or [None, "https://us.api.csod.com/"])[1]
+    seen, out = set(), []
+    for term in CSOD_TERMS:
+        body = json.dumps({"careerSiteId": site, "careerSitePageId": site, "pageNumber": 1, "pageSize": 50, "cultureId": 1,
+                           "searchText": term, "cultureName": "en-US", "states": [], "countryCodes": [], "cities": [],
+                           "placeID": "", "radius": None, "postingsWithinDays": None, "customFieldCheckboxKeys": [],
+                           "customFieldDropdowns": [], "customFieldRadios": []}).encode()
+        req = urllib.request.Request(cloud + "rec-job-search/external/jobs", data=body,
+                                     headers={"Authorization": "Bearer " + token, "Content-Type": "application/json", **UA})
+        try:
+            with urllib.request.urlopen(req, timeout=30) as r:
+                d = json.load(r)
+        except Exception:
+            continue
+        for q in (d.get("data") or {}).get("requisitions", []):
+            rid = q.get("requisitionId")
+            if rid in seen:
+                continue
+            seen.add(rid)
+            loc = (q.get("locations") or [{}])[0]
+            try:
+                posted = dt.datetime.strptime(q.get("postingEffectiveDate", ""), "%m/%d/%Y").date().isoformat()
+            except ValueError:
+                posted = None
+            out.append(job(source="Cornerstone", employer=name, etype=etype, native_id=f"cs:{corp}:{rid}",
+                           title=q.get("displayJobTitle", ""),
+                           url=f"https://{corp}.csod.com/ux/ats/careersite/{site}/home/requisition/{rid}?c={corp}",
+                           location=", ".join(x for x in (loc.get("city"), loc.get("country")) if x),
+                           country_hint=loc.get("country", ""), posted=posted, desc=strip_html(q.get("externalDescription"))))
+    return out
+
+
+# ---------------- SAP SuccessFactors « Career Site Builder » (flux RSS par mot-clé) ----------------
+def rmk_rss(name, etype, host, locale="en_US", terms=("intern", "investment", "analyst", "young professional", "infrastructure")):
+    import xml.etree.ElementTree as ET
+    seen, out = set(), []
+    for term in terms:
+        try:
+            root = ET.fromstring(http_text(f"https://{host}/services/rss/job/?locale={locale}&keywords={urllib.parse.quote(term)}"))
+        except Exception:
+            continue
+        for it in root.iter("item"):
+            link = it.findtext("link") or ""
+            if not link or link in seen or "/job/" not in link:
+                continue
+            seen.add(link)
+            title = (it.findtext("title") or "").strip()
+            loc = re.sub(r"\s*\(.*$", "", title.split(" - ")[0]) if " - " in title else ""
+            m = re.search(r"/job/([^/]+)/", link)
+            pub = it.findtext("pubDate") or ""
+            try:
+                posted = dt.datetime.strptime(pub[:16].strip(), "%a, %d %b %Y").date().isoformat()
+            except ValueError:
+                posted = None
+            out.append(job(source="SuccessFactors", employer=name, etype=etype, native_id=f"rmk:{link}",
+                           title=re.sub(r"\s*\([^)]*\)\s*$", "", title), url=link,
+                           location=urllib.parse.unquote(m.group(1)).split("-")[0] if m else loc, posted=posted,
+                           desc=strip_html(it.findtext("description"))))
+    return out
