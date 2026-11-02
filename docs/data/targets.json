@@ -798,5 +798,805 @@
 "note": "",
 "jobs": 2,
 "auto": true
+},
+{
+"name": "Rothschild & Co",
+"type": "Banque d'affaires",
+"zone": "France · UK · Monde",
+"url": "https://www.rothschildandco.com/en-us/careers/",
+"email": "",
+"note": "Graduate programmes via rothschildandco.tal.net",
+"jobs": 0,
+"auto": true
+},
+{
+"name": "Clipperton",
+"type": "Boutique M&A",
+"zone": "France",
+"url": "https://www.clipperton.com/careers",
+"email": "",
+"note": "Offres suivies automatiquement",
+"jobs": 0,
+"auto": true
+},
+{
+"name": "Natixis Partners",
+"type": "Boutique M&A",
+"zone": "France",
+"url": "https://www.natixispartners.com/carrieres/",
+"email": "careers@np.partners",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "ODDO BHF Corporate Finance",
+"type": "Boutique M&A",
+"zone": "France",
+"url": "https://www.oddo-bhf.com/careers/",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Degroof Petercam CF",
+"type": "Boutique M&A",
+"zone": "France · Belgique",
+"url": "https://www.degroofpetercam.com/en-be/jobs-finance",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Bryan Garnier",
+"type": "Boutique M&A",
+"zone": "France · UK",
+"url": "https://www.bryangarnier.com",
+"email": "",
+"note": "Site protégé : à consulter à la main",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Linkers",
+"type": "Boutique M&A",
+"zone": "France",
+"url": "https://linkers.fr/en/transaction/luisina-is-joining-forces-with-german-shutte-group/",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Aelios Finance",
+"type": "Boutique M&A",
+"zone": "France",
+"url": "https://www.aelios-finance.com",
+"email": "",
+"note": "Site protégé : à consulter à la main",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Financière de Courcelles",
+"type": "Boutique M&A",
+"zone": "France",
+"url": "https://www.financiere-de-courcelles.com",
+"email": "",
+"note": "Site protégé : à consulter à la main",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "In Extenso Finance",
+"type": "Boutique M&A",
+"zone": "France",
+"url": "https://finance.inextenso.fr/nous-rejoindre/",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Transaction R",
+"type": "Boutique M&A",
+"zone": "France",
+"url": "https://www.transaction-r.com",
+"email": "",
+"note": "Site protégé : à consulter à la main",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Largillière Finance",
+"type": "Boutique M&A",
+"zone": "France",
+"url": "https://largilliere-finance.com/offre-emploi/",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Acxior Corporate Finance",
+"type": "Boutique M&A",
+"zone": "France",
+"url": "https://www.acxior.com",
+"email": "",
+"note": "Site protégé : à consulter à la main",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Arjil",
+"type": "Boutique M&A",
+"zone": "France",
+"url": "https://www.arjil.com",
+"email": "",
+"note": "Site protégé : à consulter à la main",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Midcap Partners",
+"type": "Boutique M&A",
+"zone": "France",
+"url": "https://www.midcappartners.com",
+"email": "",
+"note": "Site protégé : à consulter à la main",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "BDO France (Advance Capital)",
+"type": "Boutique M&A (énergie)",
+"zone": "France",
+"url": "https://recrutement.bdo.fr/",
+"email": "",
+"note": "Intégré à BDO France : offres suivies via recrutement.bdo.fr",
+"jobs": 0,
+"auto": true
+},
+{
+"name": "Accuracy",
+"type": "Conseil transactions",
+"zone": "France",
+"url": "https://www.accuracy.com/careers/joining-accuracy/",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Sorgem Evaluation",
+"type": "Conseil transactions",
+"zone": "France",
+"url": "https://sorgem.com/en/careers/",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "E-CUBE Strategy Consultants",
+"type": "Conseil énergie",
+"zone": "France",
+"url": "https://e-cube.com/en/job-offers/",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Clean Horizon",
+"type": "Conseil énergie",
+"zone": "France",
+"url": "https://www.cleanhorizon.com/careers/",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Robey Warshaw",
+"type": "Boutique M&A",
+"zone": "UK",
+"url": "https://www.robeywarshaw.com",
+"email": "",
+"note": "Site protégé : à consulter à la main",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Zaoui & Co",
+"type": "Boutique M&A",
+"zone": "UK · France",
+"url": "https://www.zaouico.com/en/careers",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Fenchurch Advisory",
+"type": "Boutique M&A",
+"zone": "UK",
+"url": "https://fenchurchadvisory.com/careers/",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Arma Partners",
+"type": "Boutique M&A",
+"zone": "UK",
+"url": "https://www.armapartners.com/careers/",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "GP Bullhound",
+"type": "Boutique M&A",
+"zone": "UK",
+"url": "https://www.gpbullhound.com/careers/",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Hampleton Partners",
+"type": "Boutique M&A",
+"zone": "UK",
+"url": "https://www.hampletonpartners.com/careers/",
+"email": "careers@hampletonpartners.com",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Livingstone Partners",
+"type": "Boutique M&A",
+"zone": "UK",
+"url": "https://livingstonepartners.com/en/about-us/work-at-livingstone/",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Hannam & Partners",
+"type": "Boutique M&A (énergie, ressources)",
+"zone": "UK",
+"url": "https://hannam.partners/careers/",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Cavendish",
+"type": "Banque d'affaires",
+"zone": "UK",
+"url": "https://www.cavendish.com",
+"email": "",
+"note": "Site protégé : à consulter à la main",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Peel Hunt",
+"type": "Banque d'affaires",
+"zone": "UK",
+"url": "https://www.peelhunt.com",
+"email": "",
+"note": "Site protégé : à consulter à la main",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Panmure Liberum",
+"type": "Banque d'affaires",
+"zone": "UK",
+"url": "https://www.panmureliberum.com/careers/",
+"email": "",
+"note": "Offres suivies automatiquement",
+"jobs": 0,
+"auto": true
+},
+{
+"name": "Investec",
+"type": "Banque d'affaires",
+"zone": "UK · Afrique",
+"url": "https://www.investec.com",
+"email": "",
+"note": "Site protégé : à consulter à la main",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Centerview Partners",
+"type": "Boutique M&A",
+"zone": "UK",
+"url": "https://www.centerviewpartners.com/careers",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Evercore",
+"type": "Boutique M&A",
+"zone": "UK · US",
+"url": "https://www.evercore.com/careers/",
+"email": "",
+"note": "Candidatures via evercore.tal.net (non lisible automatiquement)",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Baringa",
+"type": "Conseil énergie",
+"zone": "UK",
+"url": "https://www.baringa.com/en/careers/",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Aurora Energy Research",
+"type": "Conseil énergie",
+"zone": "UK",
+"url": "https://auroraer.com/careers/life-at-aurora",
+"email": "myrto.polychronopoulou@auroraer.com",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Downing",
+"type": "Fonds énergie",
+"zone": "UK",
+"url": "https://www.downing.co.uk/careers",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Pantheon Infrastructure",
+"type": "Fonds infra",
+"zone": "UK",
+"url": "https://www.pantheon.com",
+"email": "",
+"note": "Site protégé : à consulter à la main",
+"jobs": 0,
+"auto": true
+},
+{
+"name": "Federated Hermes Infrastructure",
+"type": "Fonds infra",
+"zone": "UK",
+"url": "https://www.federatedhermes.com:443/careers",
+"email": "HRAssist@federatedhermes.com",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Legal & General Capital",
+"type": "Fonds infra",
+"zone": "UK",
+"url": "https://www.lgcapital.com/careers",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Cubico Sustainable Investments",
+"type": "Fonds infra",
+"zone": "UK · Europe",
+"url": "https://www.cubicoinvest.com/careers/",
+"email": "",
+"note": "Offres sur cubicojobs.careers.hibob.com",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Rasmala",
+"type": "Banque d'affaires",
+"zone": "Dubaï",
+"url": "https://rasmala.com/",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "EFG Holding",
+"type": "Banque d'affaires",
+"zone": "Dubaï · Égypte",
+"url": "https://careers.efghldg.com/",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "SHUAA Capital",
+"type": "Banque d'affaires",
+"zone": "Dubaï",
+"url": "https://www.shuaa.com/careers",
+"email": "hr@shuaa.com",
+"note": "Offres publiées surtout sur LinkedIn",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Arqaam Capital",
+"type": "Banque d'affaires",
+"zone": "Dubaï",
+"url": "https://www.arqaamcapital.com/2026/10/13/arqaam-capital-joins-the-confeas-in-muscat-as-a-strategic-partner/",
+"email": "hr@arqaamcapital.com",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Waha Capital",
+"type": "Fonds infra",
+"zone": "Abu Dhabi",
+"url": "https://www.wahacapital.com/mediacenter/detail/waha-capital-joins-ftse-adx-dividend-stars-index-reinforcing-appeal-to-income-focused-investors",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Jadwa Investment",
+"type": "Banque d'affaires",
+"zone": "Riyad",
+"url": "https://www.jadwa.com/en/careers",
+"email": "careers@jadwa.com",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "ACWA Power",
+"type": "Investisseur énergie",
+"zone": "Riyad",
+"url": "https://careers.acwapower.com",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "TAQA",
+"type": "Investisseur énergie",
+"zone": "Abu Dhabi",
+"url": "https://taqa.com/careers",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Alpha Dhabi",
+"type": "Fonds infra",
+"zone": "Abu Dhabi",
+"url": "https://alphadhabi.com/careers/",
+"email": "talent@alphadhabi.com",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Rand Merchant Bank",
+"type": "Banque d'affaires",
+"zone": "Afrique du Sud",
+"url": "https://www.rmb.co.za/careers",
+"email": "",
+"note": "Offres suivies automatiquement",
+"jobs": 0,
+"auto": true
+},
+{
+"name": "Standard Bank CIB",
+"type": "Banque d'affaires",
+"zone": "Afrique",
+"url": "https://www.standardbank.com/sbg/standard-bank-group/careers",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Development Partners International",
+"type": "Fonds PE",
+"zone": "UK · Afrique",
+"url": "https://www.dpi-llp.com",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Adenia Partners",
+"type": "Fonds PE",
+"zone": "Afrique",
+"url": "https://www.adenia.com",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Amethis",
+"type": "Fonds PE",
+"zone": "France · Afrique",
+"url": "https://www.amethis.com",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "AfricInvest",
+"type": "Fonds PE",
+"zone": "Afrique",
+"url": "https://www.africinvest.com/contacts/careers/",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Ninety One",
+"type": "Gestionnaire d'actifs",
+"zone": "UK · Afrique",
+"url": "https://www.ninetyone.com",
+"email": "",
+"note": "Site protégé : à consulter à la main",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Globeleq",
+"type": "Investisseur énergie",
+"zone": "UK · Afrique",
+"url": "https://globeleq.com/careers/",
+"email": "hr@globeleq.com.",
+"note": "Offres suivies automatiquement",
+"jobs": 0,
+"auto": true
+},
+{
+"name": "Vantage Capital",
+"type": "Fonds infra",
+"zone": "Afrique",
+"url": "https://www.vantagecapital.co.za",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "CDG Invest",
+"type": "Fonds infra",
+"zone": "Maroc",
+"url": "https://www.cdginvest.ma",
+"email": "",
+"note": "Site protégé : à consulter à la main",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "BMCE Capital",
+"type": "Banque d'affaires",
+"zone": "Maroc",
+"url": "https://www.bmcecapital.com/carrieres/culture-valeurs",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "CFG Bank",
+"type": "Banque d'affaires",
+"zone": "Maroc",
+"url": "https://carrieres.cfgbank.com/",
+"email": "",
+"note": "Offres suivies automatiquement",
+"jobs": 0,
+"auto": true
+},
+{
+"name": "Ithmar Capital",
+"type": "Fonds infra",
+"zone": "Maroc",
+"url": "https://www.ithmar.ma",
+"email": "",
+"note": "Site protégé : à consulter à la main",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Masen",
+"type": "Investisseur énergie",
+"zone": "Maroc",
+"url": "https://masen-career.talent-soft.com/accueil.aspx?LCID=1036",
+"email": "recrutement@masen.ma",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Mediterrania Capital Partners",
+"type": "Fonds PE",
+"zone": "Maroc · Afrique",
+"url": "https://www.mcp.ma",
+"email": "",
+"note": "Site protégé : à consulter à la main",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Attijari Finances Corp",
+"type": "Banque d'affaires",
+"zone": "Maroc",
+"url": "https://www.attijarifinances.com",
+"email": "",
+"note": "Site protégé : à consulter à la main",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Banque des Territoires",
+"type": "Fonds infra",
+"zone": "France",
+"url": "https://www.banquedesterritoires.fr",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Amundi Transition Énergétique",
+"type": "Fonds infra",
+"zone": "France",
+"url": "https://about.amundi.com/join-us",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "BNP Paribas AM (Private Debt & Real Assets)",
+"type": "Fonds infra",
+"zone": "France",
+"url": "https://www.bnpparibas-am.com/en/why-join-us/",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "AXA IM Alts",
+"type": "Fonds infra",
+"zone": "France",
+"url": "https://www.bnpparibas-am.com/en/why-join-us/",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "La Banque Postale AM",
+"type": "Fonds infra",
+"zone": "France",
+"url": "https://www.lbpam.com/fr/carrieres/un-sens-aigu-du-collectif",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Idinvest / Eurazeo Mid-cap",
+"type": "Fonds PE",
+"zone": "France",
+"url": "https://www.eurazeo.com/en/talents",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "F2i",
+"type": "Fonds infra",
+"zone": "Italie",
+"url": "https://www.f2isgr.it",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Ambienta",
+"type": "Fonds environnement",
+"zone": "Italie",
+"url": "https://www.ambientasgr.com/careers",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Aream",
+"type": "Fonds infra",
+"zone": "Allemagne",
+"url": "https://www.aream.de",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Encavis Asset Management",
+"type": "Fonds énergie",
+"zone": "Allemagne",
+"url": "https://www.encavis.com/en/careers",
+"email": "jobs@encavis.com",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Plenium Partners",
+"type": "Fonds énergie",
+"zone": "Espagne",
+"url": "https://www.plenium.es/index.php/contacto",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Q-Energy",
+"type": "Fonds énergie",
+"zone": "Espagne",
+"url": "https://qenergy.eu/career/",
+"email": "",
+"note": "Offres suivies automatiquement",
+"jobs": 0,
+"auto": true
+},
+{
+"name": "Mirova Energy Transition",
+"type": "Fonds infra",
+"zone": "Europe",
+"url": "https://www.mirova.com/en/join-us",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
+},
+{
+"name": "Arjun Infrastructure Partners",
+"type": "Fonds infra",
+"zone": "UK · Europe",
+"url": "https://www.arjuninfra.com",
+"email": "",
+"note": "",
+"jobs": 0,
+"auto": false
 }
 ]
