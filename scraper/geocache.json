@@ -989,6 +989,13 @@
 "lat": -26.205,
 "lon": 28.0497
 },
+"Jordan": {
+"cc": "JO",
+"city": "Jordan",
+"country": "Jordan",
+"lat": 31.1667,
+"lon": 36.9416
+},
 "Kansas City, KS": {
 "cc": "US",
 "city": "Kansas City",
