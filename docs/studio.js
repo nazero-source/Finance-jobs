@@ -53,8 +53,33 @@ function setTarget(j) {
   $("#l_role").value = cleanRole(j.title); $("#l_city").value = j.city || ""; $("#l_hook").value = "";
   $("#newsLink").href = `https://news.google.com/search?q=${encodeURIComponent(j.employer)}`;
   ["#matchCard", "#letterControls", "#claudeCard"].forEach(s => $(s).hidden = false);
-  renderAll();
+  renderAll(); renderExpress();
 }
+// ---- candidature express : du CV à l'envoi, sans quitter la page
+function renderExpress() {
+  if (!target) return;
+  const tr = S.track[target.id], st = tr?.status || "";
+  const m = F.matchScore?.(target);
+  $("#express").hidden = false;
+  $("#express").innerHTML = `
+    <div class="ex-head">${logoHtml(target)}<div class="grow"><b>${esc(target.title)}</b><small>${esc(target.employer)} · ${flag(target.cc)} ${esc(target.city || target.location || "")}${m ? ` · <b>${m.score} % match</b>` : ""}</small></div>
+      <span class="ex-state">${st ? `Suivi : ${esc(st)}` : "Pas encore suivie"}</span></div>
+    <ol class="ex-steps">
+      <li class="${st ? "done" : ""}"><span>1</span><div><b>Relis ton CV</b><small>Puces liées à l'offre en tête</small><div class="ex-acts"><button class="btn small ghost" data-x="cvpdf">CV en PDF</button><button class="btn small ghost" data-x="cvdoc">Word</button></div></div></li>
+      <li class="${st ? "done" : ""}"><span>2</span><div><b>Finalise ta lettre</b><small>Complète les passages surlignés</small><div class="ex-acts"><button class="btn small ghost" data-x="letter">Voir la lettre</button><button class="btn small ghost" data-x="ltpdf">Lettre en PDF</button></div></div></li>
+      <li class="${["Envoyée", "Entretien", "Offre"].includes(st) ? "done" : ""}"><span>3</span><div><b>Postule</b><small>Sur le site de l'employeur</small><div class="ex-acts"><a class="btn small accent" href="${esc(target.url)}" target="_blank" rel="noopener" data-x="go">Ouvrir l'offre ↗</a></div></div></li>
+      <li class="${["Envoyée", "Entretien", "Offre"].includes(st) ? "done" : ""}"><span>4</span><div><b>Note-la</b><small>Elle rejoint ton suivi</small><div class="ex-acts">${["Envoyée", "Entretien", "Offre"].includes(st) ? `<span class="ok">✓ ${esc(st)}</span>` : `<button class="btn small" data-x="sent">Marquer « envoyée »</button>`}</div></div></li>
+    </ol>`;
+}
+$("#express").addEventListener("click", e => {
+  const x = e.target.closest("[data-x]")?.dataset.x; if (!x || !target) return;
+  if (x === "cvpdf") printPaper("cv");
+  if (x === "cvdoc") $("#docCv").click();
+  if (x === "letter") $("[data-paper=letter]").click();
+  if (x === "ltpdf") { $("[data-paper=letter]").click(); printPaper("letter"); }
+  if (x === "go" && !S.track[target.id]) { F.toggleTrack(target, "À postuler"); setTimeout(renderExpress, 50); }
+  if (x === "sent") { F.toggleTrack(target, "Envoyée"); renderExpress(); }
+});
 function cleanRole(t) {
   return t.replace(/\s*[\(\[][^)\]]*[\)\]]\s*/g, " ").replace(/\b(H\/F|F\/H|M\/F\/D|m\/w\/d|f\/m\/x|M\/F|F\/M)\b/gi, "")
     .replace(/\s*[|–-]\s*(?:London|Paris|New York|Frankfurt|Madrid|Milan|Hong Kong|Singapore|Dubai|Tokyo|Sydney|Toronto|S[aã]o Paulo)\b.*$/i, "").replace(/\s+/g, " ").trim();

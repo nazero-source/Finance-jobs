@@ -60,7 +60,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add docs/data scraper/geocache.json
           git diff --cached --quiet || git commit -m "Offres du $(date -u +%Y-%m-%d)"
-          git push
+          for i in 1 2 3; do git pull --rebase -X theirs origin main && git push && break; sleep 5; done
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

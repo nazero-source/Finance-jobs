@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=EB+Garamond:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="style.css?v=14">
+<link rel="stylesheet" href="style.css?v=15">
 <script>try{const t=localStorage.getItem("fjr_theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
 </head>
 <body>
@@ -47,7 +47,7 @@
     <label>Pays<select id="country"><option value="">Tous</option></select></label>
     <label>Type d'employeur<select id="etype"><option value="">Tous</option></select></label>
     <label>Employeur<select id="employer"><option value="">Tous</option></select></label>
-    <label>Publiée<select id="since"><option value="">Toutes dates</option><option value="1">Nouvelles (24 h)</option><option value="7">7 derniers jours</option><option value="30">30 derniers jours</option></select></label>
+    <label>Publiée<select id="since"><option value="">Toutes dates</option><option value="visit">Depuis ma dernière visite</option><option value="1">Nouvelles (24 h)</option><option value="7">7 derniers jours</option><option value="30">30 derniers jours</option></select></label>
     <label>Trier par<select id="sort"><option value="date">Plus récentes</option><option value="match">Meilleur match</option><option value="salary">Salaire</option><option value="employer">Employeur</option><option value="country">Pays</option></select></label>
     <label class="check"><input type="checkbox" id="hideReported" checked> Masquer les offres signalées</label>
     <button class="btn ghost small" id="reset">Tout effacer</button>
@@ -84,6 +84,7 @@
     </div>
 
     <div class="home-body">
+      <section class="dash" id="dash"></section>
       <div class="sec-head"><span class="eyebrow-l">En 30 secondes</span><h2>Ce que le site fait pour toi</h2><p>De la découverte de l'offre à l'e-mail envoyé au bon contact, tout se passe ici.</p></div>
       <div class="demo" id="demo">
         <div class="demo-steps" id="demoSteps"></div>
@@ -112,7 +113,8 @@
   <!-- OFFRES -->
   <section id="tab-list" class="tab">
     <div class="kpis" id="kpis"></div>
-    <div class="list-head"><h2 id="listTitle">Offres</h2><span class="muted" id="count"></span></div>
+    <div class="list-head"><h2 id="listTitle">Offres</h2><span class="muted" id="count"></span><button class="btn ghost small fresh-btn" id="freshBtn">✦ Nouvelles pour moi, meilleur match d'abord</button></div>
+    <p class="upd"></p>
     <div id="list" class="list"></div>
     <button id="more" class="btn ghost wide" hidden>Afficher plus</button>
   </section>
@@ -182,6 +184,7 @@
         </div>
       </aside>
       <div class="studio-main">
+        <div class="express" id="express" hidden></div>
         <div class="paper-tabs" role="tablist">
           <button class="active" data-paper="cv">CV</button>
           <button data-paper="letter">Lettre de motivation</button>
@@ -273,11 +276,11 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="keywords.js?v=14"></script>
-<script src="app.js?v=14"></script>
-<script src="map.js?v=14"></script>
-<script src="studio.js?v=14"></script>
-<script src="home.js?v=14"></script>
+<script src="keywords.js?v=15"></script>
+<script src="app.js?v=15"></script>
+<script src="map.js?v=15"></script>
+<script src="studio.js?v=15"></script>
+<script src="home.js?v=15"></script>
 <!-- Mesure d'audience GoatCounter : sans cookies, aucune donnée personnelle -->
 <script data-goatcounter="https://financejobsradar.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

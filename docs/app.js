@@ -66,12 +66,51 @@ fetch("data/jobs.json", { cache: "no-cache" }).then(r => r.json()).then(d => {
   S.today = d.jobs.reduce((m, j) => j.first_seen > m ? j.first_seen : m, "");
   S.firstRun = d.jobs.reduce((m, j) => j.first_seen < m ? j.first_seen : m, "9999");
   S.firstDay = S.today === S.firstRun;
-  const gen = new Date(d.generated.replace("Z", ":00Z"));
-  $("#meta").textContent = `${d.jobs.length} offres juniors · mis à jour le ${gen.toLocaleDateString("fr-FR")} à ${gen.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })}`;
+  // dernière visite : les offres apparues depuis sont « nouvelles pour toi »
+  const v = store.get("fjr_visit", {}), now = new Date().toISOString().slice(0, 10);
+  if (v.last !== now) { v.prev = v.last || null; v.last = now; store.set("fjr_visit", v); }
+  S.since = v.prev || null;
+  S.generated = new Date(d.generated.replace("Z", ":00Z"));
+  renderUpdated();
+  setInterval(renderUpdated, 60000);
   buildFilters(); restoreFilters(); apply(); renderBoard(); renderAbout(); loadTargets();
   document.dispatchEvent(new CustomEvent("fjr:data"));
   const hash = location.hash.slice(1); if (["home", "list", "map", "apply", "targets", "contacts", "track", "about"].includes(hash)) switchTab(hash);
 }).catch(e => { $("#list").innerHTML = `<p class="empty">Impossible de charger les offres (${esc(e.message)}).</p>`; });
+
+// ---------------------------------------------------------------- fraîcheur des données
+function nextRun() {   // le robot tourne chaque jour à 04:17 UTC
+  const n = new Date(); const t = new Date(Date.UTC(n.getUTCFullYear(), n.getUTCMonth(), n.getUTCDate(), 4, 17));
+  if (t <= n) t.setUTCDate(t.getUTCDate() + 1); return t;
+}
+function ago(d) {
+  const m = Math.max(0, Math.round((Date.now() - d) / 60000));
+  return m < 1 ? "à l'instant" : m < 60 ? `il y a ${m} min` : m < 1440 ? `il y a ${Math.round(m / 60)} h` : `il y a ${Math.round(m / 1440)} j`;
+}
+function updatedText() {
+  if (!S.generated) return "";
+  const nx = nextRun(), tomorrow = nx.getDate() !== new Date().getDate();
+  return { short: `Mis à jour ${ago(S.generated)}`, long: `Offres mises à jour ${ago(S.generated)} (${S.generated.toLocaleDateString("fr-FR", { day: "numeric", month: "long" })} à ${S.generated.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })}) · prochaine mise à jour ${tomorrow ? "demain" : "aujourd'hui"} vers ${nx.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })}` };
+}
+function renderUpdated() {
+  const u = updatedText(); if (!u) return;
+  const stale = Date.now() - S.generated > 30 * 3600e3;
+  $("#meta").innerHTML = `<span class="upd-dot ${stale ? "stale" : ""}"></span>${S.data.jobs.length} offres · ${esc(u.short)}`;
+  $("#meta").title = u.long;
+  $$(".upd").forEach(el => { el.classList.toggle("stale", stale); el.innerHTML = `<span class="upd-dot"></span>${esc(u.long)}`; });
+}
+const isNewForMe = j => S.since ? j.first_seen > S.since : (!S.firstDay && j.first_seen === S.today);
+function matchWhy(j) {
+  const m = matchScore(j); if (!m) return "";
+  const P = Object.fromEntries(m.parts.map(p => [p[0], p]));
+  const out = [];
+  const k = P["Compétences et mots-clés"]; if (k) { const n = (k[3].match(/^(\d+)\/(\d+)/) || []); out.push([k[1] >= .7 ? "ok" : k[1] >= .45 ? "mid" : "ko", n[0] ? `${n[1]}/${n[2]} mots-clés` : "mots-clés : estimation"]); }
+  const c = P["Expérience dans le métier"]; if (c) out.push([c[1] >= .7 ? "ok" : c[1] >= .3 ? "mid" : "ko", c[1] >= .3 ? `expérience ${CAT[j.category]}` : `peu d'expérience ${CAT[j.category]}`]);
+  const l = P["Langues"]; if (l && l[1] < 1) out.push(["ko", l[3]]);
+  const w = P["Droit de travailler sur place"]; if (w) out.push([w[1] >= .9 ? "ok" : w[1] >= .5 ? "mid" : "ko", w[1] >= .9 ? (j.contract === "VIE" ? "VIE : visa géré" : "pas de visa") : w[1] >= .5 ? "visa à prévoir" : "pas de parrainage visa"]);
+  const a = P["Disponibilité"]; if (a) out.push([a[1] >= 1 ? "ok" : "ko", a[1] >= 1 ? "dates compatibles" : "début trop tôt"]);
+  return `<div class="why">${out.map(([c, t]) => `<span class="w-${c}">${c === "ok" ? "✓" : c === "mid" ? "~" : "✕"} ${esc(t)}</span>`).join("")}</div>`;
+}
 
 // ---------------------------------------------------------------- filtres
 function counts(key, jobs = S.data.jobs) { return jobs.reduce((m, j) => (m[j[key]] = (m[j[key]] || 0) + 1, m), {}); }
@@ -102,6 +141,12 @@ function buildFilters() {
   ["#region", "#country", "#employer", "#etype", "#since", "#sort", "#hideReported"].forEach(s => $(s).addEventListener("change", () => { if (s === "#region") S.region = $("#region").value; apply(); }));
   let t; $("#q").addEventListener("input", () => { clearTimeout(t); t = setTimeout(apply, 120); });
   $("#moreFilters").onclick = () => { const m = $("#fbMore"); m.hidden = !m.hidden; $("#moreFilters").setAttribute("aria-expanded", !m.hidden); };
+  $("#freshBtn").onclick = () => {
+    const on = $("#since").value === "visit" || ($("#since").value === "1" && !S.since);
+    $("#since").value = on ? "" : (S.since ? "visit" : "1");
+    if (!on && profileInfo().ok) $("#sort").value = "match";
+    apply(); toast(on ? "Toutes les offres" : S.since ? "Offres apparues depuis ta dernière visite" : "Offres apparues aujourd'hui");
+  };
   $("#reset").onclick = () => { S.cats.clear(); S.level = ""; S.zone = ""; S.region = ""; ["#q", "#region", "#country", "#employer", "#etype", "#since"].forEach(s => $(s).value = ""); apply(); };
 }
 function setFilter(key, val) {
@@ -128,11 +173,12 @@ function match(j, skip) {
   if (skip !== "cat" && S.cats.size && !S.cats.has(j.category)) return false;
   if (skip !== "level" && S.level && j.seniority !== S.level) return false;
   if (skip !== "zone" && !inZone(j, S.zone)) return false;
-  const region = $("#region").value, country = $("#country").value, emp = $("#employer").value, et = $("#etype").value, since = +$("#since").value || 0;
+  const region = $("#region").value, country = $("#country").value, emp = $("#employer").value, et = $("#etype").value, sinceV = $("#since").value, since = +sinceV || 0;
   if (region && j.region !== region) return false;
   if (country && j.country !== country) return false;
   if (emp && j.employer !== emp) return false;
   if (et && j.employer_type !== et) return false;
+  if (sinceV === "visit" && !isNewForMe(j)) return false;
   if (since) { const d = since === 1 ? daysAgo(j.first_seen) : daysAgo(j.posted || j.first_seen); if (d > (since === 1 ? 0 : since)) return false; }
   if ($("#hideReported").checked && S.reported.has(j.id)) return false;
   if (q) { const hay = norm(`${j.title} ${j.employer} ${j.city} ${j.country} ${j.location} ${CAT[j.category]} ${j.seniority}`); if (!q.split(/\s+/).every(w => hay.includes(w))) return false; }
@@ -162,6 +208,7 @@ function apply() {
   const nf = S.cats.size + (S.level ? 1 : 0) + (S.zone ? 1 : 0) + ["#region", "#country", "#employer", "#etype", "#since"].filter(x => $(x).value).length;
   $("#activeCount").textContent = ["#region", "#country", "#employer", "#etype", "#since"].filter(x => $(x).value).length || "";
   $("#count").textContent = `${S.filtered.length} résultat${S.filtered.length > 1 ? "s" : ""}${nf ? " · filtres actifs" : ""}`;
+  $("#freshBtn")?.classList.toggle("on", $("#since").value === "visit" || $("#since").value === "1");
   S.shown = PAGE; saveFilters(); renderChips(); renderKpis(); renderList();
   document.dispatchEvent(new CustomEvent("fjr:filtered"));
 }
@@ -169,10 +216,10 @@ function apply() {
 // ---------------------------------------------------------------- KPIs & liste
 function renderKpis() {
   const f = S.filtered, c = counts("seniority", f);
-  const fresh = f.filter(j => !S.firstDay && j.first_seen === S.today).length;
+  const fresh = f.filter(isNewForMe).length;
   const tiles = [["", f.length, "offres"], ["Stage", c.Stage || 0, "stages"], ["VIE", c.VIE || 0, "VIE"],
     ["Graduate", (c.Graduate || 0), "graduate"], ["Analyst 1", c["Analyst 1"] || 0, "analyst 1re année"]];
-  $("#kpis").innerHTML = tiles.map(([lv, n, l]) => `<button class="kpi ${S.level === lv && lv ? "on" : ""}" data-level="${lv}"><b>${n}</b><span>${l}${lv === "" && fresh ? ` · <span style="color:var(--good);font-weight:600">${fresh} nouvelles</span>` : ""}</span></button>`).join("");
+  $("#kpis").innerHTML = tiles.map(([lv, n, l]) => `<button class="kpi ${S.level === lv && lv ? "on" : ""}" data-level="${lv}"><b>${n}</b><span>${l}${lv === "" && fresh ? ` · <span style="color:var(--good);font-weight:600">${fresh} nouvelle${fresh > 1 ? "s" : ""}${S.since ? " depuis ta dernière visite" : ""}</span>` : ""}</span></button>`).join("");
   $("#kpis").onclick = e => { const k = e.target.closest(".kpi"); if (k) { S.level = S.level === k.dataset.level ? "" : k.dataset.level; apply(); } };
 }
 // ---------------------------------------------------------------- score de correspondance CV ↔ offre
@@ -263,6 +310,7 @@ function matchHtml(j) {
   return `<span class="match ${cls}" title="Correspondance entre ton CV et l'offre">${m.score} %<small>match</small></span>`;
 }
 window.FJR.matchScore = matchScore;
+Object.assign(window.FJR, { isNewForMe, matchWhy, updatedText, toggleTrack: (j, st) => toggleTrack(j, st) });
 
 function verifHtml(j) {
   if (j.verified === "site carrière") return `<span class="verified" title="Offre retrouvée sur le site carrière de l'employeur : le lien mène directement à la candidature">✔ lien direct</span>`;
@@ -276,7 +324,7 @@ function salaryHtml(s) {
 }
 function jobCard(j) {
   const tracked = !!S.track[j.id];
-  const isNew = !S.firstDay && j.first_seen === S.today;
+  const isNew = isNewForMe(j);
   return `<article class="job ${S.reported.has(j.id) ? "reported" : ""}" data-id="${j.id}" tabindex="0">
     ${logoHtml(j)}
     <div><h3>${esc(j.title)}</h3><div class="sub"><b>${esc(j.employer)}</b> · ${flag(j.cc)} ${esc(j.city || j.location || "—")}${j.country && j.city ? ", " + esc(j.country) : ""}</div></div>
@@ -285,9 +333,10 @@ function jobCard(j) {
       ${matchHtml(j)}
       <span class="tag level">${esc(j.seniority)}</span>
       <span class="tag"><span class="dot" style="background:${catColor(j.category)}"></span>${esc(CAT[j.category])}</span>
-      ${isNew ? `<span class="tag new">Nouveau</span>` : ""}
+      ${isNew ? `<span class="tag new">${S.since ? "Nouveau pour toi" : "Nouveau"}</span>` : ""}
       ${salaryHtml(j.salary)}
     </div>
+    ${matchWhy(j)}
     <div class="acts">
       <a class="btn small" href="${esc(j.url)}" target="_blank" rel="noopener" data-stop>Postuler ↗</a>
       <button class="btn ghost small" data-act="prep">Préparer CV & lettre</button>

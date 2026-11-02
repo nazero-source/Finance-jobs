@@ -162,12 +162,66 @@ function show(i, manual) {
   }, manual ? DUR * 1.6 : DUR);
 }
 
+// ------------------------------------------------ tableau de bord personnel
+function dashboard() {
+  const el = $("#dash"); if (!el) return;
+  const P = F.store.get("fjr_profile", null);
+  const hasCv = !!(P && P.cvData && P.cvData.sections.some(s => (s.items || []).length));
+  const first = (P?.name || "").split(" ")[0];
+  const track = Object.values(F.S.track || {});
+  const active = track.filter(t => !["Refusée", "Offre"].includes(t.status)).length;
+  const relance = Object.entries(F.S.track || {}).filter(([, t]) => t.status === "Envoyée" && (Date.now() - new Date(t.updated || 0)) > 7 * 864e5);
+  const fresh = jobs.filter(F.isNewForMe);
+  const scored = hasCv ? jobs.map(j => ({ j, m: F.matchScore(j) })).filter(x => x.m) : [];
+  const great = scored.filter(x => x.m.score >= 75);
+  let pool = (hasCv ? scored.filter(x => F.isNewForMe(x.j)) : fresh.map(j => ({ j, m: null })));
+  let poolTitle = F.S.since ? "Nouvelles offres pour toi depuis ta dernière visite" : "Nouvelles offres du jour";
+  if (pool.length < 3) { pool = hasCv ? scored : jobs.map(j => ({ j, m: null })); poolTitle = hasCv ? "Tes offres les plus compatibles" : "Dernières offres repérées"; }
+  pool = pool.sort((a, b) => (b.m?.score || 0) - (a.m?.score || 0) || (b.j.first_seen || "").localeCompare(a.j.first_seen || "")).slice(0, 6);
+  const u = F.updatedText();
+  const tile = (n, l, go, cls = "") => `<button class="dtile ${cls}" data-dgo="${go}"><b>${n}</b><span>${l}</span></button>`;
+  el.innerHTML = `
+    <div class="dash-head">
+      <div><span class="eyebrow-l">${hasCv ? "Ton tableau de bord" : "Tableau de bord"}</span><h2>${first ? `Bonjour ${F.esc(first)} 👋` : "Ce qui a bougé aujourd'hui"}</h2></div>
+      <p class="upd">${u ? `<span class="upd-dot"></span>${F.esc(u.long)}` : ""}</p>
+    </div>
+    <div class="dtiles">
+      ${tile(fresh.length, F.S.since ? "nouvelles depuis ta dernière visite" : "nouvelles aujourd'hui", "fresh", "t-new")}
+      ${hasCv ? tile(great.length, "offres à plus de 75 % de match", "great", "t-good") : tile("CV", "importe-le pour voir ton match", "apply", "t-cta")}
+      ${tile(active, "candidatures en cours", "track")}
+      ${tile(relance.length, relance.length ? "à relancer (envoyées il y a +7 j)" : "relance à faire", "track", relance.length ? "t-warn" : "")}
+    </div>
+    <div class="dash-sub"><h3>${poolTitle}</h3>${hasCv ? `<span class="muted small">Classées par compatibilité avec ton CV</span>` : `<button class="btn ghost small" data-dgo="apply">Importer mon CV pour les classer →</button>`}</div>
+    <div class="dcards">${pool.map(({ j, m }) => `
+      <article class="dcard" data-id="${F.esc(j.id)}">
+        <div class="dc-top">${F.logoHtml(j)}<div class="grow"><b>${F.esc(j.title)}</b><small>${F.esc(j.employer)} · ${F.flag(j.cc)} ${F.esc(j.city || j.location || "")}</small></div>
+          ${m ? `<span class="match ${m.score >= 75 ? "hi" : m.score >= 55 ? "mid" : "lo"}">${m.score} %<small>match</small></span>` : ""}</div>
+        ${m ? F.matchWhy(j) : `<div class="why"><span>${F.esc(j.seniority)}</span><span>${F.esc(F.CAT[j.category])}</span></div>`}
+        <div class="dc-acts"><button class="btn small accent" data-dact="prep">Préparer ma candidature</button><button class="btn small ghost" data-dact="open">Détails</button><span class="when">${F.isNewForMe(j) ? `<span class="tag new">Nouveau</span>` : F.esc(F.rel(j.first_seen))}</span></div>
+      </article>`).join("")}</div>
+    ${relance.length ? `<div class="dash-sub"><h3>À relancer</h3></div><div class="drel">${relance.slice(0, 5).map(([, t]) => `<div class="drow"><b>${F.esc(t.title)}</b><small>${F.esc(t.employer)} · envoyée ${F.esc(F.rel(t.updated))}</small><a class="btn small ghost" href="${F.esc(t.url)}" target="_blank" rel="noopener">Ouvrir ↗</a></div>`).join("")}</div>` : ""}`;
+}
+document.addEventListener("click", e => {
+  const g = e.target.closest("[data-dgo]");
+  if (g) {
+    const v = g.dataset.dgo;
+    if (v === "fresh" || v === "great") { $("#since").value = v === "fresh" ? (F.S.since ? "visit" : "1") : ""; $("#sort").value = v === "great" || F.store.get("fjr_profile", null) ? "match" : "date"; F.applyFilters(); F.switchTab("list"); }
+    else F.switchTab(v);
+    return;
+  }
+  const c = e.target.closest(".dcard"); if (!c) return;
+  const j = jobs.find(x => x.id === c.dataset.id); if (!j) return;
+  if (e.target.closest("[data-dact=prep]")) F.prepare?.(j); else F.openJob(j);
+});
+document.addEventListener("fjr:profile", () => started && dashboard());
+document.addEventListener("fjr:tab", e => { if (e.detail === "home" && started) dashboard(); });
+
 // ------------------------------------------------ démarrage
 async function start() {
   if (started || !window.FJR) return; started = true;
   F = window.FJR; jobs = F.S.data.jobs || [];
   cv = $("#radar"); ctx = cv.getContext("2d");
-  stats(); ticker(); demo();
+  stats(); dashboard(); ticker(); demo();
   await loadLand();
   resize(); requestAnimationFrame(frame);
   new ResizeObserver(() => { resize(); if (reduce) requestAnimationFrame(frame); }).observe(cv);
