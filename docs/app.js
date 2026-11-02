@@ -60,6 +60,9 @@ $("#themeBtn").onclick = () => {
   renderChips();
 };
 
+// les ancres #targets / #about désignent un onglet, pas un bloc : on évite le saut du navigateur
+if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+addEventListener("load", () => setTimeout(() => scrollTo(0, 0), 0));
 // ---------------------------------------------------------------- chargement
 fetch("data/jobs.json", { cache: "no-cache" }).then(r => r.json()).then(d => {
   S.data = d;
@@ -325,7 +328,7 @@ function salaryHtml(s) {
 function jobCard(j) {
   const tracked = !!S.track[j.id];
   const isNew = isNewForMe(j);
-  return `<article class="job ${S.reported.has(j.id) ? "reported" : ""}" data-id="${j.id}" tabindex="0">
+  return `<article class="job ${S.reported.has(j.id) ? "reported" : ""} ${isNew ? "is-new" : ""}" data-id="${j.id}" tabindex="0" style="--cc:${catColor(j.category)}">
     ${logoHtml(j)}
     <div><h3>${esc(j.title)}</h3><div class="sub"><b>${esc(j.employer)}</b> · ${flag(j.cc)} ${esc(j.city || j.location || "—")}${j.country && j.city ? ", " + esc(j.country) : ""}</div></div>
     <div class="right"><span class="when">${j.posted ? rel(j.posted) : "repérée " + rel(j.first_seen)}</span>${verifHtml(j)}</div>
@@ -457,14 +460,22 @@ function report(j) {
 
 // ---------------------------------------------------------------- onglets
 function switchTab(name) {
-  $$(".tabs button").forEach(b => b.classList.toggle("active", b.dataset.tab === name));
-  $$(".tab").forEach(t => t.classList.toggle("active", t.id === "tab-" + name));
-  $("#filterbar").classList.toggle("hidden", !["list", "map"].includes(name));
-  if (name === "targets" && !TARGETS.length) loadTargets();
-  history.replaceState(null, "", "#" + name);
-  try { window.goatcounter?.count?.({ path: "/onglet/" + name, title: "Onglet " + name, event: false }); } catch {}
-  document.dispatchEvent(new CustomEvent("fjr:tab", { detail: name }));
-  window.scrollTo({ top: 0 });
+  const cur = $(".tab.active")?.id;
+  const swap = () => {
+    $$(".tabs button").forEach(b => b.classList.toggle("active", b.dataset.tab === name));
+    $$(".tab").forEach(t => t.classList.toggle("active", t.id === "tab-" + name));
+    $("#filterbar").classList.toggle("hidden", !["list", "map"].includes(name));
+  };
+  const after = () => {
+    if (name === "targets" && !TARGETS.length) loadTargets();
+    history.replaceState(null, "", "#" + name);
+    try { window.goatcounter?.count?.({ path: "/onglet/" + name, title: "Onglet " + name, event: false }); } catch {}
+    document.dispatchEvent(new CustomEvent("fjr:tab", { detail: name }));
+    window.scrollTo({ top: 0 });
+  };
+  if (document.startViewTransition && cur && cur !== "tab-" + name && !matchMedia("(prefers-reduced-motion: reduce)").matches)
+    document.startViewTransition(swap).updateCallbackDone.then(after, after);
+  else { swap(); after(); }
 }
 document.addEventListener("click", e => { const b = e.target.closest("[data-tab]"); if (b && (b.closest(".tabs") || b.classList.contains("brand"))) { e.preventDefault(); switchTab(b.dataset.tab); } });
 

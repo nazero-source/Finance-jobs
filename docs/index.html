@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=EB+Garamond:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="style.css?v=15">
+<link rel="stylesheet" href="style.css?v=16">
 <script>try{const t=localStorage.getItem("fjr_theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
 </head>
 <body>
@@ -131,6 +131,7 @@
 
   <!-- CANDIDATURE -->
   <section id="tab-apply" class="tab">
+    <header class="page-hero"><div class="ph-in"><div><span class="eyebrow"><span class="live-dot"></span>Studio de candidature</span><h1>Ton CV et ta lettre, <em>taillés pour chaque offre</em></h1><p>Choisis une offre : ton CV met en avant les bonnes expériences, ta lettre s'écrit à partir de ton modèle, et tu suis chaque envoi.</p></div></div></header>
     <div class="studio">
       <aside class="studio-side">
         <div class="card">
@@ -200,6 +201,7 @@
 
   <!-- CIBLES INFRA & ÉNERGIE -->
   <section id="tab-targets" class="tab">
+    <header class="page-hero"><div class="ph-in"><div><span class="eyebrow"><span class="live-dot"></span>Veille infra &amp; énergie</span><h1>Boutiques, fonds et <em>institutions de développement</em></h1><p>Les employeurs à suivre de près en infrastructure, énergie et transition énergétique, avec leurs offres juniors en cours.</p></div><div class="ph-stats" id="phTargets"></div></div></header>
     <div class="list-head"><h2>Boutiques, fonds infra / énergie & institutions de développement</h2><span class="muted" id="targetsCount"></span></div>
     <p class="hint" style="margin-top:-.3rem">Les employeurs à suivre de près en infra, énergie et transition énergétique. « Suivi automatique » : leurs offres arrivent chaque jour sur le site. « À surveiller » : ils publient sur LinkedIn ou sur un site illisible par le robot, donc passe par leur page carrière ou écris à leur e-mail de recrutement.</p>
     <div class="fb-row" style="margin:.6rem 0 1rem"><div class="seg" id="targetZone"></div></div>
@@ -208,6 +210,7 @@
 
   <!-- CONTACTS CLÉS -->
   <section id="tab-contacts" class="tab">
+    <header class="page-hero"><div class="ph-in"><div><span class="eyebrow"><span class="live-dot"></span>Approche directe</span><h1>Les <em>bonnes personnes</em> à contacter</h1><p>Les équipes publiées par chaque firme, le format d'e-mail probable et un brouillon Gmail prêt à partir. Liste chiffrée, lisible seulement avec ta phrase secrète.</p></div></div></header>
     <div class="list-head"><h2>Contacts clés</h2><span class="muted" id="ctCount"></span></div>
     <div class="card" id="ctLock">
       <h3>🔒 Liste chiffrée</h3>
@@ -233,12 +236,15 @@
 
   <!-- SUIVI -->
   <section id="tab-track" class="tab">
+    <header class="page-hero"><div class="ph-in"><div><span class="eyebrow"><span class="live-dot"></span>Suivi</span><h1>Tes candidatures, <em>d'un coup d'œil</em></h1><p>Glisse les cartes d'une colonne à l'autre. Tout reste dans ce navigateur.</p></div><div class="ph-stats" id="phTrack"></div></div></header>
     <div class="list-head"><h2>Mes candidatures</h2><span class="muted">Glisse les cartes d'une colonne à l'autre · stocké dans ce navigateur</span><button class="btn ghost small" id="exportTrack">Exporter (CSV)</button></div>
     <div class="board" id="board"></div>
   </section>
 
   <!-- SOURCES -->
-  <section id="tab-about" class="tab"><div class="card prose" id="about"></div></section>
+  <section id="tab-about" class="tab">
+    <header class="page-hero"><div class="ph-in"><div><span class="eyebrow"><span class="live-dot"></span>Sources et méthode</span><h1>D'où viennent <em>les offres</em></h1><p>Le robot lit chaque matin les sites carrière des employeurs et ne garde que les postes juniors encore ouverts.</p></div></div></header>
+<div class="card prose" id="about"></div></section>
 </main>
 
 <!-- Tiroir de détail d'une offre -->
@@ -276,11 +282,12 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="keywords.js?v=15"></script>
-<script src="app.js?v=15"></script>
-<script src="map.js?v=15"></script>
-<script src="studio.js?v=15"></script>
-<script src="home.js?v=15"></script>
+<script src="keywords.js?v=16"></script>
+<script src="app.js?v=16"></script>
+<script src="map.js?v=16"></script>
+<script src="studio.js?v=16"></script>
+<script src="home.js?v=16"></script>
+<script src="ui.js?v=16"></script>
 <!-- Mesure d'audience GoatCounter : sans cookies, aucune donnée personnelle -->
 <script data-goatcounter="https://financejobsradar.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
