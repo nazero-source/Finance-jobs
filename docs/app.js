@@ -70,7 +70,7 @@ fetch("data/jobs.json", { cache: "no-cache" }).then(r => r.json()).then(d => {
   $("#meta").textContent = `${d.jobs.length} offres juniors · mis à jour le ${gen.toLocaleDateString("fr-FR")} à ${gen.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })}`;
   buildFilters(); restoreFilters(); apply(); renderBoard(); renderAbout(); loadTargets();
   document.dispatchEvent(new CustomEvent("fjr:data"));
-  const hash = location.hash.slice(1); if (["list", "map", "apply", "targets", "track", "about"].includes(hash)) switchTab(hash);
+  const hash = location.hash.slice(1); if (["list", "map", "apply", "targets", "contacts", "track", "about"].includes(hash)) switchTab(hash);
 }).catch(e => { $("#list").innerHTML = `<p class="empty">Impossible de charger les offres (${esc(e.message)}).</p>`; });
 
 // ---------------------------------------------------------------- filtres
@@ -413,6 +413,7 @@ function switchTab(name) {
   $("#filterbar").classList.toggle("hidden", !["list", "map"].includes(name));
   if (name === "targets" && !TARGETS.length) loadTargets();
   history.replaceState(null, "", "#" + name);
+  try { window.goatcounter?.count?.({ path: "/onglet/" + name, title: "Onglet " + name, event: false }); } catch {}
   document.dispatchEvent(new CustomEvent("fjr:tab", { detail: name }));
   window.scrollTo({ top: 0 });
 }
@@ -455,6 +456,80 @@ $("#targets").addEventListener("click", e => {
     const name = em.dataset.emp.split(" (")[0].toLowerCase();
     const match = [...new Set(S.data.jobs.map(j => j.employer))].find(x => x.toLowerCase().startsWith(name.slice(0, 12)) || name.startsWith(x.toLowerCase().slice(0, 12)));
     if (match) { setFilter("employer", match); switchTab("list"); }
+  }
+});
+
+// ---------------------------------------------------------------- contacts clés (liste chiffrée)
+let CT = null, ctLevel = "junior", ctShown = 60;
+const ctDone = store.get("fjr_contacted", {});
+const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+async function decryptContacts(pass) {
+  const r = await fetch("data/contacts.enc.json", { cache: "no-cache" });
+  if (!r.ok) throw new Error("absent");
+  const e = await r.json();
+  const base = await crypto.subtle.importKey("raw", new TextEncoder().encode(pass), "PBKDF2", false, ["deriveKey"]);
+  const key = await crypto.subtle.deriveKey({ name: "PBKDF2", hash: "SHA-256", salt: b64(e.salt), iterations: e.iter }, base, { name: "AES-GCM", length: 256 }, false, ["decrypt"]);
+  const pt = await crypto.subtle.decrypt({ name: "AES-GCM", iv: b64(e.iv) }, key, b64(e.data));
+  return JSON.parse(new TextDecoder().decode(pt));
+}
+async function unlockContacts(pass, remember) {
+  $("#ctMsg").textContent = "Déchiffrement…";
+  try {
+    CT = await decryptContacts(pass);
+    if (remember) { try { localStorage.setItem("fjr_ctpass", pass); } catch {} }
+    $("#ctLock").hidden = true; $("#ctBody").hidden = false; renderContacts();
+  } catch (e) {
+    $("#ctMsg").textContent = e.message === "absent"
+      ? "La liste n'est pas encore générée : ajoute le secret CONTACTS_KEY dans GitHub, puis lance une collecte."
+      : "Phrase secrète incorrecte.";
+  }
+}
+$("#ctForm").addEventListener("submit", e => { e.preventDefault(); unlockContacts($("#ctPass").value, $("#ctRemember").checked); });
+$("#ctLockBtn").onclick = () => { try { localStorage.removeItem("fjr_ctpass"); } catch {} CT = null; $("#ctBody").hidden = true; $("#ctLock").hidden = false; $("#ctPass").value = ""; $("#ctMsg").textContent = "Liste verrouillée."; };
+document.addEventListener("fjr:tab", e => { if (e.detail === "contacts" && !CT) { let p = null; try { p = localStorage.getItem("fjr_ctpass"); } catch {} if (p) unlockContacts(p, true); } });
+function renderContacts() {
+  if (!CT) return;
+  const q = norm($("#ctQ").value.trim());
+  const all = CT.firms.flatMap(f => f.people.map(p => ({ ...p, firm: f.firm, why: f.pattern_why, generic: f.generic })));
+  const lv = { junior: "Analysts & associates", rh: "RH & recrutement", senior: "Seniors", "": "Tous" };
+  const base = all.filter(p => !q || q.split(/\s+/).every(w => norm(`${p.name} ${p.title} ${p.firm}`).includes(w)));
+  $("#ctLevel").innerHTML = Object.entries(lv).map(([k, l]) => `<button class="${ctLevel === k ? "on" : ""}" data-l="${k}">${l}<span class="n">${base.filter(p => !k || p.level === k).length}</span></button>`).join("");
+  const list = base.filter(p => !ctLevel || p.level === ctLevel);
+  $("#ctCount").textContent = `${all.length} personnes · ${CT.firms.filter(f => f.people.length).length} entreprises · mis à jour le ${new Date(CT.generated.replace("Z", ":00Z")).toLocaleDateString("fr-FR")}`;
+  let html = "", firm = "";
+  list.slice(0, ctShown).forEach(p => {
+    if (p.firm !== firm) { firm = p.firm; html += `<div class="ctfirm">${esc(firm)}${p.generic?.length ? `<small>· ${esc(p.generic.join(", "))}</small>` : ""}</div>`; }
+    const id = `${p.firm}|${p.name}`, done = ctDone[id];
+    const sure = /déduit/.test(p.why || "");
+    html += `<div class="ct ${done ? "done" : ""}" data-id="${esc(id)}">
+      <div><b>${esc(p.name)}</b><div class="ttl">${esc(p.title)}</div>
+        <div class="mail">${esc(p.email || "—")}<span class="conf ${sure ? "ok" : "guess"}" title="${esc(p.why || "")}">${sure ? "format confirmé" : "format supposé"}</span>${done ? ` · <span class="verified">contacté le ${fmtDate(done)}</span>` : ""}</div></div>
+      <div class="acts">
+        <a class="btn ghost small" target="_blank" rel="noopener" href="https://www.google.com/search?q=${encodeURIComponent(`"${p.name}" "${p.firm}" linkedin`)}">Vérifier ↗</a>
+        <button class="btn ghost small" data-ct="copy">Copier l'e-mail</button>
+        <button class="btn small" data-ct="claude">✦ E-mail par Claude</button>
+        <button class="btn ghost small" data-ct="done">${done ? "Annuler" : "Contacté ✓"}</button>
+      </div></div>`;
+  });
+  $("#ctList").innerHTML = html || `<p class="empty">Aucun contact pour ces filtres.</p>`;
+  $("#ctMore").hidden = list.length <= ctShown; $("#ctMore").textContent = `Afficher plus (${list.length - ctShown})`;
+}
+$("#ctMore").onclick = () => { ctShown += 60; renderContacts(); };
+let ctT; $("#ctQ").addEventListener("input", () => { clearTimeout(ctT); ctT = setTimeout(() => { ctShown = 60; renderContacts(); }, 150); });
+$("#ctLevel").onclick = e => { const b = e.target.closest("[data-l]"); if (b) { ctLevel = b.dataset.l; ctShown = 60; renderContacts(); } };
+$("#ctList").addEventListener("click", async e => {
+  const b = e.target.closest("[data-ct]"); if (!b) return;
+  const id = b.closest(".ct").dataset.id, [firm, name] = id.split("|");
+  const p = CT.firms.find(f => f.firm === firm).people.find(x => x.name === name);
+  if (b.dataset.ct === "copy") { navigator.clipboard?.writeText(p.email).then(() => toast("E-mail copié : " + p.email), () => toast(p.email)); }
+  if (b.dataset.ct === "done") {
+    if (ctDone[id]) delete ctDone[id]; else ctDone[id] = new Date().toISOString().slice(0, 10);
+    store.set("fjr_contacted", ctDone); renderContacts();
+  }
+  if (b.dataset.ct === "claude") {
+    const ctx = `Contact : ${p.name}\nFonction : ${p.title}\nEntreprise : ${firm}\nE-mail : ${p.email}\nSource : site de l'entreprise (page équipe)`;
+    try { await navigator.clipboard.writeText(ctx); toast("Contact copié : colle-le dans l'assistant (Ctrl/Cmd + V)"); } catch { toast("Ouvre l'assistant puis colle le contact"); }
+    window.open(ASSISTANT + "#email", "_blank", "noopener");
   }
 });
 

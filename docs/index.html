@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="style.css?v=11">
+<link rel="stylesheet" href="style.css?v=12">
 <script>try{const t=localStorage.getItem("fjr_theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
 </head>
 <body>
@@ -24,6 +24,7 @@
     <button role="tab" data-tab="map"><svg viewBox="0 0 24 24"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/></svg><span>Carte</span></button>
     <button role="tab" data-tab="apply"><svg viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9zM14 3v6h6M8 13h8M8 17h5"/></svg><span>Candidature</span></button>
     <button role="tab" data-tab="targets"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg><span>Infra & énergie</span></button>
+    <button role="tab" data-tab="contacts"><svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg><span>Contacts</span></button>
     <button role="tab" data-tab="track"><svg viewBox="0 0 24 24"><path d="M4 4h4v16H4zM10 4h4v10h-4zM16 4h4v6h-4z"/></svg><span>Suivi</span><span id="trackCount" class="badge"></span></button>
     <button role="tab" data-tab="about"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg><span>Sources</span></button>
   </nav>
@@ -145,6 +146,31 @@
     <div class="tgrid" id="targets"></div>
   </section>
 
+  <!-- CONTACTS CLÉS -->
+  <section id="tab-contacts" class="tab">
+    <div class="list-head"><h2>Contacts clés</h2><span class="muted" id="ctCount"></span></div>
+    <div class="card" id="ctLock">
+      <h3>🔒 Liste chiffrée</h3>
+      <p class="hint" style="margin:0">Les équipes publiées sur les sites des boutiques et des fonds ciblés, avec un e-mail probable pour chaque personne. La liste est chiffrée : le dépôt GitHub est public, elle n'est lisible qu'avec ta phrase secrète.</p>
+      <form id="ctForm" class="actions" autocomplete="off">
+        <input id="ctPass" type="password" placeholder="Phrase secrète" style="flex:1;min-width:200px" aria-label="Phrase secrète">
+        <label class="check"><input type="checkbox" id="ctRemember" checked> Se souvenir sur cet appareil</label>
+        <button class="btn" type="submit">Déverrouiller</button>
+      </form>
+      <p class="hint" id="ctMsg" style="margin:0"></p>
+    </div>
+    <div id="ctBody" hidden>
+      <div class="fb-row" style="margin-bottom:.7rem">
+        <label class="search" style="flex:1 1 260px"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="ctQ" type="search" placeholder="Entreprise, nom, fonction…" autocomplete="off"></label>
+        <div class="seg" id="ctLevel"></div>
+        <button class="btn ghost small" id="ctLockBtn" title="Oublier la phrase secrète sur cet appareil">Verrouiller</button>
+      </div>
+      <p class="hint">Les analysts et associates répondent le plus souvent : commence par eux. L'e-mail est <b>déduit</b> du format de l'entreprise, donc vérifie-le (lien « Vérifier ») avant d'écrire. Envoie depuis ta propre boîte et reste à quelques messages personnalisés par jour.</p>
+      <div id="ctList" class="ctlist"></div>
+      <button id="ctMore" class="btn ghost wide" hidden>Afficher plus</button>
+    </div>
+  </section>
+
   <!-- SUIVI -->
   <section id="tab-track" class="tab">
     <div class="list-head"><h2>Mes candidatures</h2><span class="muted">Glisse les cartes d'une colonne à l'autre · stocké dans ce navigateur</span><button class="btn ghost small" id="exportTrack">Exporter (CSV)</button></div>
@@ -190,9 +216,11 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="keywords.js?v=11"></script>
-<script src="app.js?v=11"></script>
-<script src="map.js?v=11"></script>
-<script src="studio.js?v=11"></script>
+<script src="keywords.js?v=12"></script>
+<script src="app.js?v=12"></script>
+<script src="map.js?v=12"></script>
+<script src="studio.js?v=12"></script>
+<!-- Mesure d'audience GoatCounter : sans cookies, aucune donnée personnelle -->
+<script data-goatcounter="https://financejobsradar.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

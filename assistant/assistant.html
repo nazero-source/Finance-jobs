@@ -115,6 +115,7 @@ label.fld input, label.fld select { font: inherit; font-size: .85rem; color: var
 
   <div class="modes" role="tablist" aria-label="Mode">
     <button class="on" data-mode="letter" role="tab">Lettre de motivation</button>
+    <button data-mode="email" role="tab">E-mail d'approche</button>
     <button data-mode="chat" role="tab">Contacts, entretien & questions</button>
   </div>
 
@@ -127,6 +128,12 @@ label.fld input, label.fld select { font: inherit; font-size: .85rem; color: var
         <p class="hint">Sur le site, ouvre une offre et clique sur <b>Demander à Claude</b> : l'offre est copiée. Colle-la ici.</p>
         <textarea id="offer" rows="7" placeholder="Colle ici l'offre (ou son lien et sa description)…"></textarea>
         <div id="offerSum" class="ctx-sum" hidden></div>
+      </section>
+      <section class="card" aria-labelledby="h-to" data-email-only hidden>
+        <h2 id="h-to">Destinataire <span class="pill" id="toPill">vide</span></h2>
+        <p class="hint">Dans l'onglet Contacts du site, clique sur « ✦ E-mail par Claude », puis colle ici (Ctrl/Cmd + V).</p>
+        <textarea id="to" rows="4" placeholder="Contact : …&#10;Fonction : …&#10;Entreprise : …&#10;E-mail : …"></textarea>
+        <label class="fld">Objectif<select id="goal"><option value="offer">Candidature à l'offre ci-dessous</option><option value="spont">Candidature spontanée (stage / VIE / analyst)</option><option value="advice">Demande d'échange de 15 minutes</option></select></label>
       </section>
       <section class="card" aria-labelledby="h-co" data-letter-only>
         <h2 id="h-co">L'entreprise <span class="pill" id="coPill">optionnel</span></h2>
@@ -172,6 +179,20 @@ label.fld input, label.fld select { font: inherit; font-size: .85rem; color: var
         <button class="btn ghost" data-rev="translate" type="button">Traduire FR ↔ EN</button>
         <button class="btn ghost" id="copyLetter" type="button">Copier</button>
         <button class="btn" id="docxLetter" type="button">Télécharger (.docx)</button>
+      </div>
+    </section>
+
+    <section class="card letterpane" id="emailPane" aria-label="E-mail d'approche" hidden>
+      <div class="lp-head">
+        <button class="btn" id="mailBtn" type="button">✦ Rédiger l'e-mail</button>
+        <span class="hint" id="mailStatus">Colle le contact à gauche (et l'offre si tu postules à une offre précise).</span>
+      </div>
+      <div class="lp-stage"><div class="paper empty" id="mailPaper" contenteditable="false">L'e-mail apparaîtra ici : objet en première ligne, puis le message. Tu peux le modifier directement.</div></div>
+      <div class="lp-foot">
+        <button class="btn ghost" data-mrev="shorter" type="button">Plus court</button>
+        <button class="btn ghost" data-mrev="translate" type="button">Traduire FR ↔ EN</button>
+        <button class="btn ghost" id="copyMail" type="button">Copier</button>
+        <a class="btn" id="gmailBtn" target="_blank" rel="noopener" href="https://mail.google.com/mail/?view=cm">Ouvrir dans Gmail ↗</a>
       </div>
     </section>
 
@@ -392,6 +413,7 @@ $("#modelPdf").addEventListener("change", async e => {
 document.addEventListener("paste", e => {
   if (e.target.closest("textarea, input, [contenteditable=true]")) return;
   const t = e.clipboardData?.getData("text") || "";
+  if (/^Contact\s*:/m.test(t)) { e.preventDefault(); $("#to").value = t; store.set("fjc_to", t); refreshTo(); setMode("email"); return; }
   if (/^Poste\s*:/m.test(t)) { e.preventDefault(); offer.value = t; store.set("fjc_offer", t); refreshCtx(); $("#letterStatus").textContent = "Offre collée. Lance la rédaction quand tu veux."; }
 });
 function setPaper(t, editable) {
@@ -494,16 +516,75 @@ $("#docxLetter").onclick = async () => {
   catch (e) { $("#letterStatus").textContent = e && e.code === "declined" ? "Téléchargement annulé." : "Téléchargement impossible : utilise « Copier »."; }
 };
 
+// ---------- mode e-mail ----------
+const toBox = $("#to"), goal = $("#goal"), mailPaper = $("#mailPaper");
+toBox.value = store.get("fjc_to", ""); goal.value = store.get("fjc_goal", "spont");
+let mailText = store.get("fjc_mail", ""), mbusy = false;
+function refreshTo() {
+  const n = (toBox.value.match(/^Contact\s*:\s*(.+)$/mi) || [])[1];
+  $("#toPill").textContent = n || "vide"; $("#toPill").classList.toggle("ok", !!n); updateGmail();
+}
+toBox.addEventListener("input", () => { store.set("fjc_to", toBox.value); refreshTo(); });
+goal.addEventListener("change", () => store.set("fjc_goal", goal.value));
+function splitMail(t) { const m = t.match(/^\s*(?:Subject|Objet)\s*:\s*(.+)\n+([\s\S]*)$/i); return m ? [m[1].trim(), m[2].trim()] : ["", t.trim()]; }
+function updateGmail() {
+  const to = (toBox.value.match(/^E-?mail\s*:\s*(\S+@\S+)/mi) || [])[1] || "";
+  const [su, body] = splitMail(mailPaper.classList.contains("empty") ? "" : mailPaper.innerText);
+  $("#gmailBtn").href = "https://mail.google.com/mail/?view=cm&fs=1" + (to ? "&to=" + encodeURIComponent(to) : "") + (su ? "&su=" + encodeURIComponent(su) : "") + (body ? "&body=" + encodeURIComponent(body.slice(0, 1800)) : "");
+}
+mailPaper.addEventListener("input", () => { mailText = mailPaper.innerText; store.set("fjc_mail", mailText); updateGmail(); });
+if (mailText) { mailPaper.classList.remove("empty"); mailPaper.textContent = mailText; mailPaper.contentEditable = "true"; }
+refreshTo();
+const GOALS = {
+  offer: "The candidate is applying to the job offer below and wants this person to notice the application or refer it.",
+  spont: "Unsolicited application: ask whether the team is recruiting interns (6-month internship), a VIE or a junior analyst from the availability date, and offer to send the CV.",
+  advice: "Ask for a 15-minute call to learn about the team's work and how the candidate could contribute; no direct job request.",
+};
+async function writeMail(rev) {
+  if (mbusy) return;
+  if (!sample) { $("#unavailable").hidden = false; return; }
+  if (!toBox.value.trim()) { $("#mailStatus").textContent = "Colle d'abord le contact à gauche."; return; }
+  const cur = mailPaper.classList.contains("empty") ? "" : mailPaper.innerText;
+  mbusy = true; $("#mailBtn").disabled = true; $("#mailStatus").textContent = "Claude rédige…";
+  const input = rev ? `${rev === "shorter" ? "Shorten this email to under 120 words, keep the subject line." : "Translate this email into the other language (English <-> French), keep the format 'Subject: …' then body."}\nReturn only 'Subject: …' on the first line, then the body.\n\n${cur}` :
+`Write a short cold email from Nassim (master's student at emlyon, finance internships in project finance, private equity, infrastructure investing) to the person below.
+Goal: ${GOALS[goal.value]}
+Rules: 90-150 words; first line "Subject: …" (specific, under 9 words); then the body. Open with one precise sentence on why this person/team (their role, the firm's focus); then two lines on the most relevant experience from the CV; then a clear, easy ask; polite sign-off with the candidate's name. Language: French if the firm is French or the contact's name/title is in French, otherwise English. Never invent facts about the person or the firm; do not pretend to know their deals. No flattery, no "I hope this email finds you well". Availability: ${(document.querySelector("#avail")?.value) || "March 2027"}.
+
+=== CONTACT ===
+${toBox.value.trim()}
+
+=== JOB OFFER (may be empty) ===
+${goal.value === "offer" ? offer.value.trim().slice(0, 3000) || "(none)" : "(not relevant)"}
+
+=== CANDIDATE CV ===
+${cv.value.trim().slice(0, 5000) || "(no CV)"}`;
+  mailPaper.classList.remove("empty"); mailPaper.contentEditable = "false"; mailPaper.textContent = "Rédaction…";
+  try {
+    const { text } = await sample(input, { cache: false, onText: ({ text }) => { mailPaper.textContent = text; } });
+    mailText = text.trim(); store.set("fjc_mail", mailText); mailPaper.textContent = mailText; mailPaper.contentEditable = "true";
+    $("#mailStatus").textContent = "Relis, modifie si besoin, puis « Ouvrir dans Gmail » : le brouillon s'ouvre avec le destinataire et l'objet."; updateGmail();
+  } catch (e) {
+    mailPaper.textContent = e && e.text ? e.text : mailText || ""; if (!mailPaper.textContent) { mailPaper.classList.add("empty"); }
+    $("#mailStatus").textContent = ERR[e && e.code] || "Erreur de connexion : réessaie.";
+  } finally { mbusy = false; $("#mailBtn").disabled = false; }
+}
+$("#mailBtn").onclick = () => writeMail();
+document.querySelectorAll("[data-mrev]").forEach(b => b.onclick = () => writeMail(b.dataset.mrev));
+$("#copyMail").onclick = async () => { try { await navigator.clipboard.writeText(mailPaper.innerText); $("#mailStatus").textContent = "E-mail copié."; } catch { $("#mailStatus").textContent = "Sélectionne le texte puis Ctrl/Cmd + C."; } };
+
 // ---------- modes ----------
 function setMode(m) {
   document.querySelectorAll(".modes button").forEach(b => b.classList.toggle("on", b.dataset.mode === m));
-  $("#letterPane").hidden = m !== "letter"; $("#chatPane").hidden = m !== "chat";
+  $("#letterPane").hidden = m !== "letter"; $("#chatPane").hidden = m !== "chat"; $("#emailPane").hidden = m !== "email";
   document.querySelectorAll("[data-letter-only]").forEach(x => x.hidden = m !== "letter");
+  document.querySelectorAll("[data-email-only]").forEach(x => x.hidden = m !== "email");
   if (location.hash.slice(1) !== m) history.replaceState(null, "", "#" + m);
 }
 document.querySelector(".modes").addEventListener("click", e => { const b = e.target.closest("[data-mode]"); if (b) setMode(b.dataset.mode); });
-setMode(location.hash.slice(1) === "chat" ? "chat" : "letter");
-addEventListener("hashchange", () => setMode(location.hash.slice(1) === "chat" ? "chat" : "letter"));
+const modeOf = h => ["chat", "email"].includes(h) ? h : "letter";
+setMode(modeOf(location.hash.slice(1)));
+addEventListener("hashchange", () => setMode(modeOf(location.hash.slice(1))));
 
 // ---------- Claude ----------
 (async () => {

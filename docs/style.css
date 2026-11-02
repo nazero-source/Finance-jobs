@@ -380,3 +380,18 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
 .verified { font-size: .72rem; color: var(--good); font-weight: 600; }
 .unverified { font-size: .72rem; color: var(--warn); font-weight: 600; }
 @media (max-width: 560px) { .mb-row { grid-template-columns: 1fr; } .mb-row small { grid-column: 1; } }
+
+/* ============ Contacts ============ */
+.ctlist { display: grid; gap: .5rem; }
+.ctfirm { font-size: .78rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; margin: .8rem 0 .1rem; display: flex; gap: .5rem; align-items: center; }
+.ctfirm small { text-transform: none; letter-spacing: 0; font-weight: 500; }
+.ct { display: grid; grid-template-columns: 1fr auto; gap: .3rem .8rem; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: .6rem .8rem; }
+.ct b { font-size: .92rem; }
+.ct .ttl { color: var(--text-2); font-size: .8rem; }
+.ct .mail { font-size: .8rem; color: var(--text); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; }
+.ct .acts { display: flex; flex-wrap: wrap; gap: .3rem; justify-content: flex-end; }
+.ct.done { opacity: .6; }
+.conf { font-size: .7rem; font-weight: 600; padding: .05rem .4rem; border-radius: 6px; margin-left: .3rem; }
+.conf.ok { background: var(--good-soft); color: var(--good); }
+.conf.guess { background: var(--warn-soft); color: var(--warn); }
+@media (max-width: 720px) { .ct { grid-template-columns: 1fr; } .ct .acts { justify-content: flex-start; } }
