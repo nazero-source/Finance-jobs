@@ -536,13 +536,20 @@ async function decryptContacts(pass) {
 async function unlockContacts(pass, remember) {
   $("#ctMsg").textContent = "Déchiffrement…";
   try {
-    CT = await decryptContacts(pass);
+    // tolérance d'écriture : espaces, tirets ou mots collés, majuscules
+    const t = pass.trim(), words = t.split(/[\s-]+/).filter(Boolean);
+    const variants = [...new Set([pass, t, words.join(" "), words.join("-"), words.join(""), t.toLowerCase(), words.join(" ").toLowerCase(), words.join("-").toLowerCase(), words.join("").toLowerCase()])];
+    let err;
+    for (const v of variants) {
+      try { CT = await decryptContacts(v); pass = v; err = null; break; } catch (e) { err = e; if (e.message === "absent") break; }
+    }
+    if (err) throw err;
     if (remember) { try { localStorage.setItem("fjr_ctpass", pass); } catch {} }
     $("#ctLock").hidden = true; $("#ctBody").hidden = false; renderContacts();
   } catch (e) {
     $("#ctMsg").textContent = e.message === "absent"
-      ? "La liste n'est pas encore générée : ajoute le secret CONTACTS_KEY dans GitHub, puis lance une collecte."
-      : "Phrase secrète incorrecte.";
+      ? "La liste n'est pas encore en ligne : le robot la génère lors de sa prochaine collecte (le lundi, ou quand on le lance à la main). Réessaie dans quelques minutes."
+      : "Phrase secrète incorrecte : tape-la exactement comme dans le secret CONTACTS_KEY de GitHub.";
   }
 }
 $("#ctForm").addEventListener("submit", e => { e.preventDefault(); unlockContacts($("#ctPass").value, $("#ctRemember").checked); });
