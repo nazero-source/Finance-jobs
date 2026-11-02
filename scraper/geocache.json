@@ -1259,12 +1259,26 @@
 "lat": 4.5694,
 "lon": 102.2657
 },
+"Manchester": {
+"cc": "GB",
+"city": "Manchester",
+"country": "United Kingdom",
+"lat": 53.4425,
+"lon": -2.2325
+},
 "Marcq-en-Barœul, Nord": {
 "cc": "FR",
 "city": "Marcq-en-Barœul",
 "country": "France",
 "lat": 50.6767,
 "lon": 3.1043
+},
+"Marseille": {
+"cc": "FR",
+"city": "Marseille",
+"country": "France",
+"lat": 43.2964,
+"lon": 5.3778
 },
 "Marseille, France": {
 "cc": "FR",
