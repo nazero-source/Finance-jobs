@@ -37,7 +37,17 @@ function logoHtml(j) {
   return `<div class="logo"><img loading="lazy" alt="" src="https://www.google.com/s2/favicons?domain=${encodeURIComponent(j.domain)}&sz=64" onerror="this.replaceWith(document.createTextNode('${ini}'))"></div>`;
 }
 
-const S = { data: { jobs: [] }, filtered: [], shown: PAGE, cats: new Set(), level: "", region: "",
+const ZONES = [["", "Monde"], ["noUS", "Hors États-Unis"], ["EU", "Europe"], ["FR", "France"], ["GB", "Royaume-Uni"], ["MEA", "Moyen-Orient & Afrique"], ["APAC", "Asie-Pacifique"], ["AM", "Amériques"]];
+function inZone(j, z) {
+  if (!z) return true;
+  if (z === "noUS") return j.cc !== "US";
+  if (z === "EU") return j.region === "Europe";
+  if (z === "MEA") return j.region === "Moyen-Orient & Afrique";
+  if (z === "APAC") return j.region === "Asie-Pacifique";
+  if (z === "AM") return j.region === "Amérique du Nord" || j.region === "Amérique latine";
+  return j.cc === z;
+}
+const S = { data: { jobs: [] }, filtered: [], shown: PAGE, cats: new Set(), level: "", zone: "", region: "",
   track: store.get("fjr_track", {}), reported: new Set(store.get("fjr_reported", [])), today: "", firstRun: "" };
 window.FJR = { S, CAT, CAT_ORDER, TEAM, LEVELS, ETYPE, $, $$, esc, store, toast, catColor, flag, logoHtml, rel, fmtDate, norm, openJob, switchTab, applyFilters: apply, setFilter };
 
@@ -73,6 +83,8 @@ function renderChips() {
   const base = baseFiltered("cat"), cc = counts("category", base);
   $("#catChips").innerHTML = CAT_ORDER.map(c =>
     `<button class="chip ${S.cats.has(c) ? "on" : ""}" data-cat="${c}" aria-pressed="${S.cats.has(c)}"><span class="dot" style="background:${catColor(c)}"></span>${esc(CAT[c])}<span class="n">${cc[c] || 0}</span></button>`).join("");
+  const zb = baseFiltered("zone");
+  $("#zoneSeg").innerHTML = ZONES.map(([z, l]) => `<button class="${S.zone === z ? "on" : ""}" data-zone="${z}">${l}<span class="n">${zb.filter(j => inZone(j, z)).length}</span></button>`).join("");
   const lb = baseFiltered("level"), lc = counts("seniority", lb);
   $("#levelSeg").innerHTML = `<button class="${S.level ? "" : "on"}" data-level="">Tous<span class="n">${lb.length}</span></button>` +
     LEVELS.filter(l => lc[l] || S.level === l).map(l => `<button class="${S.level === l ? "on" : ""}" data-level="${l}">${l}<span class="n">${lc[l] || 0}</span></button>`).join("");
@@ -86,10 +98,11 @@ function buildFilters() {
   opts("#etype", uniq("employer_type").map(([k, n]) => [k, `${ETYPE[k] || k} (${n})`]));
   $("#catChips").onclick = e => { const b = e.target.closest(".chip"); if (!b) return; S.cats.has(b.dataset.cat) ? S.cats.delete(b.dataset.cat) : S.cats.add(b.dataset.cat); apply(); };
   $("#levelSeg").onclick = e => { const b = e.target.closest("button"); if (!b) return; S.level = b.dataset.level; apply(); };
+  $("#zoneSeg").onclick = e => { const b = e.target.closest("button"); if (!b) return; S.zone = b.dataset.zone; apply(); };
   ["#region", "#country", "#employer", "#etype", "#since", "#sort", "#hideReported"].forEach(s => $(s).addEventListener("change", () => { if (s === "#region") S.region = $("#region").value; apply(); }));
   let t; $("#q").addEventListener("input", () => { clearTimeout(t); t = setTimeout(apply, 120); });
   $("#moreFilters").onclick = () => { const m = $("#fbMore"); m.hidden = !m.hidden; $("#moreFilters").setAttribute("aria-expanded", !m.hidden); };
-  $("#reset").onclick = () => { S.cats.clear(); S.level = ""; S.region = ""; ["#q", "#region", "#country", "#employer", "#etype", "#since"].forEach(s => $(s).value = ""); apply(); };
+  $("#reset").onclick = () => { S.cats.clear(); S.level = ""; S.zone = ""; S.region = ""; ["#q", "#region", "#country", "#employer", "#etype", "#since"].forEach(s => $(s).value = ""); apply(); };
 }
 function setFilter(key, val) {
   if (key === "country") { $("#country").value = val; }
@@ -101,12 +114,12 @@ function setFilter(key, val) {
   apply();
 }
 function saveFilters() {
-  store.set("fjr_filters2", { cats: [...S.cats], level: S.level, region: $("#region").value, country: $("#country").value,
+  store.set("fjr_filters2", { cats: [...S.cats], level: S.level, zone: S.zone, region: $("#region").value, country: $("#country").value,
     employer: $("#employer").value, etype: $("#etype").value, since: $("#since").value, sort: $("#sort").value });
 }
 function restoreFilters() {
   const f = store.get("fjr_filters2", null); if (!f) return;
-  f.cats.forEach(c => S.cats.add(c)); S.level = f.level || "";
+  f.cats.forEach(c => S.cats.add(c)); S.level = f.level || ""; S.zone = f.zone ?? "";
   for (const k of ["region", "country", "employer", "etype", "since", "sort"]) if (f[k] && [...$("#" + k).options].some(o => o.value === f[k])) $("#" + k).value = f[k];
   S.region = $("#region").value;
 }
@@ -114,6 +127,7 @@ function match(j, skip) {
   const q = norm($("#q").value.trim());
   if (skip !== "cat" && S.cats.size && !S.cats.has(j.category)) return false;
   if (skip !== "level" && S.level && j.seniority !== S.level) return false;
+  if (skip !== "zone" && !inZone(j, S.zone)) return false;
   const region = $("#region").value, country = $("#country").value, emp = $("#employer").value, et = $("#etype").value, since = +$("#since").value || 0;
   if (region && j.region !== region) return false;
   if (country && j.country !== country) return false;
@@ -133,7 +147,18 @@ function apply() {
     : s === "country" ? (a, b) => (a.country || "~").localeCompare(b.country || "~") || dateKey(b).localeCompare(dateKey(a))
     : s === "salary" ? (a, b) => salKey(b) - salKey(a)
     : (a, b) => dateKey(b).localeCompare(dateKey(a)));
-  const nf = S.cats.size + (S.level ? 1 : 0) + ["#region", "#country", "#employer", "#etype", "#since"].filter(x => $(x).value).length;
+  if ((s === "date" || !s) && !S.zone) {
+    // à date égale, on alterne États-Unis et reste du monde pour équilibrer le haut de la liste
+    const us = S.filtered.filter(j => j.cc === "US"), rest = S.filtered.filter(j => j.cc !== "US"), mix = [];
+    let i = 0, k = 0;
+    while (i < us.length || k < rest.length) {
+      if (k < rest.length) mix.push(rest[k++]);
+      if (k < rest.length) mix.push(rest[k++]);
+      if (i < us.length) mix.push(us[i++]);
+    }
+    S.filtered = mix;
+  }
+  const nf = S.cats.size + (S.level ? 1 : 0) + (S.zone ? 1 : 0) + ["#region", "#country", "#employer", "#etype", "#since"].filter(x => $(x).value).length;
   $("#activeCount").textContent = ["#region", "#country", "#employer", "#etype", "#since"].filter(x => $(x).value).length || "";
   $("#count").textContent = `${S.filtered.length} résultat${S.filtered.length > 1 ? "s" : ""}${nf ? " · filtres actifs" : ""}`;
   S.shown = PAGE; saveFilters(); renderChips(); renderKpis(); renderList();

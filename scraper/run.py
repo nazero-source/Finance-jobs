@@ -125,9 +125,15 @@ def main():
     direct = {(norm(j["title"]), norm(j["location"])[:12]) for j in cand if not j["source"].startswith(("Jooble", "Adzuna"))}
     direct_emp = {norm(j["employer"])[:8] for j in cand if not j["source"].startswith(("Jooble", "Adzuna"))}
     seen_agg = set()
+    direct_titles = {}
+    for j in cand:
+        if not j["source"].startswith(("Jooble", "Adzuna")):
+            direct_titles.setdefault(norm(j["title"]), set()).add(norm(j["employer"])[:4])
     def keep_agg(j):
         if not j["source"].startswith(("Jooble", "Adzuna")):
             return True
+        if norm(j["employer"])[:4] in direct_titles.get(norm(j["title"]), set()):
+            return False
         k = (norm(j["title"]), norm(j["employer"])[:8])
         if (norm(j["title"]), norm(j["location"])[:12]) in direct or k in seen_agg:
             return False

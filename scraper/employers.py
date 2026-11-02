@@ -206,6 +206,11 @@ SEARCH_TERMS = [
     "project finance", "project finance analyst", "leveraged finance", "acquisition finance",
     "corporate finance", "capital markets origination", "energy finance", "advisory analyst",
     "stage", "stagiaire", "VIE", "working student", "placement", "internship banking",
+    # recherches par ville, pour ne pas sur-représenter les États-Unis dans les grandes banques
+    "analyst London", "intern London", "analyst Paris", "stage Paris", "analyst Frankfurt", "intern Frankfurt",
+    "analyst Madrid", "analyst Milan", "analyst Amsterdam", "analyst Zurich", "analyst Dubai", "intern Dubai",
+    "analyst Riyadh", "analyst Singapore", "intern Singapore", "analyst Hong Kong", "intern Hong Kong", "analyst Tokyo",
+    "analyst Sydney", "analyst Mumbai", "analyst São Paulo", "analyst Mexico",
 ]
 
 # Domaines pour afficher le logo de chaque employeur

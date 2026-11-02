@@ -420,23 +420,30 @@ def teamtailor(name, etype, host):
 # La clé Jooble actuelle couvre les États-Unis (jooble.org) et a un quota limité (500 requêtes) :
 # ~16 requêtes ciblées par jour. Pour d'autres pays, il faut une clé par pays (fr.jooble.org, uk.jooble.org…).
 JOOBLE_QUERIES = [
-    ("investment banking analyst", "New York"), ("investment banking summer analyst", ""), ("M&A analyst", "New York"),
-    ("M&A analyst", ""), ("private equity analyst", "New York"), ("private equity analyst", ""),
-    ("private equity intern", ""), ("investment banking intern", ""), ("infrastructure investment analyst", ""),
-    ("project finance analyst", ""), ("leveraged finance analyst", ""), ("investment banking analyst", "Chicago"),
-    ("investment banking analyst", "San Francisco"), ("investment banking analyst", "Houston"),
-    ("M&A summer analyst 2027", ""), ("restructuring investment banking analyst", ""),
+    ("investment banking analyst", "New York"), ("investment banking summer analyst", ""), ("M&A analyst", ""),
+    ("private equity analyst", ""), ("private equity intern", ""), ("infrastructure investment analyst", ""),
+    ("project finance analyst", ""), ("leveraged finance analyst", ""),
 ]
 
 
 # Une clé Jooble par pays : JOOBLE_API_KEY (États-Unis), JOOBLE_API_KEY_FR, _UK, _DE, _CH, _NL, _ES, _IT, _AE, _SG, _BR…
 JOOBLE_LOCAL = {
-    "FR": [("analyste M&A", ""), ("stage fusions acquisitions", ""), ("stage M&A", "Paris"), ("stage private equity", ""),
-           ("analyste private equity", ""), ("stage financement de projets", ""), ("VIE M&A", ""), ("stage corporate finance", "Paris"),
-           ("stage leveraged finance", ""), ("stage infrastructure investissement", "")],
+    "FR": [("analyste M&A", ""), ("stage fusions acquisitions", ""), ("stage M&A", "Paris"), ("stage M&A", "Lyon"), ("stage private equity", ""),
+           ("analyste private equity", ""), ("stage capital investissement", ""), ("stage financement de projets", ""), ("VIE M&A", ""),
+           ("VIE finance", ""), ("stage corporate finance", "Paris"), ("stage leveraged finance", ""), ("stage financement d'acquisition", ""),
+           ("stage infrastructure investissement", ""), ("stage transition énergétique financement", ""), ("analyste financement de projets", ""),
+           ("stage banque d'affaires", ""), ("stage debt advisory", "")],
+    "UK": [("M&A analyst", "London"), ("M&A intern", ""), ("investment banking analyst", "London"), ("investment banking internship", ""),
+           ("off-cycle internship investment banking", ""), ("private equity analyst", "London"), ("private equity intern", ""),
+           ("infrastructure investment analyst", ""), ("infrastructure graduate", ""), ("project finance analyst", ""),
+           ("renewable energy M&A analyst", ""), ("energy transition investment analyst", ""), ("leveraged finance analyst", ""),
+           ("debt advisory analyst", ""), ("corporate finance graduate", ""), ("graduate analyst investment banking", ""),
+           ("summer analyst 2027", "London"), ("corporate finance intern", "")],
     "DEFAULT": [("M&A analyst", ""), ("M&A intern", ""), ("investment banking analyst", ""), ("investment banking intern", ""),
                 ("private equity analyst", ""), ("private equity intern", ""), ("project finance analyst", ""),
-                ("infrastructure investment analyst", ""), ("corporate finance intern", ""), ("leveraged finance analyst", "")],
+                ("infrastructure investment analyst", ""), ("corporate finance intern", ""), ("leveraged finance analyst", ""),
+                ("investment analyst renewable energy", ""), ("graduate programme investment banking", ""), ("summer analyst 2027", ""),
+                ("off-cycle internship", ""), ("transaction advisory analyst", ""), ("energy transition investment", "")],
 }
 
 
