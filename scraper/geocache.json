@@ -989,6 +989,13 @@
 "lat": -26.205,
 "lon": 28.0497
 },
+"Kansas City, KS": {
+"cc": "US",
+"city": "Kansas City",
+"country": "United States",
+"lat": 39.1135,
+"lon": -94.6265
+},
 "Kansas City, MO": {
 "cc": "US",
 "city": "Kansas City",
@@ -1383,6 +1390,13 @@
 "country": "United States",
 "lat": 44.9773,
 "lon": -93.2655
+},
+"Missouri": {
+"cc": "US",
+"city": "Missouri",
+"country": "United States",
+"lat": 38.7605,
+"lon": -92.5618
 },
 "Montreal, Canada": {
 "cc": "CA",
