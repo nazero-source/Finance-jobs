@@ -9,8 +9,8 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
-"status": "inaccessible (HTTPError)",
+"checked": "2026-11-03",
+"status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
 "new": 0,
@@ -38,7 +38,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -57,7 +57,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -76,8 +76,8 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
-"status": "ok",
+"checked": "2026-11-03",
+"status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
 "new": 0,
@@ -95,7 +95,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -114,7 +114,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "inaccessible (HTTPError)",
 "ats": [],
 "count": 0,
@@ -133,7 +133,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -152,8 +152,8 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
-"status": "page vide",
+"checked": "2026-11-03",
+"status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
 "new": 0,
@@ -171,7 +171,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -190,7 +190,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -209,7 +209,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -268,7 +268,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -287,8 +287,8 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
-"status": "inaccessible (RemoteDisconnected)",
+"checked": "2026-11-03",
+"status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
 "new": 0,
@@ -326,7 +326,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 1,
@@ -352,7 +352,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -371,7 +371,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -400,7 +400,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -419,7 +419,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -448,7 +448,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -467,7 +467,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -486,7 +486,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -505,7 +505,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -524,7 +524,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -553,7 +553,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -572,7 +572,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [
 "jobteaser.com"
@@ -613,7 +613,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -632,7 +632,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -651,7 +651,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -670,7 +670,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -699,8 +699,8 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
-"status": "inaccessible (RemoteDisconnected)",
+"checked": "2026-11-03",
+"status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
 "new": 0,
@@ -718,7 +718,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -737,7 +737,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -756,7 +756,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -775,7 +775,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "inaccessible (HTTPError)",
 "ats": [],
 "count": 0,
@@ -794,7 +794,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -823,7 +823,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -842,7 +842,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "inaccessible (HTTPError)",
 "ats": [],
 "count": 0,
@@ -861,7 +861,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [
 "myworkdayjobs.com"
@@ -882,7 +882,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -911,7 +911,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -930,7 +930,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -949,7 +949,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [
 "myworkdayjobs.com"
@@ -970,7 +970,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -999,7 +999,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -1018,7 +1018,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [
 "smartrecruiters.com"
@@ -1039,8 +1039,8 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
-"status": "inaccessible (RemoteDisconnected)",
+"checked": "2026-11-03",
+"status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
 "new": 0,
@@ -1058,7 +1058,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "inaccessible (HTTPError)",
 "ats": [],
 "count": 0,
@@ -1077,7 +1077,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -1096,7 +1096,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -1115,7 +1115,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -1134,7 +1134,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "inaccessible (HTTPError)",
 "ats": [],
 "count": 0,
@@ -1173,7 +1173,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -1202,7 +1202,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "inaccessible (HTTPError)",
 "ats": [],
 "count": 0,
@@ -1221,7 +1221,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -1240,7 +1240,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "inaccessible (HTTPError)",
 "ats": [],
 "count": 0,
@@ -1269,7 +1269,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -1288,7 +1288,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -1307,7 +1307,7 @@
 "jobs": 1,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "inaccessible (HTTPError)",
 "ats": [],
 "count": 0,
@@ -1366,7 +1366,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -1385,7 +1385,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -1404,7 +1404,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -1423,7 +1423,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -1442,7 +1442,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -1461,7 +1461,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -1480,7 +1480,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -1499,7 +1499,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -1518,7 +1518,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -1537,7 +1537,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 2,
@@ -1569,7 +1569,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -1588,7 +1588,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -1607,7 +1607,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -1636,7 +1636,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -1655,7 +1655,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -1674,20 +1674,13 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
-"status": "ok",
+"checked": "2026-11-03",
+"status": "inaccessible (URLError)",
 "ats": [],
-"count": 1,
+"count": 0,
 "new": 0,
 "new_junior": 0,
-"links": [
-{
-"title": "Lausanne [Switzerland] – Internship / Master Thesis as Junior Consultant (1st Semester 2027) Stage",
-"url": "https://e-cube.com/en/job-offers/internship-master-project/",
-"first": "initial",
-"junior": true
-}
-]
+"links": []
 }
 },
 {
@@ -1700,7 +1693,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -1719,7 +1712,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -1738,7 +1731,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "inaccessible (HTTPError)",
 "ats": [],
 "count": 0,
@@ -1757,7 +1750,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -1776,7 +1769,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 1,
@@ -1802,7 +1795,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -1821,7 +1814,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -1840,7 +1833,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 2,
@@ -1848,14 +1841,14 @@
 "new_junior": 0,
 "links": [
 {
-"title": "M&A Internship | October 2026 Milan",
-"url": "https://livingstonepartners.com/en/position/ma-internship-october-2026/",
+"title": "Experienced Investment Banking Analyst Chicago, Los Angeles",
+"url": "https://livingstonepartners.com/en/position/experienced-investment-banking-analyst/",
 "first": "initial",
 "junior": true
 },
 {
-"title": "Experienced Investment Banking Analyst Chicago, Los Angeles",
-"url": "https://livingstonepartners.com/en/position/experienced-investment-banking-analyst/",
+"title": "M&A Internship | October 2026 Milan",
+"url": "https://livingstonepartners.com/en/position/ma-internship-october-2026/",
 "first": "initial",
 "junior": true
 }
@@ -1872,7 +1865,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -1891,7 +1884,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -1910,7 +1903,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "inaccessible (HTTPError)",
 "ats": [],
 "count": 0,
@@ -1939,7 +1932,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "inaccessible (HTTPError)",
 "ats": [],
 "count": 0,
@@ -1958,7 +1951,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -1977,7 +1970,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -1996,7 +1989,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -2015,7 +2008,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 9,
@@ -2023,38 +2016,8 @@
 "new_junior": 0,
 "links": [
 {
-"title": "Japan Graduate Analyst Programme",
-"url": "https://auroraer.com/careers/early-careers/tokyo-graduate-analyst-programme",
-"first": "initial",
-"junior": true
-},
-{
 "title": "Greece Graduate Analyst Opportunity",
 "url": "https://auroraer.com/careers/early-careers/athens-graduate-analyst-opportunity",
-"first": "initial",
-"junior": true
-},
-{
-"title": "Spain Graduate Analyst Opportunity",
-"url": "https://auroraer.com/careers/early-careers/madrid-graduate-analyst-opportunity",
-"first": "initial",
-"junior": true
-},
-{
-"title": "Singapore Graduate Analyst Opportunity",
-"url": "https://auroraer.com/careers/early-careers/singapore-graduate-analyst-opportunity",
-"first": "initial",
-"junior": true
-},
-{
-"title": "Live Brazil Graduate Modelling Programme",
-"url": "https://auroraer.com/careers/early-careers/sao-paulo-graduate-modelling-programme",
-"first": "initial",
-"junior": true
-},
-{
-"title": "Australia Graduate Analyst Opportunity",
-"url": "https://auroraer.com/careers/early-careers/sydney-graduate-analyst-programme",
 "first": "initial",
 "junior": true
 },
@@ -2065,14 +2028,44 @@
 "junior": true
 },
 {
+"title": "Germany Graduate Analyst Programme",
+"url": "https://auroraer.com/careers/early-careers/berlin-graduate-analyst-programme",
+"first": "initial",
+"junior": true
+},
+{
 "title": "India Graduate Modelling Programme",
 "url": "https://auroraer.com/careers/early-careers/gurugram-graduate-modelling-programme",
 "first": "initial",
 "junior": true
 },
 {
-"title": "Germany Graduate Analyst Programme",
-"url": "https://auroraer.com/careers/early-careers/berlin-graduate-analyst-programme",
+"title": "Spain Graduate Analyst Opportunity",
+"url": "https://auroraer.com/careers/early-careers/madrid-graduate-analyst-opportunity",
+"first": "initial",
+"junior": true
+},
+{
+"title": "Live Brazil Graduate Modelling Programme",
+"url": "https://auroraer.com/careers/early-careers/sao-paulo-graduate-modelling-programme",
+"first": "initial",
+"junior": true
+},
+{
+"title": "Singapore Graduate Analyst Opportunity",
+"url": "https://auroraer.com/careers/early-careers/singapore-graduate-analyst-opportunity",
+"first": "initial",
+"junior": true
+},
+{
+"title": "Australia Graduate Analyst Opportunity",
+"url": "https://auroraer.com/careers/early-careers/sydney-graduate-analyst-programme",
+"first": "initial",
+"junior": true
+},
+{
+"title": "Japan Graduate Analyst Programme",
+"url": "https://auroraer.com/careers/early-careers/tokyo-graduate-analyst-programme",
 "first": "initial",
 "junior": true
 }
@@ -2089,7 +2082,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 1,
@@ -2125,7 +2118,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -2144,7 +2137,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page vide",
 "ats": [],
 "count": 0,
@@ -2163,7 +2156,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [
 "hibob.com"
@@ -2184,7 +2177,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -2203,7 +2196,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -2222,7 +2215,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -2241,8 +2234,8 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
-"status": "inaccessible (RemoteDisconnected)",
+"checked": "2026-11-03",
+"status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
 "new": 0,
@@ -2260,7 +2253,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -2279,7 +2272,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -2298,7 +2291,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -2317,7 +2310,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -2336,8 +2329,8 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
-"status": "page dynamique (offres chargées par script)",
+"checked": "2026-11-03",
+"status": "inaccessible (HTTPError)",
 "ats": [],
 "count": 0,
 "new": 0,
@@ -2365,7 +2358,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 1,
@@ -2391,7 +2384,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "inaccessible (RemoteDisconnected)",
 "ats": [],
 "count": 0,
@@ -2410,7 +2403,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -2429,7 +2422,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -2448,7 +2441,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -2467,7 +2460,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "inaccessible (HTTPError)",
 "ats": [],
 "count": 0,
@@ -2496,7 +2489,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -2515,7 +2508,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -2534,7 +2527,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -2563,7 +2556,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -2582,7 +2575,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [
 "talent-soft"
@@ -2603,7 +2596,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -2622,7 +2615,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -2641,7 +2634,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -2660,7 +2653,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -2676,10 +2669,10 @@
 "url": "https://www.bnpparibas-am.com/en/why-join-us/",
 "email": "",
 "note": "",
-"jobs": 0,
+"jobs": 1,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -2698,7 +2691,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -2717,7 +2710,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -2736,7 +2729,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [
 "jobteaser.com"
@@ -2757,7 +2750,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -2776,7 +2769,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -2795,7 +2788,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -2814,7 +2807,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -2833,7 +2826,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -2862,7 +2855,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -2881,7 +2874,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-02",
+"checked": "2026-11-03",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,

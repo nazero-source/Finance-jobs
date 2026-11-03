@@ -945,6 +945,13 @@
 "lat": 52.8652,
 "lon": -7.9795
 },
+"Irvine, CA": {
+"cc": "US",
+"city": "Irvine",
+"country": "United States",
+"lat": 33.6857,
+"lon": -117.826
+},
 "Istanbul, Türkiye": {
 "cc": "TR",
 "city": "Istanbul",
