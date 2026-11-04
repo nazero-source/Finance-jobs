@@ -565,6 +565,7 @@
 "lat": 39.7392,
 "lon": -104.9849
 },
+"Doha, Ad Dawhah, Qatar": null,
 "Dollard-des-Ormeaux, Québec, Canada": {
 "cc": "CA",
 "city": "Dollard-des-Ormeaux",
@@ -698,6 +699,13 @@
 "country": "Finland",
 "lat": 63.2468,
 "lon": 25.9209
+},
+"Fontenay-sous-Bois, Val-de-Marne": {
+"cc": "FR",
+"city": "Fontenay-sous-Bois",
+"country": "France",
+"lat": 48.8491,
+"lon": 2.4749
 },
 "Fort Lauderdale, FL": {
 "cc": "US",
@@ -1336,6 +1344,13 @@
 "lat": 44.8836,
 "lon": -93.1383
 },
+"Menlo Park, CA": {
+"cc": "US",
+"city": "Menlo Park",
+"country": "United States",
+"lat": 37.452,
+"lon": -122.178
+},
 "Metro Manila, National Capital Region, Philippines": {
 "cc": "PH",
 "city": "Manila",
@@ -1410,6 +1425,13 @@
 "country": "Japan",
 "lat": 35.658,
 "lon": 139.7515
+},
+"Minneapolis, MN": {
+"cc": "US",
+"city": "Minneapolis",
+"country": "United States",
+"lat": 44.9773,
+"lon": -93.2655
 },
 "Minneapolis, MN, USA, United States": null,
 "Minneapolis, United States": {
@@ -1693,6 +1715,7 @@
 "lat": 41.8327,
 "lon": -87.9484
 },
+"One, Canada Square (44th Floor), Canary Wharf London, E14 5AA (UK), United Kingdom": null,
 "Oshawa, ON, CAN, Canada": null,
 "Ottawa, ON, CAN, Canada": null,
 "Owen Sound, Ontario, Canada": {
@@ -1710,6 +1733,13 @@
 "lon": 2.32
 },
 "PARIS, Paris, France": {
+"cc": "FR",
+"city": "Paris",
+"country": "France",
+"lat": 48.8589,
+"lon": 2.32
+},
+"PARIS, París, France": {
 "cc": "FR",
 "city": "Paris",
 "country": "France",
