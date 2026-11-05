@@ -231,6 +231,13 @@
 "lat": 4.6534,
 "lon": -74.0836
 },
+"Bogotá. D.C., Distrito Capital de Bogotá, Colombia": {
+"cc": "CO",
+"city": "Bogota",
+"country": "Colombia",
+"lat": 4.6608,
+"lon": -74.1382
+},
 "Bordeaux": {
 "cc": "FR",
 "city": "Bordeaux",
@@ -382,6 +389,13 @@
 "country": "France",
 "lat": 49.0528,
 "lon": 2.0389
+},
+"Charlotte, NC": {
+"cc": "US",
+"city": "Charlotte",
+"country": "United States",
+"lat": 35.2272,
+"lon": -80.8431
 },
 "Charlotte, NC, United States": {
 "cc": "US",
@@ -629,6 +643,13 @@
 "country": "Canada",
 "lat": 53.5462,
 "lon": -113.4912
+},
+"El Segundo, CA": {
+"cc": "US",
+"city": "El Segundo",
+"country": "United States",
+"lat": 33.917,
+"lon": -118.4156
 },
 "El Segundo, California, United States": {
 "cc": "US",
@@ -1803,6 +1824,13 @@
 "lon": -118.1442
 },
 "Philadelphia": {
+"cc": "US",
+"city": "Philadelphia",
+"country": "United States",
+"lat": 39.9527,
+"lon": -75.1635
+},
+"Philadelphia, Pennsylvania": {
 "cc": "US",
 "city": "Philadelphia",
 "country": "United States",
