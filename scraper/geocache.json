@@ -159,6 +159,7 @@
 "lat": 39.2909,
 "lon": -76.6108
 },
+"Bangalore Velankani ISC, India": null,
 "Bangalore, India": {
 "cc": "IN",
 "city": "Bengaluru",
@@ -586,6 +587,13 @@
 "country": "Canada",
 "lat": 45.4842,
 "lon": -73.8065
+},
+"Doral, FL": {
+"cc": "US",
+"city": "Miami-Dade County",
+"country": "United States",
+"lat": 25.8195,
+"lon": -80.3553
 },
 "Dubai": {
 "cc": "AE",
@@ -1541,6 +1549,7 @@
 "lat": 19.055,
 "lon": 72.8692
 },
+"Mumbai, Nirlon Knowledge Park (BX) 9th & 11-12 floor, India": null,
 "Mumbai, Nirlon Knowledge Park, India": null,
 "Mumbai,Maharashtra": {
 "cc": "IN",
@@ -2261,6 +2270,13 @@
 "lat": 59.675,
 "lon": 14.5209
 },
+"Switzerland": {
+"cc": "CH",
+"city": "Switzerland",
+"country": "Switzerland",
+"lat": 46.7986,
+"lon": 8.232
+},
 "Sydney": {
 "cc": "AU",
 "city": "Sydney",
@@ -2577,5 +2593,6 @@
 "country": "Switzerland",
 "lat": 47.3867,
 "lon": 8.5182
-}
+},
+"Zürich Uraniastrasse 9, Switzerland": null
 }

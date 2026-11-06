@@ -9,7 +9,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -38,7 +38,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -57,7 +57,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -76,7 +76,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -95,7 +95,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -114,7 +114,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (HTTPError)",
 "ats": [],
 "count": 0,
@@ -133,7 +133,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -152,7 +152,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -171,7 +171,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -190,7 +190,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -209,7 +209,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -268,7 +268,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -287,7 +287,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (RemoteDisconnected)",
 "ats": [],
 "count": 0,
@@ -326,7 +326,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 1,
@@ -352,7 +352,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -371,7 +371,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -400,7 +400,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -419,7 +419,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -448,7 +448,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -467,7 +467,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -486,7 +486,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -505,7 +505,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -524,7 +524,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -553,7 +553,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -572,7 +572,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [
 "jobteaser.com"
@@ -600,7 +600,7 @@
 "url": "https://www.ardian.com/talent",
 "email": "",
 "note": "",
-"jobs": 18,
+"jobs": 20,
 "auto": true
 },
 {
@@ -613,7 +613,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -632,7 +632,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -651,7 +651,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -670,7 +670,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -699,7 +699,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (RemoteDisconnected)",
 "ats": [],
 "count": 0,
@@ -718,7 +718,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -737,7 +737,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -756,7 +756,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -775,7 +775,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (HTTPError)",
 "ats": [],
 "count": 0,
@@ -794,7 +794,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -823,7 +823,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -842,7 +842,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (HTTPError)",
 "ats": [],
 "count": 0,
@@ -861,7 +861,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [
 "myworkdayjobs.com"
@@ -882,7 +882,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -911,7 +911,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -930,7 +930,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -949,7 +949,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [
 "myworkdayjobs.com"
@@ -970,7 +970,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -999,7 +999,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -1018,7 +1018,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [
 "smartrecruiters.com"
@@ -1039,7 +1039,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (RemoteDisconnected)",
 "ats": [],
 "count": 0,
@@ -1058,7 +1058,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -1077,7 +1077,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -1096,7 +1096,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -1115,7 +1115,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -1134,7 +1134,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (HTTPError)",
 "ats": [],
 "count": 0,
@@ -1173,7 +1173,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -1202,7 +1202,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (HTTPError)",
 "ats": [],
 "count": 0,
@@ -1221,7 +1221,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -1240,7 +1240,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (HTTPError)",
 "ats": [],
 "count": 0,
@@ -1269,7 +1269,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -1288,7 +1288,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -1307,7 +1307,7 @@
 "jobs": 2,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (HTTPError)",
 "ats": [],
 "count": 0,
@@ -1366,7 +1366,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -1385,7 +1385,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -1404,7 +1404,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -1423,7 +1423,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -1442,7 +1442,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -1461,7 +1461,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -1480,7 +1480,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -1499,7 +1499,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -1518,7 +1518,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -1537,7 +1537,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 2,
@@ -1569,7 +1569,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -1588,7 +1588,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -1607,7 +1607,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -1636,7 +1636,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -1655,7 +1655,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -1674,7 +1674,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 1,
@@ -1700,7 +1700,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -1719,7 +1719,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -1738,7 +1738,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (HTTPError)",
 "ats": [],
 "count": 0,
@@ -1757,7 +1757,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -1776,7 +1776,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 1,
@@ -1802,7 +1802,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -1821,7 +1821,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -1840,7 +1840,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 1,
@@ -1866,7 +1866,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -1885,7 +1885,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -1904,7 +1904,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (HTTPError)",
 "ats": [],
 "count": 0,
@@ -1933,7 +1933,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (HTTPError)",
 "ats": [],
 "count": 0,
@@ -1952,7 +1952,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -1971,7 +1971,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -1990,7 +1990,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -2009,7 +2009,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 9,
@@ -2083,7 +2083,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -2112,7 +2112,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -2131,7 +2131,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page vide",
 "ats": [],
 "count": 0,
@@ -2150,7 +2150,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [
 "hibob.com"
@@ -2171,7 +2171,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -2190,7 +2190,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -2209,7 +2209,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -2228,7 +2228,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (RemoteDisconnected)",
 "ats": [],
 "count": 0,
@@ -2247,7 +2247,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -2266,7 +2266,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -2285,7 +2285,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -2304,7 +2304,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -2323,7 +2323,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -2352,7 +2352,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 1,
@@ -2378,7 +2378,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -2397,7 +2397,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -2416,7 +2416,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -2435,7 +2435,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -2454,7 +2454,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (HTTPError)",
 "ats": [],
 "count": 0,
@@ -2483,7 +2483,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -2502,7 +2502,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -2521,7 +2521,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -2550,7 +2550,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -2569,7 +2569,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [
 "talent-soft"
@@ -2590,7 +2590,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -2609,7 +2609,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "inaccessible (URLError)",
 "ats": [],
 "count": 0,
@@ -2628,7 +2628,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -2647,7 +2647,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -2663,10 +2663,10 @@
 "url": "https://www.bnpparibas-am.com/en/why-join-us/",
 "email": "",
 "note": "",
-"jobs": 1,
+"jobs": 2,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -2685,7 +2685,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -2701,10 +2701,10 @@
 "url": "https://www.lbpam.com/fr/carrieres/un-sens-aigu-du-collectif",
 "email": "",
 "note": "",
-"jobs": 0,
+"jobs": 3,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -2723,7 +2723,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [
 "jobteaser.com"
@@ -2744,7 +2744,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -2763,7 +2763,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -2782,7 +2782,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -2801,7 +2801,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -2820,7 +2820,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "ok",
 "ats": [],
 "count": 0,
@@ -2849,7 +2849,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
@@ -2868,7 +2868,7 @@
 "jobs": 0,
 "auto": false,
 "watch": {
-"checked": "2026-11-05",
+"checked": "2026-11-06",
 "status": "page dynamique (offres chargées par script)",
 "ats": [],
 "count": 0,
