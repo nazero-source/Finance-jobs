@@ -332,6 +332,13 @@
 "lat": 35.2272,
 "lon": -80.8431
 },
+"CORSO VITTORIO EMANUELE II, 9 MILAN": {
+"cc": "IT",
+"city": "Milan",
+"country": "Italy",
+"lat": 45.4655,
+"lon": 9.1953
+},
 "Calgary, AB, CAN, Canada": null,
 "Calgary, AB, Canada": {
 "cc": "CA",
@@ -1747,6 +1754,13 @@
 },
 "One, Canada Square (44th Floor), Canary Wharf London, E14 5AA (UK), United Kingdom": null,
 "Oshawa, ON, CAN, Canada": null,
+"Oslo": {
+"cc": "NO",
+"city": "Oslo",
+"country": "Norway",
+"lat": 59.9133,
+"lon": 10.739
+},
 "Ottawa, ON, CAN, Canada": null,
 "Owen Sound, Ontario, Canada": {
 "cc": "CA",
@@ -2093,6 +2107,13 @@
 "country": "United States",
 "lat": 37.7879,
 "lon": -122.4075
+},
+"San Rafael, CA": {
+"cc": "US",
+"city": "San Rafael",
+"country": "United States",
+"lat": 37.9748,
+"lon": -122.5317
 },
 "Santiago Chile": {
 "cc": "CL",
