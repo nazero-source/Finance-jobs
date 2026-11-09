@@ -55,6 +55,7 @@ def sources():
         s.append((f"Avature · {args[0]}", F.avature, args))
     for args in E.HTML_PAGES:
         s.append((f"Site carrière · {args[0]}", F.html_links, args))
+    s.append(("Dogfinance (BNP Paribas, Société Générale, EY, AFD…)", F.dogfinance, ()))
     for args in E.BAMBOOHR:
         s.append((f"BambooHR · {args[0]}", F.bamboohr, args))
     for args in E.ASHBY:
@@ -118,6 +119,34 @@ def main():
         pass
 
     raw, report = fetch_all()
+    # Veille des pages carrière (employeurs sans flux lisible) : les postes relevés deviennent des offres
+    WATCH = {}
+    try:
+        import watch
+        followed = {l.split(" · ")[1] if " · " in l else l for l in report}
+        pre = [{"name": n, "type": t, "zone": z, "url": u,
+                "auto": any(n.split(" (")[0].lower().startswith(f.lower()[:10]) for f in followed)} for n, t, z, u, e, note in E.TARGETS]
+        WATCH = watch.run(pre)
+        ZC = {"France": "France", "UK": "United Kingdom", "Dubaï": "United Arab Emirates", "Abu Dhabi": "United Arab Emirates", "Maroc": "Morocco",
+              "Allemagne": "Germany", "Italie": "Italy", "Espagne": "Spain", "Riyad": "Saudi Arabia", "Afrique du Sud": "South Africa"}
+        nw = 0
+        for t in pre:
+            w = WATCH.get(t["name"])
+            if not w or t["auto"]:
+                continue
+            ty = t["type"].lower()
+            et = "dfi" if ty.startswith("dfi") else "infra" if "infra" in ty or "énergie" in ty or "energie" in ty else "pe" if "pe" in ty.split() or "fonds" in ty else "boutique"
+            first_zone = re.split(r"\s*·\s*", t["zone"])[0]
+            for l in w.get("links", []):
+                def desc_fn(u=l["url"]):
+                    return {"desc": F.strip_html(F.http_text(u, timeout=20))[:5000]}
+                raw.append(F.job(source="Page carrière", employer=t["name"].split(" (")[0], etype=et, native_id="watch:" + l["url"],
+                                 title=l["title"], url=l["url"], location=ZC.get(first_zone, first_zone), country_hint=ZC.get(first_zone, ""),
+                                 posted=None, desc_fn=desc_fn))
+                nw += 1
+        report["Pages carrière · veille"] = {"fetched": nw, "error": None, "seconds": 0}
+    except Exception as e:  # la veille ne doit jamais bloquer la collecte
+        print("Veille des pages carrière : erreur", e)
     cand = [j for j in raw if title_prefilter(j["title"], j["etype"])]
     # dédoublonnage avant enrichissement
     uniq = {}
@@ -200,6 +229,7 @@ def main():
             "cc": (g or {}).get("cc", ""), "region": region_of((g or {}).get("cc")),
             "lat": (g or {}).get("lat"), "lon": (g or {}).get("lon"),
             "posted": j.get("posted") or old.get("posted"),
+            "date_kind": "agrégateur" if j["source"].startswith(("Jooble", "Adzuna")) else "mise à jour" if j["source"] == "CA-CIB" else "publication",
             "first_seen": old.get("first_seen", TODAY),
             "verified": "source directe" if not j["source"].startswith(("Jooble", "Adzuna")) and "via" not in j["source"] else j.get("verified", ""),
             "_sal": sal, "emails": emails, "recruiters": recruiters, "domain": E.DOMAINS.get(j["employer"], ""),
@@ -225,7 +255,13 @@ def main():
                     p.update(c)
                     jobs.append(p)
 
-    jobs.sort(key=lambda x: (x.get("posted") or x["first_seen"]), reverse=True)
+    # Offres trop anciennes : écartées (sauf programmes datés d'une promotion à venir)
+    limit = (dt.date.today() - dt.timedelta(days=150)).isoformat()
+    nxt = str(dt.date.today().year + 1)
+    before = len(jobs)
+    jobs = [x for x in jobs if not x.get("posted") or x["posted"][:10] >= limit or nxt in x["title"] or str(int(nxt) + 1) in x["title"]]
+    print(f"{before - len(jobs)} offres de plus de 150 jours écartées", flush=True)
+    jobs.sort(key=lambda x: (x.get("posted") or "0000"), reverse=True)
     os.makedirs(OUT, exist_ok=True)
     with open(os.path.join(OUT, "jobs.json"), "w") as f:
         json.dump({"generated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%MZ"), "categories": CATEGORIES,
@@ -246,14 +282,9 @@ def main():
     targets = [{"name": n, "type": t, "zone": z, "url": u, "email": e, "note": note, "jobs": n_for(n),
                 "auto": any(n.split(" (")[0].lower().startswith(f.lower()[:10]) for f in followed)}
                for n, t, z, u, e, note in E.TARGETS]
-    try:
-        import watch
-        w = watch.run(targets)
-        for t in targets:
-            if t["name"] in w:
-                t["watch"] = w[t["name"]]
-    except Exception as e:  # la veille ne doit jamais bloquer la collecte
-        print("Veille des pages carrière : erreur", e)
+    for t in targets:
+        if t["name"] in WATCH:
+            t["watch"] = WATCH[t["name"]]
     with open(os.path.join(OUT, "targets.json"), "w") as f:
         json.dump(targets, f, ensure_ascii=False, indent=0)
     print(f"\nTerminé : {len(jobs)} offres, {geo.calls} géolocalisations, {time.time()-t0:.0f}s")

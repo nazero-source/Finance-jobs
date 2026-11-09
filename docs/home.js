@@ -28,7 +28,7 @@ function stats() {
     jobs: jobs.length,
     employers: new Set(jobs.map(j => j.employer)).size,
     countries: new Set(jobs.map(j => j.cc).filter(Boolean)).size,
-    fresh: jobs.filter(j => new Date((j.posted || j.first_seen || "").slice(0, 10)) >= week).length,
+    fresh: jobs.filter(j => j.posted && new Date(j.posted.slice(0, 10)) >= week).length,
   };
   document.querySelectorAll("[data-count]").forEach(el => countUp(el, v[el.dataset.count] || 0));
   const today = jobs.filter(j => j.first_seen === F.S.today).length;

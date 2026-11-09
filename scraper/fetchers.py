@@ -386,7 +386,11 @@ def cacib(name, etype):
                 i, k = t.find('class="JobDescription"'), t.find("Ces offres pourraient")
                 k = k if k > i else t.find("These offers might")
                 txt = strip_html(t[i:k] if i > 0 and k > i else "")
-                return {"desc": re.sub(r"^.*?Description du poste|^.*?Job description", "", txt, flags=re.S).strip()[:6000]}
+                md = re.search(r"(?:Date de mise à jour|Date de mise &#224; jour|Update date|Updated on)\D{0,40}(\d{1,2})/(\d{1,2})/(\d{4})", t)
+                res = {"desc": re.sub(r"^.*?Description du poste|^.*?Job description", "", txt, flags=re.S).strip()[:6000]}
+                if md:
+                    res["posted"] = f"{md.group(3)}-{int(md.group(2)):02d}-{int(md.group(1)):02d}"
+                return res
             out.append(job(source="CA-CIB", employer=name, etype=etype, native_id=f"cacib:{m.group(2)}",
                            title=f"{title} ({contract})" if re.search(r"internship|V\.?I\.?E|graduate|apprentice", contract, re.I) else title,
                            url=url, location=", ".join(reversed(geo)) if geo else "", desc_fn=desc_fn))
@@ -432,7 +436,12 @@ JOOBLE_LOCAL = {
            ("analyste private equity", ""), ("stage capital investissement", ""), ("stage financement de projets", ""), ("VIE M&A", ""),
            ("VIE finance", ""), ("stage corporate finance", "Paris"), ("stage leveraged finance", ""), ("stage financement d'acquisition", ""),
            ("stage infrastructure investissement", ""), ("stage transition énergétique financement", ""), ("analyste financement de projets", ""),
-           ("stage banque d'affaires", ""), ("stage debt advisory", "")],
+           ("stage banque d'affaires", ""), ("stage debt advisory", ""),
+           # boutiques M&A, fonds de private equity small / mid-cap, transaction services
+           ("stagiaire analyste M&A boutique", ""), ("stage analyste LBO", ""), ("stage fonds d'investissement", ""),
+           ("analyste fonds private equity small cap", ""), ("stage transaction services", "Paris"), ("stage dette privée", ""),
+           ("stage analyste infrastructure", ""), ("stage énergies renouvelables M&A", ""), ("alternance M&A", ""),
+           ("alternance private equity", ""), ("graduate analyste M&A", ""), ("stage évaluation financière", "")],
     "UK": [("M&A analyst", "London"), ("M&A intern", ""), ("investment banking analyst", "London"), ("investment banking internship", ""),
            ("off-cycle internship investment banking", ""), ("private equity analyst", "London"), ("private equity intern", ""),
            ("infrastructure investment analyst", ""), ("infrastructure graduate", ""), ("project finance analyst", ""),
@@ -451,7 +460,7 @@ def _jooble_run(host, key, queries, cc):
     out = []
     for term, loc in queries:
         try:
-            d = http(f"https://{host}/api/{key}", {"keywords": term, "location": loc, "page": 1}, tries=1)
+            d = http(f"https://{host}/api/{key}", {"keywords": term, "location": loc, "page": 1, "ResultOnPage": 50}, tries=1)
         except Exception:
             continue
         for j in d.get("jobs", []):
@@ -644,3 +653,72 @@ def rmk_rss(name, etype, host, locale="en_US", terms=("intern", "investment", "a
                            location=urllib.parse.unquote(m.group(1)).split("-")[0] if m else loc, posted=posted,
                            desc=strip_html(it.findtext("description"))))
     return out
+
+
+# ---------------- Dogfinance (site d'emploi finance français ; pages de liste autorisées par son robots.txt) ----------------
+DOG_SKIP = re.compile(r"(?i)^(expectra|adsearch|manpower|adecco|hays|michael page|fed finance|lhh|ihecf|ifb france|bloom alternance|club aktif|"
+                      r"storm group|qualis|groupe crit|page personnel|robert half|walters people|randstad)")
+DOG_TYPES = {"bnp paribas": "bank", "sg": "bank", "société générale": "bank", "la banque postale": "bank", "banque palatine": "bank",
+             "afd - agence française de développement": "dfi", "ey": "boutique", "kpmg": "boutique", "bdo": "boutique", "grant thornton": "boutique",
+             "in extenso": "boutique", "banque de france": "bank", "banque internationale du luxembourg": "bank"}
+DOG_NAMES = {"sg": "Société Générale", "afd - agence française de développement": "AFD"}
+
+
+DOG_JUNIOR = re.compile(r"(^|-)(stage|stagiaire|intern|internship|alternance|alternant|alternante|apprenti\w*|vie|v-i-e|graduate|analyst|analyste|junior|off-cycle|summer|charge-d-affaires|chargee-d-affaires)(-|$|\d)")
+DOG_TOPIC = re.compile(r"m-a|fusion|acquisition|private-equity|capital|lbo|corporate-finance|transaction|invest|banque-d-aff|infrastructure|project-finance|financement|"
+                       r"leveraged|ecm|dcm|debt|dette|restructuring|valuation|evaluation|coverage|structur|equity|fonds|fund|energ|origination|syndic|advisory|"
+                       r"conseil|strategy|strategie|export-finance|trade-finance|credit|analyst|analyste|participations|developpement")
+
+
+def dogfinance(max_age=120):
+    """Offres juniors de Dogfinance : plan du site (toutes les offres) puis fiche de chaque offre pertinente."""
+    import concurrent.futures as cf
+    urls = []
+    for i in range(1, 8):
+        try:
+            x = http_text(f"https://cdn.carrevolutis.com/reborn-production-cdn-bucket/sitemaps/dogfinance/sitemap-offers-{i}.xml")
+        except Exception:
+            break
+        found = re.findall(r"<loc>([^<]+/offre/[^<]+)</loc>", x)
+        if not found:
+            break
+        urls += found
+    todo = []
+    for u in dict.fromkeys(urls):
+        comp, _, slug = u.split("/offre/")[-1].partition("/")
+        if DOG_SKIP.match(comp.replace("-", " ")) or not DOG_JUNIOR.search(slug) or not DOG_TOPIC.search(slug):
+            continue
+        todo.append(u)
+    limit = (TODAY - dt.timedelta(days=max_age)).isoformat()
+
+    def one(u):
+        try:
+            page = http_text(u, timeout=25)
+            k = page.find('"offreSSR":')
+            if k < 0:
+                return None
+            d, _ = json.JSONDecoder().raw_decode(page[k + 11:])
+        except Exception:
+            return None
+        if not d or d.get("status") not in (0, None):
+            return None
+        posted = dt.datetime.fromtimestamp(d["datePub"], dt.timezone.utc).date().isoformat() if d.get("datePub") else None
+        if posted and posted < limit:
+            return None
+        comp = ((d.get("auteur") or {}).get("nom") or "").strip()
+        key = comp.lower()
+        contract = {"STAGE": "Stage", "ALTERNANCE": "Alternance", "VIE": "VIE", "VIA": "VIE"}.get((d.get("contrat") or "").upper(), "")
+        title = (d.get("titre") or "").strip()
+        if contract and not re.search(r"(?i)stage|stagiaire|intern|altern|apprenti|v\.?i\.?e\b|graduate", title):
+            title = f"{title} ({contract})"
+        apply_url = d.get("urlCandid") if (d.get("typeCandid") == "EXTERNE" and str(d.get("urlCandid") or "").startswith("http")) else u
+        apply_url = re.sub(r"[?&]source=Dog[^&]*", "", apply_url)
+        loc = ", ".join(x for x in ((d.get("ville") or {}).get("nom") or d.get("villeTxt"), (d.get("pays") or {}).get("nom")) if x)
+        return job(source="Dogfinance", employer=DOG_NAMES.get(key, comp), etype=DOG_TYPES.get(key, "bank"), native_id=f"dog:{d.get('id')}",
+                   title=title, url=apply_url, location=loc, posted=posted,
+                   country_hint="FR" if (d.get("pays") or {}).get("nom") == "France" else "",
+                   latlon=(d["lat"], d["lng"]) if d.get("lat") and d.get("lng") else None,
+                   desc=strip_html((d.get("missions") or "") + " " + (d.get("profil") or ""))[:6000])
+
+    with cf.ThreadPoolExecutor(6) as ex:
+        return [j for j in ex.map(one, todo) if j]

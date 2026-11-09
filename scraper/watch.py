@@ -80,6 +80,48 @@ def check(target):
     return target["name"], links, ats, "page dynamique (offres chargées par script)" if dynamic else "ok"
 
 
+def render_pages(urls, budget=240):
+    """Ouvre des pages dans un navigateur sans écran (Playwright) pour lire celles qui chargent leurs offres par script.
+    Retourne {url: html}. Sans Playwright installé, ne fait rien."""
+    try:
+        from playwright.sync_api import sync_playwright
+    except Exception:
+        return {}
+    import glob, time
+    out, t0 = {}, time.time()
+    exe = next(iter(sorted(glob.glob("/opt/pw-browsers/chromium-*/chrome-linux*/chrome"))), None)   # navigateur déjà présent, sinon celui de Playwright
+    try:
+        with sync_playwright() as pw:
+            br = pw.chromium.launch(executable_path=exe) if exe else pw.chromium.launch()
+            ctx = br.new_context(locale="fr-FR", user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36")
+            ctx.route(re.compile(r"\.(png|jpe?g|gif|webp|svg|woff2?|ttf|mp4|webm)(\?|$)"), lambda r: r.abort())
+            for u in urls:
+                if time.time() - t0 > budget:
+                    break
+                pg = ctx.new_page()
+                try:
+                    pg.goto(u, wait_until="domcontentloaded", timeout=20000)
+                    try:
+                        pg.wait_for_load_state("networkidle", timeout=8000)
+                    except Exception:
+                        pass
+                    html_ = pg.content()
+                    for fr in pg.frames[1:6]:          # offres servies dans un cadre (outil de recrutement intégré)
+                        try:
+                            html_ += "\n<!-- frame -->\n" + re.sub(r'href="/', f'href="{urllib.parse.urljoin(fr.url, "/")}', fr.content())
+                        except Exception:
+                            pass
+                    out[u] = html_
+                except Exception:
+                    pass
+                finally:
+                    pg.close()
+            br.close()
+    except Exception as e:
+        print("Veille : navigateur indisponible", type(e).__name__, str(e)[:120])
+    return out
+
+
 def run(targets):
     """Met à jour l'état de veille et renvoie {employeur: résumé} pour targets.json."""
     try:
@@ -89,6 +131,21 @@ def run(targets):
     todo = [t for t in targets if not t.get("auto") and t.get("url")]
     with cf.ThreadPoolExecutor(12) as ex:
         results = list(ex.map(check, todo))
+    # 2e passe : pages illisibles en lecture simple (script, blocage, vide) ouvertes dans un vrai navigateur
+    by_name = {t["name"]: t for t in todo}
+    retry = [by_name[n]["url"] for n, links, ats, status in results if status != "ok" or not links]
+    rendered = render_pages(retry) if os.environ.get("WATCH_RENDER") == "1" else {}   # désactivé par défaut : lent, peu de gain
+    if rendered:
+        fixed = 0
+        for i, (name, links, ats, status) in enumerate(results):
+            page = rendered.get(by_name[name]["url"])
+            if not page:
+                continue
+            l2, a2 = offers_on(by_name[name]["url"], page)
+            if status != "ok" or l2:
+                results[i] = (name, {**(links or {}), **l2}, sorted(set(ats) | set(a2)), "ok")
+                fixed += status != "ok"
+        print(f"Veille : {len(rendered)} pages ouvertes dans le navigateur, {fixed} rendues lisibles")
     first_run = not state
     for name, links, ats, status in results:
         s = state.setdefault(name, {"links": {}})

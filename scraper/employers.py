@@ -10,6 +10,7 @@ Pour ajouter un employeur, il suffit d'ajouter une ligne ici.
 
 WORKDAY = [
     # name, type, host, tenant, site, mode
+    ("Sagard", "pe", "sagardholdings.wd10.myworkdayjobs.com", "sagardholdings", "sagardcareers", "all"),
     ("Rothschild & Co", "bank", "rothschildandco.wd3.myworkdayjobs.com", "rothschildandco", "RothschildAndCo_Lateral", "all"),
     ("Rand Merchant Bank", "bank", "firstrand.wd3.myworkdayjobs.com", "firstrand", "FRB", "search"),
     ("Morgan Stanley", "bank", "ms.wd5.myworkdayjobs.com", "ms", "External", "search"),
@@ -135,10 +136,12 @@ SMARTRECRUITERS = [
     ("StepStone Group", "pe", "stepstonegroup"),
     ("Accurent", "boutique", "Accurent"),
     ("Sienna Investment Managers", "infra", "SiennaInvestmentManagers"),
+    ("Akuo", "infra", "Akuo"),
 ]
 
 PERSONIO = [
     ("Clearwater International", "boutique", "clearwater", "de"),
+    ("Carlsquare", "boutique", "carlsquare-gmbh", "de"),
     ("Oaklins", "boutique", "oaklins", "de"),
     ("Pava Partners", "boutique", "pava-partners", "de"),
     ("DUBAG", "pe", "dubag", "de"),
@@ -152,6 +155,10 @@ TEAMTAILOR = [
     ("Kepler Cheuvreux", "boutique", "keplercheuvreux.teamtailor.com"),
     ("Antin Infrastructure Partners", "infra", "antininfrastructurepartners-1655458195.teamtailor.com"),
     ("CFG Bank", "bank", "carrieres.cfgbank.com"),
+    ("Photosol", "infra", "photosol.teamtailor.com"),
+    ("CVE", "infra", "jobs.cvegroup.com"),
+    ("Zenobe", "infra", "careers.zenobe.com"),
+    ("Technique Solaire", "infra", "carriere.mexens.com"),
     ("BDO France (Advance Capital)", "boutique", "recrutement.bdo.fr"),
 ]
 
@@ -270,6 +277,7 @@ DOMAINS = {
     "CrossBoundary": "crossboundary.com", "AIIB": "aiib.org", "Africa Finance Corporation": "africafc.org", "Macquarie": "macquarie.com",
     "Africa50": "africa50.com", "EBRD": "ebrd.com", "World Bank Group / IFC": "ifc.org", "IDB / IDB Invest": "idbinvest.org", "FMO": "fmo.nl", "Pemberton": "pembertonam.com", "HSBC": "hsbc.com", "Crédit Agricole CIB": "ca-cib.com",
     'Rothschild & Co': 'rothschildandco.com', 'Clipperton': 'clipperton.com', 'Natixis Partners': 'natixispartners.com', 'ODDO BHF Corporate Finance': 'oddo-bhf.com', 'Degroof Petercam CF': 'degroofpetercam.com', 'Bryan Garnier': 'bryangarnier.com', 'Linkers': 'linkers.fr', 'Aelios Finance': 'aelios-finance.com', 'Financière de Courcelles': 'financiere-de-courcelles.com', 'In Extenso Finance': 'inextenso-finance.fr', 'Transaction R': 'transaction-r.com', 'Largillière Finance': 'largilliere-finance.com', 'Acxior Corporate Finance': 'acxior.com', 'Arjil': 'arjil.com', 'Midcap Partners': 'midcappartners.com', 'Advance Capital': 'advancecapital.fr', 'Accuracy': 'accuracy.com', 'Sorgem Evaluation': 'sorgem.com', 'E-CUBE Strategy Consultants': 'e-cube.com', 'Clean Horizon': 'cleanhorizon.com', 'Robey Warshaw': 'robeywarshaw.com', 'Zaoui & Co': 'zaouico.com', 'Fenchurch Advisory': 'fenchurchadvisory.com', 'Arma Partners': 'armapartners.com', 'GP Bullhound': 'gpbullhound.com', 'Hampleton Partners': 'hampletonpartners.com', 'Livingstone Partners': 'livingstonepartners.com', 'Hannam & Partners': 'hannam.partners', 'Cavendish': 'cavendish.com', 'Peel Hunt': 'peelhunt.com', 'Panmure Liberum': 'panmureliberum.com', 'Investec': 'investec.com', 'Centerview Partners': 'centerviewpartners.com', 'Evercore': 'evercore.com', 'Baringa': 'baringa.com', 'Aurora Energy Research': 'auroraer.com', 'Downing': 'downing.co.uk', 'Pantheon Infrastructure': 'pantheon.com', 'Federated Hermes Infrastructure': 'hermes-investment.com', 'Legal & General Capital': 'lgcapital.com', 'Cubico Sustainable Investments': 'cubicoinvest.com', 'Rasmala': 'rasmala.com', 'EFG Holding': 'efghldg.com', 'SHUAA Capital': 'shuaa.com', 'Arqaam Capital': 'arqaamcapital.com', 'Waha Capital': 'wahacapital.ae', 'Jadwa Investment': 'jadwa.com', 'ACWA Power': 'acwapower.com', 'TAQA': 'taqa.com', 'Alpha Dhabi': 'alphadhabi.com', 'Rand Merchant Bank': 'rmb.co.za', 'Standard Bank CIB': 'standardbank.com', 'Development Partners International': 'dpi-llp.com', 'Adenia Partners': 'adenia.com', 'Amethis': 'amethis.com', 'AfricInvest': 'africinvest.com', 'Ninety One': 'ninetyone.com', 'Globeleq': 'globeleq.com', 'Vantage Capital': 'vantagecapital.co.za', 'CDG Invest': 'cdginvest.ma', 'BMCE Capital': 'bmcecapital.com', 'CFG Bank': 'cfgbank.com', 'Ithmar Capital': 'ithmar.ma', 'Masen': 'masen.ma', 'Mediterrania Capital Partners': 'mcp.ma', 'Attijari Finances Corp': 'attijarifinances.com', 'Banque des Territoires': 'banquedesterritoires.fr', 'Amundi Transition Énergétique': 'amundi.com', 'BNP Paribas AM (Private Debt & Real Assets)': 'bnpparibas-am.com', 'AXA IM Alts': 'axa-im.com', 'La Banque Postale AM': 'labanquepostale-am.fr', 'Idinvest / Eurazeo Mid-cap': 'eurazeo.com', 'F2i': 'f2isgr.it', 'Ambienta': 'ambientasgr.com', 'Aream': 'aream.de', 'Encavis Asset Management': 'encavis-am.com', 'Plenium Partners': 'plenium.es', 'Q-Energy': 'qenergy.eu', 'Mirova Energy Transition': 'mirova.com', 'Arjun Infrastructure Partners': 'arjuninfra.com',
+    'Sagard': 'sagard.com', 'Carlsquare': 'carlsquare.com', 'Photosol': 'photosol.fr', 'CVE': 'cvegroup.com', 'Zenobe': 'zenobe.com', 'Technique Solaire': 'techniquesolaire.com', 'Akuo': 'akuoenergy.com', 'BNP Paribas': 'group.bnpparibas', 'Société Générale': 'societegenerale.com', 'EY': 'ey.com', 'AFD': 'afd.fr', 'AXA': 'axa.com', 'Nexia S&A': 'nexia.fr', 'Banque Palatine': 'palatine.fr', 'Banque de France': 'banque-france.fr',
 }
 
 # Boutiques et fonds infra / énergie suivis de près (France, Royaume-Uni, Dubaï, Afrique).

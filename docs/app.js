@@ -182,12 +182,12 @@ function match(j, skip) {
   if (emp && j.employer !== emp) return false;
   if (et && j.employer_type !== et) return false;
   if (sinceV === "visit" && !isNewForMe(j)) return false;
-  if (since) { const d = since === 1 ? daysAgo(j.first_seen) : daysAgo(j.posted || j.first_seen); if (d > (since === 1 ? 0 : since)) return false; }
+  if (since) { const d = since === 1 ? daysAgo(j.first_seen) : (j.posted ? daysAgo(j.posted) : 9999); if (d > (since === 1 ? 0 : since)) return false; }
   if ($("#hideReported").checked && S.reported.has(j.id)) return false;
   if (q) { const hay = norm(`${j.title} ${j.employer} ${j.city} ${j.country} ${j.location} ${CAT[j.category]} ${j.seniority}`); if (!q.split(/\s+/).every(w => hay.includes(w))) return false; }
   return true;
 }
-const dateKey = j => j.posted || (j.first_seen > S.firstRun ? j.first_seen : "");
+const dateKey = j => j.posted || "";   // date indiquée par le site ; jamais la date de repérage
 const salKey = j => { const m = (j.salary?.text || "").match(/≈ ([\d ]+)[–-]?([\d ]*) ?k€/); if (m) return +m[1].replace(/\s/g, "") * 1000; const e = (j.salary?.text || "").match(/≈ ([\d ]+)[–-]([\d ]+) €/); return e ? +e[1].replace(/\s/g, "") * 12 : 0; };
 function apply() {
   S.filtered = S.data.jobs.filter(j => match(j));
@@ -331,7 +331,7 @@ function jobCard(j) {
   return `<article class="job ${S.reported.has(j.id) ? "reported" : ""} ${isNew ? "is-new" : ""}" data-id="${j.id}" tabindex="0" style="--cc:${catColor(j.category)}">
     ${logoHtml(j)}
     <div><h3>${esc(j.title)}</h3><div class="sub"><b>${esc(j.employer)}</b> · ${flag(j.cc)} ${esc(j.city || j.location || "—")}${j.country && j.city ? ", " + esc(j.country) : ""}</div></div>
-    <div class="right"><span class="when">${j.posted ? rel(j.posted) : "repérée " + rel(j.first_seen)}</span>${verifHtml(j)}</div>
+    <div class="right"><span class="when" title="${j.posted ? (j.date_kind === "agrégateur" ? "Dernière mise à jour vue sur l'agrégateur" : j.date_kind === "mise à jour" ? "Date de mise à jour indiquée par le site" : "Date de publication indiquée par le site") + " : " + fmtDate(j.posted) : "Le site de l'employeur n'indique pas de date"}">${j.posted ? (j.date_kind === "agrégateur" || j.date_kind === "mise à jour" ? "màj " : "publiée ") + rel(j.posted) : "date non indiquée"}</span>${verifHtml(j)}</div>
     <div class="tags">
       ${matchHtml(j)}
       <span class="tag level">${esc(j.seniority)}</span>
@@ -418,7 +418,7 @@ function openJob(j) {
       <div class="facts">
         <div class="fact"><span>Type de poste</span><b>${esc(j.seniority)}</b></div>
         <div class="fact"><span>Métier</span><b><span class="dot" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${catColor(j.category)};margin-right:.35rem"></span>${esc(CAT[j.category])}</b></div>
-        <div class="fact"><span>${j.posted ? "Publiée le" : "Repérée le"}</span><b>${fmtDate(j.posted || j.first_seen)}</b></div>
+        <div class="fact"><span>${!j.posted ? "Date de publication" : j.date_kind === "agrégateur" ? "Mise à jour (agrégateur)" : j.date_kind === "mise à jour" ? "Mise à jour le" : "Publiée le"}</span><b>${j.posted ? fmtDate(j.posted) : "non indiquée par le site"}</b></div>
         <div class="fact"><span>Employeur</span><b>${esc(ETYPE[j.employer_type] || "")}</b></div>
         <div class="fact" style="grid-column:1/-1"><span>Salaire ${j.salary?.estimated ? "estimé" : "annoncé"}</span><b>${esc(j.salary?.text || "Non communiqué")}</b>${j.salary?.estimated ? `<span style="margin-top:.2rem">Base : ${esc(j.salary.basis || "")} · fixe, hors bonus</span>` : ""}</div>
       </div>

@@ -10,7 +10,7 @@ import datetime as dt, difflib, json, os, re, urllib.request
 
 CACHE = os.path.join(os.path.dirname(__file__), "ats_cache.json")
 UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/124 Safari/537.36", "Accept": "application/json"}
-MAX_AGE_DAYS = 30
+MAX_AGE_DAYS = 45
 MAX_PROBES = 70
 
 # Agrégateurs, job boards et cabinets de recrutement : offres souvent republiées, anonymes ou déjà pourvues
@@ -134,7 +134,7 @@ def resolve(aggregated, direct_jobs, today=None):
     kept, stats = [], {"direct": 0, "board": 0, "unverified": 0, "dropped_old": 0, "dropped_agency": 0, "dropped_dup": 0}
     for j in aggregated:
         emp = j["employer"] or ""
-        if not emp or emp == "?" or NOT_EMPLOYER.search(emp) or not FINANCE_EMPLOYER.search(emp + " " + j["title"][:0]):
+        if not emp or emp == "?" or NOT_EMPLOYER.search(emp):
             stats["dropped_agency"] += 1
             continue
         if SPAM_TITLE.search(j["title"]):

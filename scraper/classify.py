@@ -58,7 +58,7 @@ DESC_RULES = [
 EXCLUDE_TITLE = rx(
     r"technolog\w*", r"engineer\w*", r"developer", r"software", r"data", r"it", r"cyber\w*",
     r"operations?", r"ops", r"compliance", r"audit\w*", r"legal", r"counsel", r"paralegal", r"lawyer",
-    r"tax", r"fiscalit\w*", r"tva", r"douanes?", r"prix de transfert", r"transfer pricing", r"corporate-m&a", r"banque priv\w*", r"gestion de fortune",
+    r"closed", r"pourvue?", r"tax", r"fiscalit\w*", r"fiscal\w*", r"fiscaliste", r"tva", r"douanes?", r"prix de transfert", r"transfer pricing", r"corporate-m&a", r"banque priv\w*", r"gestion de fortune",
     r"accountant", r"accounting", r"controllers?", r"product control", r"financial control\w*",
     r"payroll", r"hr", r"human resources", r"talent", r"recruit\w*", r"marketing", r"communications?",
     r"executive assistant", r"administrative", r"assistant", r"receptionist", r"facilities", r"kyc", r"aml",
