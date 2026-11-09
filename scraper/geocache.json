@@ -1366,6 +1366,13 @@
 "lat": 40.4632,
 "lon": -88.8197
 },
+"McLean, VA": {
+"cc": "US",
+"city": "McLean",
+"country": "United States",
+"lat": 38.9367,
+"lon": -77.1858
+},
 "Melbourne, Australia": {
 "cc": "AU",
 "city": "Melbourne",
@@ -1866,6 +1873,13 @@
 "country": "United States",
 "lat": 33.0137,
 "lon": -96.6925
+},
+"Portsmouth, NH": {
+"cc": "US",
+"city": "Portsmouth",
+"country": "United States",
+"lat": 43.0751,
+"lon": -70.7602
 },
 "Portugal": {
 "cc": "PT",
@@ -2593,6 +2607,13 @@
 "country": "United States",
 "lat": 34.1684,
 "lon": -118.6058
+},
+"Zurich": {
+"cc": "CH",
+"city": "Zurich",
+"country": "Switzerland",
+"lat": 47.3744,
+"lon": 8.541
 },
 "Zurich Switzerland": {
 "cc": "CH",
