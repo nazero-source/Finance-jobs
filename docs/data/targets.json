@@ -540,7 +540,7 @@
 "url": "https://www.sienna-im.com/join-us/",
 "email": "",
 "note": "",
-"jobs": 2,
+"jobs": 1,
 "auto": true
 },
 {
@@ -600,7 +600,7 @@
 "url": "https://www.ardian.com/talent",
 "email": "",
 "note": "",
-"jobs": 21,
+"jobs": 20,
 "auto": true
 },
 {
@@ -971,7 +971,7 @@
 "auto": false,
 "watch": {
 "checked": "2026-11-09",
-"status": "page dynamique (offres chargées par script)",
+"status": "inaccessible (TimeoutError)",
 "ats": [],
 "count": 0,
 "new": 0,
@@ -1343,7 +1343,7 @@
 "url": "https://www.rothschildandco.com/en-us/careers/",
 "email": "",
 "note": "Graduate programmes via rothschildandco.tal.net",
-"jobs": 1,
+"jobs": 0,
 "auto": true
 },
 {
@@ -1534,7 +1534,7 @@
 "url": "https://largilliere-finance.com/offre-emploi/",
 "email": "",
 "note": "",
-"jobs": 0,
+"jobs": 1,
 "auto": false,
 "watch": {
 "checked": "2026-11-09",
@@ -1773,7 +1773,7 @@
 "url": "https://www.armapartners.com/careers/",
 "email": "",
 "note": "",
-"jobs": 0,
+"jobs": 1,
 "auto": false,
 "watch": {
 "checked": "2026-11-09",
@@ -2349,7 +2349,7 @@
 "url": "https://www.standardbank.com/sbg/standard-bank-group/careers",
 "email": "",
 "note": "",
-"jobs": 0,
+"jobs": 1,
 "auto": false,
 "watch": {
 "checked": "2026-11-09",
@@ -2470,7 +2470,7 @@
 "url": "https://globeleq.com/careers/",
 "email": "hr@globeleq.com.",
 "note": "Offres suivies automatiquement",
-"jobs": 0,
+"jobs": 1,
 "auto": true
 },
 {
@@ -2644,7 +2644,7 @@
 "url": "https://about.amundi.com/join-us",
 "email": "",
 "note": "",
-"jobs": 0,
+"jobs": 1,
 "auto": false,
 "watch": {
 "checked": "2026-11-09",
@@ -2663,7 +2663,7 @@
 "url": "https://www.bnpparibas-am.com/en/why-join-us/",
 "email": "",
 "note": "",
-"jobs": 0,
+"jobs": 7,
 "auto": false,
 "watch": {
 "checked": "2026-11-09",

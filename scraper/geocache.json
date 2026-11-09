@@ -30,6 +30,13 @@
 "lat": 40.6259,
 "lon": -74.0784
 },
+"AME (Amsterdam": {
+"cc": "US",
+"city": "New York",
+"country": "United States",
+"lat": 40.7997,
+"lon": -73.9449
+},
 "Abu Dhabi": {
 "cc": "AE",
 "city": "Abu Dhabi",
@@ -43,6 +50,13 @@
 "country": "United Arab Emirates",
 "lat": 24.4538,
 "lon": 54.3774
+},
+"Afrique": {
+"cc": "",
+"city": "Afrique",
+"country": "",
+"lat": 11.5024,
+"lon": 17.7578
 },
 "Al Riyadh, Saudi Arabia": {
 "cc": "SA",
@@ -131,6 +145,13 @@
 "lat": 30.2675,
 "lon": -97.735
 },
+"Austin, TX": {
+"cc": "US",
+"city": "Austin",
+"country": "United States",
+"lat": 30.2649,
+"lon": -97.7474
+},
 "Austin, Texas, United States": {
 "cc": "US",
 "city": "Austin",
@@ -153,6 +174,13 @@
 "lon": -71.0578
 },
 "Baltimore": {
+"cc": "US",
+"city": "Baltimore",
+"country": "United States",
+"lat": 39.2909,
+"lon": -76.6108
+},
+"Baltimore, MD": {
 "cc": "US",
 "city": "Baltimore",
 "country": "United States",
@@ -210,6 +238,20 @@
 "lat": 12.9768,
 "lon": 77.5901
 },
+"Berlin": {
+"cc": "DE",
+"city": "Berlin",
+"country": "Germany",
+"lat": 52.5174,
+"lon": 13.3951
+},
+"Bethesda, MD": {
+"cc": "US",
+"city": "Bethesda",
+"country": "United States",
+"lat": 38.9813,
+"lon": -77.1234
+},
 "Birmingham, One Snow Hill, United Kingdom": null,
 "Birmingham, United Kingdom": {
 "cc": "GB",
@@ -239,12 +281,26 @@
 "lat": 4.6608,
 "lon": -74.1382
 },
+"Bohemia, NY": {
+"cc": "US",
+"city": "Town of Islip",
+"country": "United States",
+"lat": 40.7706,
+"lon": -73.1201
+},
 "Bordeaux": {
 "cc": "FR",
 "city": "Bordeaux",
 "country": "France",
 "lat": 44.8412,
 "lon": -0.58
+},
+"Bordes, Pyrénées-Atlantiques": {
+"cc": "FR",
+"city": "Bordes",
+"country": "France",
+"lat": 43.2345,
+"lon": -0.2817
 },
 "Boston , United States, MA": {
 "cc": "US",
@@ -317,6 +373,13 @@
 "country": "Brazil",
 "lat": -10.3333,
 "lon": -53.2
+},
+"Buenos Aires, Argentina": {
+"cc": "AR",
+"city": "Buenos Aires",
+"country": "Argentina",
+"lat": -34.6096,
+"lon": -58.3888
 },
 "CA": {
 "cc": "CA",
@@ -515,6 +578,13 @@
 "lat": 19.4326,
 "lon": -99.1332
 },
+"Clayton, AL": {
+"cc": "US",
+"city": "Clayton",
+"country": "United States",
+"lat": 31.8782,
+"lon": -85.4497
+},
 "Clayton, MO": {
 "cc": "US",
 "city": "Clayton",
@@ -528,6 +598,13 @@
 "country": "United States",
 "lat": 41.4997,
 "lon": -81.6937
+},
+"Cluses, Haute-Savoie": {
+"cc": "FR",
+"city": "Cluses",
+"country": "France",
+"lat": 46.0603,
+"lon": 6.5804
 },
 "Cologne, Allemagne": {
 "cc": "DE",
@@ -823,6 +900,13 @@
 "lat": 41.0265,
 "lon": -73.6285
 },
+"Gaithersburg, MD": {
+"cc": "US",
+"city": "Gaithersburg",
+"country": "United States",
+"lat": 39.1399,
+"lon": -77.1929
+},
 "Georgetown, Ontario, Canada": {
 "cc": "CA",
 "city": "Halton Hills",
@@ -873,7 +957,21 @@
 "lat": 29.7589,
 "lon": -95.3677
 },
+"HOUSTON, United States Of America": {
+"cc": "US",
+"city": "Houston",
+"country": "United States",
+"lat": 29.7589,
+"lon": -95.3677
+},
 "Halifax, NS, CAN, Canada": null,
+"Hamburg": {
+"cc": "DE",
+"city": "Hamburg",
+"country": "Germany",
+"lat": 53.5502,
+"lon": 10.0013
+},
 "Hamburg, Allemagne": {
 "cc": "DE",
 "city": "Hamburg",
@@ -1097,6 +1195,13 @@
 "lat": 51.5074,
 "lon": -0.1278
 },
+"La Défense": {
+"cc": "FR",
+"city": "Courbevoie",
+"country": "France",
+"lat": 48.891,
+"lon": 2.2412
+},
 "La Jolla": {
 "cc": "US",
 "city": "San Diego",
@@ -1110,6 +1215,13 @@
 "country": "France",
 "lat": 50.6544,
 "lon": 3.0733
+},
+"Lafayette, LA": {
+"cc": "US",
+"city": "Lafayette",
+"country": "United States",
+"lat": 30.2262,
+"lon": -92.0178
 },
 "Lake Saint Louis, MO": {
 "cc": "US",
@@ -1145,6 +1257,13 @@
 "country": "France",
 "lat": 48.893,
 "lon": 2.2882
+},
+"Lexington Park, MD": {
+"cc": "US",
+"city": "Lexington Park",
+"country": "United States",
+"lat": 38.2494,
+"lon": -76.447
 },
 "Lexington, NY": {
 "cc": "US",
@@ -1393,6 +1512,13 @@
 "country": "United States",
 "lat": 37.452,
 "lon": -122.178
+},
+"Meridian, ID": {
+"cc": "US",
+"city": "Meridian",
+"country": "United States",
+"lat": 43.6086,
+"lon": -116.3923
 },
 "Metro Manila, National Capital Region, Philippines": {
 "cc": "PH",
@@ -1745,12 +1871,26 @@
 "lat": 40.7127,
 "lon": -74.006
 },
+"Newtown Square, PA": {
+"cc": "US",
+"city": "Newtown Township",
+"country": "United States",
+"lat": 39.9868,
+"lon": -75.4008
+},
 "North Andover, MA, United States": {
 "cc": "US",
 "city": "North Andover",
 "country": "United States",
 "lat": 42.703,
 "lon": -71.1309
+},
+"North Chicago, IL": {
+"cc": "US",
+"city": "North Chicago",
+"country": "United States",
+"lat": 42.3277,
+"lon": -87.8394
 },
 "Oak Brook, IL": {
 "cc": "US",
@@ -1760,6 +1900,13 @@
 "lon": -87.9484
 },
 "One, Canada Square (44th Floor), Canary Wharf London, E14 5AA (UK), United Kingdom": null,
+"Orlando, FL": {
+"cc": "US",
+"city": "Orlando",
+"country": "United States",
+"lat": 28.5421,
+"lon": -81.379
+},
 "Oshawa, ON, CAN, Canada": null,
 "Oslo": {
 "cc": "NO",
@@ -1867,6 +2014,13 @@
 "lat": 39.9527,
 "lon": -75.1635
 },
+"Phoenix, AZ": {
+"cc": "US",
+"city": "Phoenix",
+"country": "United States",
+"lat": 33.4484,
+"lon": -112.0741
+},
 "Plano, TX": {
 "cc": "US",
 "city": "Plano",
@@ -1887,6 +2041,13 @@
 "country": "Portugal",
 "lat": 39.6622,
 "lon": -8.1354
+},
+"Puteaux, France": {
+"cc": "FR",
+"city": "Puteaux",
+"country": "France",
+"lat": 48.8842,
+"lon": 2.2369
 },
 "Puteaux, Hauts-de-Seine": {
 "cc": "FR",
@@ -2071,6 +2232,20 @@
 "lat": 46.7566,
 "lon": -71.2379
 },
+"Saint-Rémy-lès-Chevreuse, Yvelines": {
+"cc": "FR",
+"city": "Saint-Rémy-lès-Chevreuse",
+"country": "France",
+"lat": 48.7055,
+"lon": 2.0711
+},
+"Salt Lake City, UT": {
+"cc": "US",
+"city": "Salt Lake City",
+"country": "United States",
+"lat": 40.7596,
+"lon": -111.8868
+},
 "Salt Lake City, United States": {
 "cc": "US",
 "city": "Salt Lake City",
@@ -2170,6 +2345,13 @@
 "country": "Saudi Arabia",
 "lat": 25.6243,
 "lon": 42.3528
+},
+"Seattle, WA": {
+"cc": "US",
+"city": "Seattle",
+"country": "United States",
+"lat": 47.6038,
+"lon": -122.3301
 },
 "Seoul, South Korea": {
 "cc": "KR",
@@ -2467,6 +2649,20 @@
 "lat": 43.6535,
 "lon": -79.3839
 },
+"Toulouse": {
+"cc": "FR",
+"city": "Toulouse",
+"country": "France",
+"lat": 43.6045,
+"lon": 1.4442
+},
+"Trowbridge, Wiltshire": {
+"cc": "GB",
+"city": "Wiltshire",
+"country": "United Kingdom",
+"lat": 51.3162,
+"lon": -2.2024
+},
 "Ukraine": {
 "cc": "UA",
 "city": "Ukraine",
@@ -2508,6 +2704,13 @@
 "country": "Canada",
 "lat": 49.2609,
 "lon": -123.114
+},
+"Val-de-Marne (94)": {
+"cc": "BE",
+"city": "Evere",
+"country": "Belgium",
+"lat": 50.8776,
+"lon": 4.3993
 },
 "Vancouver": {
 "cc": "CA",
