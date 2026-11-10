@@ -988,6 +988,13 @@
 },
 "Harris Williams London": null,
 "Harris Williams-Cambpell Mithu (MN013), United States": null,
+"Haute-Garonne (31)": {
+"cc": "FR",
+"city": "Toulouse",
+"country": "France",
+"lat": 43.6055,
+"lon": 1.385
+},
 "Hauts-de-Seine (92)": {
 "cc": "FR",
 "city": "Garches",
@@ -2480,6 +2487,13 @@
 "lon": 9.18
 },
 "Sucursal Shenzhen, China": null,
+"Sunriver, OR": {
+"cc": "US",
+"city": "Sunriver",
+"country": "United States",
+"lat": 43.884,
+"lon": -121.4385
+},
 "Sweden": {
 "cc": "SE",
 "city": "Sweden",
