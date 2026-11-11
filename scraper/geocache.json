@@ -288,6 +288,13 @@
 "lat": 40.7706,
 "lon": -73.1201
 },
+"Bois-Colombes": {
+"cc": "FR",
+"city": "Bois-Colombes",
+"country": "France",
+"lat": 48.9148,
+"lon": 2.2675
+},
 "Bordeaux": {
 "cc": "FR",
 "city": "Bordeaux",
@@ -360,6 +367,7 @@
 "lat": 50.8467,
 "lon": 4.3525
 },
+"Bruxelles Avenue Marnix (), Belgium": null,
 "Bruxelles, Belgium": {
 "cc": "BE",
 "city": "Brussels",
@@ -591,6 +599,13 @@
 "country": "United States",
 "lat": 38.6504,
 "lon": -90.3362
+},
+"Cleveland, OH": {
+"cc": "US",
+"city": "Cleveland",
+"country": "United States",
+"lat": 41.4997,
+"lon": -81.6937
 },
 "Cleveland, Ohio, United States": {
 "cc": "US",
@@ -929,6 +944,13 @@
 "lon": -72.6081
 },
 "Global Service Private Ltd.": null,
+"Grand Rapids, MI": {
+"cc": "US",
+"city": "Grand Rapids",
+"country": "United States",
+"lat": 42.9632,
+"lon": -85.6679
+},
 "Greece": {
 "cc": "GR",
 "city": "Greece",
@@ -1244,6 +1266,13 @@
 "lat": 51.2955,
 "lon": -0.3293
 },
+"Leawood, KS": {
+"cc": "US",
+"city": "Leawood",
+"country": "United States",
+"lat": 38.9667,
+"lon": -94.6169
+},
 "Leeds, Park Row, United Kingdom": {
 "cc": "GB",
 "city": "Leeds",
@@ -1278,6 +1307,13 @@
 "country": "United States",
 "lat": 42.2405,
 "lon": -74.3654
+},
+"Lincoln, NE": {
+"cc": "US",
+"city": "Lincoln",
+"country": "United States",
+"lat": 40.8089,
+"lon": -96.7078
 },
 "London": {
 "cc": "GB",
@@ -2775,6 +2811,13 @@
 "country": "United States",
 "lat": 44.8992,
 "lon": -97.1153
+},
+"West Virginia": {
+"cc": "US",
+"city": "West Virginia",
+"country": "United States",
+"lat": 38.4758,
+"lon": -80.8408
 },
 "Westlake, TX": {
 "cc": "US",
