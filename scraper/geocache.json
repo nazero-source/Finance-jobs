@@ -1024,6 +1024,7 @@
 "lat": 48.8383,
 "lon": 2.1755
 },
+"Header, Sitemap": null,
 "High Prairie, Alberta, Canada": {
 "cc": "CA",
 "city": "High Prairie",
@@ -1109,6 +1110,13 @@
 "lat": 22.3511,
 "lon": 78.6677
 },
+"Indianapolis, IN": {
+"cc": "US",
+"city": "Indianapolis",
+"country": "United States",
+"lat": 39.7683,
+"lon": -86.1584
+},
 "Ireland": {
 "cc": "IE",
 "city": "Ireland",
@@ -1153,12 +1161,26 @@
 "lat": 35.6608,
 "lon": 139.7407
 },
+"Jersey City, NJ": {
+"cc": "US",
+"city": "Jersey City",
+"country": "United States",
+"lat": 40.7216,
+"lon": -74.0475
+},
 "Jersey City, NJ, United States": {
 "cc": "US",
 "city": "Jersey City",
 "country": "United States",
 "lat": 40.7216,
 "lon": -74.0475
+},
+"Johannesburg South Africa": {
+"cc": "ZA",
+"city": "Johannesburg",
+"country": "South Africa",
+"lat": -26.205,
+"lon": 28.0497
 },
 "Johannesburg, South Africa": {
 "cc": "ZA",
@@ -1748,6 +1770,13 @@
 "lat": 48.1371,
 "lon": 11.5754
 },
+"Mundelein, IL": {
+"cc": "US",
+"city": "Mundelein",
+"country": "United States",
+"lat": 42.2631,
+"lon": -88.004
+},
 "Munich": {
 "cc": "DE",
 "city": "Munich",
@@ -2044,6 +2073,13 @@
 "lon": -118.1442
 },
 "Philadelphia": {
+"cc": "US",
+"city": "Philadelphia",
+"country": "United States",
+"lat": 39.9527,
+"lon": -75.1635
+},
+"Philadelphia, PA": {
 "cc": "US",
 "city": "Philadelphia",
 "country": "United States",
@@ -2677,6 +2713,7 @@
 "lat": 43.6535,
 "lon": -79.3839
 },
+"Toronto, Bay Wellington Tower L47, Canada": null,
 "Toronto, Canada": {
 "cc": "CA",
 "city": "Toronto",
