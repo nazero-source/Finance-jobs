@@ -252,6 +252,13 @@
 "lat": 38.9813,
 "lon": -77.1234
 },
+"Birmingham": {
+"cc": "GB",
+"city": "Birmingham",
+"country": "United Kingdom",
+"lat": 52.4949,
+"lon": -1.8518
+},
 "Birmingham, One Snow Hill, United Kingdom": null,
 "Birmingham, United Kingdom": {
 "cc": "GB",
@@ -498,6 +505,7 @@
 "lat": 35.2272,
 "lon": -80.8431
 },
+"Chennai, DLF IT Park, India": null,
 "Chicago Illinois United States, United States": null,
 "Chicago, 190 South LaSalle Street, United States": {
 "cc": "US",
@@ -649,6 +657,13 @@
 "country": "France",
 "lat": 48.8953,
 "lon": 2.2562
+},
+"Cuauhtemoc, Distrito Federal, Mexico": {
+"cc": "MX",
+"city": "Mexico City",
+"country": "Mexico",
+"lat": 19.4326,
+"lon": -99.1332
 },
 "Dallas, TX": {
 "cc": "US",
@@ -1117,6 +1132,13 @@
 "lat": 39.7683,
 "lon": -86.1584
 },
+"Indonesia": {
+"cc": "ID",
+"city": "Indonesia",
+"country": "Indonesia",
+"lat": -2.4834,
+"lon": 117.8903
+},
 "Ireland": {
 "cc": "IE",
 "city": "Ireland",
@@ -1294,6 +1316,13 @@
 "country": "United States",
 "lat": 38.9667,
 "lon": -94.6169
+},
+"Leeds": {
+"cc": "GB",
+"city": "Leeds",
+"country": "United Kingdom",
+"lat": 53.7974,
+"lon": -1.5438
 },
 "Leeds, Park Row, United Kingdom": {
 "cc": "GB",
@@ -2276,6 +2305,13 @@
 "lat": 59.3251,
 "lon": 18.0711
 },
+"Saint Louis, MO": {
+"cc": "US",
+"city": "Saint Louis",
+"country": "United States",
+"lat": 38.6254,
+"lon": -90.19
+},
 "Saint Paul, MN": {
 "cc": "US",
 "city": "Saint Paul",
@@ -2514,6 +2550,13 @@
 "lat": 36.6384,
 "lon": 127.6961
 },
+"Southfield, MI": {
+"cc": "US",
+"city": "Southfield",
+"country": "United States",
+"lat": 42.4734,
+"lon": -83.2219
+},
 "Spain": {
 "cc": "ES",
 "city": "Spain",
@@ -2750,6 +2793,13 @@
 "lat": 51.3162,
 "lon": -2.2024
 },
+"Troy, MI": {
+"cc": "US",
+"city": "Troy",
+"country": "United States",
+"lat": 42.6056,
+"lon": -83.1499
+},
 "Ukraine": {
 "cc": "UA",
 "city": "Ukraine",
@@ -2821,12 +2871,26 @@
 "lon": -79.5268
 },
 "Victoriaville, QC, CAN, Canada": null,
+"Vienna, VA": {
+"cc": "US",
+"city": "Vienna",
+"country": "United States",
+"lat": 38.9014,
+"lon": -77.2652
+},
 "Warszawa, Mazowieckie, Poland": {
 "cc": "PL",
 "city": "Masovian Voivodeship",
 "country": "Poland",
 "lat": 52.2334,
 "lon": 21.0711
+},
+"Warwick, Warwickshire": {
+"cc": "GB",
+"city": "Warwick",
+"country": "United Kingdom",
+"lat": 52.2821,
+"lon": -1.5906
 },
 "Washington DC": {
 "cc": "US",
@@ -2848,6 +2912,13 @@
 "country": "United States",
 "lat": 44.8992,
 "lon": -97.1153
+},
+"Wayne, NJ": {
+"cc": "US",
+"city": "Wayne",
+"country": "United States",
+"lat": 40.9492,
+"lon": -74.2377
 },
 "West Virginia": {
 "cc": "US",
