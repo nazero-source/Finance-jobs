@@ -202,6 +202,13 @@
 "lat": 41.7408,
 "lon": -71.3085
 },
+"Beachwood, OH": {
+"cc": "US",
+"city": "Beachwood",
+"country": "United States",
+"lat": 41.4645,
+"lon": -81.5087
+},
 "Beijing Shanghai China": {
 "cc": "CN",
 "city": "Jiading District",
@@ -441,6 +448,13 @@
 "lon": -107.9917
 },
 "Canary Wharf, 1 Churchill Place, United Kingdom": null,
+"Cary, NC": {
+"cc": "US",
+"city": "Cary",
+"country": "United States",
+"lat": 35.7874,
+"lon": -78.7812
+},
 "Casablanca, Morocco": {
 "cc": "MA",
 "city": "Casablanca",
@@ -687,6 +701,13 @@
 "lat": 32.7763,
 "lon": -96.7969
 },
+"Dana Point, CA": {
+"cc": "US",
+"city": "Dana Point",
+"country": "United States",
+"lat": 33.467,
+"lon": -117.6981
+},
 "Denver, CO": {
 "cc": "US",
 "city": "Denver",
@@ -752,6 +773,13 @@
 "lon": -6.2606
 },
 "Düsseldorf oder Frankfurt am Main": null,
+"Düsseldorf, Nordrhein-Westfalen, Germany": {
+"cc": "DE",
+"city": "Dusseldorf",
+"country": "Germany",
+"lat": 51.2254,
+"lon": 6.7763
+},
 "Edinburgh, United Kingdom": {
 "cc": "GB",
 "city": "City of Edinburgh",
@@ -1153,6 +1181,20 @@
 "lat": 33.6857,
 "lon": -117.826
 },
+"Irving, TX": {
+"cc": "US",
+"city": "Irving",
+"country": "United States",
+"lat": 32.8295,
+"lon": -96.9442
+},
+"Issy-les-Moulineaux, Hauts-de-Seine": {
+"cc": "FR",
+"city": "Issy-les-Moulineaux",
+"country": "France",
+"lat": 48.8251,
+"lon": 2.2735
+},
 "Istanbul, Türkiye": {
 "cc": "TR",
 "city": "Istanbul",
@@ -1295,6 +1337,13 @@
 "country": "United States",
 "lat": 30.2262,
 "lon": -92.0178
+},
+"Lake County, FL": {
+"cc": "US",
+"city": "Lake County",
+"country": "United States",
+"lat": 28.7007,
+"lon": -81.7899
 },
 "Lake Saint Louis, MO": {
 "cc": "US",
@@ -1494,6 +1543,13 @@
 "lon": 72.8692
 },
 "Madison Ave Corp, United States": null,
+"Madison, WI": {
+"cc": "US",
+"city": "Madison",
+"country": "United States",
+"lat": 43.0747,
+"lon": -89.3842
+},
 "Madrid Paseo Castellana 18, Spain": null,
 "Madrid Spain": {
 "cc": "ES",
@@ -1827,6 +1883,13 @@
 "lat": 48.1371,
 "lon": 11.5754
 },
+"Mérignac, Gironde": {
+"cc": "FR",
+"city": "Mérignac",
+"country": "France",
+"lat": 44.8422,
+"lon": -0.6469
+},
 "München": {
 "cc": "DE",
 "city": "Munich",
@@ -2017,6 +2080,13 @@
 "lon": 10.739
 },
 "Ottawa, ON, CAN, Canada": null,
+"Overland Park, KS": {
+"cc": "US",
+"city": "Overland Park",
+"country": "United States",
+"lat": 38.9743,
+"lon": -94.6852
+},
 "Owen Sound, Ontario, Canada": {
 "cc": "CA",
 "city": "Owen Sound",
@@ -2368,6 +2438,13 @@
 "lat": 40.7596,
 "lon": -111.8868
 },
+"San Diego, CA": {
+"cc": "US",
+"city": "San Diego",
+"country": "United States",
+"lat": 32.7157,
+"lon": -117.1638
+},
 "San Francisco": {
 "cc": "US",
 "city": "San Francisco",
@@ -2707,6 +2784,20 @@
 "lat": 25.0375,
 "lon": 121.5637
 },
+"Tallahassee, FL": {
+"cc": "US",
+"city": "Tallahassee",
+"country": "United States",
+"lat": 30.4381,
+"lon": -84.2809
+},
+"Tampa, FL": {
+"cc": "US",
+"city": "Tampa",
+"country": "United States",
+"lat": 27.945,
+"lon": -82.4583
+},
 "Tel Aviv Israel": {
 "cc": "IL",
 "city": "Tel-Aviv",
@@ -2919,6 +3010,13 @@
 "country": "United States",
 "lat": 40.9492,
 "lon": -74.2377
+},
+"Wayne, PA": {
+"cc": "US",
+"city": "Wayne County",
+"country": "United States",
+"lat": 41.6264,
+"lon": -75.3045
 },
 "West Virginia": {
 "cc": "US",
