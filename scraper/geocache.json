@@ -138,6 +138,13 @@
 },
 "Atlanta, Georgia; Boston, Massachusetts; Charlotte, North Carolina; Chicago, Illinois, United States; Los Angeles, California; San Francisco, California": null,
 "Atlanta, Georgia; Chicago, Illinois, United States": null,
+"Aubervilliers, Seine-Saint-Denis": {
+"cc": "FR",
+"city": "Aubervilliers",
+"country": "France",
+"lat": 48.9146,
+"lon": 2.3822
+},
 "Austin HQ": {
 "cc": "US",
 "city": "Austin",
@@ -189,6 +196,13 @@
 },
 "Bangalore Velankani ISC, India": null,
 "Bangalore, India": {
+"cc": "IN",
+"city": "Bengaluru",
+"country": "India",
+"lat": 12.9768,
+"lon": 77.5901
+},
+"Bangalore, Karnataka, India": {
 "cc": "IN",
 "city": "Bengaluru",
 "country": "India",
@@ -1309,6 +1323,13 @@
 "country": "United Kingdom",
 "lat": 51.5074,
 "lon": -0.1278
+},
+"La Celle-sous-Gouzon": {
+"cc": "FR",
+"city": "La Celle-sous-Gouzon",
+"country": "France",
+"lat": 46.2148,
+"lon": 2.2099
 },
 "La Défense": {
 "cc": "FR",
@@ -2588,6 +2609,13 @@
 "country": "China",
 "lat": 31.2313,
 "lon": 121.47
+},
+"Simi Valley, CA": {
+"cc": "US",
+"city": "Simi Valley",
+"country": "United States",
+"lat": 34.2677,
+"lon": -118.7538
 },
 "Singapore": {
 "cc": "SG",
