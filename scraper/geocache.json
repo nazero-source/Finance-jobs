@@ -107,6 +107,13 @@
 "lat": 52.3731,
 "lon": 4.8925
 },
+"Arlington, VA": {
+"cc": "US",
+"city": "Arlington County",
+"country": "United States",
+"lat": 38.8769,
+"lon": -77.0893
+},
 "Athens, Attica, Greece": {
 "cc": "GR",
 "city": "Athens",
@@ -222,6 +229,13 @@
 "country": "United States",
 "lat": 41.4645,
 "lon": -81.5087
+},
+"Beijing China Central Place": {
+"cc": "CN",
+"city": "Chaoyang District",
+"country": "China",
+"lat": 39.9077,
+"lon": 116.4747
 },
 "Beijing Shanghai China": {
 "cc": "CN",
@@ -2573,6 +2587,7 @@
 "lat": 47.6038,
 "lon": -122.3301
 },
+"Seattle, WA, USA, United States": null,
 "Seoul, South Korea": {
 "cc": "KR",
 "city": "Seoul",
