@@ -518,6 +518,13 @@
 "lat": 49.0528,
 "lon": 2.0389
 },
+"Chapel Hill, NC": {
+"cc": "US",
+"city": "Chapel Hill",
+"country": "United States",
+"lat": 35.9132,
+"lon": -79.0558
+},
 "Charlotte, NC": {
 "cc": "US",
 "city": "Charlotte",
@@ -2361,6 +2368,13 @@
 "lat": 37.5385,
 "lon": -77.4343
 },
+"Ridgecrest, CA": {
+"cc": "US",
+"city": "Ridgecrest",
+"country": "United States",
+"lat": 35.6248,
+"lon": -117.6713
+},
 "Riyadh, Saudi Arabia": {
 "cc": "SA",
 "city": "Riyadh",
@@ -3018,6 +3032,13 @@
 "country": "United States",
 "lat": 38.9014,
 "lon": -77.2652
+},
+"Vista, CA": {
+"cc": "US",
+"city": "Vista",
+"country": "United States",
+"lat": 33.2021,
+"lon": -117.2425
 },
 "Warszawa, Mazowieckie, Poland": {
 "cc": "PL",
