@@ -2113,6 +2113,13 @@
 "lon": -87.9484
 },
 "One, Canada Square (44th Floor), Canary Wharf London, E14 5AA (UK), United Kingdom": null,
+"Ontario VIRTUAL, Canada": {
+"cc": "CA",
+"city": "Toronto",
+"country": "Canada",
+"lat": 43.761,
+"lon": -79.4102
+},
 "Orlando, FL": {
 "cc": "US",
 "city": "Orlando",
@@ -2793,6 +2800,13 @@
 "lon": 151.2083
 },
 "Sydney, NSW, Australia": {
+"cc": "AU",
+"city": "Sydney",
+"country": "Australia",
+"lat": -33.8698,
+"lon": 151.2083
+},
+"Sydney, New South Wales, Australia": {
 "cc": "AU",
 "city": "Sydney",
 "country": "Australia",
