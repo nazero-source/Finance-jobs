@@ -1,142 +1,142 @@
 {
- "generated": "2026-11-20T05:26Z",
- "count": 414,
- "new_today": 34,
+ "generated": "2026-11-21T05:18Z",
+ "count": 418,
+ "new_today": 26,
  "sources": {
   "Workday · Sagard · sagardcareers": {
    "fetched": 32,
    "error": null,
-   "seconds": 0.8
+   "seconds": 0.6
   },
   "Workday · Rothschild & Co · RothschildAndCo_Lateral": {
-   "fetched": 111,
+   "fetched": 113,
    "error": null,
-   "seconds": 6.1
+   "seconds": 5.3
   },
   "Workday · Rand Merchant Bank · FRB": {
-   "fetched": 73,
+   "fetched": 69,
    "error": null,
-   "seconds": 56.3
+   "seconds": 44.7
   },
   "Workday · Morgan Stanley · External": {
-   "fetched": 612,
+   "fetched": 609,
    "error": null,
-   "seconds": 92.8
+   "seconds": 86.4
   },
   "Workday · Bank of America · Lateral-US": {
    "fetched": 514,
    "error": null,
-   "seconds": 35.2
+   "seconds": 35.8
   },
   "Workday · Citi · 2": {
-   "fetched": 1741,
+   "fetched": 1736,
    "error": null,
-   "seconds": 232.2
+   "seconds": 224.1
   },
   "Workday · Barclays · External_Career_Site_Barclays": {
-   "fetched": 402,
+   "fetched": 399,
    "error": null,
-   "seconds": 73.0
+   "seconds": 60.9
   },
   "Workday · Deutsche Bank · DBWebsite": {
-   "fetched": 868,
+   "fetched": 869,
    "error": null,
-   "seconds": 174.8
+   "seconds": 155.7
   },
   "Workday · Wells Fargo · WellsFargoJobs": {
-   "fetched": 607,
+   "fetched": 627,
    "error": null,
-   "seconds": 94.5
+   "seconds": 92.3
   },
   "Workday · RBC Capital Markets · RBCGLOBAL1": {
-   "fetched": 397,
+   "fetched": 390,
    "error": null,
-   "seconds": 60.1
+   "seconds": 50.6
   },
   "Workday · TD Securities · TD_Bank_Careers": {
-   "fetched": 951,
+   "fetched": 965,
    "error": null,
-   "seconds": 195.6
+   "seconds": 171.5
   },
   "Workday · BMO Capital Markets · External": {
-   "fetched": 511,
+   "fetched": 522,
    "error": null,
-   "seconds": 123.2
+   "seconds": 106.5
   },
   "Workday · CIBC Capital Markets · search": {
-   "fetched": 488,
+   "fetched": 501,
    "error": null,
-   "seconds": 122.0
+   "seconds": 112.6
   },
   "Workday · Mizuho · MizuhoAmericas": {
-   "fetched": 115,
+   "fetched": 118,
    "error": null,
-   "seconds": 53.8
+   "seconds": 54.8
   },
   "Workday · MUFG · MUFG-Careers": {
-   "fetched": 620,
+   "fetched": 625,
    "error": null,
-   "seconds": 197.2
+   "seconds": 161.1
   },
   "Workday · Santander · SantanderCareers": {
-   "fetched": 455,
+   "fetched": 461,
    "error": null,
-   "seconds": 142.9
+   "seconds": 129.5
   },
   "Workday · ING · ICSGBLCOR": {
-   "fetched": 345,
+   "fetched": 339,
    "error": null,
-   "seconds": 58.6
+   "seconds": 45.9
   },
   "Workday · Lloyds Banking Group · LBG_Careers": {
-   "fetched": 69,
+   "fetched": 71,
    "error": null,
-   "seconds": 69.8
+   "seconds": 63.7
   },
   "Workday · Raymond James · RaymondJamesCareers": {
-   "fetched": 274,
+   "fetched": 275,
    "error": null,
-   "seconds": 65.9
+   "seconds": 52.1
   },
   "Workday · BlackRock · BlackRock_Professional": {
    "fetched": 214,
    "error": null,
-   "seconds": 27.8
+   "seconds": 25.0
   },
   "Workday · Houlihan Lokey · Campus": {
-   "fetched": 48,
+   "fetched": 49,
    "error": null,
-   "seconds": 2.2
+   "seconds": 1.7
   },
   "Workday · Houlihan Lokey · External": {
    "fetched": 0,
    "error": null,
-   "seconds": 0.7
+   "seconds": 0.6
   },
   "Workday · PJT Partners · Careers": {
-   "fetched": 52,
+   "fetched": 43,
    "error": null,
-   "seconds": 1.7
+   "seconds": 1.5
   },
   "Workday · Perella Weinberg · PWP_Experienced_Opportunities": {
    "fetched": 4,
    "error": null,
-   "seconds": 0.4
+   "seconds": 0.6
   },
   "Workday · Harris Williams · HarrisWilliams": {
    "fetched": 12,
    "error": null,
-   "seconds": 1.1
+   "seconds": 1.5
   },
   "Workday · Guggenheim Partners · Guggenheim_Partners": {
    "fetched": 5,
    "error": null,
-   "seconds": 0.7
+   "seconds": 0.6
   },
   "Workday · Blackstone · Blackstone_Careers": {
-   "fetched": 136,
+   "fetched": 135,
    "error": null,
-   "seconds": 4.3
+   "seconds": 4.1
   },
   "Workday · Blackstone · Blackstone_Campus_Careers": {
    "fetched": 15,
@@ -146,157 +146,157 @@
   "Workday · Carlyle · Carlyle": {
    "fetched": 63,
    "error": null,
-   "seconds": 2.3
+   "seconds": 2.1
   },
   "Workday · Brookfield · brookfield": {
-   "fetched": 144,
+   "fetched": 143,
    "error": null,
-   "seconds": 5.9
+   "seconds": 5.6
   },
   "Workday · Apollo · Apollo_Careers": {
-   "fetched": 54,
+   "fetched": 53,
    "error": null,
-   "seconds": 1.9
+   "seconds": 2.0
   },
   "Workday · Bain Capital · External_Public": {
-   "fetched": 32,
-   "error": null,
-   "seconds": 1.2
-  },
-  "Workday · Ardian · ArdianCareers": {
-   "fetched": 68,
-   "error": null,
-   "seconds": 3.0
-  },
-  "Workday · Moelis & Company · Experienced-Hires": {
-   "fetched": 30,
+   "fetched": 36,
    "error": null,
    "seconds": 1.1
+  },
+  "Workday · Ardian · ArdianCareers": {
+   "fetched": 67,
+   "error": null,
+   "seconds": 2.9
+  },
+  "Workday · Moelis & Company · Experienced-Hires": {
+   "fetched": 28,
+   "error": null,
+   "seconds": 1.0
   },
   "Workday · ICG · external_careers": {
    "fetched": 20,
    "error": null,
-   "seconds": 0.7
+   "seconds": 0.6
   },
   "Workday · BBVA · BBVA": {
-   "fetched": 140,
+   "fetched": 136,
    "error": null,
-   "seconds": 72.5
+   "seconds": 65.5
   },
   "Workday · DBS · DBS_Careers": {
-   "fetched": 669,
+   "fetched": 668,
    "error": null,
-   "seconds": 112.1
+   "seconds": 95.9
   },
   "Workday · CDPQ · CDPQ": {
    "fetched": 37,
    "error": null,
-   "seconds": 1.0
+   "seconds": 1.2
   },
   "Workday · CDPQ · CDPQ-recrutement-universitaire": {
    "fetched": 3,
    "error": null,
-   "seconds": 0.5
+   "seconds": 0.4
   },
   "Workday · Ontario Teachers' · OntarioTeachers_Careers": {
    "fetched": 32,
    "error": null,
-   "seconds": 2.2
+   "seconds": 2.1
   },
   "Workday · Hamilton Lane · search": {
    "fetched": 48,
    "error": null,
-   "seconds": 1.2
+   "seconds": 1.3
   },
   "Workday · Alantra · Alantra": {
    "fetched": 52,
    "error": null,
-   "seconds": 2.9
+   "seconds": 2.6
   },
   "Workday · Guggenheim Partners · Guggenheim_Careers_Campus": {
    "fetched": 4,
    "error": null,
-   "seconds": 0.5
+   "seconds": 0.6
   },
   "Workday · LGT Capital Partners · lgtcpcurrentvacancies": {
    "fetched": 20,
    "error": null,
-   "seconds": 0.8
+   "seconds": 0.7
   },
   "Workday · Howden Capital Markets & Advisory · Hyperion_External": {
-   "fetched": 313,
+   "fetched": 306,
    "error": null,
-   "seconds": 95.2
+   "seconds": 81.8
   },
   "Workday · Texas Capital · Careers": {
-   "fetched": 79,
+   "fetched": 84,
    "error": null,
-   "seconds": 24.3
+   "seconds": 23.3
   },
   "Workday · 3i Group · Intern_Career": {
    "fetched": 5,
    "error": null,
-   "seconds": 0.8
+   "seconds": 0.7
   },
   "Workday · Copenhagen Infrastructure Partners · CIP_Careers": {
    "fetched": 5,
    "error": null,
-   "seconds": 0.7
+   "seconds": 1.1
   },
   "Workday · Knight Frank Capital Advisory · KF": {
-   "fetched": 90,
+   "fetched": 89,
    "error": null,
    "seconds": 4.0
   },
   "Workday · M&G Infracapital · mandgprudential": {
-   "fetched": 122,
+   "fetched": 128,
    "error": null,
-   "seconds": 8.1
+   "seconds": 7.1
   },
   "Oracle · J.P. Morgan · CX_1001": {
-   "fetched": 1454,
+   "fetched": 1436,
    "error": null,
-   "seconds": 100.5
+   "seconds": 115.0
   },
   "Oracle · Lazard · CX_1001": {
-   "fetched": 104,
+   "fetched": 101,
    "error": null,
-   "seconds": 3.1
+   "seconds": 2.7
   },
   "Oracle · Lazard · CX_1": {
-   "fetched": 43,
+   "fetched": 42,
    "error": null,
-   "seconds": 1.2
+   "seconds": 1.1
   },
   "Oracle · Lazard · CX_2": {
-   "fetched": 61,
+   "fetched": 59,
    "error": null,
-   "seconds": 1.7
+   "seconds": 1.6
   },
   "Oracle · IFM Investors · CX": {
    "fetched": 20,
    "error": null,
-   "seconds": 0.9
+   "seconds": 1.1
   },
   "Oracle · Jefferies · CX_1": {
    "fetched": 174,
    "error": null,
-   "seconds": 6.4
+   "seconds": 5.5
   },
   "Oracle · Edmond de Rothschild · CX_7001": {
-   "fetched": 24,
+   "fetched": 23,
    "error": null,
-   "seconds": 1.4
+   "seconds": 1.5
   },
   "Goldman Sachs": {
-   "fetched": 318,
+   "fetched": 321,
    "error": null,
-   "seconds": 11.3
+   "seconds": 10.4
   },
   "Greenhouse · TPG": {
    "fetched": 12,
    "error": null,
-   "seconds": 0.3
+   "seconds": 0.1
   },
   "Greenhouse · General Atlantic": {
    "fetched": 12,
@@ -311,17 +311,17 @@
   "Greenhouse · William Blair": {
    "fetched": 48,
    "error": null,
-   "seconds": 0.3
+   "seconds": 0.2
   },
   "Greenhouse · Lincoln International": {
-   "fetched": 37,
+   "fetched": 40,
    "error": null,
    "seconds": 0.2
   },
   "Greenhouse · Solomon Partners": {
    "fetched": 0,
    "error": null,
-   "seconds": 0.3
+   "seconds": 0.1
   },
   "Greenhouse · LionTree": {
    "fetched": 2,
@@ -334,7 +334,7 @@
    "seconds": 0.1
   },
   "Greenhouse · EQT": {
-   "fetched": 11,
+   "fetched": 13,
    "error": null,
    "seconds": 0.1
   },
@@ -344,7 +344,7 @@
    "seconds": 0.1
   },
   "Greenhouse · Adams Street Partners": {
-   "fetched": 13,
+   "fetched": 12,
    "error": null,
    "seconds": 0.1
   },
@@ -359,14 +359,14 @@
    "seconds": 0.1
   },
   "Greenhouse · Forvis Mazars": {
-   "fetched": 118,
+   "fetched": 113,
    "error": null,
    "seconds": 0.2
   },
   "Greenhouse · FT Partners": {
    "fetched": 23,
    "error": null,
-   "seconds": 0.2
+   "seconds": 0.1
   },
   "Greenhouse · AQ Technology Partners": {
    "fetched": 4,
@@ -394,47 +394,47 @@
    "seconds": 0.1
   },
   "Greenhouse · GCM Grosvenor": {
-   "fetched": 18,
+   "fetched": 19,
    "error": null,
    "seconds": 0.1
   },
   "Lever · Seaport Global": {
    "fetched": 6,
    "error": null,
-   "seconds": 0.5
+   "seconds": 0.4
   },
   "Lever · The Raine Group": {
    "fetched": 1,
    "error": null,
-   "seconds": 0.5
+   "seconds": 1.1
   },
   "Lever · Octopus Energy Generation": {
-   "fetched": 155,
+   "fetched": 157,
    "error": null,
    "seconds": 0.7
   },
   "Lever · Aeris Partners": {
    "fetched": 7,
    "error": null,
-   "seconds": 0.4
+   "seconds": 1.3
   },
   "Lever · D.A. Davidson": {
-   "fetched": 42,
+   "fetched": 41,
    "error": null,
    "seconds": 0.6
   },
   "Lever · HCVT": {
-   "fetched": 47,
+   "fetched": 46,
    "error": null,
-   "seconds": 0.8
+   "seconds": 0.6
   },
   "Lever · Harrison Street": {
    "fetched": 6,
    "error": null,
-   "seconds": 0.4
+   "seconds": 0.3
   },
   "Lever · CIM Group": {
-   "fetched": 49,
+   "fetched": 50,
    "error": null,
    "seconds": 0.6
   },
@@ -461,12 +461,12 @@
   "Workable · Interpath Advisory": {
    "fetched": 107,
    "error": null,
-   "seconds": 0.2
+   "seconds": 0.1
   },
   "Workable · Improved Corporate Finance": {
    "fetched": 4,
    "error": null,
-   "seconds": 0.3
+   "seconds": 0.1
   },
   "Recruitee · Meridiam": {
    "fetched": 5,
@@ -476,12 +476,12 @@
   "Recruitee · Green Giraffe": {
    "fetched": 2,
    "error": null,
-   "seconds": 0.4
+   "seconds": 0.3
   },
   "Recruitee · Apax Partners": {
    "fetched": 3,
    "error": null,
-   "seconds": 0.4
+   "seconds": 0.3
   },
   "Recruitee · IK Partners": {
    "fetched": 2,
@@ -496,22 +496,22 @@
   "Recruitee · PAI Partners": {
    "fetched": 8,
    "error": null,
-   "seconds": 0.6
+   "seconds": 0.7
   },
   "Recruitee · BC Partners": {
    "fetched": 2,
    "error": null,
-   "seconds": 0.2
+   "seconds": 0.3
   },
   "Recruitee · Eight Advisory": {
    "fetched": 71,
    "error": null,
-   "seconds": 0.9
+   "seconds": 1.1
   },
   "SmartRecruiters · Tikehau Capital": {
    "fetched": 1,
    "error": null,
-   "seconds": 0.5
+   "seconds": 0.4
   },
   "SmartRecruiters · Capza": {
    "fetched": 1,
@@ -524,9 +524,9 @@
    "seconds": 0.4
   },
   "SmartRecruiters · StepStone Group": {
-   "fetched": 122,
+   "fetched": 118,
    "error": null,
-   "seconds": 1.1
+   "seconds": 0.8
   },
   "SmartRecruiters · Accurent": {
    "fetched": 2,
@@ -534,7 +534,7 @@
    "seconds": 0.4
   },
   "SmartRecruiters · Sienna Investment Managers": {
-   "fetched": 6,
+   "fetched": 5,
    "error": null,
    "seconds": 0.4
   },
@@ -551,7 +551,7 @@
   "Personio · Carlsquare": {
    "fetched": 8,
    "error": null,
-   "seconds": 0.9
+   "seconds": 0.8
   },
   "Personio · Oaklins": {
    "fetched": 0,
@@ -561,37 +561,37 @@
   "Personio · Pava Partners": {
    "fetched": 5,
    "error": null,
-   "seconds": 0.9
+   "seconds": 0.5
   },
   "Personio · DUBAG": {
    "fetched": 1,
    "error": null,
-   "seconds": 0.6
+   "seconds": 0.7
   },
   "Personio · Rautenberg & Company": {
    "fetched": 3,
    "error": null,
-   "seconds": 0.7
+   "seconds": 0.6
   },
   "Personio · Capital Corporate Finance": {
    "fetched": 4,
    "error": null,
-   "seconds": 0.9
+   "seconds": 0.8
   },
   "Personio · Prime Capital": {
    "fetched": 1,
    "error": null,
-   "seconds": 0.8
+   "seconds": 0.7
   },
   "Personio · HQ Capital": {
    "fetched": 2,
    "error": null,
-   "seconds": 0.6
+   "seconds": 0.8
   },
   "Teamtailor · Kepler Cheuvreux": {
-   "fetched": 6,
+   "fetched": 7,
    "error": null,
-   "seconds": 0.7
+   "seconds": 0.6
   },
   "Teamtailor · Antin Infrastructure Partners": {
    "fetched": 1,
@@ -601,32 +601,32 @@
   "Teamtailor · CFG Bank": {
    "fetched": 18,
    "error": null,
-   "seconds": 1.2
+   "seconds": 0.3
   },
   "Teamtailor · Photosol": {
    "fetched": 8,
    "error": null,
-   "seconds": 0.7
+   "seconds": 0.6
   },
   "Teamtailor · CVE": {
-   "fetched": 20,
+   "fetched": 21,
    "error": null,
-   "seconds": 1.8
+   "seconds": 0.2
   },
   "Teamtailor · Zenobe": {
-   "fetched": 14,
+   "fetched": 16,
    "error": null,
-   "seconds": 0.3
+   "seconds": 1.5
   },
   "Teamtailor · Technique Solaire": {
    "fetched": 34,
    "error": null,
-   "seconds": 0.4
+   "seconds": 2.1
   },
   "Teamtailor · BDO France (Advance Capital)": {
    "fetched": 100,
    "error": null,
-   "seconds": 2.0
+   "seconds": 3.8
   },
   "Pinpoint · Marathon Capital": {
    "fetched": 2,
@@ -636,7 +636,7 @@
   "Pinpoint · Globeleq": {
    "fetched": 1,
    "error": null,
-   "seconds": 0.6
+   "seconds": 0.5
   },
   "JazzHR · CrossBoundary": {
    "fetched": 23,
@@ -646,37 +646,37 @@
   "SuccessFactors · AIIB": {
    "fetched": 0,
    "error": null,
-   "seconds": 0.9
+   "seconds": 0.7
   },
   "SuccessFactors · Africa Finance Corporation": {
-   "fetched": 1,
+   "fetched": 2,
    "error": null,
-   "seconds": 1.0
+   "seconds": 1.3
   },
   "SuccessFactors · EBRD": {
-   "fetched": 44,
+   "fetched": 43,
    "error": null,
-   "seconds": 1.7
+   "seconds": 1.6
   },
   "Cornerstone · World Bank Group / IFC": {
-   "fetched": 80,
+   "fetched": 75,
    "error": null,
-   "seconds": 4.0
+   "seconds": 4.1
   },
   "SuccessFactors · IDB / IDB Invest": {
-   "fetched": 16,
+   "fetched": 19,
    "error": null,
-   "seconds": 2.1
+   "seconds": 1.3
   },
   "SuccessFactors · FMO": {
    "fetched": 3,
    "error": null,
-   "seconds": 3.5
+   "seconds": 3.2
   },
   "Avature · Macquarie": {
    "fetched": 8,
    "error": null,
-   "seconds": 1.7
+   "seconds": 1.6
   },
   "Site carrière · Africa50": {
    "fetched": 27,
@@ -684,34 +684,34 @@
    "seconds": 1.3
   },
   "Dogfinance (BNP Paribas, Société Générale, EY, AFD…)": {
-   "fetched": 187,
+   "fetched": 181,
    "error": null,
-   "seconds": 55.5
+   "seconds": 54.7
   },
   "BambooHR · Panmure Liberum": {
    "fetched": 2,
    "error": null,
-   "seconds": 0.8
+   "seconds": 0.7
   },
   "BambooHR · Summa Equity": {
    "fetched": 1,
    "error": null,
-   "seconds": 0.8
+   "seconds": 0.7
   },
   "BambooHR · Stone Point Capital": {
    "fetched": 5,
    "error": null,
-   "seconds": 0.4
+   "seconds": 0.3
   },
   "BambooHR · Solomon Partners": {
    "fetched": 3,
    "error": null,
-   "seconds": 0.4
+   "seconds": 0.3
   },
   "BambooHR · Climate Fund Managers": {
    "fetched": 1,
    "error": null,
-   "seconds": 0.8
+   "seconds": 0.7
   },
   "BambooHR · InfraRed Capital Partners": {
    "fetched": 2,
@@ -721,12 +721,12 @@
   "BambooHR · Bluefield": {
    "fetched": 2,
    "error": null,
-   "seconds": 0.7
+   "seconds": 0.3
   },
   "Ashby · Pemberton": {
    "fetched": 3,
    "error": null,
-   "seconds": 0.4
+   "seconds": 0.1
   },
   "Ashby · Agentis Capital": {
    "fetched": 30,
@@ -736,47 +736,47 @@
   "Ashby · Ridgepeak Partners": {
    "fetched": 2,
    "error": null,
-   "seconds": 0.1
+   "seconds": 0.2
   },
   "Ashby · MACA": {
    "fetched": 6,
    "error": null,
-   "seconds": 0.2
+   "seconds": 0.1
   },
   "Eightfold · HSBC": {
-   "fetched": 821,
-   "error": null,
-   "seconds": 113.6
+   "fetched": 0,
+   "error": "HTTPError: HTTP Error 429: TOO MANY REQUESTS",
+   "seconds": 144.8
   },
   "Site carrière · Crédit Agricole CIB": {
-   "fetched": 256,
+   "fetched": 255,
    "error": null,
-   "seconds": 4.6
+   "seconds": 5.0
   },
   "Agrégateur · Jooble": {
    "fetched": 4400,
    "error": null,
-   "seconds": 65.9
+   "seconds": 58.7
   },
   "Pages carrière · veille": {
-   "fetched": 17,
+   "fetched": 18,
    "error": null,
    "seconds": 0
   },
   "Agrégateurs · vérification": {
-   "fetched": 160,
+   "fetched": 157,
    "error": null,
    "seconds": 0,
    "stats": {
     "direct": 0,
     "board": 8,
-    "unverified": 111,
+    "unverified": 108,
     "dropped_old": 17,
-    "dropped_agency": 18,
-    "dropped_dup": 6
+    "dropped_agency": 19,
+    "dropped_dup": 5
    }
   }
  },
- "geocoding_calls": 2,
- "duration_s": 793
+ "geocoding_calls": 4,
+ "duration_s": 770
 }

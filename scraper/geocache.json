@@ -344,6 +344,13 @@
 "lat": 44.8412,
 "lon": -0.58
 },
+"Bordeaux, France": {
+"cc": "FR",
+"city": "Bordeaux",
+"country": "France",
+"lat": 44.8412,
+"lon": -0.58
+},
 "Bordes, Pyrénées-Atlantiques": {
 "cc": "FR",
 "city": "Bordes",
@@ -553,6 +560,13 @@
 "country": "United States",
 "lat": 35.2272,
 "lon": -80.8431
+},
+"Charlottesville, VA": {
+"cc": "US",
+"city": "Charlottesville",
+"country": "United States",
+"lat": 38.0293,
+"lon": -78.4767
 },
 "Chennai, DLF IT Park, India": null,
 "Chicago Illinois United States, United States": null,
@@ -1229,6 +1243,13 @@
 "country": "France",
 "lat": 48.8251,
 "lon": 2.2735
+},
+"Istanbul Turkey, Türkiye": {
+"cc": "TR",
+"city": "Istanbul",
+"country": "Turkey",
+"lat": 41.0171,
+"lon": 28.9463
 },
 "Istanbul, Türkiye": {
 "cc": "TR",
@@ -1961,6 +1982,13 @@
 "lon": -74.006
 },
 "NY": {
+"cc": "US",
+"city": "New York",
+"country": "United States",
+"lat": 43.1562,
+"lon": -75.845
+},
+"NY, United States": {
 "cc": "US",
 "city": "New York",
 "country": "United States",
