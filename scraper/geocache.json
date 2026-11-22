@@ -821,6 +821,13 @@
 "lat": 53.3494,
 "lon": -6.2606
 },
+"Durham, NC": {
+"cc": "US",
+"city": "Durham",
+"country": "United States",
+"lat": 35.9967,
+"lon": -78.9018
+},
 "Düsseldorf oder Frankfurt am Main": null,
 "Düsseldorf, Nordrhein-Westfalen, Germany": {
 "cc": "DE",
