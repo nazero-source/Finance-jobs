@@ -2220,6 +2220,13 @@
 "lat": 48.8844,
 "lon": 2.322
 },
+"Paris 8e": {
+"cc": "FR",
+"city": "Paris",
+"country": "France",
+"lat": 48.8737,
+"lon": 2.3104
+},
 "Paris France": {
 "cc": "FR",
 "city": "Paris",
