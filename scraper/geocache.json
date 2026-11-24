@@ -459,6 +459,7 @@
 "lat": 45.4655,
 "lon": 9.1953
 },
+"Calgary, 888 3rd Street SW, Canada": null,
 "Calgary, AB, CAN, Canada": null,
 "Calgary, AB, Canada": {
 "cc": "CA",
@@ -483,6 +484,13 @@
 "lon": -107.9917
 },
 "Canary Wharf, 1 Churchill Place, United Kingdom": null,
+"Capistrano Beach, CA": {
+"cc": "US",
+"city": "Dana Point",
+"country": "United States",
+"lat": 33.4587,
+"lon": -117.6686
+},
 "Cary, NC": {
 "cc": "US",
 "city": "Cary",
@@ -2862,6 +2870,13 @@
 "lat": 48.1353,
 "lon": 11.6881
 },
+"TORONTO, Canada": {
+"cc": "CA",
+"city": "Toronto",
+"country": "Canada",
+"lat": 43.6535,
+"lon": -79.3839
+},
 "TORONTO, Ontario, Canada": {
 "cc": "CA",
 "city": "Toronto",
@@ -3209,6 +3224,13 @@
 "lon": 8.541
 },
 "Zurich Switzerland": {
+"cc": "CH",
+"city": "Zurich",
+"country": "Switzerland",
+"lat": 47.3744,
+"lon": 8.541
+},
+"Zurich, Suisse": {
 "cc": "CH",
 "city": "Zurich",
 "country": "Switzerland",
