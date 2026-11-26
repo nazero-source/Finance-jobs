@@ -942,6 +942,13 @@
 "lat": 48.8491,
 "lon": 2.4749
 },
+"Fort Belvoir, VA": {
+"cc": "US",
+"city": "Fort Belvoir",
+"country": "United States",
+"lat": 38.7108,
+"lon": -77.1437
+},
 "Fort Lauderdale, FL": {
 "cc": "US",
 "city": "Fort Lauderdale",
