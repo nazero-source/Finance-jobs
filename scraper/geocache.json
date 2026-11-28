@@ -1175,6 +1175,13 @@
 "lon": 114.1583
 },
 "Houston Texas United States, United States": null,
+"Houston Texas, United States": {
+"cc": "US",
+"city": "Houston",
+"country": "United States",
+"lat": 29.7577,
+"lon": -95.3615
+},
 "Houston, 609 Main Street, United States": {
 "cc": "US",
 "city": "Houston",
@@ -2805,6 +2812,13 @@
 "country": "Sweden",
 "lat": 59.3251,
 "lon": 18.0711
+},
+"Strasbourg": {
+"cc": "FR",
+"city": "Strasbourg",
+"country": "France",
+"lat": 48.5846,
+"lon": 7.7507
 },
 "Stuttgart, Germany": {
 "cc": "DE",
